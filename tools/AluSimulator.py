@@ -4,10 +4,12 @@ Simulate Alu tree
 
 See Theorem 3.3 from Stadler & Steel (2012) for proof about branch lengths
 
-USAGE: python AluSimulator.py <rate> <rate'> <n>
-    -rate:  Rate at which active Alus create offspring
-    -rate': Rate at which inactive Alus create offspring (become active)
+USAGE: python AluSimulator.py <rateA> <rateB> <n>
+    -rateA: (A)ctivation Rate, rate at which inactive Alus create offspring
+    -rateB: (B)irth Rate, rate at which active Alus create offspring
     -n:     Desired total number of leaves in the tree
+
+Biologically, it makes sense to have rateB >> rateA
 '''
 # imports
 import sys
@@ -61,10 +63,10 @@ INPUT:
 OUTPUT:
     -The simulated tree (as a string in the Newick format)
 '''
-def simulateAlu(rate, rateP, n):
+def simulateAlu(rateA, rateB, n):
     # numpy uses scale parameters for exponential (beta = 1/lambda)
-    beta = 1/(2*rate)
-    betaP = 1/(2*rateP)
+    beta = 1/(2*rateB)
+    betaP = 1/(2*rateA)
 
     # initialize simulation
     root = Node(depth=0, parent=None)
@@ -111,11 +113,11 @@ if __name__ == '__main__':
     # parse args
     if len(sys.argv) != 4:
         print("ERROR: Incorrect number of arguments")
-        print("USAGE: python AluSimulator.py <rate> <rate'> <length>")
+        print("USAGE: python AluSimulator.py <rateA> <rateB> <n>")
         exit(-1)
-    rate = float(sys.argv[1])  # lambda
-    rateP = float(sys.argv[2]) # lambda'
-    n = int(sys.argv[3])       # n
+    rateA = float(sys.argv[1])
+    rateB = float(sys.argv[2])
+    n = int(sys.argv[3])
 
     # perform simulation
-    print(simulateAlu(rate,rateP,n))
+    print(simulateAlu(rateA,rateB,n))
