@@ -65,8 +65,8 @@ OUTPUT:
 '''
 def simulateAlu(rateA, rateB, n):
     # numpy uses scale parameters for exponential (beta = 1/lambda)
-    beta = 1/(2*rateB)
-    betaP = 1/(2*rateA)
+    beta = 1/(2*float(rateB))
+    betaP = 1/(2*float(rateA))
 
     # initialize simulation
     root = Node(depth=0, parent=None)
