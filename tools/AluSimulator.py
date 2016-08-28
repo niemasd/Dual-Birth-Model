@@ -1,6 +1,9 @@
 '''
 Niema Moshiri 2016
 Simulate Alu tree
+
+See Theorem 3.3 from Stadler & Steel (2012) for proof about branch lengths
+
 USAGE: python AluSimulator.py <rate> <rate'> <n>
     -rate:  Rate at which active Alus create offspring
     -rate': Rate at which inactive Alus create offspring (become active)
