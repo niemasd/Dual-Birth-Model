@@ -3,14 +3,15 @@ Niema Moshiri 2016
 Generate plots of number of cherries vs. rateA (activation rate)
 '''
 # imports
-import re
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn
-from math import sqrt
-import sys
-sys.path.insert(0,'../tools')
-from AluSimulator import simulateAlu
+import re                            # for regex search to count cherries
+import matplotlib.pyplot as plt      # for plotting
+import seaborn                       # for plotting (prettier)
+from math import sqrt                # for calculation of stdev
+from scipy.optimize import curve_fit # for curve fitting
+from numpy import asarray            # for curve fitting
+import sys                           # to import simulateAlu
+sys.path.insert(0,'../tools')        # to import simulateAlu
+from AluSimulator import simulateAlu # for Alu tree simulation
 
 # define some things for convenience
 cherryRegex = '\([0-9]+\:[0-9]+\.?[0-9]+e?-?[0-9]*\,[0-9]+\:[0-9]+\.?[0-9]+e?-?[0-9]*\)'
@@ -34,6 +35,12 @@ for rateA in rateAs:
     stdev = sqrt((sqSumCherries/reps) - (mean*mean))
     cherries.append(mean)
     errors.append(stdev)
+
+# fit curve (y = alpha - beta/x)
+def func(x, alpha, beta):
+    return alpha - (beta/x)
+popt, pcov = curve_fit(func, asarray(rateAs), asarray(cherries))
+print("NumCherries = " + str(popt[0]) + " - " + str(popt[1]) + "/(Activation Rate)\n")
 
 # create plot
 plt.figure()
