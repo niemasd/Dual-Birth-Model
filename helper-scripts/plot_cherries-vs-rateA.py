@@ -7,6 +7,7 @@ import re                            # for regex search to count cherries
 import matplotlib.pyplot as plt      # for plotting
 import seaborn                       # for plotting (prettier)
 from math import sqrt                # for calculation of stdev
+from math import log                 # for calculation of log ratios
 from scipy.optimize import curve_fit # for curve fitting
 from numpy import asarray            # for curve fitting
 import sys                           # to import simulateAlu
@@ -20,7 +21,11 @@ n     = 1000  # trees will have 1000 leaves
 reps  = 100   # for each rateA, simulate this many trees (repetitions)
 
 # perform simulations
+#rateAs = [1,5,10,20,50,100,200,500,1000,2000,5000,10000] # (A)ctivation Rates
 rateAs = [1,5,10,20,50,100,200,500,1000,2000,5000,10000] # (A)ctivation Rates
+for r in rateAs[:-1]:
+    rateAs.append(int(rateB*rateB/r))
+rateAs = sorted(rateAs)
 cherries = []
 errors = []
 for rateA in rateAs:
@@ -37,15 +42,27 @@ for rateA in rateAs:
     errors.append(stdev)
 
 # fit curve (y = alpha - beta/x)
+'''
 def func(x, alpha, beta):
     return alpha - (beta/x)
 popt, pcov = curve_fit(func, asarray(rateAs), asarray(cherries))
 print("NumCherries = " + str(popt[0]) + " - " + str(popt[1]) + "/(Activation Rate)\n")
+'''
 
-# create plot
+# create plot of Number of Cherries vs. Activation Rate (rateA)
 plt.figure()
 plt.errorbar(rateAs, cherries, yerr=errors)
 plt.title("Number of Cherries vs. Activation Rate (rateA)")
 plt.ylabel("Number of Cherries")
 plt.xlabel("Activation Rate (rateA)")
+plt.show()
+
+# create plot of Number of Cherries vs. Ratio of Rates (rateB/rateA)
+ratios = [log(float(rateB)/float(rateA), 2) for rateA in rateAs] # log-2 ratios
+plt.clf()
+plt.figure()
+plt.errorbar(ratios, cherries, yerr=errors)
+plt.title(r"Number of Cherries vs. Log-Ratio of Rates $(\frac{rateB}{rateA})$")
+plt.ylabel("Number of Cherries")
+plt.xlabel(r"Log-Ratio of Rates $(\frac{rateB}{rateA})$")
 plt.show()
