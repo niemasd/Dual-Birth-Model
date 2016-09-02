@@ -100,7 +100,7 @@ else:
 plt.clf()
 plt.errorbar(ratios, cherries, yerr=errors, color='blue', label="data")
 plt.errorbar(ratios, myFunc(ar(ratios), *popt), color='red', label="fit")
-plt.title(r"Number of Cherries vs. Log-Ratio of Rates $(\frac{rateB}{rateA})$ for Birth Rate (rateB) = " + str(rateB))
+plt.title(r"Number of Cherries vs. Log-Ratio of Rates $(\log_2{(\frac{rateB}{rateA})})$ for Birth Rate (rateB) = " + str(rateB))
 plt.ylabel("Number of Cherries")
 plt.xlabel(r"Log2-Ratio of Rates $(\log_2{(\frac{rateB}{rateA})})$")
 plt.legend()
