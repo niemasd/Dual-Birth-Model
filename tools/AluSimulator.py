@@ -33,6 +33,8 @@ class Node:
 
     # equality
     def __eq__(self, other):
+        if other is None:
+            return self is None
         return self.num == other.num
 
     # inequality
