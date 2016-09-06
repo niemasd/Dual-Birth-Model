@@ -45,14 +45,20 @@ class Node:
 
     # output tree (or subtree) in Newick format
     def newick(self):
+        # if leaf
         if len(self.children) == 0:
             return str(self.num)
+
+        # if internal node
         else:
             lLen = str(self.children[0][0])
             lStr = self.children[0][1].newick()
             rLen = str(self.children[1][0])
             rStr = self.children[1][1].newick()
-            return '(' + lStr + ':' + lLen + ',' + rStr + ':' + rLen + ')'
+            out = '(' + lStr + ':' + lLen + ',' + rStr + ':' + rLen + ')'
+            if self.parent == None: # if root, need semicolon (entire tree)
+                out += ';'
+            return out
 
 '''
 Alu simulation function
