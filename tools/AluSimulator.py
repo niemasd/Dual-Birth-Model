@@ -73,8 +73,8 @@ OUTPUT:
 '''
 def simulateAlu(rateA, rateB, n):
     # numpy uses scale parameters for exponential (beta = 1/lambda)
-    beta = 1/(2*float(rateB))
-    betaP = 1/(2*float(rateA))
+    beta = 1/(float(rateB))
+    betaP = 1/(float(rateA))
 
     # initialize simulation
     root = Node(depth=0, parent=None)
@@ -98,6 +98,7 @@ def simulateAlu(rateA, rateB, n):
         currNode.children = [(leftLength,leftChild),(rightLength,rightChild)]
         pq.put(leftChild)
         pq.put(rightChild)
+        #print >>sys.stderr, (leftLength, rightLength)
 
     # get leaves from pq
     leaves = []
