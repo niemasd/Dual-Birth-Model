@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 '''
 Niema Moshiri 2016
+
 Simulate Alu tree
 
 See Theorem 3.3 from Stadler & Steel (2012) for proof about branch lengths
