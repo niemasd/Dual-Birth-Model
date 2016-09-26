@@ -7,4 +7,3 @@ ultrametric = no, gamma rate = 29.518173529892621
 
 # SEQUENCE EVOLUTION PARAMETERS
 length      = 600
-alpha       = 5.256
