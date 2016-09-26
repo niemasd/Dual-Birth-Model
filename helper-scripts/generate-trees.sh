@@ -4,5 +4,5 @@
 
 for i in $(seq -w 1 $4); do
     echo "Generating tree $i...";
-    ~/GitHub/Alu-Project/tools/AluSimulator.py $1 $2 $3 > $i.tre;
+    ~/GitHub/Alu-Project/tools/AluSimulator.py $1 $2 $3 > $i.tre.ULTRAMETRIC;
 done
