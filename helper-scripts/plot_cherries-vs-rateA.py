@@ -1,3 +1,4 @@
+#! /usr/bin/env python
 '''
 Niema Moshiri 2016
 
