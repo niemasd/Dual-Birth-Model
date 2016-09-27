@@ -5,7 +5,9 @@ Niema Moshiri 2016
 For each branch in the input tree, sample a multiplier from a Gamma distribution
 defined by the given parameter alpha = beta such that the expected branch length
 remains the same after resizing.
+'''
 
+USAGE_MESSAGE = '''
 USAGE: python break-ultrametricity.py <gamma_param> <tree_file>
     -gamma_param: alpha = beta parameter for Gamma distribution
     -tree_file:   path to the tree (in Newick format), or - to specify STDIN
@@ -29,10 +31,7 @@ if __name__ == '__main__':
     # parse args
     if len(sys.argv) != 3:
         print("ERROR: Incorrect number of arguments")
-        print("USAGE: python break-ultrametricity.py <gamma_param> <tree_file>")
-        print("    -gamma_param: alpha = beta parameter for Gamma distribution")
-        print("    -tree_file:   path to the tree (in Newick format), or - to specify STDIN")
-        print()
+        print(USAGE_MESSAGE)
         exit(-1)
     param = float(sys.argv[1])
     if sys.argv[2].strip() == '-':
