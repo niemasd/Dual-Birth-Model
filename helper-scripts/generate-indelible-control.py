@@ -43,6 +43,10 @@ def generateControl(directory, length, reps, pA, pC, pG, pT, pAC, pAG, pAT, pCG,
 /* Nucleotide Simulation */
 [TYPE] NUCLEOTIDE 1 // use Method 1 (usually faster)
 
+/* INDELible Settings */
+[SETTINGS]
+    [output] FASTA
+
 /* GTR Model */
 [MODEL] GTRalu  // model name
     [submodel]  GTR ''' + str(pCT) + ' ' + str(pAT) + ' ' + str(pGT) + ' ' + str(pAC) + ' ' + str(pCG) + '''
