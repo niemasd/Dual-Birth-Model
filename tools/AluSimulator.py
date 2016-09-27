@@ -125,6 +125,10 @@ if __name__ == '__main__':
     if len(sys.argv) != 4:
         print("ERROR: Incorrect number of arguments")
         print("USAGE: python AluSimulator.py <rateA> <rateB> <n>")
+        print("    -rateA: (A)ctivation Rate, rate at which inactive Alus create offspring")
+        print("    -rateB: (B)irth Rate, rate at which active Alus create offspring")
+        print("    -n:     Desired total number of leaves in the tree")
+        print()
         exit(-1)
     rateA = float(sys.argv[1])
     rateB = float(sys.argv[2])
