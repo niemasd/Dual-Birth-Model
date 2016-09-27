@@ -1,5 +1,7 @@
+#! /usr/bin/env python
 '''
 Niema Moshiri 2016
+
 Generate plots of number of cherries vs. rateA (activation rate)
 '''
 # imports

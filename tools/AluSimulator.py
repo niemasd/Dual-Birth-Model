@@ -1,9 +1,13 @@
+#! /usr/bin/env python
 '''
 Niema Moshiri 2016
+
 Simulate Alu tree
 
 See Theorem 3.3 from Stadler & Steel (2012) for proof about branch lengths
+'''
 
+USAGE_MESSAGE = '''
 USAGE: python AluSimulator.py <rateA> <rateB> <n>
     -rateA: (A)ctivation Rate, rate at which inactive Alus create offspring
     -rateB: (B)irth Rate, rate at which active Alus create offspring
@@ -122,7 +126,7 @@ if __name__ == '__main__':
     # parse args
     if len(sys.argv) != 4:
         print("ERROR: Incorrect number of arguments")
-        print("USAGE: python AluSimulator.py <rateA> <rateB> <n>")
+        print(USAGE_MESSAGE)
         exit(-1)
     rateA = float(sys.argv[1])
     rateB = float(sys.argv[2])
