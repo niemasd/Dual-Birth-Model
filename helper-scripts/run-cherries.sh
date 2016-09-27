@@ -14,5 +14,4 @@ echo '
 
 d=read.csv("exp.stat",sep=" ",head=F)
 
-
-qplot(V2/1024,V3/V1,data=d[d$V1!=1021,],geom=c("boxplot"),group=c(V2/1024))+theme_bw()+scale_color_brewer(name="",palette="Set2") + scale_x_log10(limits=c(0.0005,2000))+ stat_function(fun = function(x) {r=10^(x);sqrt(r)/(r+sqrt(r)+1)}, colour = "red",size=1,linetype=2)+xlab(expression(lambda[a]/lambda[b]~(log~scale)))+ylab("cherry frequency")+facet_wrap(~V1)+geom_hline(yin=1/3,color="blue",linetype=3)' |R --save
+qplot(V2/1024,V3/V1,data=d,geom=c("boxplot"),group=c(V2/1024))+theme_bw()+scale_color_brewer(name="",palette="Set2") + scale_x_log10(limits=c(0.0005,2000))+ stat_function(fun = function(x) {r=10^(x);sqrt(r)/(r+sqrt(r)+1)}, colour = "red",size=1,linetype=2)+xlab(expression(r==lambda[a]/lambda[b]~(log~scale)))+ylab("cherry frequency")+facet_wrap(~V1)+geom_hline(yin=1/3,color="blue",linetype=3,size=1); ' |R --save
