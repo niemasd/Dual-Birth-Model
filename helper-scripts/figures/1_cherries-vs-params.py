@@ -37,14 +37,14 @@ r_inferred = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of 
              ).astype(float)/1000} # divide by number of leaves to get percentage
 
 # modifying lambda = lambdaA + lambdaB
-l_original = {'lambda':np.array([33.86550309051126]*20+[84.66375772627816]*20+[169.32751545255631]*20+[338.65503090511262]*20+[846.63757726278155]*20),
+l_original = {'lambda':np.array([33.866]*20+[84.664]*20+[169.328]*20+[338.655]*20+[846.638]*20),
               'cherries':np.array([88,88,91,98,86,90,98,106,96,83,96,83,87,98,98,95,85,96,101,92] +                   # lambda = 33.86550309051126
                                   [97,85,92,87,84,94,96,97,88,93,80,98,95,91,100,91,87,87,90,98] +                    # lambda = 84.66375772627816
                                   [88,91,90,88,86,90,90,91,92,94,85,87,88,86,100,88,91,91,98,90] +                    # lambda = 169.32751545255631
                                   [91,89,90,82,94,79,81,89,92,91,90,93,95,92,96,94,91,90,86,94] +                     # lambda = 338.65503090511262
                                   [88,89,89,87,89,87,89,86,85,87,94,84,83,85,84,87,86,84,83,89]                       # lambda = 846.63757726278155
              ).astype(float)/1000} # divide by number of leaves to get percentage
-l_inferred = {'lambda':np.array([33.86550309051126]*20+[84.66375772627816]*20+[169.32751545255631]*20+[338.65503090511262]*20+[846.63757726278155]*20),
+l_inferred = {'lambda':np.array([33.866]*20+[84.664]*20+[169.328]*20+[338.655]*20+[846.638]*20),
               'cherries':np.array([215,190,198,191,196,190,204,211,189,184,181,202,189,190,183,199,170,182,189,182] + # lambda = 33.86550309051126
                                   [195,211,200,203,204,205,184,189,182,197,194,198,191,200,190,192,193,200,187,195] + # lambda = 84.66375772627816
                                   [208,204,216,214,213,216,216,196,207,197,221,219,176,206,205,217,219,210,214,197] + # lambda = 169.32751545255631
@@ -68,6 +68,26 @@ k_inferred = {'length':np.array([50]*20+[100]*20+[200]*20+[300]*20+[600]*20), # 
                                   [173,176,178,179,191,182,176,169,185,178,190,182,182,182,175,176,176,175,185,181]   # length = 600
              ).astype(float)/1000} # divide by number of leaves to get percentage
 
+# modifying deviation from ultrametricity
+g_original = {'gammarate':np.array([0]*20+[2.952]*20+[5.904]*20+[29.518]*20+[147.591]*20+[295.182]*20+[float('inf')]*20),
+              'cherries':np.array([87,86,94,92,84,82,97,102,88,89,92,82,98,92,87,87,88,92,87,81] +                    # gamma = 0
+                                  [93,88,91,93,89,80,86,91,84,86,93,92,104,95,88,89,93,84,96,90] +                    # gamma = 2.95181735298926
+                                  [85,92,83,89,81,97,94,95,92,96,90,86,81,85,86,87,95,88,88,83] +                     # gamma = 5.90363470597852
+                                  [88,91,90,88,86,90,90,91,92,94,85,87,88,86,100,88,91,91,98,90] +                    # gamma = 29.518173529892621
+                                  [93,85,92,91,90,82,86,85,72,91,89,87,97,78,94,87,91,88,76,87] +                     # gamma = 147.590867649463
+                                  [95,86,89,90,84,87,82,92,84,88,89,91,90,95,92,75,91,99,90,95] +                     # gamma = 295.181735298926
+                                  [90,86,79,91,83,84,87,89,92,91,97,91,88,96,93,97,89,106,83,86]                      # gamma = infinity
+             ).astype(float)/1000} # divide by number of leaves to get percentage
+g_inferred = {'gammarate':np.array([0]*20+[2.952]*20+[5.904]*20+[29.518]*20+[147.591]*20+[295.182]*20+[float('inf')]*20),
+              'cherries':np.array([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] +                                         # gamma = 0
+                                  [214,210,207,208,203,204,202,214,200,206,210,229,219,220,223,229,214,216,197,220] + # gamma = 2.95181735298926
+                                  [210,208,204,201,206,213,219,211,209,218,192,210,192,205,213,214,212,225,212,215] + # gamma = 5.90363470597852
+                                  [208,204,216,214,213,216,216,196,207,197,221,219,176,206,205,217,219,210,214,197] + # gamma = 29.518173529892621
+                                  [211,200,220,196,195,196,228,212,210,211,217,215,214,202,207,204,216,220,206,201] + # gamma = 147.590867649463
+                                  [209,204,220,205,197,211,184,209,197,205,223,217,214,214,215,208,205,202,211,205] + # gamma = 295.181735298926
+                                  [207,210,207,210,201,203,204,210,224,204,220,206,209,217,227,214,217,204,203,196]   # gamma = infinity
+             ).astype(float)/1000} # divide by number of leaves to get percentage
+
 # plot cherries fraction vs. r
 handles = [Patch(color='blue',label='Original'),Patch(color='green',label='Inferred'),Patch(color='red',label='Theoretical')]
 fig = plt.figure()
@@ -86,8 +106,8 @@ plt.close()
 # plot cherries fraction vs. lambda
 handles = [Patch(color='blue',label='Original'),Patch(color='green',label='Inferred')]
 fig = plt.figure()
-ax = sns.boxplot(x='lambda',y='cherries',data=pd.DataFrame(l_original),order=np.array([33.86550309051126,84.66375772627816,169.32751545255631,338.65503090511262,846.63757726278155]),color='blue')
-sns.boxplot(x='lambda',y='cherries',data=pd.DataFrame(l_inferred),order=np.array([33.86550309051126,84.66375772627816,169.32751545255631,338.65503090511262,846.63757726278155]),color='green')
+ax = sns.boxplot(x='lambda',y='cherries',data=pd.DataFrame(l_original),order=np.array([33.866,84.664,169.328,338.655,846.638]),color='blue')
+sns.boxplot(x='lambda',y='cherries',data=pd.DataFrame(l_inferred),order=np.array([33.866,84.664,169.328,338.655,846.638]),color='green')
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\lambda = \lambda_A + \lambda_B$',fontsize=14)
 sns.plt.ylabel('Cherries Fraction',fontsize=14)
@@ -107,4 +127,17 @@ sns.plt.ylabel('Cherries Fraction',fontsize=14)
 sns.plt.title('Cherries Fraction vs. Sequence Length',fontsize=18)
 sns.plt.show()
 fig.savefig('cherries-fraction_vs_length.png', bbox_extra_artists=(legend,), bbox_inches='tight')
+plt.close()
+
+# plot cherries fraction vs. gamma rate
+handles = [Patch(color='blue',label='Original'),Patch(color='green',label='Inferred')]
+fig = plt.figure()
+ax = sns.boxplot(x='gammarate',y='cherries',data=pd.DataFrame(g_original),order=np.array([0,2.952,5.904,29.518,147.591,295.182,float('inf')]),color='blue')
+sns.boxplot(x='gammarate',y='cherries',data=pd.DataFrame(g_inferred),order=np.array([0,2.952,5.904,29.518,147.591,295.182,float('inf')]),color='green')
+legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+sns.plt.xlabel(r'Gamma Distribution Rate $\left(\alpha\right)$',fontsize=14)
+sns.plt.ylabel('Cherries Fraction',fontsize=14)
+sns.plt.title('Cherries Fraction vs. Deviation from Ultrametricity',fontsize=18)
+sns.plt.show()
+fig.savefig('cherries-fraction_vs_gammarate.png', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
