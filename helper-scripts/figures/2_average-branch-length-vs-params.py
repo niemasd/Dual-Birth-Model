@@ -16,7 +16,7 @@ import seaborn as sns
 rcParams['font.family'] = 'serif'
 
 # DATASETS
-# modifying r = lambdaA/lambdaB
+# modifying r = lambdaA/lambdaB (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
 r_original = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
               'avgbranch':np.array([0.0267173088177,0.0261440606527,0.0312439923838,0.0323414121369,0.0284412304162,0.0221902476671,0.0332732948459,0.0226990515461,0.0322243882024,0.0266119261977,0.0244588228148,0.0317945312511,0.0284623983945,0.0274336980022,0.0294185465291,0.0251340426802,0.0361775313532,0.0378493489401,0.0283413235062,0.0255517224613] + # r = 0.0001
                                    [0.0288172453829,0.0315400414579,0.0295240432778,0.0314335257526,0.0343411206552,0.0278711604309,0.0284841657065,0.0361782655956,0.0272720510435,0.0302386959695,0.0332791081614,0.0296476943958,0.0336052533775,0.0288903880247,0.0266085546863,0.0305035900252,0.0260006600931,0.0353427556564,0.0334477664964,0.0324730285238] + # r = 0.001
@@ -39,7 +39,7 @@ l_original = {'lambda':np.array([33.866]*20+[84.664]*20+[169.328]*20+[338.655]*2
                                    [0.0324368929047,0.0297296903215,0.0288485932844,0.0283625675391,0.0305399759106,0.0287495336242,0.0312924089442,0.0258828176824,0.0283369150003,0.0310587031688,0.0315481480198,0.0357377345189,0.0296620093877,0.0324900928253,0.0296365747935,0.0309474224846,0.0299091439225,0.0287504569736,0.0295955130799,0.033324377919] +                      # lambda = 169.32751545255631
                                    [0.0152403603366,0.014969397447,0.0159206639142,0.0174719817445,0.0155243566165,0.0159844901146,0.0144759136345,0.0134115442032,0.0142469572875,0.0149791445624,0.0130799891608,0.0152068090801,0.0138217839539,0.0144693128477,0.0144079050459,0.0149786258522,0.0145023765406,0.0142388539955,0.0144987533606,0.0140120301359] +                      # lambda = 338.65503090511262
                                    [0.00615739444225,0.00600433292579,0.00585292974031,0.00640174217878,0.00577163058783,0.00552211831022,0.00564774525726,0.00672511081415,0.00614197255059,0.00607276573989,0.00586703404507,0.00597194979227,0.00595905264059,0.00600993592936,0.00582957055436,0.00667616168129,0.00619190359535,0.00581191444748,0.005915794599,0.0061569606114]      # lambda = 846.63757726278155
-             ).astype(float)/1000} # divide by number of leaves to get percentage
+             ).astype(float)} # divide by number of leaves to get percentage
 l_inferred = {'lambda':np.array([33.866]*20+[84.664]*20+[169.328]*20+[338.655]*20+[846.638]*20),
               'avgbranch':np.array([0.159401676355,0.143119146848,0.13943602077,0.144122653384,0.1482882493,0.157464393554,0.135828809548,0.135581543577,0.132579478232,0.154882957309,0.156633606591,0.162897810776,0.146780818986,0.140818075046,0.145856434927,0.14167510423,0.129835103366,0.143581219252,0.125248582956,0.142577213] +                                                # lambda = 33.86550309051126
                                    [0.0604693157429,0.058339246339,0.0643995834605,0.0585328312609,0.0639507101799,0.0578836266757,0.0613798946019,0.0567041225376,0.0514580968653,0.056993765345,0.0674941721703,0.0564744919605,0.0575915933541,0.0591447873814,0.0539272253839,0.0624513646234,0.0686656067852,0.0582208754892,0.0517107301662,0.0553103145298] +                       # lambda = 84.66375772627816
@@ -90,17 +90,28 @@ g_inferred = {'gammarate':np.array([0]*20+[2.952]*20+[5.904]*20+[29.518]*20+[147
                                    [0.0312357401703,0.0301406521636,0.0320185049578,0.0283382956334,0.0291644728323,0.0312038974227,0.028866041395,0.0294389286642,0.0324771578258,0.0259699268277,0.0293557383527,0.0319032626632,0.0296372389367,0.0293530949363,0.0321356588537,0.0309043840873,0.033667038491,0.0257766281958,0.0324633288627,0.0310201537093]     # gamma = infinity
              ).astype(float)}
 
-# plot average branch length vs. r
+# plot average branch length vs. r (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
 handles = [Patch(color='blue',label='Original'),Patch(color='green',label='Inferred'),Patch(color='red',label='Theoretical')]
 fig = plt.figure()
 x = np.array([-4,-3,-2,-1,0])
-ax = sns.boxplot(x='r',y='avgbranch',data=pd.DataFrame(r_original),order=x,color='blue')
-sns.boxplot(x='r',y='avgbranch',data=pd.DataFrame(r_inferred),order=x,color='green')
+df = {'r':{},'avgbranch':{},'category':{}}
+for i in range(len(r_original['avgbranch'])):
+    currNum = len(df['r'])
+    df['r'][currNum] = r_original['r'][i]
+    df['avgbranch'][currNum] = r_original['avgbranch'][i]
+    df['category'][currNum] = 'original'
+    currNum = len(df['r'])
+    df['r'][currNum] = r_inferred['r'][i]
+    df['avgbranch'][currNum] = r_inferred['avgbranch'][i]
+    df['category'][currNum] = 'inferred'
+df = pd.DataFrame(df)
+ax = sns.boxplot(x='r',y='avgbranch',hue='category',data=df,order=x,palette={'original':'blue','inferred':'green'})
 plt.plot(np.linspace(-4,0,100)+4,[0.0298238593208140]*100,label='Theoretical',linestyle='--',color='red')
-legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
-sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}$',fontsize=14)
+legend = plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}$ (constant expected branch length)',fontsize=14)
 sns.plt.ylabel('Average Branch Length',fontsize=14)
-sns.plt.title(r'Average Branch Length vs. $\log_{10}{r}$',fontsize=18)
+sns.plt.title(r'Average Branch Length vs. $\log_{10}{r}$ (constant expected branch length)',fontsize=18)
+fig.tight_layout()
 sns.plt.show()
 fig.savefig('avg-branch-length_vs_r.png', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()

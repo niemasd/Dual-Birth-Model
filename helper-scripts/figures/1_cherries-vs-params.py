@@ -20,7 +20,7 @@ def cherries_vs_r(r):
     return (r**0.5)/(1+r+r**0.5)
 
 # DATASETS
-# modifying r = lambdaA/lambdaB
+# modifying r = lambdaA/lambdaB (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
 r_original = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
               'cherries':np.array([14,12,7,10,10,12,8,10,8,12,14,7,13,9,8,8,10,9,9,11] +                              # r = 0.0001
                                   [33,28,26,30,25,31,33,28,32,29,28,29,25,27,30,31,32,27,27,27] +                     # r = 0.001
@@ -94,7 +94,7 @@ g_inferred = {'gammarate':np.array([0]*20+[2.952]*20+[5.904]*20+[29.518]*20+[147
                                   [207,210,207,210,201,203,204,210,224,204,220,206,209,217,227,214,217,204,203,196]   # gamma = infinity
              ).astype(float)/1000} # divide by number of leaves to get percentage
 
-# plot cherries fraction vs. r
+# plot cherries fraction vs. r (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
 handles = [Patch(color='blue',label='Original'),Patch(color='green',label='Inferred'),Patch(color='red',label='Theoretical')]
 fig = plt.figure()
 x = np.array([-4,-3,-2,-1,0])
@@ -103,9 +103,9 @@ sns.boxplot(x='r',y='cherries',data=pd.DataFrame(r_inferred),order=x,color='gree
 x = np.linspace(-4,0,100)
 plt.plot(x+4,cherries_vs_r(10**x),label='Theoretical',linestyle='--',color='red')
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
-sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}$',fontsize=14)
+sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}$ (constant expected branch length',fontsize=14)
 sns.plt.ylabel('Cherries Fraction',fontsize=14)
-sns.plt.title(r'Cherries Fraction vs. $\log_{10}{r}$',fontsize=18)
+sns.plt.title(r'Cherries Fraction vs. $\log_{10}{r}$ (constant expected branch length)',fontsize=18)
 sns.plt.show()
 fig.savefig('cherries-fraction_vs_r.png', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
