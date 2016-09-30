@@ -13,6 +13,7 @@ import pandas as pd
 import seaborn as sns
 
 # settings
+sns.set_style("ticks")
 rcParams['font.family'] = 'serif'
 
 # DATASETS
@@ -109,7 +110,7 @@ plt.plot(np.linspace(-4.5,0.5,100)+4,[0.0298238593208140]*100,label='Theoretical
 legend = plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}$ (constant expected branch length)',fontsize=14)
 sns.plt.ylabel('Average Branch Length',fontsize=14)
-sns.plt.title(r'Average Branch Length vs. $\log_{10}{r}$',fontsize=18)
+sns.plt.title(r'Average Branch Length vs. $\log_{10}{r}$',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('avg-branch-length_vs_r.png', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
@@ -134,7 +135,7 @@ ax = sns.violinplot(x='lambda',y='avgbranch',hue='category',data=df,order=x,pale
 legend = plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\lambda = \lambda_A + \lambda_B$',fontsize=14)
 sns.plt.ylabel('Average Branch Length',fontsize=14)
-sns.plt.title(r'Average Branch Length vs. $\lambda$',fontsize=18)
+sns.plt.title(r'Average Branch Length vs. $\lambda$',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('avg-branch-length_vs_lambda.png', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
@@ -159,7 +160,7 @@ ax = sns.violinplot(x='length',y='avgbranch',hue='category',data=df,order=x,pale
 legend = plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel('Sequence Length',fontsize=14)
 sns.plt.ylabel('Average Branch Length',fontsize=14)
-sns.plt.title('Average Branch Length vs. Sequence Length',fontsize=18)
+sns.plt.title('Average Branch Length vs. Sequence Length',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('avg-branch-length_vs_length.png', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
@@ -184,7 +185,7 @@ ax = sns.violinplot(x='gammarate',y='avgbranch',hue='category',data=df,order=x,p
 legend = plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'Gamma Distribution Rate $\left(\alpha\right)$',fontsize=14)
 sns.plt.ylabel('Average Branch Length',fontsize=14)
-sns.plt.title('Average Branch Length vs. Deviation from Ultrametricity',fontsize=18)
+sns.plt.title('Average Branch Length vs. Deviation from Ultrametricity',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('avg-branch-length_vs_gammarate.png', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()

@@ -13,6 +13,7 @@ import pandas as pd
 import seaborn as sns
 
 # settings
+sns.set_style("ticks")
 rcParams['font.family'] = 'serif'
 
 # Expected Number of Cherries as a Function of r
@@ -103,9 +104,9 @@ sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_inferred),order=x,color='#
 x = np.linspace(-4,0,100)
 plt.plot(x+4,cherries_vs_r(10**x),label='Theoretical',linestyle='--',color='red')
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
-sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}$ (constant expected branch length',fontsize=14)
+sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}$ (constant expected branch length)',fontsize=14)
 sns.plt.ylabel('Cherries Fraction',fontsize=14)
-sns.plt.title(r'Cherries Fraction vs. $\log_{10}{r}$',fontsize=18)
+sns.plt.title(r'Cherries Fraction vs. $\log_{10}{r}$',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('cherries-fraction_vs_r.png', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
@@ -121,7 +122,7 @@ sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_inferred),order=x,col
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\lambda = \lambda_A + \lambda_B$',fontsize=14)
 sns.plt.ylabel('Cherries Fraction',fontsize=14)
-sns.plt.title(r'Cherries Fraction vs. $\lambda$',fontsize=18)
+sns.plt.title(r'Cherries Fraction vs. $\lambda$',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('cherries-fraction_vs_lambda.png', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
@@ -137,7 +138,7 @@ sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_inferred),order=x,col
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel('Sequence Length',fontsize=14)
 sns.plt.ylabel('Cherries Fraction',fontsize=14)
-sns.plt.title('Cherries Fraction vs. Sequence Length',fontsize=18)
+sns.plt.title('Cherries Fraction vs. Sequence Length',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('cherries-fraction_vs_length.png', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
@@ -153,7 +154,7 @@ sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_inferred),order=x,
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'Gamma Distribution Rate $\left(\alpha\right)$',fontsize=14)
 sns.plt.ylabel('Cherries Fraction',fontsize=14)
-sns.plt.title('Cherries Fraction vs. Deviation from Ultrametricity',fontsize=18)
+sns.plt.title('Cherries Fraction vs. Deviation from Ultrametricity',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('cherries-fraction_vs_gammarate.png', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
