@@ -2,7 +2,7 @@
 '''
 Niema Moshiri 2016
 
-Generate plots of number of cherries vs. rateA (activation rate)
+Generate plots of fraction of cherries vs. various parameters
 '''
 # imports
 from matplotlib import rcParams
