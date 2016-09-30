@@ -1,8 +1,8 @@
 # TREE SHAPE PARAMETERS
 n           = 1000 leaves
 r           = 1
-lambdaA     = 1.6765100539857060
-lambdaB     = 167.65100539857060
+lambdaA     = 84.663757726278155
+lambdaB     = 84.663757726278155
 ultrametric = no, gamma rate = 29.518173529892621
 
 # SEQUENCE EVOLUTION PARAMETERS
