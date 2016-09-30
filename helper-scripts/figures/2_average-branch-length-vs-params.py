@@ -15,10 +15,6 @@ import seaborn as sns
 # settings
 rcParams['font.family'] = 'serif'
 
-# Expected Branch Length as a Function of r and lambda = lambdaA + lambdaB
-def expected_branch_length_vs_r(r, L):
-    return (r+1)/(2*L*(r**0.5))
-
 # DATASETS
 # modifying r = lambdaA/lambdaB
 r_original = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
@@ -100,9 +96,7 @@ fig = plt.figure()
 x = np.array([-4,-3,-2,-1,0])
 ax = sns.boxplot(x='r',y='avgbranch',data=pd.DataFrame(r_original),order=x,color='blue')
 sns.boxplot(x='r',y='avgbranch',data=pd.DataFrame(r_inferred),order=x,color='green')
-x = np.linspace(-4,0,100)
-print expected_branch_length_vs_r(10**x,169.32751545255631)
-#plt.plot(x+4,expected_branch_length_vs_r(10**x,169.32751545255631),label='Theoretical',linestyle='--',color='red')
+plt.plot(np.linspace(-4,0,100)+4,[0.0298238593208140]*100,label='Theoretical',linestyle='--',color='red')
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}$',fontsize=14)
 sns.plt.ylabel('Average Branch Length',fontsize=14)
