@@ -105,7 +105,7 @@ for i in range(len(r_original['avgbranch'])):
     df['avgbranch'][currNum] = r_inferred['avgbranch'][i]
     df['category'][currNum] = 'inferred'
 df = pd.DataFrame(df)
-#ax = sns.boxplot(x='r',y='avgbranch',hue='category',data=df,order=x,palette={'original':'blue','inferred':'green'})
+#ax = sns.boxplot(x='r',y='avgbranch',hue='category',data=df,order=x,palette='muted')
 ax = sns.violinplot(x='r',y='avgbranch',hue='category',data=df,order=x,palette='muted')
 plt.plot(np.linspace(-4.5,0.5,100)+4,[0.0298238593208140]*100,label='Theoretical',linestyle='--',color='red')
 legend = plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
@@ -131,7 +131,7 @@ for i in range(len(l_original['avgbranch'])):
     df['avgbranch'][currNum] = l_inferred['avgbranch'][i]
     df['category'][currNum] = 'inferred'
 df = pd.DataFrame(df)
-#ax = sns.boxplot(x='lambda',y='avgbranch',hue='category',data=df,order=x,palette={'original':'blue','inferred':'green'})
+#ax = sns.boxplot(x='lambda',y='avgbranch',hue='category',data=df,order=x,palette='muted')
 ax = sns.violinplot(x='lambda',y='avgbranch',hue='category',data=df,order=x,palette='muted')
 legend = plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\lambda = \lambda_A + \lambda_B$',fontsize=14)
@@ -156,7 +156,7 @@ for i in range(len(k_original['avgbranch'])):
     df['avgbranch'][currNum] = k_inferred['avgbranch'][i]
     df['category'][currNum] = 'inferred'
 df = pd.DataFrame(df)
-#ax = sns.boxplot(x='length',y='avgbranch',hue='category',data=df,order=x,palette={'original':'blue','inferred':'green'})
+#ax = sns.boxplot(x='length',y='avgbranch',hue='category',data=df,order=x,palette='muted')
 ax = sns.violinplot(x='length',y='avgbranch',hue='category',data=df,order=x,palette='muted')
 legend = plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel('Sequence Length',fontsize=14)
@@ -181,7 +181,7 @@ for i in range(len(g_original['avgbranch'])):
     df['avgbranch'][currNum] = g_inferred['avgbranch'][i]
     df['category'][currNum] = 'inferred'
 df = pd.DataFrame(df)
-#ax = sns.boxplot(x='gammarate',y='avgbranch',hue='category',data=df,order=x,palette={'original':'blue','inferred':'green'})
+#ax = sns.boxplot(x='gammarate',y='avgbranch',hue='category',data=df,order=x,palette='muted')
 ax = sns.violinplot(x='gammarate',y='avgbranch',hue='category',data=df,order=x,palette='muted')
 legend = plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'Gamma Distribution Rate $\left(\alpha\right)$',fontsize=14)

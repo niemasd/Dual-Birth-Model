@@ -95,11 +95,11 @@ g_inferred = {'gammarate':np.array([0]*20+[2.952]*20+[5.904]*20+[29.518]*20+[147
              ).astype(float)/1000} # divide by number of leaves to get percentage
 
 # plot cherries fraction vs. r (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
-handles = [Patch(color='blue',label='Original'),Patch(color='green',label='Inferred'),Patch(color='red',label='Theoretical')]
+handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred'),Patch(color='red',label='Theoretical')]
 fig = plt.figure()
 x = np.array([-4,-3,-2,-1,0])
-ax = sns.boxplot(x='r',y='cherries',data=pd.DataFrame(r_original),order=x,color='blue')
-sns.boxplot(x='r',y='cherries',data=pd.DataFrame(r_inferred),order=x,color='green')
+ax = sns.boxplot(x='r',y='cherries',data=pd.DataFrame(r_original),order=x,color='#597DBE')
+sns.boxplot(x='r',y='cherries',data=pd.DataFrame(r_inferred),order=x,color='#76BF72')
 x = np.linspace(-4,0,100)
 plt.plot(x+4,cherries_vs_r(10**x),label='Theoretical',linestyle='--',color='red')
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
@@ -111,11 +111,11 @@ fig.savefig('cherries-fraction_vs_r.png', bbox_extra_artists=(legend,), bbox_inc
 plt.close()
 
 # plot cherries fraction vs. lambda
-handles = [Patch(color='blue',label='Original'),Patch(color='green',label='Inferred')]
+handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred')]
 fig = plt.figure()
 x = np.array([33.866,84.664,169.328,338.655,846.638])
-ax = sns.boxplot(x='lambda',y='cherries',data=pd.DataFrame(l_original),order=x,color='blue')
-sns.boxplot(x='lambda',y='cherries',data=pd.DataFrame(l_inferred),order=x,color='green')
+ax = sns.boxplot(x='lambda',y='cherries',data=pd.DataFrame(l_original),order=x,color='#597DBE')
+sns.boxplot(x='lambda',y='cherries',data=pd.DataFrame(l_inferred),order=x,color='#76BF72')
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\lambda = \lambda_A + \lambda_B$',fontsize=14)
 sns.plt.ylabel('Cherries Fraction',fontsize=14)
@@ -125,11 +125,11 @@ fig.savefig('cherries-fraction_vs_lambda.png', bbox_extra_artists=(legend,), bbo
 plt.close()
 
 # plot cherries fraction vs. length
-handles = [Patch(color='blue',label='Original'),Patch(color='green',label='Inferred')]
+handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred')]
 fig = plt.figure()
 x = np.array([50,100,200,300,600,1200,2400,4800])
-ax = sns.boxplot(x='length',y='cherries',data=pd.DataFrame(k_original),order=x,color='blue')
-sns.boxplot(x='length',y='cherries',data=pd.DataFrame(k_inferred),order=x,color='green')
+ax = sns.boxplot(x='length',y='cherries',data=pd.DataFrame(k_original),order=x,color='#597DBE')
+sns.boxplot(x='length',y='cherries',data=pd.DataFrame(k_inferred),order=x,color='#76BF72')
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel('Sequence Length',fontsize=14)
 sns.plt.ylabel('Cherries Fraction',fontsize=14)
@@ -139,11 +139,11 @@ fig.savefig('cherries-fraction_vs_length.png', bbox_extra_artists=(legend,), bbo
 plt.close()
 
 # plot cherries fraction vs. gamma rate
-handles = [Patch(color='blue',label='Original'),Patch(color='green',label='Inferred')]
+handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred')]
 fig = plt.figure()
 x = np.array([0,2.952,5.904,29.518,147.591,295.182,float('inf')])
-ax = sns.boxplot(x='gammarate',y='cherries',data=pd.DataFrame(g_original),order=x,color='blue')
-sns.boxplot(x='gammarate',y='cherries',data=pd.DataFrame(g_inferred),order=x,color='green')
+ax = sns.boxplot(x='gammarate',y='cherries',data=pd.DataFrame(g_original),order=x,color='#597DBE')
+sns.boxplot(x='gammarate',y='cherries',data=pd.DataFrame(g_inferred),order=x,color='#76BF72')
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'Gamma Distribution Rate $\left(\alpha\right)$',fontsize=14)
 sns.plt.ylabel('Cherries Fraction',fontsize=14)
