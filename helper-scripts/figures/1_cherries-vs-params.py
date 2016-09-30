@@ -105,7 +105,7 @@ plt.plot(x+4,cherries_vs_r(10**x),label='Theoretical',linestyle='--',color='red'
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}$ (constant expected branch length',fontsize=14)
 sns.plt.ylabel('Cherries Fraction',fontsize=14)
-sns.plt.title(r'Cherries Fraction vs. $\log_{10}{r}$ (constant expected branch length)',fontsize=18)
+sns.plt.title(r'Cherries Fraction vs. $\log_{10}{r}$',fontsize=18)
 sns.plt.show()
 fig.savefig('cherries-fraction_vs_r.png', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
