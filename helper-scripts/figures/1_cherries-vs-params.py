@@ -37,6 +37,22 @@ r_inferred = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of 
                                   [326,325,328,338,348,327,343,325,341,329,320,334,327,327,330,324,333,332,314,329]   # r = 1
              ).astype(float)/1000} # divide by number of leaves to get percentage
 
+# modifying r = lambdaA/lambdaB (with constant lambda = lambdaA + lambdaB)
+r2_original = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
+              'cherries':np.array([12,8,9,9,10,11,11,11,10,10,9,11,11,11,9,9,7,14,11,9] +                             # r = 0.0001
+                                  [36,36,36,30,26,25,34,32,31,30,26,30,32,33,33,25,35,29,36,32] +                     # r = 0.001
+                                  [88,91,90,88,86,90,90,91,92,94,85,87,88,86,100,88,91,91,98,90] +                    # r = 0.01
+                                  [220,232,233,225,232,221,221,223,224,230,234,218,230,218,227,227,227,231,223,219] + # r = 0.1
+                                  [336,319,341,338,325,323,328,324,327,338,336,330,319,336,333,338,332,334,347,331]   # r = 1
+             ).astype(float)/1000} # divide by number of leaves to get percentage
+r2_inferred = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
+              'cherries':np.array([292,295,285,275,309,289,306,297,298,285,296,298,290,286,291,296,296,282,277,278] + # r = 0.0001
+                                  [238,248,238,257,245,232,264,239,252,252,243,223,241,232,225,243,235,244,231,228] + # r = 0.001
+                                  [208,204,216,214,213,216,216,196,207,197,221,219,176,206,205,217,219,210,214,197] + # r = 0.01
+                                  [253,261,268,268,242,247,230,249,243,256,251,245,260,256,265,254,252,257,261,244] + # r = 0.1
+                                  [313,303,308,314,303,307,307,290,300,313,295,303,304,306,303,310,288,300,324,310]   # r = 1
+             ).astype(float)/1000} # divide by number of leaves to get percentage
+
 # modifying lambda = lambdaA + lambdaB
 l_original = {'lambda':np.array([33.866]*20+[84.664]*20+[169.328]*20+[338.655]*20+[846.638]*20),
               'cherries':np.array([88,88,91,98,86,90,98,106,96,83,96,83,87,98,98,95,85,96,101,92] +                   # lambda = 33.86550309051126
@@ -94,7 +110,7 @@ g_inferred = {'gammarate':np.array([2.952]*20+[5.904]*20+[29.518]*20+[147.591]*2
              ).astype(float)/1000} # divide by number of leaves to get percentage
 
 # plot cherries fraction vs. r (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
-handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred'),Patch(color='red',label='Theoretical')]
+handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred'),Patch(color='#D65F5F',label='Theoretical')]
 fig = plt.figure()
 x = np.array([-4,-3,-2,-1,0])
 #ax = sns.boxplot(x='r',y='cherries',data=pd.DataFrame(r_original),order=x,color='#597DBE')
@@ -102,13 +118,31 @@ ax = sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_original),order=x,col
 #sns.boxplot(x='r',y='cherries',data=pd.DataFrame(r_inferred),order=x,color='#76BF72')
 sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_inferred),order=x,color='#76BF72')
 x = np.linspace(-4,0,100)
-plt.plot(x+4,cherries_vs_r(10**x),label='Theoretical',linestyle='--',color='red')
+plt.plot(x+4,cherries_vs_r(10**x),label='Theoretical',linestyle='--',color='#D65F5F')
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
-sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}$ (constant expected branch length)',fontsize=14)
+sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}\ \left(E(l_b)=0.298\right)$',fontsize=14)
 sns.plt.ylabel('Cherries Fraction',fontsize=14)
-sns.plt.title(r'Cherries Fraction vs. $\log_{10}{r}$',fontsize=18,y=1.05)
+sns.plt.title(r'Cherries Fraction vs. $\log_{10}{r}\ \left(E(l_b)=0.298\right)$',fontsize=18,y=1.05)
 sns.plt.show()
-fig.savefig('cherries-fraction_vs_r.png', bbox_extra_artists=(legend,), bbox_inches='tight')
+fig.savefig('cherries-fraction_vs_r_const-exp-branch-length.png', bbox_extra_artists=(legend,), bbox_inches='tight')
+plt.close()
+
+# plot cherries fraction vs. r (with constant lambda = lambdaA + lambdaB)
+handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred'),Patch(color='#D65F5F',label='Theoretical')]
+fig = plt.figure()
+x = np.array([-4,-3,-2,-1,0])
+#ax = sns.boxplot(x='r',y='cherries',data=pd.DataFrame(r_original),order=x,color='#597DBE')
+ax = sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_original),order=x,color='#597DBE')
+#sns.boxplot(x='r',y='cherries',data=pd.DataFrame(r_inferred),order=x,color='#76BF72')
+sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_inferred),order=x,color='#76BF72')
+x = np.linspace(-4,0,100)
+plt.plot(x+4,cherries_vs_r(10**x),label='Theoretical',linestyle='--',color='#D65F5F')
+legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}\ \left(\lambda = \lambda_A + \lambda_B = 169\right)$',fontsize=14)
+sns.plt.ylabel('Cherries Fraction',fontsize=14)
+sns.plt.title(r'Cherries Fraction vs. $\log_{10}{r}\ \left(\lambda=\lambda_A+\lambda_B=169\right)$',fontsize=18,y=1.05)
+sns.plt.show()
+fig.savefig('cherries-fraction_vs_r_const-lambda.png', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
 
 # plot cherries fraction vs. lambda
