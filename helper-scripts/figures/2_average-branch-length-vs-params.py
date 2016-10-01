@@ -16,6 +16,10 @@ import seaborn as sns
 sns.set_style("ticks")
 rcParams['font.family'] = 'serif'
 
+# Expected Branch Length as a Function of r and lambda
+def exp_branch_length_vs_r_l(r,l):
+    return (r+1)/(2*l*(r**0.5))
+
 # DATASETS
 # modifying r = lambdaA/lambdaB (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
 r_original = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
@@ -31,6 +35,22 @@ r_inferred = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of 
                                    [0.0328280374927,0.0293589119216,0.0293702403287,0.0292681320346,0.0304669867301,0.0293316668095,0.0321295772533,0.0263854120724,0.0283967136126,0.03225246587,0.0319497768996,0.0374410630995,0.0308409901689,0.0339875604079,0.0297108082644,0.0315950468596,0.0294834989233,0.028531067488,0.0302582171395,0.0339871709363] +    # r = 0.01
                                    [0.030908756487,0.0293246405779,0.0305872622326,0.0312348412715,0.0302792192364,0.0317577917227,0.0292236069209,0.0315772113499,0.0322745759664,0.0284663069264,0.0311400442172,0.0276892237524,0.0299521893201,0.0302964643453,0.0278839343805,0.0333979026186,0.0299993248823,0.0314752551242,0.0280796421003,0.0291283838921] +  # r = 0.1
                                    [0.0301889357577,0.0303062380285,0.0282059312142,0.0321063780255,0.0293023983941,0.0293900225611,0.028442782481,0.028683302495,0.0318360375896,0.0317259772173,0.0309329562267,0.030243283971,0.0291623957044,0.0319937694507,0.031138244972,0.0297647370636,0.0306398214027,0.0302573248453,0.0299996197709,0.0322849918988]       # r = 1
+             ).astype(float)}
+
+# modifying r = lambdaA/lambdaB (with constant lambda = lambdaA + lambdaB)
+r2_original = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
+              'avgbranch':np.array([0.235508623662,0.262010890762,0.26777858773,0.241735202482,0.317321260001,0.295131341426,0.231501419898,0.232604632401,0.282924404669,0.318855169806,0.275903260058,0.252841392577,0.214269304973,0.215280794679,0.299891549679,0.383802517711,0.280469785689,0.199292398496,0.197418658194,0.220236326541] +                                       # r = 0.0001
+                                   [0.0771874103174,0.093522571013,0.0944345091822,0.0886075855878,0.0942926395073,0.0846837181773,0.0878442822435,0.0872843633653,0.0990605514199,0.0894565331086,0.104336800808,0.0850699683727,0.0824760998189,0.0958794515592,0.0813781099597,0.0991601749303,0.0862946707689,0.0943619042295,0.0895996381695,0.0789658810706] +                    # r = 0.001
+                                   [0.0324368929047,0.0297296903215,0.0288485932844,0.0283625675391,0.0305399759106,0.0287495336242,0.0312924089442,0.0258828176824,0.0283369150003,0.0310587031688,0.0315481480198,0.0357377345189,0.0296620093877,0.0324900928253,0.0296365747935,0.0309474224846,0.0299091439225,0.0287504569736,0.0295955130799,0.033324377919] +                   # r = 0.01
+                                   [0.0104230927432,0.0100345745525,0.0103151664639,0.00994326536942,0.00959895138881,0.00940962754297,0.00993734146685,0.0104469917093,0.00939680513363,0.00982917305324,0.0101244762123,0.0111928415007,0.00977384548981,0.0106629374697,0.0103899990171,0.0105269104061,0.00982281005085,0.0105245305712,0.0108628938025,0.0102633901509] +          # r = 0.1
+                                   [0.00574271027405,0.00615527046848,0.00587626103644,0.00580408327046,0.00582344507897,0.0059932817163,0.00577139965317,0.0055095373957,0.00586534091989,0.00576687528432,0.00591879122331,0.005796973702,0.00596858785722,0.00607603351526,0.00590287194715,0.00594363947666,0.00590856277427,0.00575930241676,0.00588576984628,0.0063292753831]     # r = 1
+             ).astype(float)}
+r2_inferred = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
+              'avgbranch':np.array([0.216102612555,0.237728725148,0.238378729585,0.220598138892,0.280139140216,0.248792812834,0.216596619703,0.214201745526,0.253509190382,0.261515098296,0.244176780691,0.224200888262,0.198881592815,0.197578800958,0.242602301057,0.301742192233,0.248085745794,0.190681480682,0.190361169683,0.202930079214] +                                      # r = 0.0001
+                                   [0.0776380430566,0.0942164924424,0.0930781514727,0.0877949225338,0.0946227213793,0.0832843807231,0.0877183677064,0.0847023796321,0.0959168807181,0.088407859003,0.103102817882,0.0818617883041,0.0785649471713,0.0918447758462,0.0816049673968,0.102085071851,0.0832788748326,0.0957997004345,0.0914600294709,0.0807448356287] +                     # r = 0.001
+                                   [0.0328280374927,0.0293589119216,0.0293702403287,0.0292681320346,0.0304669867301,0.0293316668095,0.0321295772533,0.0263854120724,0.0283967136126,0.03225246587,0.0319497768996,0.0374410630995,0.0308409901689,0.0339875604079,0.0297108082644,0.0315950468596,0.0294834989233,0.028531067488,0.0302582171395,0.0339871709363] +                     # r = 0.01
+                                   [0.01088083443,0.00992735498489,0.0109351720587,0.0107131410991,0.0101390973401,0.00999612979154,0.0101288065317,0.010895061003,0.00987218763476,0.0105317569139,0.0102457129985,0.0120174114401,0.00970399923399,0.0110395321855,0.0107174161061,0.0106196544291,0.00976033948361,0.0102104479899,0.0111549571355,0.0106570870389] +                # r = 0.1
+                                   [0.00599345508388,0.00646391016591,0.00622927652123,0.00576894738621,0.0063303263861,0.00640376569959,0.00583936552506,0.00572118207774,0.00610647881199,0.00601086128651,0.00641964555522,0.00608458938886,0.00619473873529,0.00616070627268,0.00614667713951,0.00607636779036,0.00642136849289,0.00604308441024,0.00600230603984,0.00675911011494] # r = 1
              ).astype(float)}
 
 # modifying lambda = lambdaA + lambdaB
@@ -90,7 +110,6 @@ g_inferred = {'gammarate':np.array([2.952]*20+[5.904]*20+[29.518]*20+[147.591]*2
              ).astype(float)}
 
 # plot average branch length vs. r (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
-handles = [Patch(color='blue',label='Original'),Patch(color='green',label='Inferred'),Patch(color='red',label='Theoretical')]
 fig = plt.figure()
 x = np.array([-4,-3,-2,-1,0])
 df = {'r':{},'avgbranch':{},'category':{}}
@@ -106,17 +125,44 @@ for i in range(len(r_original['avgbranch'])):
 df = pd.DataFrame(df)
 #ax = sns.boxplot(x='r',y='avgbranch',hue='category',data=df,order=x,palette='muted')
 ax = sns.violinplot(x='r',y='avgbranch',hue='category',data=df,order=x,palette='muted')
-plt.plot(np.linspace(-4.5,0.5,100)+4,[0.0298238593208140]*100,label='Theoretical',linestyle='--',color='red')
-legend = plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
-sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}$ (constant expected branch length)',fontsize=14)
+plt.plot(np.linspace(-4.5,0.5,100)+4,[0.0298238593208140]*100,label='Theoretical',linestyle='--',color='#D65F5F')
+handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred'),Patch(color='#D65F5F',label='Theoretical')]
+legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}\ \left(E(l_b)=0.298\right)$',fontsize=14)
 sns.plt.ylabel('Average Branch Length',fontsize=14)
-sns.plt.title(r'Average Branch Length vs. $\log_{10}{r}$',fontsize=18,y=1.05)
+sns.plt.title(r'Average Branch Length vs. $\log_{10}{r}\ \left(E(l_b)=0.298\right)$',fontsize=18,y=1.05)
 sns.plt.show()
-fig.savefig('avg-branch-length_vs_r.png', bbox_extra_artists=(legend,), bbox_inches='tight')
+fig.savefig('avg-branch-length_vs_r_const-exp-branch-length.png', bbox_extra_artists=(legend,), bbox_inches='tight')
+plt.close()
+
+# plot average branch length vs. r (with constant lambda = lambdaA + lambdaB)
+fig = plt.figure()
+x = np.array([-4,-3,-2,-1,0])
+df = {'r':{},'avgbranch':{},'category':{}}
+for i in range(len(r2_original['avgbranch'])):
+    currNum = len(df['r'])
+    df['r'][currNum] = r2_original['r'][i]
+    df['avgbranch'][currNum] = r2_original['avgbranch'][i]
+    df['category'][currNum] = 'original'
+    currNum = len(df['r'])
+    df['r'][currNum] = r2_inferred['r'][i]
+    df['avgbranch'][currNum] = r2_inferred['avgbranch'][i]
+    df['category'][currNum] = 'inferred'
+df = pd.DataFrame(df)
+#ax = sns.boxplot(x='r',y='avgbranch',hue='category',data=df,order=x,palette='muted')
+ax = sns.violinplot(x='r',y='avgbranch',hue='category',data=df,order=x,palette='muted')
+x=np.linspace(-4.5,0.5,100)
+plt.plot(x+4,exp_branch_length_vs_r_l(10**x,169.32751545255631),label='Theoretical',linestyle='--',color='#D65F5F')
+handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred'),Patch(color='#D65F5F',label='Theoretical')]
+legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}\ \left(\lambda = \lambda_A + \lambda_B = 169\right)$',fontsize=14)
+sns.plt.ylabel('Average Branch Length',fontsize=14)
+sns.plt.title(r'Average Branch Length vs. $\log_{10}{r}\ \left(\lambda=\lambda_A+\lambda_B=169\right)$',fontsize=18,y=1.05)
+sns.plt.show()
+fig.savefig('avg-branch-length_vs_r_const-lambda.png', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
 
 # plot average branch length vs. lambda
-handles = [Patch(color='blue',label='Original'),Patch(color='green',label='Inferred')]
 fig = plt.figure()
 x = np.array([33.866,84.664,169.328,338.655,846.638])
 df = {'lambda':{},'avgbranch':{},'category':{}}
@@ -132,7 +178,9 @@ for i in range(len(l_original['avgbranch'])):
 df = pd.DataFrame(df)
 #ax = sns.boxplot(x='lambda',y='avgbranch',hue='category',data=df,order=x,palette='muted')
 ax = sns.violinplot(x='lambda',y='avgbranch',hue='category',data=df,order=x,palette='muted')
-legend = plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+sns.pointplot(x,exp_branch_length_vs_r_l(0.01,x),label='Theoretical',linestyles=['--'],color='#D65F5F')
+handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred'),Patch(color='#D65F5F',label='Theoretical')]
+legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\lambda = \lambda_A + \lambda_B$',fontsize=14)
 sns.plt.ylabel('Average Branch Length',fontsize=14)
 sns.plt.title(r'Average Branch Length vs. $\lambda$',fontsize=18,y=1.05)
@@ -141,7 +189,6 @@ fig.savefig('avg-branch-length_vs_lambda.png', bbox_extra_artists=(legend,), bbo
 plt.close()
 
 # plot average branch length vs. length
-handles = [Patch(color='blue',label='Original'),Patch(color='green',label='Inferred')]
 fig = plt.figure()
 x = np.array([50,100,200,300,600,1200,2400,4800])
 df = {'length':{},'avgbranch':{},'category':{}}
@@ -157,7 +204,8 @@ for i in range(len(k_original['avgbranch'])):
 df = pd.DataFrame(df)
 #ax = sns.boxplot(x='length',y='avgbranch',hue='category',data=df,order=x,palette='muted')
 ax = sns.violinplot(x='length',y='avgbranch',hue='category',data=df,order=x,palette='muted')
-legend = plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred')]
+legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel('Sequence Length',fontsize=14)
 sns.plt.ylabel('Average Branch Length',fontsize=14)
 sns.plt.title('Average Branch Length vs. Sequence Length',fontsize=18,y=1.05)
@@ -166,7 +214,6 @@ fig.savefig('avg-branch-length_vs_length.png', bbox_extra_artists=(legend,), bbo
 plt.close()
 
 # plot average branch length vs. gamma rate
-handles = [Patch(color='blue',label='Original'),Patch(color='green',label='Inferred')]
 fig = plt.figure()
 x = np.array([2.952,5.904,29.518,147.591,295.182,float('inf')])
 df = {'gammarate':{},'avgbranch':{},'category':{}}
@@ -182,7 +229,8 @@ for i in range(len(g_original['avgbranch'])):
 df = pd.DataFrame(df)
 #ax = sns.boxplot(x='gammarate',y='avgbranch',hue='category',data=df,order=x,palette='muted')
 ax = sns.violinplot(x='gammarate',y='avgbranch',hue='category',data=df,order=x,palette='muted')
-legend = plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred')]
+legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'Gamma Distribution Rate $\left(\alpha\right)$',fontsize=14)
 sns.plt.ylabel('Average Branch Length',fontsize=14)
 sns.plt.title('Average Branch Length vs. Deviation from Ultrametricity',fontsize=18,y=1.05)
