@@ -2,7 +2,7 @@
 # USAGE: Just run this script in the directory containing all of the tree parameter folders
 
 for dir in param*; do
-    echo "=== Working on Directory $dir ==="
+    echo "=== Working on directory $dir ==="
     echo "=== TREE ERROR RF = (FN + FP) / 2 ===" >> $dir/tree_comparison.stats
     for i in $(seq -w 1 20); do
         echo -n "Working on tree $i..."
