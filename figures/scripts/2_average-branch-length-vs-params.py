@@ -123,7 +123,6 @@ for i in range(len(r_original['avgbranch'])):
     df['avgbranch'][currNum] = r_inferred['avgbranch'][i]
     df['category'][currNum] = 'inferred'
 df = pd.DataFrame(df)
-#ax = sns.boxplot(x='r',y='avgbranch',hue='category',data=df,order=x,palette='muted')
 ax = sns.violinplot(x='r',y='avgbranch',hue='category',data=df,order=x,palette='muted')
 plt.plot(np.linspace(-4.5,0.5,100)+4,[0.0298238593208140]*100,label='Theoretical',linestyle='--',color='#D65F5F')
 handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred'),Patch(color='#D65F5F',label='Theoretical')]
@@ -149,7 +148,6 @@ for i in range(len(r2_original['avgbranch'])):
     df['avgbranch'][currNum] = r2_inferred['avgbranch'][i]
     df['category'][currNum] = 'inferred'
 df = pd.DataFrame(df)
-#ax = sns.boxplot(x='r',y='avgbranch',hue='category',data=df,order=x,palette='muted')
 ax = sns.violinplot(x='r',y='avgbranch',hue='category',data=df,order=x,palette='muted')
 x=np.linspace(-4.5,0.5,100)
 plt.plot(x+4,exp_branch_length_vs_r_l(10**x,169.32751545255631),label='Theoretical',linestyle='--',color='#D65F5F')
@@ -176,7 +174,6 @@ for i in range(len(l_original['avgbranch'])):
     df['avgbranch'][currNum] = l_inferred['avgbranch'][i]
     df['category'][currNum] = 'inferred'
 df = pd.DataFrame(df)
-#ax = sns.boxplot(x='lambda',y='avgbranch',hue='category',data=df,order=x,palette='muted')
 ax = sns.violinplot(x='lambda',y='avgbranch',hue='category',data=df,order=x,palette='muted')
 sns.pointplot(x,exp_branch_length_vs_r_l(0.01,x),label='Theoretical',linestyles=['--'],color='#D65F5F')
 handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred'),Patch(color='#D65F5F',label='Theoretical')]
@@ -202,7 +199,6 @@ for i in range(len(k_original['avgbranch'])):
     df['avgbranch'][currNum] = k_inferred['avgbranch'][i]
     df['category'][currNum] = 'inferred'
 df = pd.DataFrame(df)
-#ax = sns.boxplot(x='length',y='avgbranch',hue='category',data=df,order=x,palette='muted')
 ax = sns.violinplot(x='length',y='avgbranch',hue='category',data=df,order=x,palette='muted')
 plt.plot(np.linspace(-4.5,1000,100)+4,[0.0298238593208140]*100,label='Theoretical',linestyle='--',color='#D65F5F')
 handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred'),Patch(color='#D65F5F',label='Theoretical')]
@@ -228,7 +224,6 @@ for i in range(len(g_original['avgbranch'])):
     df['avgbranch'][currNum] = g_inferred['avgbranch'][i]
     df['category'][currNum] = 'inferred'
 df = pd.DataFrame(df)
-#ax = sns.boxplot(x='gammarate',y='avgbranch',hue='category',data=df,order=x,palette='muted')
 ax = sns.violinplot(x='gammarate',y='avgbranch',hue='category',data=df,order=x,palette='muted')
 plt.plot(np.linspace(-4.5,1000,100)+4,[0.0298238593208140]*100,label='Theoretical',linestyle='--',color='#D65F5F')
 handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred'),Patch(color='#D65F5F',label='Theoretical')]
