@@ -146,13 +146,15 @@ fig.savefig('cherries-fraction_vs_r_const-lambda.png', bbox_extra_artists=(legen
 plt.close()
 
 # plot cherries fraction vs. lambda
-handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred')]
+handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred'),Patch(color='#D65F5F',label='Theoretical')]
 fig = plt.figure()
 x = np.array([33.866,84.664,169.328,338.655,846.638])
 #ax = sns.boxplot(x='lambda',y='cherries',data=pd.DataFrame(l_original),order=x,color='#597DBE')
 ax = sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_original),order=x,color='#597DBE')
 #sns.boxplot(x='lambda',y='cherries',data=pd.DataFrame(l_inferred),order=x,color='#76BF72')
 sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_inferred),order=x,color='#76BF72')
+x = np.linspace(-100,1000,1100)
+plt.plot(x,np.array([cherries_vs_r(0.01)]*len(x)),label='Theoretical',linestyle='--',color='#D65F5F')
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\lambda = \lambda_A + \lambda_B$',fontsize=14)
 sns.plt.ylabel('Cherries Fraction',fontsize=14)
@@ -162,13 +164,15 @@ fig.savefig('cherries-fraction_vs_lambda.png', bbox_extra_artists=(legend,), bbo
 plt.close()
 
 # plot cherries fraction vs. length
-handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred')]
+handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred'),Patch(color='#D65F5F',label='Theoretical')]
 fig = plt.figure()
 x = np.array([50,100,200,300,600,1200,2400,4800])
 #ax = sns.boxplot(x='length',y='cherries',data=pd.DataFrame(k_original),order=x,color='#597DBE')
 ax = sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_original),order=x,color='#597DBE')
 #sns.boxplot(x='length',y='cherries',data=pd.DataFrame(k_inferred),order=x,color='#76BF72')
 sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_inferred),order=x,color='#76BF72')
+x = np.linspace(-100,5000,5100)
+plt.plot(x,np.array([cherries_vs_r(0.01)]*len(x)),label='Theoretical',linestyle='--',color='#D65F5F')
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel('Sequence Length',fontsize=14)
 sns.plt.ylabel('Cherries Fraction',fontsize=14)
@@ -178,13 +182,15 @@ fig.savefig('cherries-fraction_vs_length.png', bbox_extra_artists=(legend,), bbo
 plt.close()
 
 # plot cherries fraction vs. gamma rate
-handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred')]
+handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred'),Patch(color='#D65F5F',label='Theoretical')]
 fig = plt.figure()
 x = np.array([2.952,5.904,29.518,147.591,295.182,float('inf')])
 #ax = sns.boxplot(x='gammarate',y='cherries',data=pd.DataFrame(g_original),order=x,color='#597DBE')
 ax = sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_original),order=x,color='#597DBE')
 #sns.boxplot(x='gammarate',y='cherries',data=pd.DataFrame(g_inferred),order=x,color='#76BF72')
 sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_inferred),order=x,color='#76BF72')
+x = np.linspace(-100,1000,5000)
+plt.plot(x,np.array([cherries_vs_r(0.01)]*len(x)),label='Theoretical',linestyle='--',color='#D65F5F')
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'Gamma Distribution Rate $\left(\alpha\right)$',fontsize=14)
 sns.plt.ylabel('Cherries Fraction',fontsize=14)
