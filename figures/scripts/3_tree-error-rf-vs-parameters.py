@@ -67,66 +67,56 @@ g_data = {'gammarate':np.array([2.952]*20+[5.904]*20+[29.518]*20+[147.591]*20+[2
              ).astype(float)}
 
 # plot tree error (RF) vs. r (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
-handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred')]
 fig = plt.figure()
 x = np.array([-4,-3,-2,-1,0])
 ax = sns.violinplot(x='r',y='RF',data=pd.DataFrame(r_data),order=x,color='#597DBE')
-legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}\ \left(E(l_b)=0.298\right)$',fontsize=14)
 sns.plt.ylabel('Tree Error (RF)',fontsize=14)
 sns.plt.title(r'Tree Error (RF) vs. $\log_{10}{r}\ \left(E(l_b)=0.298\right)$',fontsize=18,y=1.05)
 sns.plt.show()
-fig.savefig('tree-error-rf_vs_r_const-exp-branch-length.png', bbox_extra_artists=(legend,), bbox_inches='tight')
+fig.savefig('tree-error-rf_vs_r_const-exp-branch-length.png', bbox_inches='tight')
 plt.close()
 
 # plot tree error (RF) vs. r (with constant lambda = lambdaA + lambdaB)
-handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred')]
 fig = plt.figure()
 x = np.array([-4,-3,-2,-1,0])
 ax = sns.violinplot(x='r',y='RF',data=pd.DataFrame(r2_data),order=x,color='#597DBE')
-legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}\ \left(\lambda = \lambda_A + \lambda_B = 169\right)$',fontsize=14)
 sns.plt.ylabel('Tree Error (RF)',fontsize=14)
 sns.plt.title(r'Tree Error (RF) vs. $\log_{10}{r}\ \left(\lambda=\lambda_A+\lambda_B=169\right)$',fontsize=18,y=1.05)
 sns.plt.show()
-fig.savefig('tree-error-rf_vs_r_const-lambda.png', bbox_extra_artists=(legend,), bbox_inches='tight')
+fig.savefig('tree-error-rf_vs_r_const-lambda.png', bbox_inches='tight')
 plt.close()
 
 # plot tree error (RF) vs. lambda
-handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred')]
 fig = plt.figure()
 x = np.array([33.866,84.664,169.328,338.655,846.638])
 ax = sns.violinplot(x='lambda',y='RF',data=pd.DataFrame(l_data),order=x,color='#597DBE')
-legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\lambda = \lambda_A + \lambda_B$',fontsize=14)
 sns.plt.ylabel('Tree Error (RF)',fontsize=14)
 sns.plt.title(r'Tree Error (RF) vs. $\lambda$',fontsize=18,y=1.05)
 sns.plt.show()
-fig.savefig('tree-error-rf_vs_lambda.png', bbox_extra_artists=(legend,), bbox_inches='tight')
+fig.savefig('tree-error-rf_vs_lambda.png', bbox_inches='tight')
 plt.close()
 
 # plot tree error (RF) vs. length
-handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred')]
 fig = plt.figure()
 x = np.array([50,100,200,300,600,1200,2400,4800])
 ax = sns.violinplot(x='length',y='RF',data=pd.DataFrame(k_data),order=x,color='#597DBE')
-legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel('Sequence Length',fontsize=14)
 sns.plt.ylabel('Tree Error (RF)',fontsize=14)
 sns.plt.title('Tree Error (RF) vs. Sequence Length',fontsize=18,y=1.05)
 sns.plt.show()
-fig.savefig('tree-error-rf_vs_length.png', bbox_extra_artists=(legend,), bbox_inches='tight')
+fig.savefig('tree-error-rf_vs_length.png', bbox_inches='tight')
 plt.close()
 
 # plot tree error (RF) vs. gamma rate
-handles = [Patch(color='#597DBE',label='Original'),Patch(color='#76BF72',label='Inferred')]
 fig = plt.figure()
 x = np.array([2.952,5.904,29.518,147.591,295.182,float('inf')])
 ax = sns.violinplot(x='gammarate',y='RF',data=pd.DataFrame(g_data),order=x,color='#597DBE')
-legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'Gamma Distribution Rate $\left(\alpha\right)$',fontsize=14)
 sns.plt.ylabel('Tree Error (RF)',fontsize=14)
 sns.plt.title('Tree Error (RF) vs. Deviation from Ultrametricity',fontsize=18,y=1.05)
 sns.plt.show()
-fig.savefig('tree-error-rf_vs_gammarate.png', bbox_extra_artists=(legend,), bbox_inches='tight')
+fig.savefig('tree-error-rf_vs_gammarate.png', bbox_inches='tight')
 plt.close()
