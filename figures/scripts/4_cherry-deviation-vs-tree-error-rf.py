@@ -54,7 +54,7 @@ diff  = [120,113,126,126,127,126,126,105,115,103,136,132,88,120,105,129,128,119,
          227,219,207,230,207,221,222,217,193,209,199,192,218,200,215,195,196,280,287,276,266,299,278,295,286,288,275,287,287,279,275,282,287,289,268,266,269]
 
 # store data as dataframe to make it easier to work with
-data = pd.DataFrame({'RF':np.asarray(rf),'ratio':np.asarray(ratio),'diff':np.asarray(diff)})
+data = pd.DataFrame({'RF':np.asarray(rf),'ratio':np.log10(np.asarray(ratio)),'diff':np.asarray(diff)})
 
 # plot cherry deviation (as difference) vs. tree error (RF)
 fig = plt.figure()
@@ -71,8 +71,8 @@ plt.close()
 fig = plt.figure()
 ax = sns.regplot(x='RF',y='ratio',data=data)
 sns.plt.xlabel('Tree Error (RF)',fontsize=14)
-sns.plt.ylabel(r'Cherry Deviation $\left(\frac{Inferred}{True}\right)$')
-sns.plt.title(r'Cherry Deviation $\left(\frac{Inferred}{True}\right)$ vs. Tree Error (RF)',fontsize=18,y=1.05)
+sns.plt.ylabel(r'Cherry Deviation $\left(\log_{10}{\frac{Inferred}{True}}\right)$')
+sns.plt.title(r'Cherry Deviation $\left(\log_{10}{\frac{Inferred}{True}}\right)$ vs. Tree Error (RF)',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('cherry-deviation-ratio_vs_tree-error-rf.png', bbox_inches='tight')
 plt.close()
