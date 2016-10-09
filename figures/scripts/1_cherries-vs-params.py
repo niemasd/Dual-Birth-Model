@@ -15,6 +15,8 @@ import seaborn as sns
 # settings
 sns.set_style("ticks")
 rcParams['font.family'] = 'serif'
+pal = {'simulated':'#597DBE', 'fasttree':'#76BF72', 'raxml':'#B47CC7', 'theoretical':'#D65F5F'}
+handles = [Patch(color=pal['simulated'],label='Simulated'),Patch(color=pal['fasttree'],label='FastTree'),Patch(color=pal['raxml'],label='RAxML'),Patch(color=pal['theoretical'],label='Theoretical')]
 
 # Expected Number of Cherries as a Function of r
 def cherries_vs_r(r):
@@ -149,14 +151,13 @@ g_raxml    = {'gammarate':np.array([2.952]*20+[5.904]*20+[29.518]*20+[147.591]*2
              ).astype(float)/1000} # divide by number of leaves to get percentage
 
 # plot cherries fraction vs. r (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
-handles = [Patch(color='#597DBE',label='Simulated'),Patch(color='#76BF72',label='FastTree'),Patch(color='#D65F5F',label='RAxML'),Patch(color='#B47CC7',label='Theoretical')]
 fig = plt.figure()
 x = np.array([-4,-3,-2,-1,0])
-ax = sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_original),order=x,color='#597DBE')
-sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_fasttree),order=x,color='#76BF72')
-sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_raxml),order=x,color='#D65F5F')
+ax = sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_original),order=x,color=pal['simulated'])
+sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_fasttree),order=x,color=pal['fasttree'])
+sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_raxml),order=x,color=pal['raxml'])
 x = np.linspace(-4,0,100)
-plt.plot(x+4,cherries_vs_r(10**x),label='Theoretical',linestyle='--',color='#B47CC7')
+plt.plot(x+4,cherries_vs_r(10**x),label='Theoretical',linestyle='--',color=pal['theoretical'])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}\ \left(E(l_b)=0.298\right)$',fontsize=14)
 sns.plt.ylabel('Cherries Fraction',fontsize=14)
@@ -166,14 +167,13 @@ fig.savefig('cherries-fraction_vs_r_const-exp-branch-length.png', bbox_extra_art
 plt.close()
 
 # plot cherries fraction vs. r (with constant lambda = lambdaA + lambdaB)
-handles = [Patch(color='#597DBE',label='Simulated'),Patch(color='#76BF72',label='FastTree'),Patch(color='#D65F5F',label='RAxML'),Patch(color='#B47CC7',label='Theoretical')]
 fig = plt.figure()
 x = np.array([-4,-3,-2,-1,0])
-ax = sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_original),order=x,color='#597DBE')
-sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_fasttree),order=x,color='#76BF72')
-sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_raxml),order=x,color='#D65F5F')
+ax = sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_original),order=x,color=pal['simulated'])
+sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_fasttree),order=x,color=pal['fasttree'])
+sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_raxml),order=x,color=pal['raxml'])
 x = np.linspace(-4,0,100)
-plt.plot(x+4,cherries_vs_r(10**x),label='Theoretical',linestyle='--',color='#B47CC7')
+plt.plot(x+4,cherries_vs_r(10**x),label='Theoretical',linestyle='--',color=pal['theoretical'])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}\ \left(\lambda = \lambda_A + \lambda_B = 169\right)$',fontsize=14)
 sns.plt.ylabel('Cherries Fraction',fontsize=14)
@@ -183,14 +183,13 @@ fig.savefig('cherries-fraction_vs_r_const-lambda.png', bbox_extra_artists=(legen
 plt.close()
 
 # plot cherries fraction vs. lambda
-handles = [Patch(color='#597DBE',label='Simulated'),Patch(color='#76BF72',label='FastTree'),Patch(color='#D65F5F',label='RAxML'),Patch(color='#B47CC7',label='Theoretical')]
 fig = plt.figure()
 x = np.array([33.866,84.664,169.328,338.655,846.638])
-ax = sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_original),order=x,color='#597DBE')
-sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_fasttree),order=x,color='#76BF72')
-sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_raxml),order=x,color='#D65F5F')
+ax = sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_original),order=x,color=pal['simulated'])
+sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_fasttree),order=x,color=pal['fasttree'])
+sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_raxml),order=x,color=pal['raxml'])
 x = np.linspace(-100,1000,1100)
-plt.plot(x,np.array([cherries_vs_r(0.01)]*len(x)),label='Theoretical',linestyle='--',color='#B47CC7')
+plt.plot(x,np.array([cherries_vs_r(0.01)]*len(x)),label='Theoretical',linestyle='--',color=pal['theoretical'])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\lambda = \lambda_A + \lambda_B$',fontsize=14)
 sns.plt.ylabel('Cherries Fraction',fontsize=14)
@@ -200,14 +199,13 @@ fig.savefig('cherries-fraction_vs_lambda.png', bbox_extra_artists=(legend,), bbo
 plt.close()
 
 # plot cherries fraction vs. length
-handles = [Patch(color='#597DBE',label='Simulated'),Patch(color='#76BF72',label='FastTree'),Patch(color='#D65F5F',label='RAxML'),Patch(color='#B47CC7',label='Theoretical')]
 fig = plt.figure()
 x = np.array([50,100,200,300,600,1200,2400,4800])
-ax = sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_original),order=x,color='#597DBE')
-sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_fasttree),order=x,color='#76BF72')
-sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_raxml),order=x,color='#D65F5F')
+ax = sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_original),order=x,color=pal['simulated'])
+sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_fasttree),order=x,color=pal['fasttree'])
+sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_raxml),order=x,color=pal['raxml'])
 x = np.linspace(-100,5000,5100)
-plt.plot(x,np.array([cherries_vs_r(0.01)]*len(x)),label='Theoretical',linestyle='--',color='#B47CC7')
+plt.plot(x,np.array([cherries_vs_r(0.01)]*len(x)),label='Theoretical',linestyle='--',color=pal['theoretical'])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel('Sequence Length',fontsize=14)
 sns.plt.ylabel('Cherries Fraction',fontsize=14)
@@ -217,14 +215,13 @@ fig.savefig('cherries-fraction_vs_length.png', bbox_extra_artists=(legend,), bbo
 plt.close()
 
 # plot cherries fraction vs. gamma rate
-handles = [Patch(color='#597DBE',label='Simulated'),Patch(color='#76BF72',label='FastTree'),Patch(color='#D65F5F',label='RAxML'),Patch(color='#B47CC7',label='Theoretical')]
 fig = plt.figure()
 x = np.array([2.952,5.904,29.518,147.591,295.182,float('inf')])
-ax = sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_original),order=x,color='#597DBE')
-sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_fasttree),order=x,color='#76BF72')
-sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_raxml),order=x,color='#D65F5F')
+ax = sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_original),order=x,color=pal['simulated'])
+sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_fasttree),order=x,color=pal['fasttree'])
+sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_raxml),order=x,color=pal['raxml'])
 x = np.linspace(-100,1000,5000)
-plt.plot(x,np.array([cherries_vs_r(0.01)]*len(x)),label='Theoretical',linestyle='--',color='#B47CC7')
+plt.plot(x,np.array([cherries_vs_r(0.01)]*len(x)),label='Theoretical',linestyle='--',color=pal['theoretical'])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'Gamma Distribution Rate $\left(\alpha\right)$',fontsize=14)
 sns.plt.ylabel('Cherries Fraction',fontsize=14)

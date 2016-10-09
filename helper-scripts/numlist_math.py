@@ -10,11 +10,13 @@ Only pass in a single argument.
 '''
 
 USAGE_MESSAGE = '''
-USAGE: python numlist_math.py [-avg, -sum, -min, -max]
-    -avg: Compute average of list of numbers
-    -sum: Compute sum of list of numbers
-    -min: Compute minimum of list of numbers
-    -max: Compute maximum of list of numbers
+USAGE: python numlist_math.py [-avg, -sum, -min, -max, -csv, -csvInt]
+    -avg:    Compute average of list of numbers
+    -sum:    Compute sum of list of numbers
+    -min:    Compute minimum of list of numbers
+    -max:    Compute maximum of list of numbers
+    -csv:    Print the list as comma-separated values (float)
+    -csvInt: Print the list as comma-separated values (int)
 '''
 # imports
 import sys
@@ -35,6 +37,10 @@ if __name__ == '__main__':
         print(min(l))
     elif arg == 'max':
         print(max(l))
+    elif arg == 'csv':
+        print(','.join([str(i) for i in l]))
+    elif arg == 'csvInt':
+        print(','.join([str(int(i)) for i in l]))
     else:
         print("ERROR: Invalid argument")
         print(USAGE_MESSAGE)
