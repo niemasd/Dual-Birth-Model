@@ -1,5 +1,6 @@
 ### MAC GITIGNORE ###
 .DS_Store
+*.swp
 
 ### PYTHON GITIGNORE ###
 # Byte-compiled / optimized / DLL files
