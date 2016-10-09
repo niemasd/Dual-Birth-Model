@@ -2,3 +2,5 @@ Number of Cherries: 240
 Average Branch Length: 0.00595771463807
 RAxML GAMMA-based Score: -20217.198626
 Tree Error RF = (FN+FP)/2: .65555000000000000000
+Cherry Deviation as Difference (inferred - true): 156
+Cherry Deviation as Ratio (inferred / true): 2.85714285714285714285
