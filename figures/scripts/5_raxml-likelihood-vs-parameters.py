@@ -2,7 +2,7 @@
 '''
 Niema Moshiri 2016
 
-Generate plots of RAxML Likelihood Score vs. various parameters
+Generate plots of RAxML Score vs. various parameters
 '''
 # imports
 from matplotlib import rcParams
@@ -195,7 +195,7 @@ g_raxml    = {'gammarate':np.array([2.952]*20+[5.904]*20+[29.518]*20+[147.591]*2
              ).astype(float)}
 '''
 
-# plot RAxML Likelihood Score vs. r (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
+# plot RAxML Score vs. r (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
 fig = plt.figure()
 x = np.array([-4,-3,-2,-1,0])
 df = {'r':{},'score':{},'category':{}}
@@ -216,13 +216,13 @@ df = pd.DataFrame(df)
 ax = sns.violinplot(x='r',y='score',hue='category',data=df,order=x,palette=pal)
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}\ \left(E(l_b)=0.298\right)$',fontsize=14)
-sns.plt.ylabel('RAxML Likelihood Score',fontsize=14)
-sns.plt.title(r'RAxML Likelihood Score vs. $\log_{10}{r}\ \left(E(l_b)=0.298\right)$',fontsize=18,y=1.05)
+sns.plt.ylabel('RAxML Score',fontsize=14)
+sns.plt.title(r'RAxML Score vs. $\log_{10}{r}\ \left(E(l_b)=0.298\right)$',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('raxml-likelihood_vs_r_const-exp-branch-length.png', bbox_inches='tight')
 plt.close()
 
-# plot RAxML Likelihood Score vs. r (with constant lambda = lambdaA + lambdaB)
+# plot RAxML Score vs. r (with constant lambda = lambdaA + lambdaB)
 fig = plt.figure()
 x = np.array([-4,-3,-2,-1,0])
 df = {'r':{},'score':{},'category':{}}
@@ -243,13 +243,13 @@ df = pd.DataFrame(df)
 ax = sns.violinplot(x='r',y='score',hue='category',data=df,order=x,palette=pal)
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}\ \left(\lambda = \lambda_A + \lambda_B = 169\right)$',fontsize=14)
-sns.plt.ylabel('RAxML Likelihood Score',fontsize=14)
-sns.plt.title(r'RAxML Likelihood Score vs. $\log_{10}{r}\ \left(\lambda=\lambda_A+\lambda_B=169\right)$',fontsize=18,y=1.05)
+sns.plt.ylabel('RAxML Score',fontsize=14)
+sns.plt.title(r'RAxML Score vs. $\log_{10}{r}\ \left(\lambda=\lambda_A+\lambda_B=169\right)$',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('raxml-likelihood_vs_r_const-lambda.png', bbox_inches='tight')
 plt.close()
 
-# plot RAxML Likelihood Score vs. lambda
+# plot RAxML Score vs. lambda
 fig = plt.figure()
 x = np.array([33.866,84.664,169.328,338.655,846.638])
 df = {'lambda':{},'score':{},'category':{}}
@@ -270,13 +270,13 @@ df = pd.DataFrame(df)
 ax = sns.violinplot(x='lambda',y='score',hue='category',data=df,order=x,palette=pal)
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\lambda = \lambda_A + \lambda_B$',fontsize=14)
-sns.plt.ylabel('RAxML Likelihood Score',fontsize=14)
-sns.plt.title(r'RAxML Likelihood Score vs. $\lambda$',fontsize=18,y=1.05)
+sns.plt.ylabel('RAxML Score',fontsize=14)
+sns.plt.title(r'RAxML Score vs. $\lambda$',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('raxml-likelihood_vs_lambda.png', bbox_inches='tight')
 plt.close()
 
-# plot RAxML Likelihood Score vs. length
+# plot RAxML Score vs. length
 fig = plt.figure()
 x = np.array([50,100,200,300,600,1200,2400,4800])
 df = {'length':{},'score':{},'category':{}}
@@ -297,13 +297,13 @@ df = pd.DataFrame(df)
 ax = sns.violinplot(x='length',y='score',hue='category',data=df,order=x,palette=pal)
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel('Sequence Length',fontsize=14)
-sns.plt.ylabel('RAxML Likelihood Score',fontsize=14)
-sns.plt.title('RAxML Likelihood Score vs. Sequence Length',fontsize=18,y=1.05)
+sns.plt.ylabel('RAxML Score',fontsize=14)
+sns.plt.title('RAxML Score vs. Sequence Length',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('raxml-likelihood_vs_length.png', bbox_inches='tight')
 plt.close()
 
-# plot RAxML Likelihood Score vs. gamma rate
+# plot RAxML Score vs. gamma rate
 fig = plt.figure()
 x = np.array([2.952,5.904,29.518,147.591,295.182,float('inf')])
 df = {'gammarate':{},'score':{},'category':{}}
@@ -324,8 +324,8 @@ df = pd.DataFrame(df)
 ax = sns.violinplot(x='gammarate',y='score',hue='category',data=df,order=x,palette=pal)
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'Gamma Distribution Rate $\left(\alpha\right)$',fontsize=14)
-sns.plt.ylabel('RAxML Likelihood Score',fontsize=14)
-sns.plt.title('RAxML Likelihood Score vs. Deviation from Ultrametricity',fontsize=18,y=1.05)
+sns.plt.ylabel('RAxML Score',fontsize=14)
+sns.plt.title('RAxML Score vs. Deviation from Ultrametricity',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('raxml-likelihood_vs_gammarate.png', bbox_inches='tight')
 plt.close()
