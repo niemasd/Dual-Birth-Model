@@ -128,6 +128,8 @@ y_estimate_cherries_sh['param22_true'] = [0.22575]*len(x)
 y_estimate_cherries_sh['param23_true'] = [0.03135]*len(x)
 y_estimate_cherries_sh['param24_true'] = [0.0101]*len(x)
 
+### FASTTREE PLOTS ###
+
 # create plot of cherry deviation vs. r (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
 fig = plt.figure()
 for i in ['04','03','00','02','01']:
@@ -142,7 +144,7 @@ sns.plt.ylabel(r'$\log_{10}{\frac{Estimated}{True}}$',fontsize=14)
 sns.plt.title(r'FastTree Estimated Cherry Fraction  for $r\ \left(E(l_b)=0.298\right)$',fontsize=18,y=1.05)
 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.show()
-fig.savefig('cherry-deviation_vs_threshold_r_const-exp-branch-length_estimate-cherries-sh.png', bbox_inches='tight')
+fig.savefig('cherry-deviation_vs_threshold_r_const-exp-branch-length_fasttree_estimate-cherries-sh.png', bbox_inches='tight')
 plt.close()
 
 # create plot of cherry deviation vs. r (with constant lambda = lambdaA + lambdaB)
@@ -159,7 +161,7 @@ sns.plt.ylabel(r'$\log_{10}{\frac{Estimated}{True}}$',fontsize=14)
 sns.plt.title(r'FastTree Estimated Cherry Fraction  for $r\ \left(\lambda = \lambda_A + \lambda_B = 169\right)$',fontsize=18,y=1.05)
 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.show()
-fig.savefig('cherry-deviation_vs_threshold_r_const-lambda_estimate-cherries-sh.png', bbox_inches='tight')
+fig.savefig('cherry-deviation_vs_threshold_r_const-lambda_fasttree_estimate-cherries-sh.png', bbox_inches='tight')
 plt.close()
 
 # create plot of cherry deviation vs. lambda
@@ -176,7 +178,7 @@ sns.plt.ylabel(r'$\log_{10}{\frac{Estimated}{True}}$',fontsize=14)
 sns.plt.title(r'FastTree Estimated Cherry Fraction  for $\lambda$',fontsize=18,y=1.05)
 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.show()
-fig.savefig('cherry-deviation_vs_threshold_lambda_estimate-cherries-sh.png', bbox_inches='tight')
+fig.savefig('cherry-deviation_vs_threshold_lambda_fasttree_estimate-cherries-sh.png', bbox_inches='tight')
 plt.close()
 
 # create plot of cherry deviation vs. length
@@ -193,7 +195,7 @@ sns.plt.ylabel(r'$\log_{10}{\frac{Estimated}{True}}$',fontsize=14)
 sns.plt.title('FastTree Estimated Cherry Fraction  for Sequence Length',fontsize=18,y=1.05)
 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.show()
-fig.savefig('cherry-deviation_vs_threshold_length_estimate-cherries-sh.png', bbox_inches='tight')
+fig.savefig('cherry-deviation_vs_threshold_length_fasttree_estimate-cherries-sh.png', bbox_inches='tight')
 plt.close()
 
 # create plot of cherry deviation vs. gamma rate
@@ -210,5 +212,5 @@ sns.plt.ylabel(r'$\log_{10}{\frac{Estimated}{True}}$',fontsize=14)
 sns.plt.title('FastTree Estimated Cherry Fraction  for Deviation from Ultrametricity',fontsize=18,y=1.05)
 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.show()
-fig.savefig('cherry-deviation_vs_threshold_gammarate_estimate-cherries-sh.png', bbox_inches='tight')
+fig.savefig('cherry-deviation_vs_threshold_gammarate_fasttree_estimate-cherries-sh.png', bbox_inches='tight')
 plt.close()
