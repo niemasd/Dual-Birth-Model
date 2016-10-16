@@ -115,7 +115,7 @@ for i in ['04','03','00','02','01']:
     p = 'param' + i
     r = {'04':0.0001, '03':0.001, '00':0.01, '02':0.1, '01':1}[i]
     y = np.log10([y_estimate_cherries_sh[p+'_fasttree'][j] / y_estimate_cherries_sh[p+'_true'][j] for j in range(len(x))])
-    label = r'$r = $' + str(r)
+    label = r'$r = $' + str(r) + " (estimate-cherries.sh)"
     plt.plot(x,y,label=label)
 plt.xticks(axisX)
 sns.plt.xlabel('Support Threshold',fontsize=14)
@@ -123,7 +123,7 @@ sns.plt.ylabel(r'$\log_{10}{\frac{Estimated}{True}}$',fontsize=14)
 sns.plt.title(r'FastTree Estimated Cherry Fraction  for $r\ \left(E(l_b)=0.298\right)$',fontsize=18,y=1.05)
 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.show()
-fig.savefig('cherry-deviation_vs_threshold_r_const-exp-branch-length_fasttree_estimate-cherries-sh.png', bbox_inches='tight')
+fig.savefig('cherry-deviation_vs_threshold_r_const-exp-branch-length_fasttree.png', bbox_inches='tight')
 plt.close()
 
 # create plot of cherry deviation vs. r (with constant lambda = lambdaA + lambdaB)
@@ -132,7 +132,7 @@ for i in ['24','23','00','22','21']:
     p = 'param' + i
     r = {'24':0.0001, '23':0.001, '00':0.01, '22':0.1, '21':1}[i]
     y = np.log10([y_estimate_cherries_sh[p+'_fasttree'][j] / y_estimate_cherries_sh[p+'_true'][j] for j in range(len(x))])
-    label = r'$r = $' + str(r)
+    label = r'$r = $' + str(r) + " (estimate-cherries.sh)"
     plt.plot(x,y,label=label)
 plt.xticks(axisX)
 sns.plt.xlabel('Support Threshold',fontsize=14)
@@ -140,7 +140,7 @@ sns.plt.ylabel(r'$\log_{10}{\frac{Estimated}{True}}$',fontsize=14)
 sns.plt.title(r'FastTree Estimated Cherry Fraction  for $r\ \left(\lambda = \lambda_A + \lambda_B = 169\right)$',fontsize=18,y=1.05)
 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.show()
-fig.savefig('cherry-deviation_vs_threshold_r_const-lambda_fasttree_estimate-cherries-sh.png', bbox_inches='tight')
+fig.savefig('cherry-deviation_vs_threshold_r_const-lambda_fasttree.png', bbox_inches='tight')
 plt.close()
 
 # create plot of cherry deviation vs. lambda
@@ -149,7 +149,7 @@ for i in ['05','06','00','07','08']:
     p = 'param' + i
     l = {'05':33.866, '06':84.664, '00':169.328, '07':338.655, '08':846.638}[i]
     y = np.log10([y_estimate_cherries_sh[p+'_fasttree'][j] / y_estimate_cherries_sh[p+'_true'][j] for j in range(len(x))])
-    label = r'$\lambda = $' + str(l)
+    label = r'$\lambda = $' + str(l) + " (estimate-cherries.sh)"
     plt.plot(x,y,label=label)
 plt.xticks(axisX)
 sns.plt.xlabel('Support Threshold',fontsize=14)
@@ -157,7 +157,7 @@ sns.plt.ylabel(r'$\log_{10}{\frac{Estimated}{True}}$',fontsize=14)
 sns.plt.title(r'FastTree Estimated Cherry Fraction  for $\lambda$',fontsize=18,y=1.05)
 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.show()
-fig.savefig('cherry-deviation_vs_threshold_lambda_fasttree_estimate-cherries-sh.png', bbox_inches='tight')
+fig.savefig('cherry-deviation_vs_threshold_lambda_fasttree.png', bbox_inches='tight')
 plt.close()
 
 # create plot of cherry deviation vs. length
@@ -166,7 +166,7 @@ for i in ['09','10','11','00','12','13','14','15']:
     p = 'param' + i
     k = {'09':50, '10':100, '11':200, '00':300, '12':600, '13':1200, '14':2400, '15':4800}[i]
     y = np.log10([y_estimate_cherries_sh[p+'_fasttree'][j] / y_estimate_cherries_sh[p+'_true'][j] for j in range(len(x))])
-    label = 'Sequence Length = ' + str(k)
+    label = 'Sequence Length = ' + str(k) + " (estimate-cherries.sh)"
     plt.plot(x,y,label=label)
 plt.xticks(axisX)
 sns.plt.xlabel('Support Threshold',fontsize=14)
@@ -174,7 +174,7 @@ sns.plt.ylabel(r'$\log_{10}{\frac{Estimated}{True}}$',fontsize=14)
 sns.plt.title('FastTree Estimated Cherry Fraction  for Sequence Length',fontsize=18,y=1.05)
 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.show()
-fig.savefig('cherry-deviation_vs_threshold_length_fasttree_estimate-cherries-sh.png', bbox_inches='tight')
+fig.savefig('cherry-deviation_vs_threshold_length_fasttree.png', bbox_inches='tight')
 plt.close()
 
 # create plot of cherry deviation vs. gamma rate
@@ -183,7 +183,7 @@ for i in ['16','17','00','18','19']:
     p = 'param' + i
     g = {'16':2.952, '17':5.904, '00':29.518, '18':147.591, '19':295.182}[i]
     y = np.log10([y_estimate_cherries_sh[p+'_fasttree'][j] / y_estimate_cherries_sh[p+'_true'][j] for j in range(len(x))])
-    label = r'Gamma Distribution Rate $\alpha = $' + str(g)
+    label = r'Gamma Distribution Rate $\alpha = $' + str(g) + " (estimate-cherries.sh)"
     plt.plot(x,y,label=label)
 plt.xticks(axisX)
 sns.plt.xlabel('Support Threshold',fontsize=14)
@@ -191,7 +191,7 @@ sns.plt.ylabel(r'$\log_{10}{\frac{Estimated}{True}}$',fontsize=14)
 sns.plt.title('FastTree Estimated Cherry Fraction  for Deviation from Ultrametricity',fontsize=18,y=1.05)
 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.show()
-fig.savefig('cherry-deviation_vs_threshold_gammarate_fasttree_estimate-cherries-sh.png', bbox_inches='tight')
+fig.savefig('cherry-deviation_vs_threshold_gammarate_fasttree.png', bbox_inches='tight')
 plt.close()
 
 ### RAxML PLOTS ###
@@ -202,7 +202,7 @@ for i in ['04','03','00','02','01']:
     p = 'param' + i
     r = {'04':0.0001, '03':0.001, '00':0.01, '02':0.1, '01':1}[i]
     y = np.log10([y_estimate_cherries_sh[p+'_raxml'][j] / y_estimate_cherries_sh[p+'_true'][j] for j in range(len(x))])
-    label = r'$r = $' + str(r)
+    label = r'$r = $' + str(r) + " (estimate-cherries.sh)"
     plt.plot(x,y,label=label)
 plt.xticks(axisX)
 sns.plt.xlabel('Support Threshold',fontsize=14)
@@ -210,7 +210,7 @@ sns.plt.ylabel(r'$\log_{10}{\frac{Estimated}{True}}$',fontsize=14)
 sns.plt.title(r'RAxML Estimated Cherry Fraction for $r\ \left(E(l_b)=0.298\right)$',fontsize=18,y=1.05)
 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.show()
-fig.savefig('cherry-deviation_vs_threshold_r_const-exp-branch-length_raxml_estimate-cherries-sh.png', bbox_inches='tight')
+fig.savefig('cherry-deviation_vs_threshold_r_const-exp-branch-length_raxml.png', bbox_inches='tight')
 plt.close()
 
 # create plot of cherry deviation vs. r (with constant lambda = lambdaA + lambdaB)
@@ -219,7 +219,7 @@ for i in ['24','23','00','22','21']:
     p = 'param' + i
     r = {'24':0.0001, '23':0.001, '00':0.01, '22':0.1, '21':1}[i]
     y = np.log10([y_estimate_cherries_sh[p+'_raxml'][j] / y_estimate_cherries_sh[p+'_true'][j] for j in range(len(x))])
-    label = r'$r = $' + str(r)
+    label = r'$r = $' + str(r) + " (estimate-cherries.sh)"
     plt.plot(x,y,label=label)
 plt.xticks(axisX)
 sns.plt.xlabel('Support Threshold',fontsize=14)
@@ -227,7 +227,7 @@ sns.plt.ylabel(r'$\log_{10}{\frac{Estimated}{True}}$',fontsize=14)
 sns.plt.title(r'RAxML Estimated Cherry Fraction for $r\ \left(\lambda = \lambda_A + \lambda_B = 169\right)$',fontsize=18,y=1.05)
 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.show()
-fig.savefig('cherry-deviation_vs_threshold_r_const-lambda_raxml_estimate-cherries-sh.png', bbox_inches='tight')
+fig.savefig('cherry-deviation_vs_threshold_r_const-lambda_raxml.png', bbox_inches='tight')
 plt.close()
 
 # create plot of cherry deviation vs. lambda
@@ -236,7 +236,7 @@ for i in ['05','06','00','07','08']:
     p = 'param' + i
     l = {'05':33.866, '06':84.664, '00':169.328, '07':338.655, '08':846.638}[i]
     y = np.log10([y_estimate_cherries_sh[p+'_raxml'][j] / y_estimate_cherries_sh[p+'_true'][j] for j in range(len(x))])
-    label = r'$\lambda = $' + str(l)
+    label = r'$\lambda = $' + str(l) + " (estimate-cherries.sh)"
     plt.plot(x,y,label=label)
 plt.xticks(axisX)
 sns.plt.xlabel('Support Threshold',fontsize=14)
@@ -244,7 +244,7 @@ sns.plt.ylabel(r'$\log_{10}{\frac{Estimated}{True}}$',fontsize=14)
 sns.plt.title(r'RAxML Estimated Cherry Fraction for $\lambda$',fontsize=18,y=1.05)
 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.show()
-fig.savefig('cherry-deviation_vs_threshold_lambda_raxml_estimate-cherries-sh.png', bbox_inches='tight')
+fig.savefig('cherry-deviation_vs_threshold_lambda_raxml.png', bbox_inches='tight')
 plt.close()
 
 # create plot of cherry deviation vs. length
@@ -253,7 +253,7 @@ for i in ['09','10','11','00','12','13','14','15']:
     p = 'param' + i
     k = {'09':50, '10':100, '11':200, '00':300, '12':600, '13':1200, '14':2400, '15':4800}[i]
     y = np.log10([y_estimate_cherries_sh[p+'_raxml'][j] / y_estimate_cherries_sh[p+'_true'][j] for j in range(len(x))])
-    label = 'Sequence Length = ' + str(k)
+    label = 'Sequence Length = ' + str(k) + " (estimate-cherries.sh)"
     plt.plot(x,y,label=label)
 plt.xticks(axisX)
 sns.plt.xlabel('Support Threshold',fontsize=14)
@@ -261,7 +261,7 @@ sns.plt.ylabel(r'$\log_{10}{\frac{Estimated}{True}}$',fontsize=14)
 sns.plt.title('RAxML Estimated Cherry Fraction for Sequence Length',fontsize=18,y=1.05)
 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.show()
-fig.savefig('cherry-deviation_vs_threshold_length_raxml_estimate-cherries-sh.png', bbox_inches='tight')
+fig.savefig('cherry-deviation_vs_threshold_length_raxml.png', bbox_inches='tight')
 plt.close()
 
 # create plot of cherry deviation vs. gamma rate
@@ -270,7 +270,7 @@ for i in ['16','17','00','18','19']:
     p = 'param' + i
     g = {'16':2.952, '17':5.904, '00':29.518, '18':147.591, '19':295.182}[i]
     y = np.log10([y_estimate_cherries_sh[p+'_raxml'][j] / y_estimate_cherries_sh[p+'_true'][j] for j in range(len(x))])
-    label = r'Gamma Distribution Rate $\alpha = $' + str(g)
+    label = r'Gamma Distribution Rate $\alpha = $' + str(g) + " (estimate-cherries.sh)"
     plt.plot(x,y,label=label)
 plt.xticks(axisX)
 sns.plt.xlabel('Support Threshold',fontsize=14)
@@ -278,5 +278,5 @@ sns.plt.ylabel(r'$\log_{10}{\frac{Estimated}{True}}$',fontsize=14)
 sns.plt.title('RAxML Estimated Cherry Fraction for Deviation from Ultrametricity',fontsize=18,y=1.05)
 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.show()
-fig.savefig('cherry-deviation_vs_threshold_gammarate_raxml_estimate-cherries-sh.png', bbox_inches='tight')
+fig.savefig('cherry-deviation_vs_threshold_gammarate_raxml.png', bbox_inches='tight')
 plt.close()
