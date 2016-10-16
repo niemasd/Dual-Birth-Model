@@ -1,6 +1,9 @@
 #!/bin/bash
 # WARNING: This script needs numlist, which is a program located in my "tools" GitHub repo
 # USAGE: Just run this script in the directory containing all of the tree parameter folders
+
+command -v numlist >/dev/null 2>&1 || { echo >&2 "ERROR: numlist not found in PATH. Get numlist from my \"tools\" GitHub repo (niemasd/tools)."; exit 1; }
+
 for d in $(seq -w 0 24); do
     # do fasttree fixes (fasttree support values are decimals, so do 0-1)
     echo -n "param$d" && echo -n "_fasttree = ["

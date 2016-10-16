@@ -7,6 +7,9 @@
 #    - Average Branch Length
 # does NOT do slower stats:
 #    - RAxML GAMMA-based Score
+
+command -v numlist >/dev/null 2>&1 || { echo >&2 "ERROR: numlist not found in PATH. Get numlist from my \"tools\" GitHub repo (niemasd/tools)."; exit 1; }
+
 for tree in *.tre.gz; do
     # get tre file prefix (*.tre from *.tre.gz)
     treFile=${tree%.*}
