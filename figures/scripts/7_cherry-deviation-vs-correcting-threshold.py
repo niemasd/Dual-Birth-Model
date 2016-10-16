@@ -81,31 +81,33 @@ y_estimate_cherries_sh = {
 x = np.arange(0,1.0,1.0/len(y_estimate_cherries_sh['param00_fasttree']))
 
 # true values
-y_estimate_cherries_sh['param00_true'] = [0.0902]*len(x)
-y_estimate_cherries_sh['param01_true'] = [0.3317]*len(x)
-y_estimate_cherries_sh['param02_true'] = [0.2234]*len(x)
-y_estimate_cherries_sh['param03_true'] = [0.0289]*len(x)
-y_estimate_cherries_sh['param04_true'] = [0.01005]*len(x)
-y_estimate_cherries_sh['param05_true'] = [0.09275]*len(x)
-y_estimate_cherries_sh['param06_true'] = [0.0915]*len(x)
-y_estimate_cherries_sh['param07_true'] = [0.08995]*len(x)
-y_estimate_cherries_sh['param08_true'] = [0.08675]*len(x)
-y_estimate_cherries_sh['param09_true'] = [0.0909]*len(x)
-y_estimate_cherries_sh['param10_true'] = [0.09005]*len(x)
-y_estimate_cherries_sh['param11_true'] = [0.0894]*len(x)
-y_estimate_cherries_sh['param12_true'] = [0.0899]*len(x)
-y_estimate_cherries_sh['param13_true'] = [0.0904]*len(x)
-y_estimate_cherries_sh['param14_true'] = [0.0898]*len(x)
-y_estimate_cherries_sh['param15_true'] = [0.08885]*len(x)
-y_estimate_cherries_sh['param16_true'] = [0.09025]*len(x)
-y_estimate_cherries_sh['param17_true'] = [0.08865]*len(x)
-y_estimate_cherries_sh['param18_true'] = [0.08705]*len(x)
-y_estimate_cherries_sh['param19_true'] = [0.0892]*len(x)
-y_estimate_cherries_sh['param20_true'] = [0.0899]*len(x)
-y_estimate_cherries_sh['param21_true'] = [0.33175]*len(x)
-y_estimate_cherries_sh['param22_true'] = [0.22575]*len(x)
-y_estimate_cherries_sh['param23_true'] = [0.03135]*len(x)
-y_estimate_cherries_sh['param24_true'] = [0.0101]*len(x)
+y_true = {
+    'param00_true':[0.0902]*len(x),
+    'param01_true':[0.3317]*len(x),
+    'param02_true':[0.2234]*len(x),
+    'param03_true':[0.0289]*len(x),
+    'param04_true':[0.01005]*len(x),
+    'param05_true':[0.09275]*len(x),
+    'param06_true':[0.0915]*len(x),
+    'param07_true':[0.08995]*len(x),
+    'param08_true':[0.08675]*len(x),
+    'param09_true':[0.0909]*len(x),
+    'param10_true':[0.09005]*len(x),
+    'param11_true':[0.0894]*len(x),
+    'param12_true':[0.0899]*len(x),
+    'param13_true':[0.0904]*len(x),
+    'param14_true':[0.0898]*len(x),
+    'param15_true':[0.08885]*len(x),
+    'param16_true':[0.09025]*len(x),
+    'param17_true':[0.08865]*len(x),
+    'param18_true':[0.08705]*len(x),
+    'param19_true':[0.0892]*len(x),
+    'param20_true':[0.0899]*len(x),
+    'param21_true':[0.33175]*len(x),
+    'param22_true':[0.22575]*len(x),
+    'param23_true':[0.03135]*len(x),
+    'param24_true':[0.0101]*len(x),
+}
 
 ### FASTTREE PLOTS ###
 
@@ -114,7 +116,7 @@ fig = plt.figure()
 for i in ['04','03','00','02','01']:
     p = 'param' + i
     r = {'04':0.0001, '03':0.001, '00':0.01, '02':0.1, '01':1}[i]
-    y = np.log10([y_estimate_cherries_sh[p+'_fasttree'][j] / y_estimate_cherries_sh[p+'_true'][j] for j in range(len(x))])
+    y = np.log10([y_estimate_cherries_sh[p+'_fasttree'][j] / y_true[p+'_true'][j] for j in range(len(x))])
     label = r'$r = $' + str(r) + " (estimate-cherries.sh)"
     plt.plot(x,y,label=label)
 plt.xticks(axisX)
@@ -131,7 +133,7 @@ fig = plt.figure()
 for i in ['24','23','00','22','21']:
     p = 'param' + i
     r = {'24':0.0001, '23':0.001, '00':0.01, '22':0.1, '21':1}[i]
-    y = np.log10([y_estimate_cherries_sh[p+'_fasttree'][j] / y_estimate_cherries_sh[p+'_true'][j] for j in range(len(x))])
+    y = np.log10([y_estimate_cherries_sh[p+'_fasttree'][j] / y_true[p+'_true'][j] for j in range(len(x))])
     label = r'$r = $' + str(r) + " (estimate-cherries.sh)"
     plt.plot(x,y,label=label)
 plt.xticks(axisX)
@@ -148,7 +150,7 @@ fig = plt.figure()
 for i in ['05','06','00','07','08']:
     p = 'param' + i
     l = {'05':33.866, '06':84.664, '00':169.328, '07':338.655, '08':846.638}[i]
-    y = np.log10([y_estimate_cherries_sh[p+'_fasttree'][j] / y_estimate_cherries_sh[p+'_true'][j] for j in range(len(x))])
+    y = np.log10([y_estimate_cherries_sh[p+'_fasttree'][j] / y_true[p+'_true'][j] for j in range(len(x))])
     label = r'$\lambda = $' + str(l) + " (estimate-cherries.sh)"
     plt.plot(x,y,label=label)
 plt.xticks(axisX)
@@ -165,7 +167,7 @@ fig = plt.figure()
 for i in ['09','10','11','00','12','13','14','15']:
     p = 'param' + i
     k = {'09':50, '10':100, '11':200, '00':300, '12':600, '13':1200, '14':2400, '15':4800}[i]
-    y = np.log10([y_estimate_cherries_sh[p+'_fasttree'][j] / y_estimate_cherries_sh[p+'_true'][j] for j in range(len(x))])
+    y = np.log10([y_estimate_cherries_sh[p+'_fasttree'][j] / y_true[p+'_true'][j] for j in range(len(x))])
     label = 'Sequence Length = ' + str(k) + " (estimate-cherries.sh)"
     plt.plot(x,y,label=label)
 plt.xticks(axisX)
@@ -182,7 +184,7 @@ fig = plt.figure()
 for i in ['16','17','00','18','19']:
     p = 'param' + i
     g = {'16':2.952, '17':5.904, '00':29.518, '18':147.591, '19':295.182}[i]
-    y = np.log10([y_estimate_cherries_sh[p+'_fasttree'][j] / y_estimate_cherries_sh[p+'_true'][j] for j in range(len(x))])
+    y = np.log10([y_estimate_cherries_sh[p+'_fasttree'][j] / y_true[p+'_true'][j] for j in range(len(x))])
     label = r'Gamma Distribution Rate $\alpha = $' + str(g) + " (estimate-cherries.sh)"
     plt.plot(x,y,label=label)
 plt.xticks(axisX)
@@ -201,7 +203,7 @@ fig = plt.figure()
 for i in ['04','03','00','02','01']:
     p = 'param' + i
     r = {'04':0.0001, '03':0.001, '00':0.01, '02':0.1, '01':1}[i]
-    y = np.log10([y_estimate_cherries_sh[p+'_raxml'][j] / y_estimate_cherries_sh[p+'_true'][j] for j in range(len(x))])
+    y = np.log10([y_estimate_cherries_sh[p+'_raxml'][j] / y_true[p+'_true'][j] for j in range(len(x))])
     label = r'$r = $' + str(r) + " (estimate-cherries.sh)"
     plt.plot(x,y,label=label)
 plt.xticks(axisX)
@@ -218,7 +220,7 @@ fig = plt.figure()
 for i in ['24','23','00','22','21']:
     p = 'param' + i
     r = {'24':0.0001, '23':0.001, '00':0.01, '22':0.1, '21':1}[i]
-    y = np.log10([y_estimate_cherries_sh[p+'_raxml'][j] / y_estimate_cherries_sh[p+'_true'][j] for j in range(len(x))])
+    y = np.log10([y_estimate_cherries_sh[p+'_raxml'][j] / y_true[p+'_true'][j] for j in range(len(x))])
     label = r'$r = $' + str(r) + " (estimate-cherries.sh)"
     plt.plot(x,y,label=label)
 plt.xticks(axisX)
@@ -235,7 +237,7 @@ fig = plt.figure()
 for i in ['05','06','00','07','08']:
     p = 'param' + i
     l = {'05':33.866, '06':84.664, '00':169.328, '07':338.655, '08':846.638}[i]
-    y = np.log10([y_estimate_cherries_sh[p+'_raxml'][j] / y_estimate_cherries_sh[p+'_true'][j] for j in range(len(x))])
+    y = np.log10([y_estimate_cherries_sh[p+'_raxml'][j] / y_true[p+'_true'][j] for j in range(len(x))])
     label = r'$\lambda = $' + str(l) + " (estimate-cherries.sh)"
     plt.plot(x,y,label=label)
 plt.xticks(axisX)
@@ -252,7 +254,7 @@ fig = plt.figure()
 for i in ['09','10','11','00','12','13','14','15']:
     p = 'param' + i
     k = {'09':50, '10':100, '11':200, '00':300, '12':600, '13':1200, '14':2400, '15':4800}[i]
-    y = np.log10([y_estimate_cherries_sh[p+'_raxml'][j] / y_estimate_cherries_sh[p+'_true'][j] for j in range(len(x))])
+    y = np.log10([y_estimate_cherries_sh[p+'_raxml'][j] / y_true[p+'_true'][j] for j in range(len(x))])
     label = 'Sequence Length = ' + str(k) + " (estimate-cherries.sh)"
     plt.plot(x,y,label=label)
 plt.xticks(axisX)
@@ -269,7 +271,7 @@ fig = plt.figure()
 for i in ['16','17','00','18','19']:
     p = 'param' + i
     g = {'16':2.952, '17':5.904, '00':29.518, '18':147.591, '19':295.182}[i]
-    y = np.log10([y_estimate_cherries_sh[p+'_raxml'][j] / y_estimate_cherries_sh[p+'_true'][j] for j in range(len(x))])
+    y = np.log10([y_estimate_cherries_sh[p+'_raxml'][j] / y_true[p+'_true'][j] for j in range(len(x))])
     label = r'Gamma Distribution Rate $\alpha = $' + str(g) + " (estimate-cherries.sh)"
     plt.plot(x,y,label=label)
 plt.xticks(axisX)
