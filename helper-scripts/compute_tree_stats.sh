@@ -1,4 +1,5 @@
 #!/bin/bash
+# WARNING: This script needs numlist, which is a program located in my "tools" GitHub repo
 
 # compute tree stats on all trees in the current working directory (*.tre.gz files)
 # so far, only does fast stats:
@@ -6,6 +7,9 @@
 #    - Average Branch Length
 # does NOT do slower stats:
 #    - RAxML GAMMA-based Score
+
+command -v numlist >/dev/null 2>&1 || { echo >&2 "ERROR: numlist not found in PATH. Get numlist from my \"tools\" GitHub repo (niemasd/tools)."; exit 1; }
+
 for tree in *.tre.gz; do
     # get tre file prefix (*.tre from *.tre.gz)
     treFile=${tree%.*}
@@ -16,5 +20,5 @@ for tree in *.tre.gz; do
 
     # compute average branch length
     echo -n "Average Branch Length: " >> $treFile.stats
-    gunzip -c $tree | nw_distance -mp -sa - | ~/GitHub/Alu-Project/helper-scripts/numlist_math.py -avg >> $treFile.stats
+    gunzip -c $tree | nw_distance -mp -sa - | ~/GitHub/Alu-Project/helper-scripts/numlist -avg >> $treFile.stats
 done

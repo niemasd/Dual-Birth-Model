@@ -39,12 +39,21 @@ r_fasttree = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of 
                                   [326,325,328,338,348,327,343,325,341,329,320,334,327,327,330,324,333,332,314,329]   # r = 1
              ).astype(float)/1000} # divide by number of leaves to get percentage
 r_raxml    = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
+              'cherries':np.array([328,339,333,322,330,325,326,329,339,324,339,342,327,325,337,344,329,343,332,334] + # r = 0.0001
+                                  [275,273,274,281,283,282,284,285,290,270,289,290,281,277,264,287,259,286,287,278] + # r = 0.001
+                                  [199,215,210,215,211,228,215,192,209,208,219,225,197,206,211,212,209,209,217,200] + # r = 0.01
+                                  [243,264,248,253,258,242,241,243,247,251,252,242,255,242,248,248,240,243,256,263] + # r = 0.1
+                                  [331,322,330,336,346,326,343,327,338,328,320,332,326,327,332,324,335,330,317,331]   # r = 1
+             ).astype(float)/1000} # divide by number of leaves to get percentage
+''' # VALUES FROM ORIGINAL RAXML TREES
+r_raxml    = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
               'cherries':np.array([323,334,327,320,323,323,325,325,332,314,330,334,317,320,335,334,320,332,316,326] + # r = 0.0001
                                   [261,257,262,261,249,258,265,269,272,241,273,274,264,258,243,274,237,264,271,266] + # r = 0.001
                                   [193,190,199,193,197,196,209,190,190,199,205,218,192,199,185,197,203,203,198,189] + # r = 0.01
                                   [240,256,244,250,253,239,242,238,242,240,241,237,250,236,244,244,235,237,254,256] + # r = 0.1
                                   [329,319,327,332,348,325,343,320,338,322,317,329,323,326,329,322,335,329,312,328]   # r = 1
              ).astype(float)/1000} # divide by number of leaves to get percentage
+'''
 
 # modifying r = lambdaA/lambdaB (with constant lambda = lambdaA + lambdaB)
 r2_original = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
@@ -62,12 +71,21 @@ r2_fasttree = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of
                                   [313,303,308,314,303,307,307,290,300,313,295,303,304,306,303,310,288,300,324,310]   # r = 1
              ).astype(float)/1000} # divide by number of leaves to get percentage
 r2_raxml   = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
+              'cherries':np.array([288,278,262,280,286,269,288,278,276,280,289,275,276,271,285,275,289,269,265,269] + # r = 0.0001
+                                  [234,244,233,244,242,235,238,237,236,244,233,217,251,236,239,243,230,236,224,220] + # r = 0.001
+                                  [199,215,210,215,211,228,215,192,209,208,219,225,197,206,211,212,209,209,217,200] + # r = 0.01
+                                  [258,266,273,274,259,258,254,260,256,272,259,258,273,260,262,264,263,271,265,264] + # r = 0.1
+                                  [331,321,323,327,323,319,324,316,319,335,320,324,322,325,327,331,316,331,338,326]   # r = 1
+             ).astype(float)/1000} # divide by number of leaves to get percentage
+''' # VALUES FROM ORIGINAL RAXML TREES
+r2_raxml   = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
               'cherries':np.array([272,261,246,264,278,248,263,273,250,258,285,259,273,255,267,260,276,243,247,257] + # r = 0.0001
                                   [223,220,224,239,225,226,225,222,219,238,220,214,236,218,221,223,213,218,215,210] + # r = 0.001
                                   [193,190,199,193,197,196,209,190,190,199,205,218,192,199,185,197,203,203,198,189] + # r = 0.01
                                   [243,253,260,262,249,246,253,244,250,265,252,245,255,254,253,254,247,259,252,250] + # r = 0.1
                                   [329,314,322,323,320,314,319,314,312,329,317,317,313,315,318,321,310,326,332,312]   # r = 1
              ).astype(float)/1000} # divide by number of leaves to get percentage
+'''
 
 # modifying lambda = lambdaA + lambdaB
 l_original = {'lambda':np.array([33.866]*20+[84.664]*20+[169.328]*20+[338.655]*20+[846.638]*20),
@@ -85,12 +103,21 @@ l_fasttree = {'lambda':np.array([33.866]*20+[84.664]*20+[169.328]*20+[338.655]*2
                                   [233,229,217,222,225,219,217,227,222,219,246,213,233,246,209,210,232,240,218,231]   # lambda = 846.63757726278155
              ).astype(float)/1000} # divide by number of leaves to get percentage
 l_raxml    = {'lambda':np.array([33.866]*20+[84.664]*20+[169.328]*20+[338.655]*20+[846.638]*20),
+              'cherries':np.array([202,187,195,191,182,183,194,205,183,184,183,196,182,182,178,197,164,178,186,178] + # lambda = 33.86550309051126
+                                  [193,206,193,189,197,192,182,193,175,194,193,197,195,199,184,193,189,190,185,187] + # lambda = 84.66375772627816
+                                  [199,215,210,215,211,228,215,192,209,208,219,225,197,206,211,212,209,209,217,200] + # lambda = 169.32751545255631
+                                  [250,247,263,229,248,258,226,237,236,239,233,238,243,252,246,246,241,227,242,240] + # lambda = 338.65503090511262
+                                  [274,274,279,273,289,267,272,267,273,271,279,259,263,280,275,265,273,285,279,295]   # lambda = 846.63757726278155
+             ).astype(float)/1000} # divide by number of leaves to get percentage
+''' # VALUES FROM ORIGINAL RAXML TREES
+l_raxml    = {'lambda':np.array([33.866]*20+[84.664]*20+[169.328]*20+[338.655]*20+[846.638]*20),
               'cherries':np.array([200,186,190,185,183,183,194,208,190,184,180,185,182,184,177,194,170,182,181,180] + # lambda = 33.86550309051126
                                   [195,204,191,184,190,192,184,186,174,185,188,194,195,195,186,189,188,198,172,194] + # lambda = 84.66375772627816
                                   [193,190,199,193,197,196,209,190,190,199,205,218,192,199,185,197,203,203,198,189] + # lambda = 169.32751545255631
                                   [241,235,236,216,223,237,199,226,216,211,208,226,224,236,223,239,225,209,221,221] + # lambda = 338.65503090511262
                                   [270,266,263,262,286,257,267,255,263,264,266,255,256,272,260,259,256,271,263,281]   # lambda = 846.63757726278155
              ).astype(float)/1000} # divide by number of leaves to get percentage
+'''
 
 # modifying sequence length
 k_original = {'length':np.array([50]*20+[100]*20+[200]*20+[300]*20+[600]*20+[1200]*20+[2400]*20+[4800]*20), # values of length
@@ -114,6 +141,17 @@ k_fasttree = {'length':np.array([50]*20+[100]*20+[200]*20+[300]*20+[600]*20+[120
                                   [106,121,113,109,111,113,120,116,115,121,116,104,124,103,131,115,105,104,119,111]   # length = 4800
              ).astype(float)/1000} # divide by number of leaves to get percentage
 k_raxml    = {'length':np.array([50]*20+[100]*20+[200]*20+[300]*20+[600]*20+[1200]*20+[2400]*20+[4800]*20), # values of length
+              'cherries':np.array([285,293,273,278,267,270,262,280,277,286,275,276,270,277,278,279,276,272,268,277] + # length = 50
+                                  [257,250,262,256,252,260,264,255,264,257,265,263,254,250,273,251,252,257,263,256] + # length = 100
+                                  [223,225,230,231,229,239,239,238,219,229,240,219,234,242,224,233,240,238,245,229] + # length = 200
+                                  [199,215,210,215,211,228,215,192,209,208,219,225,197,206,211,212,209,209,217,200] + # length = 300
+                                  [176,175,173,175,189,187,170,170,184,181,178,184,170,182,176,175,174,179,181,177] + # length = 600
+                                  [128,140,147,159,146,158,165,146,152,156,138,149,155,146,152,151,140,156,138,145] + # length = 1200
+                                  [129,130,130,135,126,121,135,127,129,122,128,130,116,120,127,131,124,118,130,118] + # length = 2400
+                                  [104,117,109,109,112,110,119,114,113,122,113,101,122,104,126,115,103,103,121,109]   # length = 4800
+             ).astype(float)/1000} # divide by number of leaves to get percentage
+''' # VALUES FROM ORIGINAL RAXML TREES
+k_raxml    = {'length':np.array([50]*20+[100]*20+[200]*20+[300]*20+[600]*20+[1200]*20+[2400]*20+[4800]*20), # values of length
               'cherries':np.array([279,286,267,280,260,268,262,269,268,278,269,266,272,274,273,276,265,263,271,279] + # length = 50
                                   [255,245,257,237,240,240,254,240,252,251,259,253,243,250,256,235,250,253,253,255] + # length = 100
                                   [198,215,213,213,214,221,214,221,208,208,222,206,216,225,204,222,224,220,233,219] + # length = 200
@@ -123,6 +161,7 @@ k_raxml    = {'length':np.array([50]*20+[100]*20+[200]*20+[300]*20+[600]*20+[120
                                   [136,135,129,138,133,128,135,128,131,128,137,137,128,125,128,138,133,118,135,128] + # length = 2400
                                   [112,124,114,117,118,116,126,118,125,128,121,106,130,113,128,119,113,110,129,116]   # length = 4800
              ).astype(float)/1000} # divide by number of leaves to get percentage
+'''
 
 # modifying deviation from ultrametricity
 g_original = {'gammarate':np.array([2.952]*20+[5.904]*20+[29.518]*20+[147.591]*20+[295.182]*20+[float('inf')]*20),
@@ -142,6 +181,15 @@ g_fasttree = {'gammarate':np.array([2.952]*20+[5.904]*20+[29.518]*20+[147.591]*2
                                   [207,210,207,210,201,203,204,210,224,204,220,206,209,217,227,214,217,204,203,196]   # gamma = infinity
              ).astype(float)/1000} # divide by number of leaves to get percentage
 g_raxml    = {'gammarate':np.array([2.952]*20+[5.904]*20+[29.518]*20+[147.591]*20+[295.182]*20+[float('inf')]*20),
+              'cherries':np.array([225,215,219,208,219,214,209,212,210,215,215,226,210,218,223,226,221,214,203,207] + # gamma = 2.95181735298926
+                                  [213,210,203,213,220,228,217,215,205,221,209,218,212,203,226,221,225,225,215,213] + # gamma = 5.90363470597852
+                                  [199,215,210,215,211,228,215,192,209,208,219,225,197,206,211,212,209,209,217,200] + # gamma = 29.518173529892621
+                                  [213,209,218,214,198,198,223,213,212,215,218,224,219,208,203,199,219,211,202,200] + # gamma = 147.590867649463
+                                  [204,210,227,210,204,207,192,213,198,213,223,220,217,212,220,214,215,209,201,215] + # gamma = 295.181735298926
+                                  [218,209,210,216,202,220,210,211,219,203,220,211,211,225,229,213,218,214,200,194]   # gamma = infinity
+             ).astype(float)/1000} # divide by number of leaves to get percentage
+''' # VALUES FROM ORIGINAL RAXML TREES
+g_raxml    = {'gammarate':np.array([2.952]*20+[5.904]*20+[29.518]*20+[147.591]*20+[295.182]*20+[float('inf')]*20),
               'cherries':np.array([212,196,204,200,202,196,199,205,194,205,202,215,206,203,213,207,218,206,194,193] + # gamma = 2.95181735298926
                                   [199,195,189,202,211,214,202,206,195,212,191,198,188,190,202,205,209,208,198,202] + # gamma = 5.90363470597852
                                   [193,190,199,193,197,196,209,190,190,199,205,218,192,199,185,197,203,203,198,189] + # gamma = 29.518173529892621
@@ -149,8 +197,9 @@ g_raxml    = {'gammarate':np.array([2.952]*20+[5.904]*20+[29.518]*20+[147.591]*2
                                   [189,187,210,203,184,188,184,203,179,193,211,196,195,202,203,197,200,191,192,203] + # gamma = 295.181735298926
                                   [208,201,197,209,194,202,194,193,209,193,208,189,191,203,209,192,196,185,194,186]   # gamma = infinity
              ).astype(float)/1000} # divide by number of leaves to get percentage
+'''
 
-# plot cherries fraction vs. r (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
+# plot Cherry Fraction vs. r (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
 fig = plt.figure()
 x = np.array([-4,-3,-2,-1,0])
 ax = sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_original),order=x,color=pal['simulated'])
@@ -160,13 +209,13 @@ x = np.linspace(-4,0,100)
 plt.plot(x+4,cherries_vs_r(10**x),label='Theoretical',linestyle='--',color=pal['theoretical'])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}\ \left(E(l_b)=0.298\right)$',fontsize=14)
-sns.plt.ylabel('Cherries Fraction',fontsize=14)
-sns.plt.title(r'Cherries Fraction vs. $\log_{10}{r}\ \left(E(l_b)=0.298\right)$',fontsize=18,y=1.05)
+sns.plt.ylabel('Cherry Fraction',fontsize=14)
+sns.plt.title(r'Cherry Fraction vs. $\log_{10}{r}\ \left(E(l_b)=0.298\right)$',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('cherries-fraction_vs_r_const-exp-branch-length.png', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
 
-# plot cherries fraction vs. r (with constant lambda = lambdaA + lambdaB)
+# plot Cherry Fraction vs. r (with constant lambda = lambdaA + lambdaB)
 fig = plt.figure()
 x = np.array([-4,-3,-2,-1,0])
 ax = sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_original),order=x,color=pal['simulated'])
@@ -176,13 +225,13 @@ x = np.linspace(-4,0,100)
 plt.plot(x+4,cherries_vs_r(10**x),label='Theoretical',linestyle='--',color=pal['theoretical'])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}\ \left(\lambda = \lambda_A + \lambda_B = 169\right)$',fontsize=14)
-sns.plt.ylabel('Cherries Fraction',fontsize=14)
-sns.plt.title(r'Cherries Fraction vs. $\log_{10}{r}\ \left(\lambda=\lambda_A+\lambda_B=169\right)$',fontsize=18,y=1.05)
+sns.plt.ylabel('Cherry Fraction',fontsize=14)
+sns.plt.title(r'Cherry Fraction vs. $\log_{10}{r}\ \left(\lambda=\lambda_A+\lambda_B=169\right)$',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('cherries-fraction_vs_r_const-lambda.png', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
 
-# plot cherries fraction vs. lambda
+# plot Cherry Fraction vs. lambda
 fig = plt.figure()
 x = np.array([33.866,84.664,169.328,338.655,846.638])
 ax = sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_original),order=x,color=pal['simulated'])
@@ -192,13 +241,13 @@ x = np.linspace(-100,1000,1100)
 plt.plot(x,np.array([cherries_vs_r(0.01)]*len(x)),label='Theoretical',linestyle='--',color=pal['theoretical'])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\lambda = \lambda_A + \lambda_B$',fontsize=14)
-sns.plt.ylabel('Cherries Fraction',fontsize=14)
-sns.plt.title(r'Cherries Fraction vs. $\lambda$',fontsize=18,y=1.05)
+sns.plt.ylabel('Cherry Fraction',fontsize=14)
+sns.plt.title(r'Cherry Fraction vs. $\lambda$',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('cherries-fraction_vs_lambda.png', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
 
-# plot cherries fraction vs. length
+# plot Cherry Fraction vs. length
 fig = plt.figure()
 x = np.array([50,100,200,300,600,1200,2400,4800])
 ax = sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_original),order=x,color=pal['simulated'])
@@ -208,13 +257,13 @@ x = np.linspace(-100,5000,5100)
 plt.plot(x,np.array([cherries_vs_r(0.01)]*len(x)),label='Theoretical',linestyle='--',color=pal['theoretical'])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel('Sequence Length',fontsize=14)
-sns.plt.ylabel('Cherries Fraction',fontsize=14)
-sns.plt.title('Cherries Fraction vs. Sequence Length',fontsize=18,y=1.05)
+sns.plt.ylabel('Cherry Fraction',fontsize=14)
+sns.plt.title('Cherry Fraction vs. Sequence Length',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('cherries-fraction_vs_length.png', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
 
-# plot cherries fraction vs. gamma rate
+# plot Cherry Fraction vs. gamma rate
 fig = plt.figure()
 x = np.array([2.952,5.904,29.518,147.591,295.182,float('inf')])
 ax = sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_original),order=x,color=pal['simulated'])
@@ -224,8 +273,8 @@ x = np.linspace(-100,1000,5000)
 plt.plot(x,np.array([cherries_vs_r(0.01)]*len(x)),label='Theoretical',linestyle='--',color=pal['theoretical'])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'Gamma Distribution Rate $\left(\alpha\right)$',fontsize=14)
-sns.plt.ylabel('Cherries Fraction',fontsize=14)
-sns.plt.title('Cherries Fraction vs. Deviation from Ultrametricity',fontsize=18,y=1.05)
+sns.plt.ylabel('Cherry Fraction',fontsize=14)
+sns.plt.title('Cherry Fraction vs. Deviation from Ultrametricity',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('cherries-fraction_vs_gammarate.png', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
