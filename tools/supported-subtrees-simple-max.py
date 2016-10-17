@@ -26,13 +26,14 @@ if __name__ == '__main__':
     for tree in trees:
         tree.reroot_at_midpoint()
         tree.calc_node_root_distances()
+        mth = tree.max_distance_from_root() * ht
         for node in tree.nodes():
             if node.label is not None:
                 node.edge.sp = float(node.label)
             else:
                 node.edge.sp = t+2
-        filt = lambda edge: False if edge.sp is None or edge.sp >= t or edge.head_node.distance_from_root()>tree.max_distance_from_root()*ht else True
-        #print(tree.max_distance_from_root())
+        filt = lambda edge: False if edge.sp is None or edge.sp >= t or edge.head_node.root_distance > mth else True
+        #print(tree.root_distance)
         edges = tree.edges(filt)
         for e in edges:
             e.collapse()
