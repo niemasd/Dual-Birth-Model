@@ -4,3 +4,5 @@ RAxML GAMMA-based Score: -84630.386992
 Tree Error RF = (FN+FP)/2: .07820000000000000000
 Cherry Deviation as Difference (inferred - true): 5
 Cherry Deviation as Ratio (inferred / true): 1.01488095238095238095
+Estimated Cherry Fraction (estimate-cherries.sh thresh=90%): .28600
+Estimated Cherry Fraction (estimate-cherries.sh thresh=95%): .25700
