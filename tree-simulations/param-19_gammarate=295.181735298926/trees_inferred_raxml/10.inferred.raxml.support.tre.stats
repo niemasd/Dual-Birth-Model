@@ -6,3 +6,4 @@ Cherry Deviation as Difference (inferred - true): 125
 Cherry Deviation as Ratio (inferred / true): 2.42045454545454545454
 Estimated Cherry Fraction (estimate-cherries.sh thresh=90%): .08200
 Estimated Cherry Fraction (estimate-cherries.sh thresh=95%): .07000
+Estimated Cherry Fraction (estimate-cherries.sh thresh=80%): .08700
