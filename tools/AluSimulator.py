@@ -49,6 +49,9 @@ class Node:
     def __cmp__(self, other):
         return cmp(self.depth,other.depth)
 
+    def __lt__(self, other):
+        return self.depth < other.depth
+
     # output tree (or subtree) in Newick format
     def newick(self):
         # if leaf
