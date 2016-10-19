@@ -17,6 +17,7 @@ sns.set_style("ticks")
 rcParams['font.family'] = 'serif'
 pal = {'fasttree':'#76BF72', 'raxml':'#B47CC7'}
 handles = [Patch(color=pal['fasttree'],label='FastTree'),Patch(color=pal['raxml'],label='RAxML')]
+axisY = np.asarray([i for i in range(-1000,1501,500)])
 
 # DATASETS
 # modifying r = lambdaA/lambdaB (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
@@ -210,6 +211,8 @@ for i in range(len(r_fasttree['score'])):
     df['category'][currNum] = 'raxml'
 df = pd.DataFrame(df)
 ax = sns.violinplot(x='r',y='score',hue='category',data=df,order=x,palette=pal)
+plt.plot(np.linspace(-1,101,10),[0]*10,linestyle='--',color='#000000')
+plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}\ \left(E(l_b)=0.298\right)$',fontsize=14)
 sns.plt.ylabel(r'RAxML Score Difference $\left(Inferred-True\right)$',fontsize=14)
@@ -233,6 +236,8 @@ for i in range(len(r2_fasttree['score'])):
     df['category'][currNum] = 'raxml'
 df = pd.DataFrame(df)
 ax = sns.violinplot(x='r',y='score',hue='category',data=df,order=x,palette=pal)
+plt.plot(np.linspace(-1,101,10),[0]*10,linestyle='--',color='#000000')
+plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}\ \left(\lambda = \lambda_A + \lambda_B = 169\right)$',fontsize=14)
 sns.plt.ylabel(r'RAxML Score Difference $\left(Inferred-True\right)$',fontsize=14)
@@ -256,6 +261,8 @@ for i in range(len(l_fasttree['score'])):
     df['category'][currNum] = 'raxml'
 df = pd.DataFrame(df)
 ax = sns.violinplot(x='lambda',y='score',hue='category',data=df,order=x,palette=pal)
+plt.plot(np.linspace(-1,101,10),[0]*10,linestyle='--',color='#000000')
+plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\lambda = \lambda_A + \lambda_B$',fontsize=14)
 sns.plt.ylabel(r'RAxML Score Difference $\left(Inferred-True\right)$',fontsize=14)
@@ -279,6 +286,8 @@ for i in range(len(k_fasttree['score'])):
     df['category'][currNum] = 'raxml'
 df = pd.DataFrame(df)
 ax = sns.violinplot(x='length',y='score',hue='category',data=df,order=x,palette=pal)
+plt.plot(np.linspace(-1,101,10),[0]*10,linestyle='--',color='#000000')
+plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel('Sequence Length',fontsize=14)
 sns.plt.ylabel(r'RAxML Score Difference $\left(Inferred-True\right)$',fontsize=14)
@@ -302,6 +311,8 @@ for i in range(len(g_fasttree['score'])):
     df['category'][currNum] = 'raxml'
 df = pd.DataFrame(df)
 ax = sns.violinplot(x='gammarate',y='score',hue='category',data=df,order=x,palette=pal)
+plt.plot(np.linspace(-1,101,10),[0]*10,linestyle='--',color='#000000')
+plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'Gamma Distribution Rate $\left(\alpha\right)$',fontsize=14)
 sns.plt.ylabel(r'RAxML Score Difference $\left(Inferred-True\right)$',fontsize=14)
