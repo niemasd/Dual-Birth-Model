@@ -6,6 +6,7 @@ Generate plots of fraction of cherries vs. various parameters
 '''
 # imports
 from matplotlib import rcParams
+from matplotlib.collections import PolyCollection
 from matplotlib.patches import Patch
 import matplotlib.pyplot as plt
 import numpy as np
@@ -15,12 +16,19 @@ import seaborn as sns
 # settings
 sns.set_style("ticks")
 rcParams['font.family'] = 'serif'
-pal = {'simulated':'#597DBE', 'fasttree':'#76BF72', 'raxml':'#B47CC7', 'theoretical':'#D65F5F', 'fasttree_fix90':'#C4AD66', 'fasttree_fix95':'#F0E442', 'raxml_fix90':'#C7AFD4', 'raxml_fix95':'#77BEDB'}
-handles = [Patch(color=pal['simulated'],label='Simulated'),Patch(color=pal['fasttree'],label='FastTree'),Patch(color=pal['fasttree_fix90'],label='FastTree (Corrected, 90%)'),Patch(color=pal['fasttree_fix95'],label='FastTree (Corrected, 95%)'),Patch(color=pal['raxml'],label='RAxML'),Patch(color=pal['raxml_fix90'],label='RAxML (Corrected, 90%)'),Patch(color=pal['raxml_fix95'],label='RAxML (Corrected, 95%)'),Patch(color=pal['theoretical'],label='Theoretical')]
+pal = {'simulated':'#597DBE', 'fasttree':'#FBD4BE', 'raxml':'#D3DDE3', 'theoretical':'#000000', 'fasttree_fix90':'#D41A1C', 'raxml_fix90':'#377EE8', 'raxml_fix80':'#4DAF4A'}
+handles = [Patch(color=pal['simulated'],label='Simulated'),Patch(color=pal['fasttree'],label='FastTree'),Patch(color=pal['fasttree_fix90'],label='FastTree (Corrected, 90%)'),Patch(color=pal['raxml'],label='RAxML'),Patch(color=pal['raxml_fix80'],label='RAxML (Corrected, 80%)'),Patch(color=pal['raxml_fix90'],label='RAxML (Corrected, 90%)'),Patch(color=pal['theoretical'],label='Theoretical')]
+axisY = np.asarray([i/10.0 for i in range(0,5)])
 
 # Expected Number of Cherries as a Function of r
 def cherries_vs_r(r):
     return (r**0.5)/(1+r+r**0.5)
+
+# set alpha transparency for axes
+def setAlpha(ax,a):
+    for art in ax.get_children():
+        if isinstance(art, PolyCollection):
+            art.set_alpha(a)
 
 # DATASETS
 # modifying r = lambdaA/lambdaB (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
@@ -59,6 +67,13 @@ r_raxml    = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of 
                                   [243,264,248,253,258,242,241,243,247,251,252,242,255,242,248,248,240,243,256,263] + # r = 0.1
                                   [331,322,330,336,346,326,343,327,338,328,320,332,326,327,332,324,335,330,317,331]   # r = 1
              ).astype(float)/1000} # divide by number of leaves to get percentage
+r_raxml_fix80 = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
+                 'cherries':np.array([0.056,0.059,0.063,0.062,0.052,0.057,0.059,0.04,0.067,0.05,0.069,0.061,0.059,0.054,0.06,0.064,0.046,0.061,0.059,0.057] +    # r = 0.0001
+                                     [0.059,0.048,0.051,0.049,0.05,0.051,0.049,0.05,0.047,0.042,0.048,0.049,0.05,0.053,0.058,0.058,0.041,0.053,0.047,0.048] +    # r = 0.001
+                                     [0.084,0.093,0.102,0.093,0.092,0.091,0.102,0.096,0.094,0.096,0.093,0.1,0.089,0.092,0.103,0.095,0.092,0.099,0.104,0.097] +   # r = 0.01
+                                     [0.208,0.218,0.217,0.216,0.216,0.197,0.212,0.207,0.211,0.211,0.212,0.213,0.212,0.211,0.197,0.199,0.206,0.213,0.209,0.216] + # r = 0.1
+                                     [0.309,0.297,0.297,0.312,0.321,0.299,0.317,0.299,0.311,0.305,0.292,0.305,0.302,0.294,0.309,0.295,0.311,0.302,0.289,0.302]   # r = 1
+                ).astype(float)}
 r_raxml_fix90 = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
                  'cherries':np.array([0.01,0.01,0.01,0.01,0.01,0.012,0.008,0.007,0.011,0.012,0.016,0.005,0.012,0.009,0.01,0.008,0.01,0.006,0.01,0.011] +         # r = 0.0001
                                      [0.031,0.024,0.022,0.028,0.023,0.029,0.028,0.027,0.028,0.028,0.026,0.026,0.024,0.026,0.027,0.026,0.027,0.027,0.022,0.026] + # r = 0.001
@@ -120,6 +135,13 @@ r2_raxml   = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of 
                                   [258,266,273,274,259,258,254,260,256,272,259,258,273,260,262,264,263,271,265,264] + # r = 0.1
                                   [331,321,323,327,323,319,324,316,319,335,320,324,322,325,327,331,316,331,338,326]   # r = 1
              ).astype(float)/1000} # divide by number of leaves to get percentage
+r2_raxml_fix80 = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
+                  'cherries':np.array([0.075,0.086,0.077,0.082,0.097,0.072,0.074,0.067,0.085,0.082,0.086,0.066,0.059,0.059,0.085,0.077,0.078,0.061,0.066,0.061] + # r = 0.0001
+                                      [0.055,0.061,0.064,0.058,0.054,0.063,0.068,0.057,0.059,0.054,0.055,0.054,0.053,0.066,0.061,0.055,0.054,0.053,0.058,0.049] + # r = 0.001
+                                      [0.084,0.093,0.102,0.093,0.092,0.091,0.102,0.096,0.094,0.096,0.093,0.1,0.089,0.092,0.103,0.095,0.092,0.099,0.104,0.097] +   # r = 0.01
+                                      [0.194,0.196,0.197,0.191,0.199,0.188,0.199,0.198,0.192,0.209,0.199,0.193,0.206,0.193,0.197,0.196,0.194,0.194,0.191,0.202] + # r = 0.1
+                                      [0.256,0.243,0.25,0.245,0.241,0.24,0.245,0.25,0.244,0.25,0.237,0.242,0.239,0.247,0.248,0.249,0.239,0.255,0.26,0.239]        # r = 1
+                 ).astype(float)}
 r2_raxml_fix90 = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
                   'cherries':np.array([0.016,0.018,0.018,0.017,0.02,0.018,0.02,0.013,0.011,0.026,0.018,0.014,0.015,0.014,0.019,0.021,0.018,0.018,0.013,0.015] +   # r = 0.0001
                                       [0.037,0.033,0.033,0.03,0.027,0.028,0.032,0.032,0.032,0.031,0.028,0.03,0.03,0.033,0.033,0.024,0.034,0.026,0.037,0.032] +    # r = 0.001
@@ -180,6 +202,13 @@ l_raxml    = {'lambda':np.array([33.866]*20+[84.664]*20+[169.328]*20+[338.655]*2
                                   [250,247,263,229,248,258,226,237,236,239,233,238,243,252,246,246,241,227,242,240] + # lambda = 338.65503090511262
                                   [274,274,279,273,289,267,272,267,273,271,279,259,263,280,275,265,273,285,279,295]   # lambda = 846.63757726278155
              ).astype(float)/1000} # divide by number of leaves to get percentage
+l_raxml_fix80 = {'lambda':np.array([33.866]*20+[84.664]*20+[169.328]*20+[338.655]*20+[846.638]*20),
+                 'cherries':np.array([0.105,0.1,0.098,0.106,0.101,0.104,0.111,0.11,0.1,0.098,0.11,0.103,0.096,0.104,0.105,0.106,0.098,0.104,0.102,0.106] +       # lambda = 33.86550309051126
+                                     [0.099,0.088,0.098,0.094,0.092,0.1,0.098,0.103,0.09,0.102,0.095,0.102,0.104,0.103,0.109,0.093,0.094,0.094,0.094,0.105] +    # lambda = 84.66375772627816
+                                     [0.084,0.093,0.102,0.093,0.092,0.091,0.102,0.096,0.094,0.096,0.093,0.1,0.089,0.092,0.103,0.095,0.092,0.099,0.104,0.097] +   # lambda = 169.32751545255631
+                                     [0.095,0.088,0.094,0.087,0.095,0.088,0.079,0.093,0.095,0.086,0.093,0.097,0.096,0.099,0.096,0.091,0.092,0.089,0.086,0.1] +   # lambda = 338.65503090511262
+                                     [0.083,0.088,0.081,0.088,0.085,0.082,0.081,0.083,0.084,0.082,0.086,0.08,0.081,0.085,0.079,0.085,0.083,0.08,0.082,0.087]     # lambda = 846.63757726278155
+                ).astype(float)}
 l_raxml_fix90 = {'lambda':np.array([33.866]*20+[84.664]*20+[169.328]*20+[338.655]*20+[846.638]*20),
                  'cherries':np.array([0.085,0.089,0.089,0.095,0.086,0.089,0.096,0.102,0.093,0.081,0.096,0.083,0.085,0.095,0.098,0.093,0.084,0.095,0.097,0.092] + # lambda = 33.86550309051126
                                      [0.09,0.08,0.084,0.086,0.082,0.092,0.092,0.092,0.084,0.09,0.075,0.094,0.087,0.09,0.095,0.087,0.084,0.084,0.084,0.093] +     # lambda = 84.66375772627816
@@ -255,6 +284,16 @@ k_raxml    = {'length':np.array([50]*20+[100]*20+[200]*20+[300]*20+[600]*20+[120
                                   [129,130,130,135,126,121,135,127,129,122,128,130,116,120,127,131,124,118,130,118] + # length = 2400
                                   [104,117,109,109,112,110,119,114,113,122,113,101,122,104,126,115,103,103,121,109]   # length = 4800
              ).astype(float)/1000} # divide by number of leaves to get percentage
+k_raxml_fix80 = {'length':np.array([50]*20+[100]*20+[200]*20+[300]*20+[600]*20+[1200]*20+[2400]*20+[4800]*20), # values of length
+                 'cherries':np.array([0.12,0.108,0.115,0.109,0.107,0.119,0.129,0.112,0.115,0.113,0.101,0.098,0.117,0.106,0.111,0.106,0.102,0.109,0.109,0.118] +  # length = 50
+                                     [0.102,0.101,0.096,0.106,0.095,0.087,0.1,0.097,0.091,0.095,0.096,0.107,0.101,0.097,0.09,0.095,0.099,0.102,0.104,0.089] +    # length = 100
+                                     [0.092,0.09,0.087,0.096,0.1,0.094,0.105,0.096,0.089,0.096,0.106,0.103,0.094,0.095,0.086,0.084,0.102,0.09,0.094,0.101] +     # length = 200
+                                     [0.084,0.093,0.102,0.093,0.092,0.091,0.102,0.096,0.094,0.096,0.093,0.1,0.089,0.092,0.103,0.095,0.092,0.099,0.104,0.097] +   # length = 300
+                                     [0.093,0.088,0.093,0.082,0.092,0.098,0.099,0.098,0.095,0.095,0.084,0.095,0.093,0.105,0.086,0.092,0.101,0.094,0.092,0.088] + # length = 600
+                                     [0.078,0.093,0.09,0.093,0.089,0.098,0.103,0.097,0.087,0.088,0.085,0.095,0.105,0.093,0.096,0.094,0.09,0.096,0.085,0.093] +   # length = 1200
+                                     [0.086,0.096,0.095,0.097,0.095,0.088,0.095,0.095,0.087,0.086,0.095,0.091,0.083,0.084,0.093,0.099,0.087,0.081,0.094,0.098] + # length = 2400
+                                     [0.08,0.091,0.093,0.087,0.094,0.086,0.095,0.091,0.086,0.097,0.089,0.084,0.1,0.086,0.099,0.096,0.086,0.079,0.095,0.081]      # length = 4800
+                ).astype(float)}
 k_raxml_fix90 = {'length':np.array([50]*20+[100]*20+[200]*20+[300]*20+[600]*20+[1200]*20+[2400]*20+[4800]*20), # values of length
                  'cherries':np.array([0.052,0.05,0.048,0.05,0.05,0.051,0.066,0.043,0.047,0.044,0.045,0.048,0.052,0.047,0.047,0.043,0.042,0.053,0.037,0.046] +    # length = 50
                                      [0.062,0.067,0.05,0.058,0.061,0.06,0.055,0.065,0.059,0.055,0.061,0.062,0.062,0.059,0.057,0.069,0.066,0.067,0.064,0.059] +   # length = 100
@@ -329,21 +368,29 @@ g_raxml    = {'gammarate':np.array([2.952]*20+[5.904]*20+[29.518]*20+[147.591]*2
                                   [204,210,227,210,204,207,192,213,198,213,223,220,217,212,220,214,215,209,201,215] + # gamma = 295.181735298926
                                   [218,209,210,216,202,220,210,211,219,203,220,211,211,225,229,213,218,214,200,194]   # gamma = infinity
              ).astype(float)/1000} # divide by number of leaves to get percentage
+g_raxml_fix80 = {'gammarate':np.array([2.952]*20+[5.904]*20+[29.518]*20+[147.591]*20+[295.182]*20+[float('inf')]*20),
+                 'cherries':np.array([0.091,0.094,0.093,0.091,0.094,0.088,0.088,0.096,0.091,0.096,0.091,0.09,0.104,0.101,0.098,0.096,0.102,0.095,0.102,0.088] +  # gamma = 2.95181735298926
+                                     [0.091,0.097,0.089,0.09,0.09,0.097,0.094,0.1,0.095,0.095,0.097,0.094,0.085,0.088,0.094,0.094,0.095,0.093,0.09,0.088] +      # gamma = 5.90363470597852
+                                     [0.084,0.093,0.102,0.093,0.092,0.091,0.102,0.096,0.094,0.096,0.093,0.1,0.089,0.092,0.103,0.095,0.092,0.099,0.104,0.097] +   # gamma = 29.518173529892621
+                                     [0.098,0.089,0.098,0.094,0.093,0.086,0.091,0.091,0.078,0.093,0.096,0.092,0.098,0.081,0.098,0.091,0.095,0.085,0.077,0.098] + # gamma = 147.590867649463
+                                     [0.098,0.091,0.09,0.091,0.088,0.088,0.089,0.095,0.088,0.087,0.088,0.091,0.095,0.1,0.093,0.082,0.1,0.101,0.093,0.1] +        # gamma = 295.181735298926
+                                     [0.092,0.087,0.085,0.096,0.089,0.089,0.089,0.088,0.099,0.091,0.105,0.094,0.095,0.103,0.095,0.103,0.099,0.104,0.088,0.094]   # gamma = infinity
+                ).astype(float)}
 g_raxml_fix90 = {'gammarate':np.array([2.952]*20+[5.904]*20+[29.518]*20+[147.591]*20+[295.182]*20+[float('inf')]*20),
-                 'cherries':np.array([0.082,0.073,0.088,0.08,0.076,0.075,0.081,0.08,0.078,0.078,0.083,0.077,0.092,0.085,0.081,0.078,0.085,0.075,0.087,0.083] +  # gamma = 2.95181735298926
-                                     [0.082,0.084,0.078,0.083,0.076,0.086,0.085,0.083,0.084,0.085,0.085,0.076,0.076,0.078,0.081,0.08,0.084,0.08,0.08,0.073] +   # gamma = 5.90363470597852
-                                     [0.077,0.087,0.085,0.078,0.077,0.08,0.083,0.08,0.084,0.089,0.08,0.079,0.082,0.08,0.09,0.078,0.081,0.085,0.089,0.082] +     # gamma = 29.518173529892621
-                                     [0.084,0.08,0.086,0.085,0.085,0.078,0.08,0.081,0.069,0.084,0.082,0.082,0.085,0.074,0.087,0.084,0.085,0.08,0.07,0.081] +    # gamma = 147.590867649463
-                                     [0.084,0.08,0.083,0.084,0.076,0.08,0.078,0.082,0.075,0.082,0.075,0.081,0.083,0.087,0.084,0.071,0.082,0.09,0.084,0.086] +   # gamma = 295.181735298926
-                                     [0.084,0.075,0.073,0.084,0.078,0.079,0.081,0.081,0.085,0.083,0.09,0.086,0.082,0.09,0.084,0.091,0.081,0.09,0.079,0.08]      # gamma = infinity
+                 'cherries':np.array([0.082,0.073,0.088,0.08,0.076,0.075,0.081,0.08,0.078,0.078,0.083,0.077,0.092,0.085,0.081,0.078,0.085,0.075,0.087,0.083] +   # gamma = 2.95181735298926
+                                     [0.082,0.084,0.078,0.083,0.076,0.086,0.085,0.083,0.084,0.085,0.085,0.076,0.076,0.078,0.081,0.08,0.084,0.08,0.08,0.073] +    # gamma = 5.90363470597852
+                                     [0.077,0.087,0.085,0.078,0.077,0.08,0.083,0.08,0.084,0.089,0.08,0.079,0.082,0.08,0.09,0.078,0.081,0.085,0.089,0.082] +      # gamma = 29.518173529892621
+                                     [0.084,0.08,0.086,0.085,0.085,0.078,0.08,0.081,0.069,0.084,0.082,0.082,0.085,0.074,0.087,0.084,0.085,0.08,0.07,0.081] +     # gamma = 147.590867649463
+                                     [0.084,0.08,0.083,0.084,0.076,0.08,0.078,0.082,0.075,0.082,0.075,0.081,0.083,0.087,0.084,0.071,0.082,0.09,0.084,0.086] +    # gamma = 295.181735298926
+                                     [0.084,0.075,0.073,0.084,0.078,0.079,0.081,0.081,0.085,0.083,0.09,0.086,0.082,0.09,0.084,0.091,0.081,0.09,0.079,0.08]       # gamma = infinity
                 ).astype(float)}
 g_raxml_fix95 = {'gammarate':np.array([2.952]*20+[5.904]*20+[29.518]*20+[147.591]*20+[295.182]*20+[float('inf')]*20),
-                 'cherries':np.array([0.073,0.07,0.081,0.072,0.069,0.069,0.071,0.068,0.07,0.065,0.076,0.061,0.081,0.072,0.077,0.067,0.07,0.066,0.077,0.072] +   # gamma = 2.95181735298926
-                                     [0.07,0.067,0.069,0.067,0.066,0.078,0.068,0.076,0.075,0.076,0.076,0.069,0.064,0.069,0.072,0.065,0.069,0.068,0.074,0.062] + # gamma = 5.90363470597852
-                                     [0.071,0.072,0.075,0.07,0.068,0.075,0.07,0.068,0.069,0.081,0.071,0.074,0.072,0.068,0.079,0.065,0.07,0.075,0.078,0.077] +   # gamma = 29.518173529892621
-                                     [0.072,0.067,0.072,0.072,0.075,0.067,0.07,0.076,0.058,0.07,0.073,0.076,0.073,0.068,0.078,0.074,0.071,0.069,0.058,0.076] +  # gamma = 147.590867649463
-                                     [0.074,0.069,0.072,0.073,0.066,0.072,0.07,0.07,0.063,0.07,0.07,0.073,0.073,0.065,0.08,0.065,0.07,0.083,0.07,0.076] +       # gamma = 295.181735298926
-                                     [0.07,0.064,0.066,0.076,0.07,0.069,0.07,0.07,0.076,0.068,0.08,0.077,0.072,0.078,0.075,0.079,0.067,0.073,0.073,0.071]       # gamma = infinity
+                 'cherries':np.array([0.073,0.07,0.081,0.072,0.069,0.069,0.071,0.068,0.07,0.065,0.076,0.061,0.081,0.072,0.077,0.067,0.07,0.066,0.077,0.072] +    # gamma = 2.95181735298926
+                                     [0.07,0.067,0.069,0.067,0.066,0.078,0.068,0.076,0.075,0.076,0.076,0.069,0.064,0.069,0.072,0.065,0.069,0.068,0.074,0.062] +  # gamma = 5.90363470597852
+                                     [0.071,0.072,0.075,0.07,0.068,0.075,0.07,0.068,0.069,0.081,0.071,0.074,0.072,0.068,0.079,0.065,0.07,0.075,0.078,0.077] +    # gamma = 29.518173529892621
+                                     [0.072,0.067,0.072,0.072,0.075,0.067,0.07,0.076,0.058,0.07,0.073,0.076,0.073,0.068,0.078,0.074,0.071,0.069,0.058,0.076] +   # gamma = 147.590867649463
+                                     [0.074,0.069,0.072,0.073,0.066,0.072,0.07,0.07,0.063,0.07,0.07,0.073,0.073,0.065,0.08,0.065,0.07,0.083,0.07,0.076] +        # gamma = 295.181735298926
+                                     [0.07,0.064,0.066,0.076,0.07,0.069,0.07,0.07,0.076,0.068,0.08,0.077,0.072,0.078,0.075,0.079,0.067,0.073,0.073,0.071]        # gamma = infinity
                 ).astype(float)}
 ''' # VALUES FROM ORIGINAL RAXML TREES
 g_raxml    = {'gammarate':np.array([2.952]*20+[5.904]*20+[29.518]*20+[147.591]*20+[295.182]*20+[float('inf')]*20),
@@ -359,15 +406,20 @@ g_raxml    = {'gammarate':np.array([2.952]*20+[5.904]*20+[29.518]*20+[147.591]*2
 # plot Cherry Fraction vs. r (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
 fig = plt.figure()
 x = np.array([-4,-3,-2,-1,0])
-ax = sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_original),order=x,color=pal['simulated'])
-sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_fasttree),order=x,color=pal['fasttree'])
-sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_fasttree_fix90),order=x,color=pal['fasttree_fix90'])
-sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_fasttree_fix95),order=x,color=pal['fasttree_fix95'])
-sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_raxml),order=x,color=pal['raxml'])
-sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_raxml_fix90),order=x,color=pal['raxml_fix90'])
-sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_raxml_fix95),order=x,color=pal['raxml_fix95'])
+ax = sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_fasttree),order=x,color=pal['fasttree'],width=0.3)
+plt.plot(np.asarray([sum(r_fasttree['r'][i:i+20])/20.0 for i in range(0,len(r_fasttree['cherries']),20)])+4,[sum(r_fasttree['cherries'][i:i+20])/20.0 for i in range(0,len(r_fasttree['cherries']),20)],color=pal['fasttree'],linestyle='--',linewidth=3)
+sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_fasttree_fix90),order=x,color=pal['fasttree_fix90'],scale='width',width=0.3)
+plt.plot(np.asarray([sum(r_fasttree_fix90['r'][i:i+20])/20.0 for i in range(0,len(r_fasttree_fix90['cherries']),20)])+4,[sum(r_fasttree_fix90['cherries'][i:i+20])/20.0 for i in range(0,len(r_fasttree_fix90['cherries']),20)],color=pal['fasttree_fix90'],linestyle=':',linewidth=3)
+sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_raxml),order=x,color=pal['raxml'],width=0.3)
+plt.plot(np.asarray([sum(r_raxml['r'][i:i+20])/20.0 for i in range(0,len(r_raxml['cherries']),20)])+4,[sum(r_raxml['cherries'][i:i+20])/20.0 for i in range(0,len(r_raxml['cherries']),20)],color=pal['raxml'],linestyle='--',linewidth=3)
+sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_raxml_fix80),order=x,color=pal['raxml_fix80'],scale='width',width=0.3)
+plt.plot(np.asarray([sum(r_raxml_fix80['r'][i:i+20])/20.0 for i in range(0,len(r_raxml_fix80['cherries']),20)])+4,[sum(r_raxml_fix80['cherries'][i:i+20])/20.0 for i in range(0,len(r_raxml_fix80['cherries']),20)],color=pal['raxml_fix80'],linestyle=':',linewidth=3)
+sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_raxml_fix90),order=x,color=pal['raxml_fix90'],scale='width',width=0.3)
+plt.plot(np.asarray([sum(r_raxml_fix90['r'][i:i+20])/20.0 for i in range(0,len(r_raxml_fix90['cherries']),20)])+4,[sum(r_raxml_fix90['cherries'][i:i+20])/20.0 for i in range(0,len(r_raxml_fix90['cherries']),20)],color=pal['raxml_fix90'],linestyle=':',linewidth=3)
+setAlpha(ax,0.5)
 x = np.linspace(-4,0,100)
-plt.plot(x+4,cherries_vs_r(10**x),label='Theoretical',linestyle='--',color=pal['theoretical'])
+plt.plot(x+4,cherries_vs_r(10**x),label='Theoretical',linestyle='-',color=pal['theoretical'])
+plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}\ \left(E(l_b)=0.298\right)$',fontsize=14)
 sns.plt.ylabel('Cherry Fraction',fontsize=14)
@@ -379,15 +431,20 @@ plt.close()
 # plot Cherry Fraction vs. r (with constant lambda = lambdaA + lambdaB)
 fig = plt.figure()
 x = np.array([-4,-3,-2,-1,0])
-ax = sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_original),order=x,color=pal['simulated'])
-sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_fasttree),order=x,color=pal['fasttree'])
-sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_fasttree_fix90),order=x,color=pal['fasttree_fix90'])
-sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_fasttree_fix95),order=x,color=pal['fasttree_fix95'])
-sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_raxml),order=x,color=pal['raxml'])
-sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_raxml_fix90),order=x,color=pal['raxml_fix90'])
-sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_raxml_fix95),order=x,color=pal['raxml_fix95'])
+ax = sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_fasttree),order=x,color=pal['fasttree'],width=0.3)
+plt.plot(np.asarray([sum(r2_fasttree['r'][i:i+20])/20.0 for i in range(0,len(r2_fasttree['cherries']),20)])+4,[sum(r2_fasttree['cherries'][i:i+20])/20.0 for i in range(0,len(r2_fasttree['cherries']),20)],color=pal['fasttree'],linestyle='--',linewidth=3)
+sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_fasttree_fix90),order=x,color=pal['fasttree_fix90'],scale='width',width=0.3)
+plt.plot(np.asarray([sum(r2_fasttree_fix90['r'][i:i+20])/20.0 for i in range(0,len(r2_fasttree_fix90['cherries']),20)])+4,[sum(r2_fasttree_fix90['cherries'][i:i+20])/20.0 for i in range(0,len(r2_fasttree_fix90['cherries']),20)],color=pal['fasttree_fix90'],linestyle=':',linewidth=3)
+sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_raxml),order=x,color=pal['raxml'],width=0.3)
+plt.plot(np.asarray([sum(r2_raxml['r'][i:i+20])/20.0 for i in range(0,len(r2_raxml['cherries']),20)])+4,[sum(r2_raxml['cherries'][i:i+20])/20.0 for i in range(0,len(r2_raxml['cherries']),20)],color=pal['raxml'],linestyle='--',linewidth=3)
+sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_raxml_fix80),order=x,color=pal['raxml_fix80'],scale='width',width=0.3)
+plt.plot(np.asarray([sum(r2_raxml_fix80['r'][i:i+20])/20.0 for i in range(0,len(r2_raxml_fix80['cherries']),20)])+4,[sum(r2_raxml_fix80['cherries'][i:i+20])/20.0 for i in range(0,len(r2_raxml_fix80['cherries']),20)],color=pal['raxml_fix80'],linestyle=':',linewidth=3)
+sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_raxml_fix90),order=x,color=pal['raxml_fix90'],scale='width',width=0.3)
+plt.plot(np.asarray([sum(r2_raxml_fix90['r'][i:i+20])/20.0 for i in range(0,len(r2_raxml_fix90['cherries']),20)])+4,[sum(r2_raxml_fix90['cherries'][i:i+20])/20.0 for i in range(0,len(r2_raxml_fix90['cherries']),20)],color=pal['raxml_fix90'],linestyle=':',linewidth=3)
+setAlpha(ax,0.5)
 x = np.linspace(-4,0,100)
 plt.plot(x+4,cherries_vs_r(10**x),label='Theoretical',linestyle='--',color=pal['theoretical'])
+plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}\ \left(\lambda = \lambda_A + \lambda_B = 169\right)$',fontsize=14)
 sns.plt.ylabel('Cherry Fraction',fontsize=14)
@@ -399,15 +456,20 @@ plt.close()
 # plot Cherry Fraction vs. lambda
 fig = plt.figure()
 x = np.array([33.866,84.664,169.328,338.655,846.638])
-ax = sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_original),order=x,color=pal['simulated'])
-sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_fasttree),order=x,color=pal['fasttree'])
-sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_fasttree_fix90),order=x,color=pal['fasttree_fix90'])
-sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_fasttree_fix95),order=x,color=pal['fasttree_fix95'])
-sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_raxml),order=x,color=pal['raxml'])
-sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_raxml_fix90),order=x,color=pal['raxml_fix90'])
-sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_raxml_fix95),order=x,color=pal['raxml_fix95'])
+ax = sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_fasttree),order=x,color=pal['fasttree'],width=0.3)
+sns.pointplot(np.asarray([sum(l_fasttree['lambda'][i:i+20])/20.0 for i in range(0,len(l_fasttree['cherries']),20)]),[sum(l_fasttree['cherries'][i:i+20])/20.0 for i in range(0,len(l_fasttree['cherries']),20)],color=pal['fasttree'],linestyles=['--'],linewidth=3)
+sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_fasttree_fix90),order=x,color=pal['fasttree_fix90'],scale='width',width=0.3)
+sns.pointplot(np.asarray([sum(l_fasttree_fix90['lambda'][i:i+20])/20.0 for i in range(0,len(l_fasttree_fix90['cherries']),20)]),[sum(l_fasttree_fix90['cherries'][i:i+20])/20.0 for i in range(0,len(l_fasttree_fix90['cherries']),20)],color=pal['fasttree_fix90'],linestyles=[':'],linewidth=3)
+sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_raxml),order=x,color=pal['raxml'],width=0.3)
+sns.pointplot(np.asarray([sum(l_raxml['lambda'][i:i+20])/20.0 for i in range(0,len(l_raxml['cherries']),20)]),[sum(l_raxml['cherries'][i:i+20])/20.0 for i in range(0,len(l_raxml['cherries']),20)],color=pal['raxml'],linestyles=['--'],linewidth=3)
+sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_raxml_fix80),order=x,color=pal['raxml_fix80'],scale='width',width=0.3)
+sns.pointplot(np.asarray([sum(l_raxml_fix80['lambda'][i:i+20])/20.0 for i in range(0,len(l_raxml_fix80['cherries']),20)]),[sum(l_raxml_fix80['cherries'][i:i+20])/20.0 for i in range(0,len(l_raxml_fix80['cherries']),20)],color=pal['raxml_fix80'],linestyles=[':'],linewidth=3)
+sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_raxml_fix90),order=x,color=pal['raxml_fix90'],scale='width',width=0.3)
+sns.pointplot(np.asarray([sum(l_raxml_fix90['lambda'][i:i+20])/20.0 for i in range(0,len(l_raxml_fix90['cherries']),20)]),[sum(l_raxml_fix90['cherries'][i:i+20])/20.0 for i in range(0,len(l_raxml_fix90['cherries']),20)],color=pal['raxml_fix90'],linestyles=[':'],linewidth=3)
+setAlpha(ax,0.5)
 x = np.linspace(-100,1000,1100)
 plt.plot(x,np.array([cherries_vs_r(0.01)]*len(x)),label='Theoretical',linestyle='--',color=pal['theoretical'])
+plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\lambda = \lambda_A + \lambda_B$',fontsize=14)
 sns.plt.ylabel('Cherry Fraction',fontsize=14)
@@ -419,15 +481,14 @@ plt.close()
 # plot Cherry Fraction vs. length
 fig = plt.figure()
 x = np.array([50,100,200,300,600,1200,2400,4800])
-ax = sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_original),order=x,color=pal['simulated'])
 sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_fasttree),order=x,color=pal['fasttree'])
 sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_fasttree_fix90),order=x,color=pal['fasttree_fix90'])
-sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_fasttree_fix95),order=x,color=pal['fasttree_fix95'])
 sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_raxml),order=x,color=pal['raxml'])
+sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_raxml_fix80),order=x,color=pal['raxml_fix80'])
 sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_raxml_fix90),order=x,color=pal['raxml_fix90'])
-sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_raxml_fix95),order=x,color=pal['raxml_fix95'])
 x = np.linspace(-100,5000,5100)
 plt.plot(x,np.array([cherries_vs_r(0.01)]*len(x)),label='Theoretical',linestyle='--',color=pal['theoretical'])
+plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel('Sequence Length',fontsize=14)
 sns.plt.ylabel('Cherry Fraction',fontsize=14)
@@ -439,15 +500,14 @@ plt.close()
 # plot Cherry Fraction vs. gamma rate
 fig = plt.figure()
 x = np.array([2.952,5.904,29.518,147.591,295.182,float('inf')])
-ax = sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_original),order=x,color=pal['simulated'])
 sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_fasttree),order=x,color=pal['fasttree'])
 sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_fasttree_fix90),order=x,color=pal['fasttree_fix90'])
-sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_fasttree_fix95),order=x,color=pal['fasttree_fix95'])
 sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_raxml),order=x,color=pal['raxml'])
+sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_raxml_fix80),order=x,color=pal['raxml_fix80'])
 sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_raxml_fix90),order=x,color=pal['raxml_fix90'])
-sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_raxml_fix95),order=x,color=pal['raxml_fix95'])
 x = np.linspace(-100,1000,5000)
 plt.plot(x,np.array([cherries_vs_r(0.01)]*len(x)),label='Theoretical',linestyle='--',color=pal['theoretical'])
+plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'Gamma Distribution Rate $\left(\alpha\right)$',fontsize=14)
 sns.plt.ylabel('Cherry Fraction',fontsize=14)

@@ -15,8 +15,9 @@ import seaborn as sns
 # settings
 sns.set_style("ticks")
 rcParams['font.family'] = 'serif'
-pal = {'simulated':'#597DBE', 'fasttree':'#76BF72', 'raxml':'#B47CC7', 'theoretical':'#D65F5F'}
+pal = {'simulated':'#597DBE', 'fasttree':'#76BF72', 'raxml':'#B47CC7', 'theoretical':'#000000'}
 handles = [Patch(color=pal['simulated'],label='Simulated'),Patch(color=pal['fasttree'],label='FastTree'),Patch(color=pal['raxml'],label='RAxML'),Patch(color=pal['theoretical'],label='Theoretical')]
+axisY = np.asarray([i/10.0 for i in range(0,7)])
 
 # Expected Branch Length as a Function of r and lambda
 def exp_branch_length_vs_r_l(r,l):
@@ -219,6 +220,7 @@ for i in range(len(r_original['avgbranch'])):
 df = pd.DataFrame(df)
 ax = sns.violinplot(x='r',y='avgbranch',hue='category',data=df,order=x,palette=pal)
 plt.plot(np.linspace(-4.5,0.5,100)+4,[0.0298238593208140]*100,label='Theoretical',linestyle='--',color=pal['theoretical'])
+plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}\ \left(E(l_b)=0.298\right)$',fontsize=14)
 sns.plt.ylabel('Average Branch Length',fontsize=14)
@@ -246,8 +248,14 @@ for i in range(len(r2_original['avgbranch'])):
     df['category'][currNum] = 'raxml'
 df = pd.DataFrame(df)
 ax = sns.violinplot(x='r',y='avgbranch',hue='category',data=df,order=x,palette=pal)
-x=np.linspace(-4.5,0.5,100)
-plt.plot(x+4,exp_branch_length_vs_r_l(10**x,169.32751545255631),label='Theoretical',linestyle='--',color=pal['theoretical'])
+#plt.plot(x+4,exp_branch_length_vs_r_l(10**x,169.32751545255631),label='Theoretical',linestyle='--',color=pal['theoretical'])
+x = np.asarray([i/10.0 for i in range(-45,-34)])
+plt.plot(x+8,np.asarray([0.0059057]*11),label='Theoretical',linestyle='--',color=pal['theoretical'])
+plt.plot(x+7,np.asarray([0.0102715]*11),label='Theoretical',linestyle='--',color=pal['theoretical'])
+plt.plot(x+6,np.asarray([0.0298238]*11),label='Theoretical',linestyle='--',color=pal['theoretical'])
+plt.plot(x+5,np.asarray([0.0934709]*11),label='Theoretical',linestyle='--',color=pal['theoretical'])
+plt.plot(x+4,np.asarray([0.2953153]*11),label='Theoretical',linestyle='--',color=pal['theoretical'])
+plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}\ \left(\lambda = \lambda_A + \lambda_B = 169\right)$',fontsize=14)
 sns.plt.ylabel('Average Branch Length',fontsize=14)
@@ -276,6 +284,7 @@ for i in range(len(l_original['avgbranch'])):
 df = pd.DataFrame(df)
 ax = sns.violinplot(x='lambda',y='avgbranch',hue='category',data=df,order=x,palette=pal)
 sns.pointplot(x,exp_branch_length_vs_r_l(0.01,x),label='Theoretical',linestyles=['--'],color=pal['theoretical'])
+plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\lambda = \lambda_A + \lambda_B$',fontsize=14)
 sns.plt.ylabel('Average Branch Length',fontsize=14)
@@ -304,6 +313,7 @@ for i in range(len(k_original['avgbranch'])):
 df = pd.DataFrame(df)
 ax = sns.violinplot(x='length',y='avgbranch',hue='category',data=df,order=x,palette=pal)
 plt.plot(np.linspace(-4.5,1000,100)+4,[0.0298238593208140]*100,label='Theoretical',linestyle='--',color=pal['theoretical'])
+plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel('Sequence Length',fontsize=14)
 sns.plt.ylabel('Average Branch Length',fontsize=14)
@@ -332,6 +342,7 @@ for i in range(len(g_original['avgbranch'])):
 df = pd.DataFrame(df)
 ax = sns.violinplot(x='gammarate',y='avgbranch',hue='category',data=df,order=x,palette=pal)
 plt.plot(np.linspace(-4.5,1000,100)+4,[0.0298238593208140]*100,label='Theoretical',linestyle='--',color=pal['theoretical'])
+plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'Gamma Distribution Rate $\left(\alpha\right)$',fontsize=14)
 sns.plt.ylabel('Average Branch Length',fontsize=14)
