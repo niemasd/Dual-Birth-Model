@@ -283,7 +283,12 @@ for i in range(len(l_original['avgbranch'])):
     df['category'][currNum] = 'raxml'
 df = pd.DataFrame(df)
 ax = sns.violinplot(x='lambda',y='avgbranch',hue='category',data=df,order=x,palette=pal)
-sns.pointplot(x,exp_branch_length_vs_r_l(0.01,x),label='Theoretical',linestyles=['--'],color=pal['theoretical'])
+plt.plot([-0.5,0.5],[0.149117108605]*2,label='Theoretical',linestyle='--',color=pal['theoretical'])
+plt.plot([0.5,1.5],[0.0596475479543]*2,label='Theoretical',linestyle='--',color=pal['theoretical'])
+plt.plot([1.5,2.5],[0.0298237739771]*2,label='Theoretical',linestyle='--',color=pal['theoretical'])
+plt.plot([2.5,3.5],[0.0149119310212]*2,label='Theoretical',linestyle='--',color=pal['theoretical'])
+plt.plot([3.5,4.5],[0.00596476888588]*2,label='Theoretical',linestyle='--',color=pal['theoretical'])
+#sns.pointplot(x,exp_branch_length_vs_r_l(0.01,x),label='Theoretical',linestyles=['--'],color=pal['theoretical'])
 plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\lambda = \lambda_A + \lambda_B$',fontsize=14)
