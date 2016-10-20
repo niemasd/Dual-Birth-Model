@@ -33,6 +33,7 @@ class Node:
         self.depth = depth       # Node's depth (0 if root)
         self.children = []       # Node's children, (branchlength,Node) tuples
         self.num = Node.numNodes # Node's identifier
+        self.label= None
         Node.numNodes += 1
 
     # equality
@@ -56,7 +57,7 @@ class Node:
     def newick(self):
         # if leaf
         if len(self.children) == 0:
-            return str(self.num)
+            return "L" + str(self.num)
 
         # if internal node
         else:
@@ -64,7 +65,7 @@ class Node:
             lStr = self.children[0][1].newick()
             rLen = str(self.children[1][0])
             rStr = self.children[1][1].newick()
-            out = '(' + lStr + ':' + lLen + ',' + rStr + ':' + rLen + ')'
+            out = '(' + lStr + ':' + lLen + ',' + rStr + ':' + rLen + ')I' + str(self.label)
             if self.parent == None: # if root, need semicolon (entire tree)
                 out += ';'
             return out
@@ -89,9 +90,12 @@ def simulateAlu(rateA, rateB, n):
     pq.put(root) # priority queue is MinHeap on node depth
 
     # perform simulation
+    numInternal = 0
     while pq.qsize() < n:
         # pop off of priority queue
         currNode = pq.get()
+        currNode.label = numInternal
+        numInternal+=1
 
         # self propogation
         leftLength = exponential(scale=beta)
@@ -127,13 +131,15 @@ def simulateAlu(rateA, rateB, n):
 # if code is executed (and not imported)
 if __name__ == '__main__':
     # parse args
-    if len(sys.argv) != 4:
+    if len(sys.argv) < 4:
         print("ERROR: Incorrect number of arguments")
         print(USAGE_MESSAGE)
         exit(-1)
     rateA = float(sys.argv[1])
     rateB = float(sys.argv[2])
     n = int(sys.argv[3])
+    r = int(sys.argv[4]) if len(sys.argv) == 5 else 1
 
     # perform simulation
-    print(simulateAlu(rateA,rateB,n))
+    for i in range(0,r):
+        print(simulateAlu(rateA,rateB,n))
