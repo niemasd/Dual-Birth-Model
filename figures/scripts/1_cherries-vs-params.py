@@ -16,7 +16,7 @@ import seaborn as sns
 sns.set_style("ticks")
 rcParams['font.family'] = 'serif'
 pal = {'simulated':'#597DBE', 'fasttree':'#76BF72', 'raxml':'#B47CC7', 'theoretical':'#000000'}
-handles = [Patch(color=pal['simulated'],label='Simulated'),Patch(color=pal['fasttree'],label='FastTree'),Patch(color=pal['raxml'],label='RAxML'),Patch(color=pal['theoretical'],label='Theoretical')]
+handles = [Patch(color=pal['theoretical'],label='Theoretical'),Patch(color=pal['simulated'],label='Simulated'),Patch(color=pal['fasttree'],label='FastTree'),Patch(color=pal['raxml'],label='RAxML')]
 axisY = np.asarray([i/10.0 for i in range(0,5)])
 
 # Expected Number of Cherries as a Function of r
@@ -207,14 +207,14 @@ ax = sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_original),order=x,col
 sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_fasttree),order=x,color=pal['fasttree'])
 sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_raxml),order=x,color=pal['raxml'])
 x = np.linspace(-4,0,100)
-plt.plot(x+4,cherries_vs_r(10**x),label='Theoretical',linestyle='--',color=pal['theoretical'])
+plt.plot(x+4,cherries_vs_r(10**x),label='Theoretical',linestyle='-',color=pal['theoretical'])
 plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}\ \left(E(l_b)=0.298\right)$',fontsize=14)
 sns.plt.ylabel('Cherry Fraction',fontsize=14)
 sns.plt.title(r'Cherry Fraction vs. $\log_{10}{r}\ \left(E(l_b)=0.298\right)$',fontsize=18,y=1.05)
 sns.plt.show()
-fig.savefig('cherries-fraction_vs_r_const-exp-branch-length.png', bbox_extra_artists=(legend,), bbox_inches='tight')
+fig.savefig('cherries-fraction_vs_r_const-exp-branch-length.pdf', format='pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
 
 # plot Cherry Fraction vs. r (with constant lambda = lambdaA + lambdaB)
@@ -224,14 +224,14 @@ ax = sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_original),order=x,co
 sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_fasttree),order=x,color=pal['fasttree'])
 sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_raxml),order=x,color=pal['raxml'])
 x = np.linspace(-4,0,100)
-plt.plot(x+4,cherries_vs_r(10**x),label='Theoretical',linestyle='--',color=pal['theoretical'])
+plt.plot(x+4,cherries_vs_r(10**x),label='Theoretical',linestyle='-',color=pal['theoretical'])
 plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}\ \left(\lambda = \lambda_A + \lambda_B = 169\right)$',fontsize=14)
 sns.plt.ylabel('Cherry Fraction',fontsize=14)
 sns.plt.title(r'Cherry Fraction vs. $\log_{10}{r}\ \left(\lambda=\lambda_A+\lambda_B=169\right)$',fontsize=18,y=1.05)
 sns.plt.show()
-fig.savefig('cherries-fraction_vs_r_const-lambda.png', bbox_extra_artists=(legend,), bbox_inches='tight')
+fig.savefig('cherries-fraction_vs_r_const-lambda.pdf', format='pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
 
 # plot Cherry Fraction vs. lambda
@@ -241,14 +241,14 @@ ax = sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_original),order=
 sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_fasttree),order=x,color=pal['fasttree'])
 sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_raxml),order=x,color=pal['raxml'])
 x = np.linspace(-100,1000,1100)
-plt.plot(x,np.array([cherries_vs_r(0.01)]*len(x)),label='Theoretical',linestyle='--',color=pal['theoretical'])
+plt.plot(x,np.array([cherries_vs_r(0.01)]*len(x)),label='Theoretical',linestyle='-',color=pal['theoretical'])
 plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'$\lambda = \lambda_A + \lambda_B$',fontsize=14)
 sns.plt.ylabel('Cherry Fraction',fontsize=14)
 sns.plt.title(r'Cherry Fraction vs. $\lambda$',fontsize=18,y=1.05)
 sns.plt.show()
-fig.savefig('cherries-fraction_vs_lambda.png', bbox_extra_artists=(legend,), bbox_inches='tight')
+fig.savefig('cherries-fraction_vs_lambda.pdf', format='pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
 
 # plot Cherry Fraction vs. length
@@ -258,14 +258,14 @@ ax = sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_original),order=
 sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_fasttree),order=x,color=pal['fasttree'])
 sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_raxml),order=x,color=pal['raxml'])
 x = np.linspace(-100,5000,5100)
-plt.plot(x,np.array([cherries_vs_r(0.01)]*len(x)),label='Theoretical',linestyle='--',color=pal['theoretical'])
+plt.plot(x,np.array([cherries_vs_r(0.01)]*len(x)),label='Theoretical',linestyle='-',color=pal['theoretical'])
 plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel('Sequence Length',fontsize=14)
 sns.plt.ylabel('Cherry Fraction',fontsize=14)
 sns.plt.title('Cherry Fraction vs. Sequence Length',fontsize=18,y=1.05)
 sns.plt.show()
-fig.savefig('cherries-fraction_vs_length.png', bbox_extra_artists=(legend,), bbox_inches='tight')
+fig.savefig('cherries-fraction_vs_length.pdf', format='pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
 
 # plot Cherry Fraction vs. gamma rate
@@ -275,12 +275,12 @@ ax = sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_original),ord
 sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_fasttree),order=x,color=pal['fasttree'])
 sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_raxml),order=x,color=pal['raxml'])
 x = np.linspace(-100,1000,5000)
-plt.plot(x,np.array([cherries_vs_r(0.01)]*len(x)),label='Theoretical',linestyle='--',color=pal['theoretical'])
+plt.plot(x,np.array([cherries_vs_r(0.01)]*len(x)),label='Theoretical',linestyle='-',color=pal['theoretical'])
 plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.xlabel(r'Gamma Distribution Rate $\left(\alpha\right)$',fontsize=14)
 sns.plt.ylabel('Cherry Fraction',fontsize=14)
 sns.plt.title('Cherry Fraction vs. Deviation from Ultrametricity',fontsize=18,y=1.05)
 sns.plt.show()
-fig.savefig('cherries-fraction_vs_gammarate.png', bbox_extra_artists=(legend,), bbox_inches='tight')
+fig.savefig('cherries-fraction_vs_gammarate.pdf', format='pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()

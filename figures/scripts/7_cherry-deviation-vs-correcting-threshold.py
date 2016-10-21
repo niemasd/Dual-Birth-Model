@@ -170,18 +170,20 @@ y_true = {
 
 # create plot of cherry deviation vs. r (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
 fig = plt.figure()
+pal = {'04':'#4878CF', '03':'#6ACC65', '00':'#D65F5F', '02':'#B47CC7', '01':'#C4AD66'}
 for i in ['04','03','00','02','01']:
     p = 'param' + i
-    r = {'04':0.0001, '03':0.001, '00':0.01, '02':0.1, '01':1}[i]
-    y = np.log10([y_estimate_cherries_sh[p+'_fasttree'][j] / y_true[p+'_true'][j] for j in range(len(x))])
-    label = r'$r = $' + str(r) + " (FastTree)"
-    plt.plot(x,y,label=label)
-for i in ['04','03','00','02','01']:
-    p = 'param' + i
-    r = {'04':0.0001, '03':0.001, '00':0.01, '02':0.1, '01':1}[i]
-    y = np.log10([y_estimate_cherries_sh[p+'_raxml'][j] / y_true[p+'_true'][j] for j in range(len(x))])
-    label = r'$r = $' + str(r) + " (RAxML)"
-    plt.plot(x,y,':',label=label)
+    r = {'04':r'$10^{-4}$', '03':r'$10^{-3}$', '00':r'$10^{-2}$', '02':r'$10^{-1}$', '01':r'$10^{0}$'}[i]
+    label = r'$r = $' + r
+    y1 = np.log10([y_estimate_cherries_sh[p+'_fasttree'][j] / y_true[p+'_true'][j] for j in range(len(x))])
+    y2 = np.log10([y_estimate_cherries_sh[p+'_raxml'][j] / y_true[p+'_true'][j] for j in range(len(x))])
+    if i == '04':
+        plt.plot(x,y1,':',label='FastTree',color=pal[i])
+        plt.plot(x,y2,'-',label='RAxML',color=pal[i])
+        plt.plot(x,y2,' ',label=' ',color='#FFFFFF')
+    else:
+        plt.plot(x,y1,':',color=pal[i])
+    plt.plot(x,y2,'-',label=label,color=pal[i])
 plt.plot(np.linspace(-1,101,10),[0]*10,linestyle='--',color='#000000')
 plt.xticks(axisX)
 plt.xlim(axisX[0],axisX[-1])
@@ -192,23 +194,25 @@ sns.plt.ylabel(r'$\log_{10}{\frac{Estimated}{True}}$',fontsize=14)
 sns.plt.title(r'Estimated Cherry Fraction for $r\ \left(E(l_b)=0.298\right)$',fontsize=18,y=1.05)
 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.show()
-fig.savefig('cherry-deviation_vs_threshold_r_const-exp-branch-length.png', bbox_inches='tight')
+fig.savefig('cherry-deviation_vs_threshold_r_const-exp-branch-length.pdf', format='pdf', bbox_inches='tight')
 plt.close()
 
 # create plot of cherry deviation vs. r (with constant lambda = lambdaA + lambdaB)
 fig = plt.figure()
+pal = {'24':'#4878CF', '23':'#6ACC65', '00':'#D65F5F', '22':'#B47CC7', '21':'#C4AD66'}
 for i in ['24','23','00','22','21']:
     p = 'param' + i
-    r = {'24':0.0001, '23':0.001, '00':0.01, '22':0.1, '21':1}[i]
-    y = np.log10([y_estimate_cherries_sh[p+'_fasttree'][j] / y_true[p+'_true'][j] for j in range(len(x))])
-    label = r'$r = $' + str(r) + " (FastTree)"
-    plt.plot(x,y,label=label)
-for i in ['24','23','00','22','21']:
-    p = 'param' + i
-    r = {'24':0.0001, '23':0.001, '00':0.01, '22':0.1, '21':1}[i]
-    y = np.log10([y_estimate_cherries_sh[p+'_raxml'][j] / y_true[p+'_true'][j] for j in range(len(x))])
-    label = r'$r = $' + str(r) + " (RAxML)"
-    plt.plot(x,y,':',label=label)
+    r = {'24':r'$10^{-4}$', '23':r'$10^{-3}$', '00':r'$10^{-2}$', '22':r'$10^{-1}$', '21':r'$10^{0}$'}[i]
+    label = r'$r = $' + r
+    y1 = np.log10([y_estimate_cherries_sh[p+'_fasttree'][j] / y_true[p+'_true'][j] for j in range(len(x))])
+    y2 = np.log10([y_estimate_cherries_sh[p+'_raxml'][j] / y_true[p+'_true'][j] for j in range(len(x))])
+    if i == '24':
+        plt.plot(x,y1,':',label='FastTree',color=pal[i])
+        plt.plot(x,y2,'-',label='RAxML',color=pal[i])
+        plt.plot(x,y2,' ',label=' ',color='#FFFFFF')
+    else:
+        plt.plot(x,y1,':',color=pal[i])
+    plt.plot(x,y2,'-',label=label,color=pal[i])
 plt.plot(np.linspace(-1,101,10),[0]*10,linestyle='--',color='#000000')
 plt.xticks(axisX)
 plt.xlim(axisX[0],axisX[-1])
@@ -219,23 +223,25 @@ sns.plt.ylabel(r'$\log_{10}{\frac{Estimated}{True}}$',fontsize=14)
 sns.plt.title(r'Estimated Cherry Fraction for $r\ \left(\lambda = \lambda_A + \lambda_B = 169\right)$',fontsize=18,y=1.05)
 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.show()
-fig.savefig('cherry-deviation_vs_threshold_r_const-lambda.png', bbox_inches='tight')
+fig.savefig('cherry-deviation_vs_threshold_r_const-lambda.pdf', format='pdf', bbox_inches='tight')
 plt.close()
 
 # create plot of cherry deviation vs. lambda
 fig = plt.figure()
+pal = {'05':'#4878CF', '06':'#6ACC65', '00':'#D65F5F', '07':'#B47CC7', '08':'#C4AD66'}
 for i in ['05','06','00','07','08']:
     p = 'param' + i
     l = {'05':33.866, '06':84.664, '00':169.328, '07':338.655, '08':846.638}[i]
-    y = np.log10([y_estimate_cherries_sh[p+'_fasttree'][j] / y_true[p+'_true'][j] for j in range(len(x))])
-    label = r'$\lambda = $' + str(l) + " (FastTree)"
-    plt.plot(x,y,label=label)
-for i in ['05','06','00','07','08']:
-    p = 'param' + i
-    l = {'05':33.866, '06':84.664, '00':169.328, '07':338.655, '08':846.638}[i]
-    y = np.log10([y_estimate_cherries_sh[p+'_raxml'][j] / y_true[p+'_true'][j] for j in range(len(x))])
-    label = r'$\lambda = $' + str(l) + " (RAxML)"
-    plt.plot(x,y,':',label=label)
+    label = r'$\lambda = $' + str(l)
+    y1 = np.log10([y_estimate_cherries_sh[p+'_fasttree'][j] / y_true[p+'_true'][j] for j in range(len(x))])
+    y2 = np.log10([y_estimate_cherries_sh[p+'_raxml'][j] / y_true[p+'_true'][j] for j in range(len(x))])
+    if i == '05':
+        plt.plot(x,y1,':',label='FastTree',color=pal[i])
+        plt.plot(x,y2,'-',label='RAxML',color=pal[i])
+        plt.plot(x,y2,' ',label=' ',color='#FFFFFF')
+    else:
+        plt.plot(x,y1,':',color=pal[i])
+    plt.plot(x,y2,'-',label=label,color=pal[i])
 plt.plot(np.linspace(-1,101,10),[0]*10,linestyle='--',color='#000000')
 plt.xticks(axisX)
 plt.xlim(axisX[0],axisX[-1])
@@ -246,23 +252,26 @@ sns.plt.ylabel(r'$\log_{10}{\frac{Estimated}{True}}$',fontsize=14)
 sns.plt.title(r'Estimated Cherry Fraction for $\lambda$',fontsize=18,y=1.05)
 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.show()
-fig.savefig('cherry-deviation_vs_threshold_lambda.png', bbox_inches='tight')
+fig.savefig('cherry-deviation_vs_threshold_lambda.pdf', format='pdf', bbox_inches='tight')
 plt.close()
 
 # create plot of cherry deviation vs. length
 fig = plt.figure()
+pal = {'09':'#4878CF', '10':'#6ACC65', '11':'#77BEDB', '00':'#D65F5F', '12':'#B47CC7', '13':'#C4AD66', '14':'#D55E00', '15':'#CC79A7'}
 for i in ['09','10','11','00','12','13','14','15']:
     p = 'param' + i
     k = {'09':50, '10':100, '11':200, '00':300, '12':600, '13':1200, '14':2400, '15':4800}[i]
-    y = np.log10([y_estimate_cherries_sh[p+'_fasttree'][j] / y_true[p+'_true'][j] for j in range(len(x))])
-    label = 'Sequence Length = ' + str(k) + " (FastTree)"
-    plt.plot(x,y,label=label)
-for i in ['09','10','11','00','12','13','14','15']:
-    p = 'param' + i
-    k = {'09':50, '10':100, '11':200, '00':300, '12':600, '13':1200, '14':2400, '15':4800}[i]
-    y = np.log10([y_estimate_cherries_sh[p+'_raxml'][j] / y_true[p+'_true'][j] for j in range(len(x))])
-    label = 'Sequence Length = ' + str(k) + " (RAxML)"
-    plt.plot(x,y,':',label=label)
+    c = pal[i]
+    label = 'Sequence Length = ' + str(k)
+    y1 = np.log10([y_estimate_cherries_sh[p+'_fasttree'][j] / y_true[p+'_true'][j] for j in range(len(x))])
+    y2 = np.log10([y_estimate_cherries_sh[p+'_raxml'][j] / y_true[p+'_true'][j] for j in range(len(x))])
+    if i == '09':
+        plt.plot(x,y1,':',label='FastTree',color=pal[i])
+        plt.plot(x,y2,'-',label='RAxML',color=pal[i])
+        plt.plot(x,y2,' ',label=' ',color='#FFFFFF')
+    else:
+        plt.plot(x,y1,':',color=pal[i])
+    plt.plot(x,y2,'-',label=label,color=pal[i])
 plt.plot(np.linspace(-1,101,10),[0]*10,linestyle='--',color='#000000')
 plt.xticks(axisX)
 plt.xlim(axisX[0],axisX[-1])
@@ -273,23 +282,26 @@ sns.plt.ylabel(r'$\log_{10}{\frac{Estimated}{True}}$',fontsize=14)
 sns.plt.title('Estimated Cherry Fraction  for Sequence Length',fontsize=18,y=1.05)
 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.show()
-fig.savefig('cherry-deviation_vs_threshold_length.png', bbox_inches='tight')
+fig.savefig('cherry-deviation_vs_threshold_length.pdf', format='pdf', bbox_inches='tight')
 plt.close()
 
 # create plot of cherry deviation vs. gamma rate
 fig = plt.figure()
+pal = {'16':'#4878CF', '17':'#6ACC65', '00':'#D65F5F', '18':'#B47CC7', '19':'#C4AD66'}
 for i in ['16','17','00','18','19']:
     p = 'param' + i
     g = {'16':2.952, '17':5.904, '00':29.518, '18':147.591, '19':295.182}[i]
-    y = np.log10([y_estimate_cherries_sh[p+'_fasttree'][j] / y_true[p+'_true'][j] for j in range(len(x))])
-    label = r'Gamma Distribution Rate $\alpha = $' + str(g) + " (FastTree"
-    plt.plot(x,y,label=label)
-for i in ['16','17','00','18','19']:
-    p = 'param' + i
-    g = {'16':2.952, '17':5.904, '00':29.518, '18':147.591, '19':295.182}[i]
-    y = np.log10([y_estimate_cherries_sh[p+'_raxml'][j] / y_true[p+'_true'][j] for j in range(len(x))])
-    label = r'Gamma Distribution Rate $\alpha = $' + str(g) + " (RAxML)"
-    plt.plot(x,y,':',label=label)
+    c = pal[i]
+    label = r'Gamma Distribution Rate $\alpha = $' + str(g)
+    y1 = np.log10([y_estimate_cherries_sh[p+'_fasttree'][j] / y_true[p+'_true'][j] for j in range(len(x))])
+    y2 = np.log10([y_estimate_cherries_sh[p+'_raxml'][j] / y_true[p+'_true'][j] for j in range(len(x))])
+    if i == '16':
+        plt.plot(x,y1,':',label='FastTree',color=pal[i])
+        plt.plot(x,y2,'-',label='RAxML',color=pal[i])
+        plt.plot(x,y2,' ',label=' ',color='#FFFFFF')
+    else:
+        plt.plot(x,y1,':',color=pal[i])
+    plt.plot(x,y2,'-',label=label,color=pal[i])
 plt.plot(np.linspace(-1,101,10),[0]*10,linestyle='--',color='#000000')
 plt.xticks(axisX)
 plt.xlim(axisX[0],axisX[-1])
@@ -300,5 +312,5 @@ sns.plt.ylabel(r'$\log_{10}{\frac{Estimated}{True}}$',fontsize=14)
 sns.plt.title('Estimated Cherry Fraction  for Deviation from Ultrametricity',fontsize=18,y=1.05)
 plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
 sns.plt.show()
-fig.savefig('cherry-deviation_vs_threshold_gammarate.png', bbox_inches='tight')
+fig.savefig('cherry-deviation_vs_threshold_gammarate.pdf', format='pdf', bbox_inches='tight')
 plt.close()

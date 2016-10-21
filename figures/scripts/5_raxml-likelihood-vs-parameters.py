@@ -220,7 +220,7 @@ sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\rig
 sns.plt.ylabel('RAxML Score',fontsize=14)
 sns.plt.title(r'RAxML Score vs. $\log_{10}{r}\ \left(E(l_b)=0.298\right)$',fontsize=18,y=1.05)
 sns.plt.show()
-fig.savefig('raxml-likelihood_vs_r_const-exp-branch-length.png', bbox_inches='tight')
+fig.savefig('raxml-likelihood_vs_r_const-exp-branch-length.pdf', format='pdf', bbox_inches='tight')
 plt.close()
 
 # plot RAxML Score vs. r (with constant lambda = lambdaA + lambdaB)
@@ -248,7 +248,7 @@ sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\rig
 sns.plt.ylabel('RAxML Score',fontsize=14)
 sns.plt.title(r'RAxML Score vs. $\log_{10}{r}\ \left(\lambda=\lambda_A+\lambda_B=169\right)$',fontsize=18,y=1.05)
 sns.plt.show()
-fig.savefig('raxml-likelihood_vs_r_const-lambda.png', bbox_inches='tight')
+fig.savefig('raxml-likelihood_vs_r_const-lambda.pdf', format='pdf', bbox_inches='tight')
 plt.close()
 
 # plot RAxML Score vs. lambda
@@ -276,7 +276,7 @@ sns.plt.xlabel(r'$\lambda = \lambda_A + \lambda_B$',fontsize=14)
 sns.plt.ylabel('RAxML Score',fontsize=14)
 sns.plt.title(r'RAxML Score vs. $\lambda$',fontsize=18,y=1.05)
 sns.plt.show()
-fig.savefig('raxml-likelihood_vs_lambda.png', bbox_inches='tight')
+fig.savefig('raxml-likelihood_vs_lambda.pdf', format='pdf', bbox_inches='tight')
 plt.close()
 
 # plot RAxML Score vs. length
@@ -304,7 +304,7 @@ sns.plt.xlabel('Sequence Length',fontsize=14)
 sns.plt.ylabel('RAxML Score',fontsize=14)
 sns.plt.title('RAxML Score vs. Sequence Length',fontsize=18,y=1.05)
 sns.plt.show()
-fig.savefig('raxml-likelihood_vs_length.png', bbox_inches='tight')
+fig.savefig('raxml-likelihood_vs_length.pdf', format='pdf', bbox_inches='tight')
 plt.close()
 
 # plot RAxML Score vs. gamma rate
@@ -332,5 +332,5 @@ sns.plt.xlabel(r'Gamma Distribution Rate $\left(\alpha\right)$',fontsize=14)
 sns.plt.ylabel('RAxML Score',fontsize=14)
 sns.plt.title('RAxML Score vs. Deviation from Ultrametricity',fontsize=18,y=1.05)
 sns.plt.show()
-fig.savefig('raxml-likelihood_vs_gammarate.png', bbox_inches='tight')
+fig.savefig('raxml-likelihood_vs_gammarate.pdf', format='pdf', bbox_inches='tight')
 plt.close()
