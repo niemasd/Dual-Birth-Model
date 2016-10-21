@@ -26,6 +26,10 @@ def cherries_vs_r(r):
 
 # Estimated r from number of cherries
 def r_vs_cherries(c):
+    if isinstance(c,np.ndarray):
+        for i in range(len(c)):
+            if c[i] > 1./3.:
+                c[i] = 1./3.
     return ((1-c-((c+1)*(1-3*c))**0.5)/(2*c))**2
 
 # set alpha transparency for axes
