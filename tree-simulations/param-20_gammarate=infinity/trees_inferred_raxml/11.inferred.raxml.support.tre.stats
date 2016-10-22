@@ -8,3 +8,4 @@ Estimated Cherry Fraction (estimate-cherries.sh thresh=90%): .09000
 Estimated Cherry Fraction (estimate-cherries.sh thresh=95%): .08000
 Estimated Cherry Fraction (estimate-cherries.sh thresh=80%): .10500
 Tree Error MS: 4158.0000
+Tree Error QT: 611809628.0000

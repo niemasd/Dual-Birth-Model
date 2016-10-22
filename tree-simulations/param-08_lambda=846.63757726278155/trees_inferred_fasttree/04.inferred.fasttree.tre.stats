@@ -7,3 +7,4 @@ Cherry Deviation as Ratio (inferred / true): 2.55172413793103448275
 Estimated Cherry Fraction (estimate-cherries.sh thresh=90%): .10200
 Estimated Cherry Fraction (estimate-cherries.sh thresh=95%): .08900
 Tree Error MS: 10855.0000
+Tree Error QT: 1020882044.0000
