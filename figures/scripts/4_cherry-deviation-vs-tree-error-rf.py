@@ -15,7 +15,7 @@ import seaborn as sns
 # settings
 sns.set_style("ticks")
 rcParams['font.family'] = 'serif'
-pal = {'simulated':'#597DBE', 'fasttree':'#76BF72', 'raxml':'#B47CC7', 'theoretical':'#D65F5F'}
+pal = {'simulated':'#597DBE', 'fasttree':'#FF9980', 'raxml':'#A2B7C3'}
 handles = [Patch(color=pal['fasttree'],label='FastTree'),Patch(color=pal['raxml'],label='RAxML')]
 
 # DATASETS

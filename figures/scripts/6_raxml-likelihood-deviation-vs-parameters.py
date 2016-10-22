@@ -15,7 +15,7 @@ import seaborn as sns
 # settings
 sns.set_style("ticks")
 rcParams['font.family'] = 'serif'
-pal = {'fasttree':'#76BF72', 'raxml':'#B47CC7'}
+pal = {'simulated':'#597DBE', 'fasttree':'#FF9980', 'raxml':'#A2B7C3'}
 handles = [Patch(color=pal['fasttree'],label='FastTree'),Patch(color=pal['raxml'],label='RAxML')]
 axisY = np.asarray([i for i in range(-1000,1501,500)])
 
