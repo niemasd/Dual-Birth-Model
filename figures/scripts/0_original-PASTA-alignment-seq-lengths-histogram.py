@@ -23,7 +23,7 @@ data = [124,300,310,302,309,204,279,295,299,303,305,293,300,128,307,311,296,303,
 fig = plt.figure()
 sns.distplot(data)
 sns.plt.title("Initial PASTA MSA Sequence Lengths", fontsize=18, y=1.05)
-sns.plt.xlabel("Sequence Length", fontsize=14)
+sns.plt.xlabel("Sequence Length (non-gap)", fontsize=14)
 sns.plt.ylabel("Frequency", fontsize=14)
 sns.plt.show()
 fig.savefig('original-PASTA-alignment-seq-lengths.pdf', format='pdf', bbox_inches='tight')
