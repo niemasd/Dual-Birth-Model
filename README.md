@@ -1,4 +1,4 @@
-This is the Git repository containing all code and simulation data for the paper titled *A two-state model of tree evolution and its applications to *Alu* retrotransposition*.
+This is the Git repository containing all code and simulation data for the paper titled *A two-state model of tree evolution and its applications to* Alu *retrotransposition*.
 
 REQUIREMENTS
 ===
