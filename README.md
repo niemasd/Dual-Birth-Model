@@ -16,5 +16,5 @@ REQUIREMENTS
 
 DESCRIPTIONS
 ===
-* **[tools](tools): The tools we developed in this paper**
-* **[helper-scripts](helper-scripts): Small scripts that helped automate various tasks**
+* **[tools](tools):** The tools we developed in this paper
+* **[helper-scripts](helper-scripts):** Small scripts that helped automate various tasks
