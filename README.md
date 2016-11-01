@@ -16,14 +16,14 @@ REQUIREMENTS
 
 DESCRIPTIONS
 ===
-* [tools](tools): The tools we developed in this paper
+* **[tools](tools):** The tools we developed in this paper
     * **[AluSimulator.py](tools/AluSimulator.py)**: Our implementation of the Dual-Birth generative process
     * **[estimate-cherries.sh](tools/estimate-cherries.sh)**: The Cherry Estimate Correction method we used in our paper
     * [supported-subtrees-min.py](tools/supported-subtrees-min.py): Alternative Cherry Estimate Correction method (unused)
     * [supported-subtrees-simple-max.py](tools/supported-subtrees-simple-max.py): Alternative Cherry Estimate Correction method (unused)
     * [supported-subtrees-simple.py](tools/supported-subtrees-simple.py): Alternative Cherry Estimate Correction method (unused)
     * [supported-subtrees.py](tools/supported-subtrees.py): Alternative Cherry Estimate Correction method (unused)
-<br/>
+<br/><br/>
 * [helper-scripts](helper-scripts): Small scripts that helped automate various tasks
     * [break_ultrametricity.py](tools/break_ultrametricity.py): Resize all branches in a tree by sampling from gamma distribution with expected value 1 (to keep expected branch length constant)
     * [calc_all_cherry_dev.sh](helper-scripts/calc_all_cherry_dev.sh): Compute cherry deviations of inferred trees after Cherry Estimate Correction
