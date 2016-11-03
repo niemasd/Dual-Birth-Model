@@ -16,7 +16,7 @@ from scipy import asarray as ar,exp  # for curve fitting
 from multiprocessing import Pool     # for multiprocessig
 import sys                           # to import simulateAlu
 sys.path.insert(0,'../tools')        # to import simulateAlu
-from AluSimulator import simulateAlu # for Alu tree simulation
+from DualBirthSimulator import simulateAlu # for Alu tree simulation
 
 # define some things for convenience
 cherryRegex = '\([0-9]+\:[0-9]+\.?[0-9]+e?-?[0-9]*\,[0-9]+\:[0-9]+\.?[0-9]+e?-?[0-9]*\)'

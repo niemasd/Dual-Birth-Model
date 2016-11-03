@@ -8,7 +8,7 @@ See Theorem 3.3 from Stadler & Steel (2012) for proof about branch lengths
 '''
 
 USAGE_MESSAGE = '''
-USAGE: python AluSimulator.py <rateA> <rateB> <n>
+USAGE: python DualBirthSimulator.py <rateA> <rateB> <n>
     -rateA: (A)ctivation Rate, rate at which inactive Alus create offspring
     -rateB: (B)irth Rate, rate at which active Alus create offspring
     -n:     Desired total number of leaves in the tree

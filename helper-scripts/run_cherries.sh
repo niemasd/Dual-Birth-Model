@@ -1,12 +1,12 @@
 #!/bin/bash
 
-for s in 128 256 1024; do 
-	for x in 1 2 4 8 16 32 64 128 256 512 1024 2048 4096 8192 16384 32768 65536 131072 262144 524288 1048576; do 
-		for i in {1..10}; do 
-			echo -n "$s $x "; 
-			python Alu-Project/tools/AluSimulator.py 1024 $x $s|nw_topology -|sed -e "s/[0-9]*//g"|grep -o "(,)"|wc -l; 
-		done; 
-	done; 
+for s in 128 256 1024; do
+	for x in 1 2 4 8 16 32 64 128 256 512 1024 2048 4096 8192 16384 32768 65536 131072 262144 524288 1048576; do
+		for i in {1..10}; do
+			echo -n "$s $x ";
+			python Alu-Project/tools/DualBirthSimulator.py 1024 $x $s|nw_topology -|sed -e "s/[0-9]*//g"|grep -o "(,)"|wc -l;
+		done;
+	done;
 done | tee exp.stat
 
 
