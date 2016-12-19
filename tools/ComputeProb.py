@@ -62,6 +62,19 @@ def omega(nodes):
                 out.update(ou)
                 yield out
 
+def getRanking(t):
+    nodes = []
+    for node in t.preorder_node_iter():
+        if node.parent_node is None:
+            node.dist_from_root = 0
+        else:
+            node.dist_from_root = node.parent_node.dist_from_root + node.edge_length
+        nodes.append(node)
+    nodes.sort(key=lambda x: x.dist_from_root)
+    for i,node in enumerate(nodes):
+        node.rank = i
+    return nodes
+
 
 if __name__ == '__main__':
     # parse args
