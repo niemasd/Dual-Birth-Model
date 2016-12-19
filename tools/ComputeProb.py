@@ -15,7 +15,7 @@ USAGE: python ComputeProb.py <rateA> <rateB> <tree> <type>
     -rateA: (A)ctivation Rate, rate at which inactive Alus create offspring
     -rateB: (B)irth Rate, rate at which active Alus create offspring
     -tree:  A file with trees to be scored
-    -type:  1 for treating input as unordered or 0 for treating it as ordered 
+    -type:  0: ordered ranked, 1: unordered ranked, 2: unordered unranked
 '''
 
 def computeProbOrder(r, t, order):
@@ -41,7 +41,7 @@ def omega(nodes):
         ch =  u.child_nodes()
         u12 = [x.is_leaf() for x in ch]
         if u12[0] and u12[1]:
-            yield {} 
+            yield {}
         elif u12[1]:
             yield {ch[0]:0}
             yield {ch[0]:1}
@@ -72,10 +72,16 @@ if __name__ == '__main__':
     rateA = float(sys.argv[1])
     rateB = float(sys.argv[2])
     trees = dendropy.TreeList.get_from_path(sys.argv[3],schema='newick',suppress_leaf_node_taxa=True)
-    unord = True if int(sys.argv[4]) == 1 else False
+    treeType = int(sys.argv[4])
 
     for t in trees:
-        if unord:
-            print(str(t)+";",sum(computeProbOrder(rateA/rateB, t, o) for o in omega(t.internal_nodes()))) 
-        else:
+        if treeType == 0:
             print(str(t)+";",computeProbOrder(rateA/rateB, t, getOrder(t)))
+        elif treeType == 1:
+            print(str(t)+";",sum(computeProbOrder(rateA/rateB, t, o) for o in omega(t.internal_nodes())))
+        elif treeType == 2:
+            print("DO UNRANKED UNORDERED PROBABILITY")
+        else:
+            print("ERROR: Invalid tree type")
+            print(USAGE_MESSAGE)
+            exit(-1)
