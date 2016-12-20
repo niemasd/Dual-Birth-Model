@@ -114,7 +114,7 @@ def simulateAlu(rateA, rateB, n):
         currNode = pq.get()
 
     # get leaves from pq
-    leaves = []
+    leaves = [currNode]
     while not pq.empty():
         leaves.append(pq.get())
 
