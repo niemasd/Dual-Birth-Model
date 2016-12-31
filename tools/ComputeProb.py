@@ -9,6 +9,7 @@ Compute tree shape probabilities
 import sys
 from numpy.random import exponential
 import dendropy
+import copy
 
 USAGE_MESSAGE = '''
 USAGE: python ComputeProb.py <rateA> <rateB> <tree> <type>
@@ -17,6 +18,81 @@ USAGE: python ComputeProb.py <rateA> <rateB> <tree> <type>
     -tree:  A file with trees to be scored
     -type:  0: ordered ranked, 1: unordered ranked, 2: unordered unranked
 '''
+
+def computeProbUnrank(r, t):
+    t.ladderize() # ladderize to make equivalent subtrees identical
+    sigma = 0     # count number of symmetric nodes
+    n = len(t.leaf_nodes()) # n = number of leaves
+
+    # compute min_rank numbers for all nodes (min_rank = # edges to root) and symmetric nodes
+    for node in t.preorder_node_iter():
+        node.id = str(node).strip().split(' ')[3][:-1]
+        if node.parent_node is None:
+            node.min_rank = 0
+        else:
+            node.min_rank = node.parent_node.min_rank + 1
+        if symmetric_subtree(node):
+            sigma += 1
+
+    # compute rankings
+    for node in t.postorder_node_iter():
+        ch = node.child_nodes()
+        if node.is_leaf(): # leaves
+            node.phi = []
+        elif ch[0].is_leaf() and ch[1].is_leaf(): # cherry parent
+            node.phi = [{node.id:i} for i in range(node.min_rank,n-1)]
+        elif ch[0].is_leaf(): # left child leaf, right child not leaf
+            node.phi = []
+            for phi in ch[1].phi:
+                child_rank = list(phi.values())[0]
+                for i in range(node.min_rank,child_rank):
+                    new_phi = copy.deepcopy(phi)
+                    new_phi[node.id] = i
+                    node.phi.append(new_phi)
+        elif ch[1].is_leaf(): # right child leaf, left child not leaf
+            node.phi = []
+            for phi in ch[0].phi:
+                child_rank = list(phi.values())[0]
+                for i in range(node.min_rank,child_rank):
+                    new_phi = copy.deepcopy(phi)
+                    new_phi[node.id] = i
+                    node.phi.append(new_phi)
+        else: # neither child is a leaf
+            node.phi = []
+            for phi0 in ch[0].phi:
+                phi0_vals = set(phi0.values())
+                for phi1 in ch[1].phi:
+                    phi1_vals = set(phi1.values())
+                    if len(phi0_vals.intersection(phi1_vals)) == 0: # no intersection between phi0 and phi1 ranks
+                        phi = {}
+                        for key in phi0:
+                            phi[key] = phi0[key]
+                        for key in phi1:
+                            phi[key] = phi1[key]
+                        max_rank = min(min(phi0_vals),min(phi1_vals))
+                        for i in range(node.min_rank,max_rank):
+                            new_phi = copy.deepcopy(phi)
+                            new_phi[node.id] = i
+                            node.phi.append(new_phi)
+    return "STUCK HERE"
+
+def symmetric_subtree(node):
+    ch = node.child_nodes()
+    if len(ch) == 0:
+        return False
+    return traverse_subtree(ch[0]) == traverse_subtree(ch[1])
+
+def traverse_subtree(node):
+    ch = node.child_nodes()
+    if len(ch) == 0:
+        return 'U' # U for "UP"
+    else:
+        left = traverse_subtree(ch[0])
+        right = traverse_subtree(ch[1])
+        return 'L' + left + 'R' + right + 'U'
+
+def computeProbUnorder(r, t):
+    return sum(computeProbOrder(r, t, o) for o in omega(t.internal_nodes()))
 
 def computeProbOrder(r, t, order):
     l=0
@@ -78,9 +154,9 @@ if __name__ == '__main__':
         if treeType == 0:
             print(str(t)+";",computeProbOrder(rateA/rateB, t, getOrder(t)))
         elif treeType == 1:
-            print(str(t)+";",sum(computeProbOrder(rateA/rateB, t, o) for o in omega(t.internal_nodes())))
+            print(str(t)+";",computeProbUnorder(rateA/rateB, t))
         elif treeType == 2:
-            print("DO UNRANKED UNORDERED PROBABILITY")
+            print(str(t)+";",computeProbUnrank(rateA/rateB, t))
         else:
             print("ERROR: Invalid tree type")
             print(USAGE_MESSAGE)
