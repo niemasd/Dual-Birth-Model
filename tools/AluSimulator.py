@@ -97,12 +97,12 @@ def simulateAlu(rateA, rateB, n):
         currNode.label = numInternal
         numInternal+=1
 
-        # self propogation
-        leftLength = exponential(scale=beta)
+        # self propagation
+        leftLength = exponential(scale=betaP)
         leftChild = Node(depth=currNode.depth+leftLength, parent=currNode)
 
         # newly created inactive child
-        rightLength = exponential(scale=betaP)
+        rightLength = exponential(scale=beta)
         rightChild = Node(depth=currNode.depth+rightLength, parent=currNode)
 
         # add new children to parent's "children" list, and add them to pq
