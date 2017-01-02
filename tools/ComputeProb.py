@@ -82,7 +82,7 @@ def computeProbUnrank(r, t):
         for ID in phi:          # set each node's label to be its rank
             id2node[ID].label = phi[ID]
         prob += computeProbUnorder(r,t) # probability of the unordered ranked tree
-    return prob
+    return prob/(2**sigma)
 
 def symmetric_subtree(node):
     ch = node.child_nodes()
