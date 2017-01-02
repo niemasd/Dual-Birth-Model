@@ -27,7 +27,7 @@ def computeProbUnrank(r, t):
 
     # compute min_rank numbers for all nodes (min_rank = # edges to root) and symmetric nodes
     for node in t.preorder_node_iter():
-        node.id = str(node).strip().split(' ')[3][:-1]
+        node.id = str(node)[16:27]
         id2node[node.id] = node
         if node.parent_node is None:
             node.min_rank = 0
