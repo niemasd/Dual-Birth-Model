@@ -23,10 +23,12 @@ def computeProbUnrank(r, t):
     t.ladderize() # ladderize to make equivalent subtrees identical
     sigma = 0     # count number of symmetric nodes
     n = len(t.leaf_nodes()) # n = number of leaves
+    id2node = {} # map node IDs to node objects
 
     # compute min_rank numbers for all nodes (min_rank = # edges to root) and symmetric nodes
     for node in t.preorder_node_iter():
         node.id = str(node).strip().split(' ')[3][:-1]
+        id2node[node.id] = node
         if node.parent_node is None:
             node.min_rank = 0
         else:
@@ -74,7 +76,13 @@ def computeProbUnrank(r, t):
                             new_phi = copy.deepcopy(phi)
                             new_phi[node.id] = i
                             node.phi.append(new_phi)
-    return "STUCK HERE"
+    # compute probability
+    prob = 0
+    for phi in t.seed_node.phi: # for each possible set of rankings,
+        for ID in phi:          # set each node's label to be its rank
+            id2node[ID].label = phi[ID]
+        prob += computeProbUnorder(r,t) # probability of the unordered ranked tree
+    return prob
 
 def symmetric_subtree(node):
     ch = node.child_nodes()
