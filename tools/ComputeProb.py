@@ -9,7 +9,6 @@ Compute tree shape probabilities
 import sys
 from numpy.random import exponential
 import dendropy
-import copy
 
 USAGE_MESSAGE = '''
 USAGE: python ComputeProb.py <rateA> <rateB> <tree> <type>
@@ -23,12 +22,9 @@ def computeProbUnrank(r, t):
     t.ladderize() # ladderize to make equivalent subtrees identical
     sigma = 0     # count number of symmetric nodes
     n = len(t.leaf_nodes()) # n = number of leaves
-    id2node = {} # map node IDs to node objects
 
     # compute min_rank numbers for all nodes (min_rank = # edges to root) and symmetric nodes
     for node in t.preorder_node_iter():
-        node.id = str(node)[16:27]
-        id2node[node.id] = node
         if node.parent_node is None:
             node.min_rank = 0
         else:
@@ -42,22 +38,26 @@ def computeProbUnrank(r, t):
         if node.is_leaf(): # leaves
             node.phi = []
         elif ch[0].is_leaf() and ch[1].is_leaf(): # cherry parent
-            node.phi = [{node.id:i} for i in range(node.min_rank,n-1)]
+            node.phi = [{node:i} for i in range(node.min_rank,n-1)]
         elif ch[0].is_leaf(): # left child leaf, right child not leaf
             node.phi = []
             for phi in ch[1].phi:
                 child_rank = list(phi.values())[0]
                 for i in range(node.min_rank,child_rank):
-                    new_phi = copy.deepcopy(phi)
-                    new_phi[node.id] = i
+                    new_phi = {}
+                    for key in phi:
+                        new_phi[key] = phi[key]
+                    new_phi[node] = i
                     node.phi.append(new_phi)
         elif ch[1].is_leaf(): # right child leaf, left child not leaf
             node.phi = []
             for phi in ch[0].phi:
                 child_rank = list(phi.values())[0]
                 for i in range(node.min_rank,child_rank):
-                    new_phi = copy.deepcopy(phi)
-                    new_phi[node.id] = i
+                    new_phi = {}
+                    for key in phi:
+                        new_phi[key] = phi[key]
+                    new_phi[node] = i
                     node.phi.append(new_phi)
         else: # neither child is a leaf
             node.phi = []
@@ -73,14 +73,16 @@ def computeProbUnrank(r, t):
                             phi[key] = phi1[key]
                         max_rank = min(min(phi0_vals),min(phi1_vals))
                         for i in range(node.min_rank,max_rank):
-                            new_phi = copy.deepcopy(phi)
-                            new_phi[node.id] = i
+                            new_phi = {}
+                            for key in phi:
+                                new_phi[key] = phi[key]
+                            new_phi[node] = i
                             node.phi.append(new_phi)
     # compute probability
     prob = 0
     for phi in t.seed_node.phi: # for each possible set of rankings,
-        for ID in phi:          # set each node's label to be its rank
-            id2node[ID].label = phi[ID]
+        for node in phi:          # set each node's label to be its rank
+            node.label = phi[node]
         prob += computeProbUnorder(r,t) # probability of the unordered ranked tree
     return prob/(2**sigma)
 
