@@ -88,7 +88,9 @@ def computeProbUnrank(r, t):
 
 def symmetric_subtree(node):
     ch = node.child_nodes()
-    if len(ch) == 0:
+    if len(ch) == 0: # don't want to count leaves
+        return False
+    if ch[0].is_leaf() and ch[1].is_leaf(): # don't want to count parents of cherries
         return False
     return traverse_subtree(ch[0]) == traverse_subtree(ch[1])
 
