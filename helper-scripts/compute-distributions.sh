@@ -1,5 +1,11 @@
 #!/bin/bash
 
-python tools/AluSimulator.py 1 1 6 50000|nw_topology -IL -|nw_order -ca - |sort|uniq -c|sort -k2n|tee ur.txt
+rep=100000;
+la=$1;
+lb=$2;
 
-python tools/AluSimulator.py 1 1 6 50000|nw_topology -L -|nw_order -ca - |sort|uniq -c|sort -k2n|tee r.txt
+python DualBirthSimulator.py $la $lb 6 $rep|nw_topology -L -|sed -e "s/I//g" -e "s/,)/,d)/g" -e "s/(,/(d,/g" |tee >(sort|uniq -c|sort -k2 > dis_${la}_${lb}_${rep}) | (nw_order -|sort|uniq -c|sort -k2 > unorddis_${la}_${lb}_${rep})
+
+join -11 -22  <(python ComputeProb.py $la $lb <(sed -e "s/.* //g" dis_${la}_${lb}_${rep}) 0) <(cat dis_${la}_${lb}_${rep})|sort -k2n|tee dist_${la}_${lb}_${rep}.stat
+
+join -11 -22  <(python ComputeProb.py $la $lb <(sed -e "s/.* //g" unorddis_${la}_${lb}_${rep}) 1) <(cat unorddis_${la}_${lb}_${rep})|sort -k2n|tee unorddist_${la}_${lb}_${rep}.stat
