@@ -42,7 +42,7 @@ def computeProbUnrank(r, t):
         elif ch[0].is_leaf(): # left child leaf, right child not leaf
             node.phi = []
             for phi in ch[1].phi:
-                child_rank = list(phi.values())[0]
+                child_rank = phi[ch[1]]
                 for i in range(node.min_rank,child_rank):
                     new_phi = {}
                     for key in phi:
@@ -52,7 +52,7 @@ def computeProbUnrank(r, t):
         elif ch[1].is_leaf(): # right child leaf, left child not leaf
             node.phi = []
             for phi in ch[0].phi:
-                child_rank = list(phi.values())[0]
+                child_rank = phi[ch[0]]
                 for i in range(node.min_rank,child_rank):
                     new_phi = {}
                     for key in phi:
