@@ -164,11 +164,11 @@ if __name__ == '__main__':
 
     for t in trees:
         if treeType == 0:
-            print(str(t)+";",computeProbOrder(rateA/rateB, t, getOrder(t)))
+            print(str(t)+"; "+str(computeProbOrder(rateA/rateB, t, getOrder(t))))
         elif treeType == 1:
-            print(str(t)+";",computeProbUnorder(rateA/rateB, t))
+            print(str(t)+"; "+str(computeProbUnorder(rateA/rateB, t)))
         elif treeType == 2:
-            print(str(t)+";",computeProbUnrank(rateA/rateB, t))
+            print(str(t)+"; "+str(computeProbUnrank(rateA/rateB, t)))
         else:
             print("ERROR: Invalid tree type")
             print(USAGE_MESSAGE)

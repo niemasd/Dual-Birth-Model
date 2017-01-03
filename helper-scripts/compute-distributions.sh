@@ -14,4 +14,4 @@ join -11 -22  <(python ComputeProb.py $la $lb <(sed -e "s/.* //g" dis_${la}_${lb
 
 join -11 -22  <(python ComputeProb.py $la $lb <(sed -e "s/.* //g" unorddis_${la}_${lb}_${rep}) 1) <(cat unorddis_${la}_${lb}_${rep})|sort -k2n|tee unorddist_${la}_${lb}_${rep}.stat
 
-join -11 -22  <(python ComputeProb.py $la $lb <(sed -e "s/.* //g" unrankdis_${la}_${lb}_${rep}) 1) <(cat unrankdis_${la}_${lb}_${rep})|sort -k2n|tee unrankdist_${la}_${lb}_${rep}.stat
+join -11 -22  <(python ComputeProb.py $la $lb <(sed -e "s/.* //g" unrankdis_${la}_${lb}_${rep}) 2) <(cat unrankdis_${la}_${lb}_${rep})|sort -k2n|tee unrankdist_${la}_${lb}_${rep}.stat
