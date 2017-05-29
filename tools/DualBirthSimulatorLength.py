@@ -22,6 +22,7 @@ try:
     import Queue as Q  # ver. < 3.0
 except ImportError:
     import queue as Q
+sys.setrecursionlimit(1000000000)
 
 # define Node class
 class Node:
