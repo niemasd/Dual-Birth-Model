@@ -5,3 +5,4 @@ Tree Error RF = (FN+FP)/2: .08630000000000000000
 Cherry Deviation as Difference (inferred - true): 43
 Cherry Deviation as Ratio (inferred / true): 1.50588235294117647058
 Average Pendant Branch Length: 0.0516708
+Average Internal Branch Length: 0.00947162
