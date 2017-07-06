@@ -7,22 +7,16 @@ Simulate Alu tree
 See Theorem 3.3 from Stadler & Steel (2012) for proof about branch lengths
 '''
 
-USAGE_MESSAGE = '''
-USAGE: python DualBirthSimulator.py <rateA> <rateB> <n>
-    -rateA: (A)ctivation Rate, rate at which inactive Alus create offspring
-    -rateB: (B)irth Rate, rate at which active Alus create offspring
-    -n:     Desired total number of leaves in the tree
-
-Biologically, it makes sense to have rateB >> rateA
-'''
 # imports
 import sys
+import argparse
 from numpy.random import exponential
 try:
     import Queue as Q  # ver. < 3.0
 except ImportError:
     import queue as Q
 sys.setrecursionlimit(1000000000)
+VERBOSE = False
 
 # define Node class
 class Node:
@@ -87,6 +81,7 @@ def simulateAlu(rateA, rateB, n):
 
     # initialize simulation
     root = Node(depth=0, parent=None)
+    root.right = True # True = right child, False = left child
     pq = Q.PriorityQueue()
     pq.put(root) # priority queue is MinHeap on node depth
 
@@ -101,10 +96,12 @@ def simulateAlu(rateA, rateB, n):
         # self propagation
         leftLength = exponential(scale=betaP)
         leftChild = Node(depth=currNode.depth+leftLength, parent=currNode)
+        leftChild.right = False
 
         # newly created inactive child
         rightLength = exponential(scale=beta)
         rightChild = Node(depth=currNode.depth+rightLength, parent=currNode)
+        rightChild.right = True
 
         # add new children to parent's "children" list, and add them to pq
         currNode.children = [(leftLength,leftChild),(rightLength,rightChild)]
@@ -114,8 +111,14 @@ def simulateAlu(rateA, rateB, n):
 
     # get leaves from pq
     leaves = []
+    counts = {True:0,False:0} # True = right, False = left
     while not pq.empty():
-        leaves.append(pq.get())
+        leaf = pq.get()
+        leaves.append(leaf)
+        counts[leaf.right] += 1
+    if VERBOSE:
+        sys.stderr.write("Number of Right Leaves: %d\n" % counts[True])
+        sys.stderr.write("Number of Left Leaves: %d\n" % counts[False])
 
     # truncate final edges to be same as shortest leaf
     minDepth = leaves[0].depth
@@ -131,16 +134,15 @@ def simulateAlu(rateA, rateB, n):
 
 # if code is executed (and not imported)
 if __name__ == '__main__':
-    # parse args
-    if len(sys.argv) < 4:
-        print("ERROR: Incorrect number of arguments")
-        print(USAGE_MESSAGE)
-        exit(-1)
-    rateA = float(sys.argv[1])
-    rateB = float(sys.argv[2])
-    n = int(sys.argv[3])
-    r = int(sys.argv[4]) if len(sys.argv) == 5 else 1
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument('-la', '--lambdaA', required=True, type=float, help="Activation Rate (lambda A)")
+    parser.add_argument('-lb', '--lambdaB', required=True, type=float, help="Birth Rate (lambda B)")
+    parser.add_argument('-n', '--leaves', required=True, type=int, help="Number of Leaves")
+    parser.add_argument('-r', '--replicates', required=False, type=int, default=1, help="Number of Replicates")
+    parser.add_argument('-v', '--verbose', action="store_true", help="Verbose Mode")
+    args = parser.parse_args()
+    VERBOSE = args.verbose
 
     # perform simulation
-    for i in range(0,r):
-        print(simulateAlu(rateA,rateB,n))
+    for i in range(0,args.replicates):
+        print(simulateAlu(args.lambdaA,args.lambdaB,args.leaves))
