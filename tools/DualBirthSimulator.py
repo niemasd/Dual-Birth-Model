@@ -116,6 +116,11 @@ def simulateAlu(rateA, rateB, n):
         leaf = pq.get()
         leaves.append(leaf)
         counts[leaf.right] += 1
+        if VERBOSE:
+            if leaf.right:
+                sys.stderr.write("Uncensored Right Pendant Edge Length: %f\n" % (leaf.depth - leaf.parent.depth))
+            else:
+                sys.stderr.write("Uncensored Left Pendant Edge Length: %f\n" % (leaf.depth - leaf.parent.depth))
     if VERBOSE:
         sys.stderr.write("Number of Right Leaves: %d\n" % counts[True])
         sys.stderr.write("Number of Left Leaves: %d\n" % counts[False])
