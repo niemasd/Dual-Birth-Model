@@ -54,4 +54,6 @@ if __name__ == "__main__":
     if args.mode in {'mv','Mv','av','mp','Mp','ap'}:
         print("lambdaB = %f" % peak_calling(x,args.mode))
     elif args.mode == 'em':
-        print("lambdaA = %f, lambdaB = %f, k = %f" % em(x,NUM_ITER))
+        la,lb,k = em(x,NUM_ITER)
+        #print("lambdaA = %f, lambdaB = %f, k = %f" % (la,lb,k))
+        print("lambdaB = %f" % lb)
