@@ -47,13 +47,17 @@ def em(x,it):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-m', '--mode', required=False, type=str, default='mp', help="Mode (mv = min valley, Mv = Max valley, av = average valley, mp = min peak, Mp = Max peak, ap = average peak, em = EM method)")
+    parser.add_argument('-m', '--mode', required=False, type=str, default='mp', help="Mode (mv = min valley, Mv = Max valley, av = average valley, mp = min peak, Mp = Max peak, ap = average peak, em = EM method, mpem = min peak averaged with EM method, mvem = min valley averaged with EM method)")
     args = parser.parse_args()
-    assert args.mode in {'mv','Mv','av','mp','Mp','ap','em'}, "Mode must be {mv,Mv,av,mp,Mp,ap,em}. Use -h for help"
+    assert args.mode in {'mv','Mv','av','mp','Mp','ap','em','mpem','mvem'}, "Mode must be in {mv,Mv,av,mp,Mp,ap,em,mpem,mvem}. Use -h for help"
     x = [float(x) for x in stdin.read().split()]
     if args.mode in {'mv','Mv','av','mp','Mp','ap'}:
-        print(peak_calling(x,args.mode))
+        lb = peak_calling(x,args.mode)
     elif args.mode == 'em':
         la,lb,k = em(x,NUM_ITER)
         #print("lambdaA = %f, lambdaB = %f, k = %f" % (la,lb,k))
-        print(lb)
+    elif args.mode in {'mpem','mvem'}:
+        lb_peak = peak_calling(x,args.mode[:2])
+        la_em,lb_em,k_em = em(x,NUM_ITER)
+        lb = (lb_peak+lb_em)/2
+    print(lb)
