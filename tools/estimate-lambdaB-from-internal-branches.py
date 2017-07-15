@@ -52,8 +52,8 @@ if __name__ == "__main__":
     assert args.mode in {'mv','Mv','av','mp','Mp','ap','em'}, "Mode must be {mv,Mv,av,mp,Mp,ap,em}. Use -h for help"
     x = [float(x) for x in stdin.read().split()]
     if args.mode in {'mv','Mv','av','mp','Mp','ap'}:
-        print("lambdaB = %f" % peak_calling(x,args.mode))
+        print(peak_calling(x,args.mode))
     elif args.mode == 'em':
         la,lb,k = em(x,NUM_ITER)
         #print("lambdaA = %f, lambdaB = %f, k = %f" % (la,lb,k))
-        print("lambdaB = %f" % lb)
+        print(lb)
