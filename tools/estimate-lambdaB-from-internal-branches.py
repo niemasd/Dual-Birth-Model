@@ -28,8 +28,8 @@ def em(x,it):
     # initialize
     n = len(x)
     xAvg = avg(x)
-    a = 16.7#0.5/xAvg
-    b = 16.7#1.0/xAvg
+    a = 1.0/xAvg
+    b = 1.0/xAvg
     k = 0.5
 
     # EM algorithm
@@ -39,9 +39,11 @@ def em(x,it):
         # M step
         sumV = float(sum(v))
         k = sumV/float(n)
-        a = sumV/sum([v[i]*x[i] for i in range(n)])
-        b = n - sumV
-    return b
+        lambda1 = sumV/sum([v[i]*x[i] for i in range(n)])
+        lambda2 = n - sumV
+        a = min(lambda1,lambda2)
+        b = max(lambda1,lambda2)
+    return a,b,k
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -50,7 +52,6 @@ if __name__ == "__main__":
     assert args.mode in {'mv','Mv','av','mp','Mp','ap','em'}, "Mode must be {mv,Mv,av,mp,Mp,ap,em}. Use -h for help"
     x = [float(x) for x in stdin.read().split()]
     if args.mode in {'mv','Mv','av','mp','Mp','ap'}:
-        lb = peak_calling(x,args.mode)
+        print("lambdaB = %f" % peak_calling(x,args.mode))
     elif args.mode == 'em':
-        lb = em(x,NUM_ITER)
-    print(lb)
+        print("lambdaA = %f, lambdaB = %f, k = %f" % em(x,NUM_ITER))
