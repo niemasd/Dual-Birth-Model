@@ -3,7 +3,7 @@
 tmpa=`mktemp XXXX`
 tmpf=`mktemp XXXX`
 
-cat - | tee >( nw_distance -sf -mp - > $tmpf )| nw_distance -sa -mp - >$tmpa
+cat - | tee >( nw_distance -sf -mp - > $tmpf )| nw_distance -sa -mp - |sed '$ d' >$tmpa
 
 echo "
 l = mean(read.csv('"$tmpf"',sep= ' ',header=F)\$V1)
