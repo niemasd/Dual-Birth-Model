@@ -4,3 +4,5 @@ RAxML GAMMA-based Score: -110867.016279
 Tree Error RF = (FN+FP)/2: .28180000000000000000
 Cherry Deviation as Difference (inferred - true): 82
 Cherry Deviation as Ratio (inferred / true): 1.91111111111111111111
+Average Pendant Branch Length: 0.0801916
+Average Internal Branch Length: 0.0157684

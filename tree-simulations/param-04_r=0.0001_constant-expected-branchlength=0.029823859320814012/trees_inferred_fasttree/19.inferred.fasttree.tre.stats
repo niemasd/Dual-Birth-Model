@@ -8,3 +8,5 @@ Estimated Cherry Fraction (estimate-cherries.sh thresh=90%): .04600
 Estimated Cherry Fraction (estimate-cherries.sh thresh=95%): .02600
 Tree Error MS: 81511.0000
 Tree Error QT: 1300007794.0000
+Average Pendant Branch Length: 0.0553549
+Average Internal Branch Length: 0.00333394
