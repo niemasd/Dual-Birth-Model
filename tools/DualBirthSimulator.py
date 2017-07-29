@@ -96,12 +96,12 @@ def simulateAlu(rateA, rateB, n):
         # self propagation
         leftLength = exponential(scale=betaP)
         leftChild = Node(depth=currNode.depth+leftLength, parent=currNode)
-        leftChild.right = False
+        leftChild.right = True
 
         # newly created inactive child
         rightLength = exponential(scale=beta)
         rightChild = Node(depth=currNode.depth+rightLength, parent=currNode)
-        rightChild.right = True
+        rightChild.right = False
 
         # add new children to parent's "children" list, and add them to pq
         currNode.children = [(leftLength,leftChild),(rightLength,rightChild)]
@@ -124,6 +124,8 @@ def simulateAlu(rateA, rateB, n):
     if VERBOSE:
         sys.stderr.write("Number of Right Leaves: %d\n" % counts[True])
         sys.stderr.write("Number of Left Leaves: %d\n" % counts[False])
+        sys.stderr.write("Number of Right Internals: %d\n" % (n - 1  - counts[True]))
+        sys.stderr.write("Number of Left Internals: %d\n" % (n - 1 - counts[False])) 
 
     # truncate final edges to be same as shortest leaf
     minDepth = leaves[0].depth
