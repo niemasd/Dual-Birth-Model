@@ -17,7 +17,7 @@ import seaborn as sns
 sns.set_style("ticks")
 rcParams['font.family'] = 'serif'
 pal = {'simulated':'#597DBE', 'fasttree':'#FF9980', 'raxml':'#A2B7C3', 'theoretical':'#000000', 'fasttree_fix90':'#D41A1C', 'raxml_fix90':'#377EE8', 'raxml_fix80':'#4DAF4A'}
-handles = [Patch(color=pal['theoretical'],label='Theoretical'),Patch(color=pal['fasttree'],label='FastTree'),Patch(color=pal['fasttree_fix90'],label='FastTree (Corrected, 90%)'),Patch(color=pal['raxml'],label='RAxML'),Patch(color=pal['raxml_fix80'],label='RAxML (Corrected, 80%)'),Patch(color=pal['raxml_fix90'],label='RAxML (Corrected, 90%)')]
+handles = [Patch(color='#00FF00',label='Branch Lengths'),Patch(color=pal['theoretical'],label='Theoretical'),Patch(color=pal['fasttree'],label='FastTree'),Patch(color=pal['fasttree_fix90'],label='FastTree (Corrected, 90%)'),Patch(color=pal['raxml'],label='RAxML'),Patch(color=pal['raxml_fix80'],label='RAxML (Corrected, 80%)'),Patch(color=pal['raxml_fix90'],label='RAxML (Corrected, 90%)')]
 axisY = np.asarray([-5,-4,-3,-2,-1,0,1])
 
 # Expected Number of Cherries as a Function of r
@@ -40,6 +40,22 @@ def setAlpha(ax,a):
 
 # DATASETS
 # modifying r = lambdaA/lambdaB (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
+r_assignment_flexible = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
+                         'cherries':np.log10(np.array([0.004553,0.003353,0.002768,0.004366,0.003822,0.004789,0.003184,0.003315,0.0029,0.004395,0.003616,0.002943,0.003531,0.0031,0.002935,0.003847,0.003065,0.002842,0.003147,0.003574] +# r = 0.0001
+                                                      [0.007396,0.00685,0.004637,0.006509,0.005708,0.007441,0.00893,0.005079,0.007243,0.006733,0.006195,0.00661,0.00485,0.005619,0.008152,0.006755,0.008306,0.004984,0.005633,0.007154] + # r = 0.001
+                                                      [0.029878,0.032548,0.034708,0.030953,0.031038,0.037153,0.024541,0.037918,0.044319,0.028368,0.025859,0.030402,0.032724,0.024146,0.035384,0.029223,0.027756,0.032361,0.035154,0.031067] + # r = 0.01
+                                                      [0.161718,0.172659,0.159658,0.158831,0.148353,0.135238,0.133655,0.14562,0.150398,0.158177,0.149241,0.156865,0.134532,0.156224,0.14414,0.142211,0.124797,0.145109,0.148909,0.183623] + # r = 0.1
+                                                      [0.337409,0.283286,0.314869,0.286248,0.331281,0.312325,0.289567,0.327456,0.335113,0.297209,0.316867,0.292924,0.338436,0.261,0.295874,0.298537,0.269528,0.298953,0.290713,0.296875] + # r = 1
+                                                      []
+                                                      ))}
+r_estimate_from_bl = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
+                         'cherries':np.log10(np.array([0.00259112,0.00167373,0.00125273,0.00211274,0.00153397,0.00221708,0.00127848,0.00146812,0.00106884,0.00205367,0.0017137,0.00111848,0.00140597,0.00132294,0.00122357,0.00180502,0.00134897,0.00106581,0.00146013,0.00178702] +# r = 0.0001
+                                                      [0.0027005,0.00231558,0.00149568,0.00260693,0.00202584,0.0026354,0.00325965,0.00188967,0.00264273,0.00240021,0.00222768,0.00235425,0.00171695,0.0020636,0.00298759,0.00235696,0.00307641,0.00197012,0.00197477,0.00250449] + # r = 0.001
+                                                      [0.0122579,0.0140104,0.0147327,0.0129625,0.0127697,0.0166014,0.00966062,0.0170136,0.0205515,0.0116561,0.0104276,0.0129337,0.0144581,0.00953683,0.0153007,0.01193,0.0111577,0.0136173,0.0151836,0.0130099] + # r = 0.01
+                                                      [0.151919,0.175476,0.148687,0.146993,0.129048,0.108831,0.105748,0.125227,0.133087,0.145826,0.129651,0.143007,0.107577,0.142741,0.121937,0.119136,0.0934888,0.12372,0.129202,0.201572] + # r = 0.1
+                                                      [1,0.667569,1,0.700721,1,1,0.702307,1,1,1,1,0.630382,1,0.468371,1,1,0.511356,1,0.704684,0.817548] + # r = 1
+                                                      []
+                                                      ))}
 r_original = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
               'cherries':np.log10(r_vs_cherries(np.array([14,12,7,10,10,12,8,10,8,12,14,7,13,9,8,8,10,9,9,11] +                              # r = 0.0001
                                   [33,28,26,30,25,31,33,28,32,29,28,29,25,27,30,31,32,27,27,27] +                     # r = 0.001
@@ -424,6 +440,8 @@ sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_raxml_fix80),order=x,color
 plt.plot(np.asarray([sum(r_raxml_fix80['r'][i:i+20])/20.0 for i in range(0,len(r_raxml_fix80['cherries']),20)])+4,[sum(r_raxml_fix80['cherries'][i:i+20])/20.0 for i in range(0,len(r_raxml_fix80['cherries']),20)],color=pal['raxml_fix80'],linestyle=':',linewidth=3)
 sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_raxml_fix90),order=x,color=pal['raxml_fix90'],scale='width',width=0.3)
 plt.plot(np.asarray([sum(r_raxml_fix90['r'][i:i+20])/20.0 for i in range(0,len(r_raxml_fix90['cherries']),20)])+4,[sum(r_raxml_fix90['cherries'][i:i+20])/20.0 for i in range(0,len(r_raxml_fix90['cherries']),20)],color=pal['raxml_fix90'],linestyle=':',linewidth=3)
+sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_estimate_from_bl),order=x,color='#00FF00',scale='width',width=0.3) # NEW METHOD
+plt.plot(np.asarray([sum(r_estimate_from_bl['r'][i:i+20])/20.0 for i in range(0,len(r_estimate_from_bl['cherries']),20)])+4,[sum(r_estimate_from_bl['cherries'][i:i+20])/20.0 for i in range(0,len(r_estimate_from_bl['cherries']),20)],color='#00FF00',linestyle=':',linewidth=3)
 setAlpha(ax,0.5)
 plt.plot([-1,0,1,2,3,4,5],[-5,-4,-3,-2,-1,0,1],label='Theoretical',linestyle='--',color=pal['theoretical'])
 plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
