@@ -4,6 +4,7 @@ Estimate r given a Newick tree using average branch length and average terminal
 branch length.
 '''
 from sys import argv,stdin
+from math import exp,log
 from os.path import expanduser,isfile
 from subprocess import Popen,PIPE,STDOUT
 import argparse
@@ -20,7 +21,10 @@ def bootlier(bl,pen_bl): # remove outliers using distribution-free method in Can
     out = Popen(['R','--slave'], stdout=PIPE, stdin=PIPE, stderr=STDOUT).communicate(input=pen_bl_script.encode('utf-8'))[0].decode()
     pen_bl_fixed = [float(i) for line in out.splitlines()[3:] for i in line.split()[1:]]
     return bl_fixed,pen_bl_fixed
-METHODS = {None:none,'bootlier':bootlier}
+def bootlier_log(bl,pen_bl): # remove outliers using Bootlier on log-scaled lengths
+    log_bl_fixed,log_pen_bl_fixed = bootlier([log(i) for i in bl if i > 0],[log(i) for i in pen_bl if i > 0])
+    return [exp(i) for i in log_bl_fixed],[exp(i) for i in log_pen_bl_fixed]
+METHODS = {None:none,'bootlier':bootlier,'bootlier_log':bootlier_log}
 
 # generally useful functions
 def sqrt(x):
