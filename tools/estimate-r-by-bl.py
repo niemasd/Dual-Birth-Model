@@ -32,7 +32,7 @@ if __name__ == "__main__":
     # parse user args
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-t', '--treefile', required=False, type=str, default='stdin', help="Tree File (Newick format)")
-    parser.add_argument('-c', '--correction', required=False, type=str, default=None, help="Correction Method %s" % str(sorted(METHODS.keys())))
+    parser.add_argument('-c', '--correction', required=False, type=str, default=None, help="Correction Method %s" % ("(Options: " + str(sorted(METHODS.keys()))[1:-1] + ")"))
     args = parser.parse_args()
     assert args.correction in METHODS, "Incorrect correction method. Use -h to see options"
 
