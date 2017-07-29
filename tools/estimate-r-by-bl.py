@@ -3,15 +3,24 @@
 Estimate r given a Newick tree using average branch length and average terminal
 branch length.
 '''
-from sys import stdin
+from sys import argv,stdin
 from os.path import expanduser,isfile
 from subprocess import Popen,PIPE,STDOUT
 import argparse
 
 # possible correction methods
-def none(bl,pen_bl):
+def none(bl,pen_bl): # no correction
     return bl,pen_bl
-METHODS = {None:none}
+def bootlier(bl,pen_bl): # remove outliers using distribution-free method in Candelon & Metiu 2013 (https://github.com/jodeleeuw/Bootlier)
+    bootlier_path = '/'.join(argv[0].split('/')[:-2] + ['deps','bootlier.R'])
+    bl_script = "source('%s')\ndata <- c(%s)\nresult <- bootstrap.identify.outliers(data)\nprint(result$data.truncated)" % (bootlier_path, str(bl)[1:-1])
+    out = Popen(['R','--slave'], stdout=PIPE, stdin=PIPE, stderr=STDOUT).communicate(input=bl_script.encode('utf-8'))[0].decode()
+    bl_fixed = [float(i) for line in out.splitlines()[3:] for i in line.split()[1:]]
+    pen_bl_script = "source('%s')\ndata <- c(%s)\nresult <- bootstrap.identify.outliers(data)\nprint(result$data.truncated)" % (bootlier_path, str(pen_bl)[1:-1])
+    out = Popen(['R','--slave'], stdout=PIPE, stdin=PIPE, stderr=STDOUT).communicate(input=pen_bl_script.encode('utf-8'))[0].decode()
+    pen_bl_fixed = [float(i) for line in out.splitlines()[3:] for i in line.split()[1:]]
+    return bl_fixed,pen_bl_fixed
+METHODS = {None:none,'bootlier':bootlier}
 
 # generally useful functions
 def sqrt(x):
@@ -32,8 +41,10 @@ if __name__ == "__main__":
     # parse user args
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-t', '--treefile', required=False, type=str, default='stdin', help="Tree File (Newick format)")
-    parser.add_argument('-c', '--correction', required=False, type=str, default=None, help="Correction Method %s" % ("(Options: " + str(sorted(METHODS.keys()))[1:-1] + ")"))
+    parser.add_argument('-c', '--correction', required=False, type=str, default=None, help="Correction Method %s" % ("(Options: " + str(sorted([str(key) for key in METHODS]))[1:-1] + ")"))
     args = parser.parse_args()
+    if args.correction is not None:
+        args.correction = args.correction.lower()
     assert args.correction in METHODS, "Incorrect correction method. Use -h to see options"
 
     # read tree parameters
