@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 '''
 Niema Moshiri 2016
 
@@ -17,7 +17,8 @@ import seaborn as sns
 sns.set_style("ticks")
 rcParams['font.family'] = 'serif'
 pal = {'simulated':'#597DBE', 'fasttree':'#FF9980', 'raxml':'#A2B7C3', 'theoretical':'#000000', 'fasttree_fix90':'#D41A1C', 'raxml_fix90':'#377EE8', 'raxml_fix80':'#4DAF4A'}
-handles = [Patch(color=pal['theoretical'],label='Theoretical'),Patch(color=pal['fasttree'],label='FastTree'),Patch(color=pal['fasttree_fix90'],label='FastTree (Corrected, 90%)'),Patch(color=pal['raxml'],label='RAxML'),Patch(color=pal['raxml_fix80'],label='RAxML (Corrected, 80%)'),Patch(color=pal['raxml_fix90'],label='RAxML (Corrected, 90%)')]
+#handles = [Patch(color=pal['theoretical'],label='Theoretical'),Patch(color=pal['fasttree'],label='FastTree'),Patch(color=pal['fasttree_fix90'],label='FastTree (Corrected, 90%)'),Patch(color=pal['raxml'],label='RAxML'),Patch(color=pal['raxml_fix80'],label='RAxML (Corrected, 80%)'),Patch(color=pal['raxml_fix90'],label='RAxML (Corrected, 90%)')]
+handles = [Patch(color=pal['theoretical'],label='Theoretical'),Patch(color=pal['fasttree'],label='FastTree'),Patch(color=pal['fasttree_fix90'],label='FastTree (Corrected, 90%)'),Patch(color=pal['raxml'],label='RAxML'),Patch(color=pal['raxml_fix90'],label='RAxML (Corrected, 90%)')]
 axisY = np.asarray([-5,-4,-3,-2,-1,0,1])
 
 # Expected Number of Cherries as a Function of r
@@ -588,12 +589,10 @@ sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_fasttree_fix90),order=x,co
 plt.plot(np.asarray([sum(r_fasttree_fix90['r'][i:i+20])/20.0 for i in range(0,len(r_fasttree_fix90['cherries']),20)])+4,[sum(r_fasttree_fix90['cherries'][i:i+20])/20.0 for i in range(0,len(r_fasttree_fix90['cherries']),20)],color=pal['fasttree_fix90'],linestyle=':',linewidth=3)
 sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_raxml),order=x,color=pal['raxml'],width=0.3)
 plt.plot(np.asarray([sum(r_raxml['r'][i:i+20])/20.0 for i in range(0,len(r_raxml['cherries']),20)])+4,[sum(r_raxml['cherries'][i:i+20])/20.0 for i in range(0,len(r_raxml['cherries']),20)],color=pal['raxml'],linestyle='--',linewidth=3)
-sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_raxml_fix80),order=x,color=pal['raxml_fix80'],scale='width',width=0.3)
-plt.plot(np.asarray([sum(r_raxml_fix80['r'][i:i+20])/20.0 for i in range(0,len(r_raxml_fix80['cherries']),20)])+4,[sum(r_raxml_fix80['cherries'][i:i+20])/20.0 for i in range(0,len(r_raxml_fix80['cherries']),20)],color=pal['raxml_fix80'],linestyle=':',linewidth=3)
+#sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_raxml_fix80),order=x,color=pal['raxml_fix80'],scale='width',width=0.3)
+#plt.plot(np.asarray([sum(r_raxml_fix80['r'][i:i+20])/20.0 for i in range(0,len(r_raxml_fix80['cherries']),20)])+4,[sum(r_raxml_fix80['cherries'][i:i+20])/20.0 for i in range(0,len(r_raxml_fix80['cherries']),20)],color=pal['raxml_fix80'],linestyle=':',linewidth=3)
 sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_raxml_fix90),order=x,color=pal['raxml_fix90'],scale='width',width=0.3)
 plt.plot(np.asarray([sum(r_raxml_fix90['r'][i:i+20])/20.0 for i in range(0,len(r_raxml_fix90['cherries']),20)])+4,[sum(r_raxml_fix90['cherries'][i:i+20])/20.0 for i in range(0,len(r_raxml_fix90['cherries']),20)],color=pal['raxml_fix90'],linestyle=':',linewidth=3)
-sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_estimate_from_bl),order=x,color='#00FF00',scale='width',width=0.3) # NEW METHOD
-plt.plot(np.asarray([sum(r_estimate_from_bl['r'][i:i+20])/20.0 for i in range(0,len(r_estimate_from_bl['cherries']),20)])+4,[sum(r_estimate_from_bl['cherries'][i:i+20])/20.0 for i in range(0,len(r_estimate_from_bl['cherries']),20)],color='#00FF00',linestyle=':',linewidth=3)
 setAlpha(ax,0.5)
 plt.plot([-1,0,1,2,3,4,5],[-5,-4,-3,-2,-1,0,1],label='Theoretical',linestyle='--',color=pal['theoretical'])
 plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
@@ -614,8 +613,8 @@ sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_fasttree_fix90),order=x,c
 plt.plot(np.asarray([sum(r2_fasttree_fix90['r'][i:i+20])/20.0 for i in range(0,len(r2_fasttree_fix90['cherries']),20)])+4,[sum(r2_fasttree_fix90['cherries'][i:i+20])/20.0 for i in range(0,len(r2_fasttree_fix90['cherries']),20)],color=pal['fasttree_fix90'],linestyle=':',linewidth=3)
 sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_raxml),order=x,color=pal['raxml'],width=0.3)
 plt.plot(np.asarray([sum(r2_raxml['r'][i:i+20])/20.0 for i in range(0,len(r2_raxml['cherries']),20)])+4,[sum(r2_raxml['cherries'][i:i+20])/20.0 for i in range(0,len(r2_raxml['cherries']),20)],color=pal['raxml'],linestyle='--',linewidth=3)
-sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_raxml_fix80),order=x,color=pal['raxml_fix80'],scale='width',width=0.3)
-plt.plot(np.asarray([sum(r2_raxml_fix80['r'][i:i+20])/20.0 for i in range(0,len(r2_raxml_fix80['cherries']),20)])+4,[sum(r2_raxml_fix80['cherries'][i:i+20])/20.0 for i in range(0,len(r2_raxml_fix80['cherries']),20)],color=pal['raxml_fix80'],linestyle=':',linewidth=3)
+#sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_raxml_fix80),order=x,color=pal['raxml_fix80'],scale='width',width=0.3)
+#plt.plot(np.asarray([sum(r2_raxml_fix80['r'][i:i+20])/20.0 for i in range(0,len(r2_raxml_fix80['cherries']),20)])+4,[sum(r2_raxml_fix80['cherries'][i:i+20])/20.0 for i in range(0,len(r2_raxml_fix80['cherries']),20)],color=pal['raxml_fix80'],linestyle=':',linewidth=3)
 sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_raxml_fix90),order=x,color=pal['raxml_fix90'],scale='width',width=0.3)
 plt.plot(np.asarray([sum(r2_raxml_fix90['r'][i:i+20])/20.0 for i in range(0,len(r2_raxml_fix90['cherries']),20)])+4,[sum(r2_raxml_fix90['cherries'][i:i+20])/20.0 for i in range(0,len(r2_raxml_fix90['cherries']),20)],color=pal['raxml_fix90'],linestyle=':',linewidth=3)
 setAlpha(ax,0.5)
@@ -639,8 +638,8 @@ sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_fasttree_fix90),order
 sns.pointplot(np.asarray([sum(l_fasttree_fix90['lambda'][i:i+20])/20.0 for i in range(0,len(l_fasttree_fix90['cherries']),20)]),[sum(l_fasttree_fix90['cherries'][i:i+20])/20.0 for i in range(0,len(l_fasttree_fix90['cherries']),20)],color=pal['fasttree_fix90'],linestyles=[':'],linewidth=3)
 sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_raxml),order=x,color=pal['raxml'],width=0.3)
 sns.pointplot(np.asarray([sum(l_raxml['lambda'][i:i+20])/20.0 for i in range(0,len(l_raxml['cherries']),20)]),[sum(l_raxml['cherries'][i:i+20])/20.0 for i in range(0,len(l_raxml['cherries']),20)],color=pal['raxml'],linestyles=['--'],linewidth=3)
-sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_raxml_fix80),order=x,color=pal['raxml_fix80'],scale='width',width=0.3)
-sns.pointplot(np.asarray([sum(l_raxml_fix80['lambda'][i:i+20])/20.0 for i in range(0,len(l_raxml_fix80['cherries']),20)]),[sum(l_raxml_fix80['cherries'][i:i+20])/20.0 for i in range(0,len(l_raxml_fix80['cherries']),20)],color=pal['raxml_fix80'],linestyles=[':'],linewidth=3)
+#sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_raxml_fix80),order=x,color=pal['raxml_fix80'],scale='width',width=0.3)
+#sns.pointplot(np.asarray([sum(l_raxml_fix80['lambda'][i:i+20])/20.0 for i in range(0,len(l_raxml_fix80['cherries']),20)]),[sum(l_raxml_fix80['cherries'][i:i+20])/20.0 for i in range(0,len(l_raxml_fix80['cherries']),20)],color=pal['raxml_fix80'],linestyles=[':'],linewidth=3)
 sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_raxml_fix90),order=x,color=pal['raxml_fix90'],scale='width',width=0.3)
 sns.pointplot(np.asarray([sum(l_raxml_fix90['lambda'][i:i+20])/20.0 for i in range(0,len(l_raxml_fix90['cherries']),20)]),[sum(l_raxml_fix90['cherries'][i:i+20])/20.0 for i in range(0,len(l_raxml_fix90['cherries']),20)],color=pal['raxml_fix90'],linestyles=[':'],linewidth=3)
 setAlpha(ax,0.5)
@@ -664,8 +663,8 @@ sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_fasttree_fix90),order
 sns.pointplot(np.asarray([sum(k_fasttree_fix90['length'][i:i+20])/20 for i in range(0,len(k_fasttree_fix90['cherries']),20)]),[sum(k_fasttree_fix90['cherries'][i:i+20])/20.0 for i in range(0,len(k_fasttree_fix90['cherries']),20)],color=pal['fasttree_fix90'],linestyles=[':'],linewidth=3)
 sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_raxml),order=x,color=pal['raxml'],width=0.3)
 sns.pointplot(np.asarray([sum(k_raxml['length'][i:i+20])/20 for i in range(0,len(k_raxml['cherries']),20)]),[sum(k_raxml['cherries'][i:i+20])/20.0 for i in range(0,len(k_raxml['cherries']),20)],color=pal['raxml'],linestyles=['--'],linewidth=3)
-sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_raxml_fix80),order=x,color=pal['raxml_fix80'],scale='width',width=0.3)
-sns.pointplot(np.asarray([sum(k_raxml_fix80['length'][i:i+20])/20 for i in range(0,len(k_raxml_fix80['cherries']),20)]),[sum(k_raxml_fix80['cherries'][i:i+20])/20.0 for i in range(0,len(k_raxml_fix80['cherries']),20)],color=pal['raxml_fix80'],linestyles=[':'],linewidth=3)
+#sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_raxml_fix80),order=x,color=pal['raxml_fix80'],scale='width',width=0.3)
+#sns.pointplot(np.asarray([sum(k_raxml_fix80['length'][i:i+20])/20 for i in range(0,len(k_raxml_fix80['cherries']),20)]),[sum(k_raxml_fix80['cherries'][i:i+20])/20.0 for i in range(0,len(k_raxml_fix80['cherries']),20)],color=pal['raxml_fix80'],linestyles=[':'],linewidth=3)
 sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_raxml_fix90),order=x,color=pal['raxml_fix90'],scale='width',width=0.3)
 sns.pointplot(np.asarray([sum(k_raxml_fix90['length'][i:i+20])/20 for i in range(0,len(k_raxml_fix90['cherries']),20)]),[sum(k_raxml_fix90['cherries'][i:i+20])/20.0 for i in range(0,len(k_raxml_fix90['cherries']),20)],color=pal['raxml_fix90'],linestyles=[':'],linewidth=3)
 setAlpha(ax,0.5)
@@ -688,8 +687,8 @@ sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_fasttree_fix90),or
 sns.pointplot(np.asarray([sum(g_fasttree_fix90['gammarate'][i:i+20])/20.0 for i in range(0,len(g_fasttree_fix90['cherries']),20)]),[sum(g_fasttree_fix90['cherries'][i:i+20])/20.0 for i in range(0,len(g_fasttree_fix90['cherries']),20)],color=pal['fasttree_fix90'],linestyles=[':'],linewidth=3)
 sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_raxml),order=x,color=pal['raxml'],width=0.3)
 sns.pointplot(np.asarray([sum(g_raxml['gammarate'][i:i+20])/20.0 for i in range(0,len(g_raxml['cherries']),20)]),[sum(g_raxml['cherries'][i:i+20])/20.0 for i in range(0,len(g_raxml['cherries']),20)],color=pal['raxml'],linestyles=['--'],linewidth=3)
-sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_raxml_fix80),order=x,color=pal['raxml_fix80'],scale='width',width=0.3)
-sns.pointplot(np.asarray([sum(g_raxml_fix80['gammarate'][i:i+20])/20.0 for i in range(0,len(g_raxml_fix80['cherries']),20)]),[sum(g_raxml_fix80['cherries'][i:i+20])/20.0 for i in range(0,len(g_raxml_fix80['cherries']),20)],color=pal['raxml_fix80'],linestyles=[':'],linewidth=3)
+#sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_raxml_fix80),order=x,color=pal['raxml_fix80'],scale='width',width=0.3)
+#sns.pointplot(np.asarray([sum(g_raxml_fix80['gammarate'][i:i+20])/20.0 for i in range(0,len(g_raxml_fix80['cherries']),20)]),[sum(g_raxml_fix80['cherries'][i:i+20])/20.0 for i in range(0,len(g_raxml_fix80['cherries']),20)],color=pal['raxml_fix80'],linestyles=[':'],linewidth=3)
 sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_raxml_fix90),order=x,color=pal['raxml_fix90'],scale='width',width=0.3)
 sns.pointplot(np.asarray([sum(g_raxml_fix90['gammarate'][i:i+20])/20.0 for i in range(0,len(g_raxml_fix90['cherries']),20)]),[sum(g_raxml_fix90['cherries'][i:i+20])/20.0 for i in range(0,len(g_raxml_fix90['cherries']),20)],color=pal['raxml_fix90'],linestyles=[':'],linewidth=3)
 setAlpha(ax,0.5)
