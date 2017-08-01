@@ -34,6 +34,8 @@ def avg(x):
 
 # estimate r from average branch length (b) and average terminal branch length (l)
 def r(bl,pen_bl):
+    if len(bl) == 0 or len(pen_bl) == 0:
+        return 1
     b = avg(bl)
     l = avg(pen_bl)
     if b > l:
