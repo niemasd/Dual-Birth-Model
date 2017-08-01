@@ -16,8 +16,9 @@ import seaborn as sns
 # settings
 sns.set_style("ticks")
 rcParams['font.family'] = 'serif'
-pal = {'r_fastme_bl_tn93':'#FF9980', 'r_fastme_bl_logdet':'#A2B7C3', 'theoretical':'#000000', 'r_fastme_bl_f84':'#D41A1C', 'raxml_fix90':'#377EE8', 'raxml_fix80':'#4DAF4A', 'fasttree_bl':'#E6C594', 'fasttree_bl_bootlier_log':'#CE8F30', 'raxml_bl':'#62E1EA', 'raxml_bl_bootlier_log':'#37ACA4'}
-handles = [Patch(color=pal['theoretical'],label='Theoretical'),Patch(color=pal['fasttree_bl'],label='FastTree'),Patch(color=pal['fasttree_bl_bootlier_log'],label='FastTree (Bootlier)'),Patch(color=pal['raxml_bl'],label='RAxML'),Patch(color=pal['raxml_bl_bootlier_log'],label='RAxML (Bootlier)'),Patch(color=pal['r_fastme_bl_tn93'],label='FastME (TN93)'),Patch(color=pal['r_fastme_bl_f84'],label='FastME (F84)'),Patch(color=pal['r_fastme_bl_logdet'],label='FastME (LogDet)')]
+pal = {'fastme_bl_tn93':'#FF9980', 'fastme_bl_logdet':'#A2B7C3', 'theoretical':'#000000', 'fastme_bl_f84':'#D41A1C', 'fastme_bl_f84_bootlier_log':'#377EE8', 'raxml_fix80':'#4DAF4A', 'fasttree_bl':'#E6C594', 'fasttree_bl_bootlier_log':'#CE8F30', 'raxml_bl':'#62E1EA', 'raxml_bl_bootlier_log':'#37ACA4'}
+#handles = [Patch(color=pal['theoretical'],label='Theoretical'),Patch(color=pal['fasttree_bl'],label='FastTree'),Patch(color=pal['fasttree_bl_bootlier_log'],label='FastTree (Bootlier Log)'),Patch(color=pal['raxml_bl'],label='RAxML'),Patch(color=pal['raxml_bl_bootlier_log'],label='RAxML (Bootlier Log)'),Patch(color=pal['fastme_bl_tn93'],label='FastME (TN93)'),Patch(color=pal['fastme_bl_f84'],label='FastME (F84)'),Patch(color=pal['fastme_bl_logdet'],label='FastME (LogDet)')]
+handles = [Patch(color=pal['theoretical'],label='Theoretical'),Patch(color=pal['fasttree_bl'],label='FastTree'),Patch(color=pal['fasttree_bl_bootlier_log'],label='FastTree (Bootlier Log)'),Patch(color=pal['raxml_bl'],label='RAxML'),Patch(color=pal['raxml_bl_bootlier_log'],label='RAxML (Bootlier Log)'),Patch(color=pal['fastme_bl_f84'],label='FastME (F84)'),Patch(color=pal['fastme_bl_f84_bootlier_log'],label='FastME (F84, Bootlier Log)')]
 axisY = np.asarray([-5,-4,-3,-2,-1,0,1])
 
 # Expected Number of Cherries as a Function of r
@@ -96,6 +97,14 @@ r_fastme_bl_f84 = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # value
                                                       [1,0.720903,1,0.74309,1,1,0.744509,1,1,1,1,0.636211,1,0.490339,1,0.877682,0.519642,1,0.747269,0.777687] + # r = 1
                                                       []
                                                       ))}
+r_fastme_bl_f84_bootlier_log = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
+                         'cherries':np.log10(np.array([0.000175124,0.00022195,0.000427811,0.000358969,0.000538527,0.000590213,0.000387128,0.000395062,0.000594001,0.000286554,0.000370382,0.000537169,0.000366076,0.000422693,0.000613077,0.000402374,0.000454692,0.000490448,0.000412475,0.000479643] +# r = 0.0001
+                                                      [0.00112562,0.00142163,0.000842165,0.000869593,0.00103323,0.00136744,0.00150058,0.000905783,0.00116912,0.00135351,0.00101671,0.00112587,0.000915931,0.000913244,0.00143722,0.00118933,0.00137663,0.000624201,0.00124547,0.00179289] + # r = 0.001
+                                                      [0.00866107,0.00942393,0.00966997,0.00964417,0.00914312,0.011375,0.00553541,0.011636,0.0138578,0.00757752,0.00675555,0.00742165,0.00828122,0.00531442,0.00896275,0.00737442,0.00694002,0.00911732,0.00981926,0.0088206] + # r = 0.01
+                                                      [0.106967,0.125302,0.10765,0.108237,0.0953172,0.0829035,0.0809657,0.108095,0.107883,0.112467,0.103429,0.104097,0.0738745,0.108896,0.0867237,0.0946548,0.0685849,0.0976038,0.0955602,0.137185] + # r = 0.1
+                                                      [1,0.421657,0.708828,0.431823,0.728407,0.718653,0.436347,0.767643,1,0.483681,0.71975,0.456372,1,0.345436,0.548349,0.479549,0.327371,0.494132,0.443733,0.454904] + # r = 1
+                                                      []
+                                                      ))}
 
 # modifying r = lambdaA/lambdaB (with constant lambda = lambdaA + lambdaB)
 r2_fasttree_bl = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
@@ -130,6 +139,22 @@ r2_raxml_bl_bootlier_log = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20)
                                                       [1,1,1,1,0.672728,0.747039,0.686734,1,0.772491,1,0.534875,1,1,0.630494,0.786623,1,0.873493,0.846379,1,0.848471] + # r = 1
                                                       []
                                                       ))}
+r2_fastme_bl_f84 = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
+                         'cherries':np.log10(np.array([0.00729127,0.00633959,0.00958985,0.00685145,0.0100937,0.00949537,0.00618398,0.00694314,0.00843522,0.0113589,0.00912312,0.0082521,0.00592601,0.00510641,0.00940477,0.0150467,0.00785096,0.00569573,0.00543001,0.00551234] +# r = 0.0001
+                                                      [0.00414049,0.00549782,0.00367447,0.00374079,0.00368921,0.00275989,0.00460099,0.00457298,0.00379241,0.00330511,0.0036757,0.0035661,0.00416402,0.00549493,0.00460131,0.00342814,0.00517983,0.00365318,0.00442238,0.00409397] + # r = 0.001
+                                                      [0.0143685,0.0162377,0.0167976,0.0151501,0.0148318,0.0186507,0.0110592,0.0189016,0.0224232,0.0133187,0.0123032,0.0142948,0.0161528,0.0113471,0.0174883,0.0139854,0.013216,0.0159902,0.0167991,0.0153694] + # r = 0.01
+                                                      [0.113398,0.15839,0.150352,0.159045,0.130519,0.155237,0.144089,0.130906,0.175753,0.190471,0.126089,0.17937,0.198507,0.15985,0.116878,0.157751,0.158087,0.167506,0.142514,0.135167] + # r = 0.1
+                                                      [1,1,1,1,0.748689,1,0.744035,1,0.928524,1,0.559093,1,1,0.656977,0.81904,1,1,1,1,0.838884] + # r = 1
+                                                      []
+                                                      ))}
+r2_fastme_bl_f84_bootlier_log = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
+                         'cherries':np.log10(np.array([0.00691525,0.00561171,0.00864616,0.00659219,0.0092445,0.00880222,0.005701,0.00586056,0.00796375,0.0107902,0.00887345,0.00744685,0.00578245,0.00471887,0.0090252,0.0147042,0.00751306,0.00470685,0.00520499,0.00515006] +# r = 0.0001
+                                                      [0.00294927,0.00407442,0.00278813,0.00268987,0.00299623,0.00204302,0.00347012,0.0033765,0.0029568,0.00221021,0.00279046,0.00269547,0.00321011,0.00423477,0.0035454,0.00286047,0.0041235,0.00270709,0.00335775,0.00297398] + # r = 0.001
+                                                      [0.00866107,0.00942393,0.00966997,0.00964417,0.00914312,0.011375,0.00553541,0.011636,0.0138578,0.00757752,0.00675555,0.00742165,0.00828122,0.00531442,0.00896275,0.00737442,0.00694002,0.00911732,0.00981926,0.0088206] + # r = 0.01
+                                                      [0.0449959,0.0582831,0.061121,0.060791,0.0532198,0.0600076,0.0503334,0.0510589,0.0631538,0.0727428,0.0451591,0.0800616,0.077763,0.066529,0.0440703,0.0618962,0.0606228,0.0639406,0.0549789,0.0492957] + # r = 0.1
+                                                      [0.114113,0.149977,0.178173,0.125166,0.137096,0.145524,0.114954,0.129654,0.126664,0.184274,0.102985,0.153504,0.121014,0.112237,0.130725,0.139656,0.135757,0.145196,0.140662,0.127946] + # r = 1
+                                                      []
+                                                      ))}
 
 # modifying lambda = lambdaA + lambdaB
 l_fasttree_bl = {'lambda':np.array([33.866]*20+[84.664]*20+[169.328]*20+[338.655]*20+[846.638]*20),
@@ -159,6 +184,20 @@ l_raxml_bl_bootlier_log = {'lambda':np.array([33.866]*20+[84.664]*20+[169.328]*2
                                      [0.0117528,0.0129104,0.0146195,0.0124127,0.0119733,0.0159625,0.00919471,0.0161587,0.0195983,0.0111165,0.00974389,0.0121575,0.0132816,0.00919249,0.0147484,0.0116352,0.01081,0.0133828,0.0146836,0.0122667] +    # lambda = 169.32751545255631
                                      [0.0108037,0.0096102,0.0126205,0.00927722,0.0115821,0.00939382,0.0149498,0.0112418,0.0154087,0.013882,0.0166119,0.0102626,0.0164398,0.01123,0.0168835,0.0142735,0.0149932,0.0135044,0.0102806,0.0187006] +      # lambda = 338.65503090511262
                                      [0.0137384,0.0120065,0.017469,0.0108412,0.0112755,0.0142328,0.0113597,0.00953871,0.013599,0.0126144,0.0144659,0.010044,0.0131233,0.0152898,0.0138188,0.0135336,0.0115992,0.0150686,0.0147288,0.0117922]      # lambda = 846.63757726278155
+                ).astype(float))}
+l_fastme_bl_f84 = {'lambda':np.array([33.866]*20+[84.664]*20+[169.328]*20+[338.655]*20+[846.638]*20),
+                 'cherries':np.log10(np.array([0.0259999,0.0259851,0.0224849,0.0318683,0.0250234,0.0291291,0.0310279,0.0334652,0.0253794,0.0230736,0.0364881,0.0250428,0.0248686,0.0265995,0.0235247,0.0266692,0.0218852,0.0282189,0.0276089,0.0262525] +   # lambda = 33.86550309051126
+                                     [0.0151618,0.0122376,0.0144486,0.0161809,0.0150989,0.018455,0.0162913,0.0179148,0.0131201,0.0170571,0.0110736,0.0176698,0.0176331,0.0197131,0.0217034,0.0154274,0.0139657,0.0142258,0.0133809,0.018464] +  # lambda = 84.66375772627816
+                                     [0.0143685,0.0162377,0.0167976,0.0151501,0.0148318,0.0186507,0.0110592,0.0189016,0.0224232,0.0133187,0.0123032,0.0142948,0.0161528,0.0113471,0.0174883,0.0139854,0.013216,0.0159902,0.0167991,0.0153694] +    # lambda = 169.32751545255631
+                                     [0.0128801,0.0116164,0.0146594,0.0114737,0.0133832,0.0109551,0.0171363,0.0134218,0.0174834,0.0155768,0.0188603,0.0120861,0.019573,0.0129523,0.0190733,0.0171575,0.0179164,0.0156424,0.0120512,0.0213901] +      # lambda = 338.65503090511262
+                                     [0.0156499,0.0142153,0.0193467,0.0128596,0.0133492,0.0164076,0.0134665,0.0107901,0.0159327,0.014515,0.0161541,0.0119454,0.0153895,0.0179816,0.0152589,0.0162558,0.0136612,0.0174142,0.0170619,0.0139504]      # lambda = 846.63757726278155
+                ).astype(float))}
+l_fastme_bl_f84_bootlier_log = {'lambda':np.array([33.866]*20+[84.664]*20+[169.328]*20+[338.655]*20+[846.638]*20),
+                 'cherries':np.log10(np.array([0.0273095,0.023537,0.0203794,0.0283397,0.0229909,0.0254376,0.0271725,0.0293431,0.0222658,0.0245925,0.0330089,0.0227757,0.0229475,0.0219658,0.0211375,0.0246516,0.0198294,0.0251063,0.0243115,0.0227826] +   # lambda = 33.86550309051126
+                                     [0.0105558,0.00897893,0.0103671,0.0115994,0.0109545,0.0143079,0.0116617,0.0136819,0.00856801,0.0123937,0.0087791,0.0140065,0.0146665,0.014928,0.0155071,0.0114605,0.0104043,0.0112886,0.00992747,0.0142424] +  # lambda = 84.66375772627816
+                                     [0.00866107,0.00942393,0.00966997,0.00964417,0.00914312,0.011375,0.00553541,0.011636,0.0138578,0.00757752,0.00675555,0.00742165,0.00828122,0.00531442,0.00896275,0.00737442,0.00694002,0.00911732,0.00981926,0.0088206] +    # lambda = 169.32751545255631
+                                     [0.00428363,0.003226,0.00549178,0.00453119,0.00432587,0.00314521,0.00517128,0.00406597,0.00608424,0.00547431,0.00573913,0.00473492,0.00626697,0.00354441,0.00660008,0.0063578,0.00618104,0.00458232,0.004553,0.00861753] +      # lambda = 338.65503090511262
+                                     [0.0007821,0.000537143,0.000218574,0.000309634,3.75746e-06,0.00087297,0.000129598,0.000355682,0.00121215,3.51507e-05,0.00130168,0.000127756,0.000293099,0.00129682,0.000354708,0.000451121,0.000490785,0.000593387,0.000430003,6.08347e-05]      # lambda = 846.63757726278155
                 ).astype(float))}
 
 # modifying sequence length
@@ -202,6 +241,26 @@ k_raxml_bl_bootlier_log = {'length':np.array([50]*20+[100]*20+[200]*20+[300]*20+
                                      [0.00838914,0.0130873,0.0114806,0.0142736,0.00927983,0.0101702,0.0122231,0.0122103,0.0104483,0.00994076,0.0106068,0.011009,0.00848038,0.00836625,0.0115807,0.0097281,0.00949473,0.00637554,0.0117575,0.0122175] + # length = 2400
                                      [0.00833839,0.0130745,0.0148757,0.00789089,0.0133368,0.00972335,0.0136364,0.0112925,0.00863865,0.0111381,0.00771095,0.0109532,0.01228,0.00886438,0.0134824,0.0126312,0.00833434,0.00761475,0.0109099,0.00860414]    # length = 4800
                 ).astype(float))}
+k_fastme_bl_f84 = {'length':np.array([50]*20+[100]*20+[200]*20+[300]*20+[600]*20+[1200]*20+[2400]*20+[4800]*20), # values of length
+                 'cherries':np.log10(np.array([0.0316959,0.0352264,0.0431794,0.0398323,0.040868,0.0380488,0.0492309,0.0504347,0.0427727,0.0407336,0.041607,0.0371781,0.0385914,0.0452715,0.0343539,0.0416812,0.0367661,0.0449793,0.0323915,0.0390263] +  # length = 50
+                                     [0.0242369,0.0264518,0.017999,0.021777,0.0243248,0.0249679,0.0211079,0.022647,0.0206354,0.0247664,0.0203444,0.0253432,0.0228608,0.0222978,0.0174442,0.0238415,0.0237105,0.0245695,0.0212466,0.0216969] +   # length = 100
+                                     [0.0133749,0.0167739,0.0181255,0.0187984,0.017638,0.0134613,0.0157398,0.018055,0.0159232,0.022042,0.0173327,0.0167762,0.0210971,0.0173963,0.0152672,0.0148108,0.0215971,0.0136198,0.015547,0.0186983] +   # length = 200
+                                     [0.0143685,0.0162377,0.0167976,0.0151501,0.0148318,0.0186507,0.0110592,0.0189016,0.0224232,0.0133187,0.0123032,0.0142948,0.0161528,0.0113471,0.0174883,0.0139854,0.013216,0.0159902,0.0167991,0.0153694] +    # length = 300
+                                     [0.00945559,0.00982009,0.0110897,0.00945576,0.0162135,0.0118585,0.0163783,0.0180554,0.0113921,0.0162854,0.0112232,0.010481,0.0144585,0.0184549,0.0111821,0.0125852,0.01793,0.0129828,0.0108753,0.0100964] + # length = 600
+                                     [0.0100739,0.010303,0.0128389,0.0136324,0.0102043,0.0135127,0.0130821,0.0124987,0.013164,0.0110478,0.0105747,0.0101401,0.0158214,0.0114157,0.0173509,0.0114438,0.0113464,0.0143435,0.0109099,0.0145184] +  # length = 1200
+                                     [0.00873783,0.0134698,0.0116678,0.0145074,0.00953988,0.0104114,0.0116311,0.0124654,0.0107406,0.00959685,0.0108623,0.0112566,0.00880422,0.00858553,0.01178,0.0100165,0.00976556,0.0067781,0.0122575,0.0125354] + # length = 2400
+                                     [0.00782894,0.0116083,0.0150554,0.00807524,0.0135018,0.00992952,0.0138741,0.010695,0.00886149,0.0114611,0.008084,0.0111536,0.0126125,0.00901437,0.0136169,0.0127462,0.00889913,0.00773965,0.0119067,0.0091233]    # length = 4800
+                ).astype(float))}
+k_fastme_bl_f84_bootlier_log = {'length':np.array([50]*20+[100]*20+[200]*20+[300]*20+[600]*20+[1200]*20+[2400]*20+[4800]*20), # values of length
+                 'cherries':np.log10(np.array([0.00155717,0.0033801,0.00243714,0.00291908,0.00098889,0.00459927,0.00336536,0.00298848,0.00424351,0.00417751,0.00309156,0.00208119,0.00297199,0.00237773,0.0029374,0.00321087,0.00340129,0.00337697,0.0029509,0.00223289] +  # length = 50
+                                     [0.00600312,0.00611798,0.00311136,0.00585014,0.00624416,0.00492811,0.00533461,0.00756688,0.00458065,0.00468656,0.00538949,0.00427174,0.00524486,0.00509352,0.00343979,0.00698145,0.00553826,0.00710721,0.00329595,0.00624484] +   # length = 100
+                                     [0.00608847,0.00754261,0.00828681,0.00986231,0.00688804,0.0067061,0.00755402,0.00831236,0.00707175,0.00997647,0.00718105,0.00760924,0.00977172,0.00741736,0.00609143,0.00698024,0.00999172,0.00605444,0.00645826,0.00760333] +   # length = 200
+                                     [0.00866107,0.00942393,0.00966997,0.00964417,0.00914312,0.011375,0.00553541,0.011636,0.0138578,0.00757752,0.00675555,0.00742165,0.00828122,0.00531442,0.00896275,0.00737442,0.00694002,0.00911732,0.00981926,0.0088206] +    # length = 300
+                                     [0.00710485,0.00644618,0.00809612,0.00715083,0.0126055,0.007967,0.0122455,0.0140726,0.00892279,0.0128991,0.0093033,0.00760755,0.0114195,0.0136148,0.00880906,0.00980752,0.0124388,0.00925219,0.00761497,0.00842625] + # length = 600
+                                     [0.00859087,0.00861406,0.0109591,0.0121399,0.00877489,0.0109036,0.0111844,0.00975732,0.012231,0.00934606,0.00904585,0.00840547,0.0126761,0.00987684,0.0149607,0.00997057,0.00988274,0.0115528,0.00896469,0.0125547] +  # length = 1200
+                                     [0.00801959,0.0129932,0.0102478,0.0133541,0.00847652,0.0094797,0.0111264,0.0118618,0.0100595,0.00927637,0.0103377,0.0102786,0.00826295,0.00759032,0.0107022,0.00835668,0.00813464,0.00641907,0.0115866,0.010347] + # length = 2400
+                                     [0.00754726,0.0108908,0.0136249,0.00825049,0.0125541,0.00947326,0.0135494,0.0102848,0.00813999,0.0108198,0.00796889,0.0106626,0.0119302,0.00834368,0.0128202,0.0125154,0.00847337,0.00757141,0.0118331,0.00906111]    # length = 4800
+                ).astype(float))}
 
 # modifying deviation from ultrametricity
 g_fasttree_bl = {'gammarate':np.array([2.952]*20+[5.904]*20+[29.518]*20+[147.591]*20+[295.182]*20+[float('inf')]*20),
@@ -236,6 +295,22 @@ g_raxml_bl_bootlier_log = {'gammarate':np.array([2.952]*20+[5.904]*20+[29.518]*2
                                      [0.014386,0.0117004,0.0125736,0.0134103,0.00944651,0.0168926,0.0111436,0.0133592,0.0118907,0.0136748,0.0114178,0.0132742,0.0121526,0.0116112,0.0139991,0.00882739,0.0104319,0.0138365,0.0119353,0.0138064] +        # gamma = 295.181735298926
                                      [0.0122937,0.00909391,0.00899696,0.0129651,0.0123945,0.0112226,0.0101734,0.0109399,0.0152365,0.0116233,0.0136234,0.0163988,0.0124884,0.0113793,0.0107714,0.0176632,0.00951865,0.0164488,0.0117895,0.0126527]        # gamma = infinity
                 ).astype(float))}
+g_fastme_bl_f84 = {'gammarate':np.array([2.952]*20+[5.904]*20+[29.518]*20+[147.591]*20+[295.182]*20+[float('inf')]*20),
+                 'cherries':np.log10(np.array([0.0119388,0.0104229,0.0132687,0.0181933,0.0150951,0.0131634,0.0149016,0.0138538,0.0122114,0.011822,0.0191404,0.0122788,0.0187777,0.0171114,0.0183546,0.0145639,0.0133577,0.0157823,0.0201814,0.0207561] +    # gamma = 2.95181735298926
+                                     [0.0150738,0.0156118,0.0162967,0.0161301,0.0148831,0.0230021,0.0139825,0.0168146,0.0138366,0.0139001,0.0148331,0.0106448,0.0127637,0.0114645,0.0162751,0.0128604,0.0130851,0.0173196,0.0143304,0.0138054] +  # gamma = 5.90363470597852
+                                     [0.0143685,0.0162377,0.0167976,0.0151501,0.0148318,0.0186507,0.0110592,0.0189016,0.0224232,0.0133187,0.0123032,0.0142948,0.0161528,0.0113471,0.0174883,0.0139854,0.013216,0.0159902,0.0167991,0.0153694] +    # gamma = 29.518173529892621
+                                     [0.016656,0.0129063,0.0152738,0.0162549,0.0161767,0.0122043,0.0130771,0.0145598,0.00956292,0.0131819,0.0135757,0.0140188,0.0164116,0.0102562,0.0159844,0.0113809,0.0148742,0.0142928,0.0106021,0.013754] +   # gamma = 147.590867649463
+                                     [0.017006,0.0139075,0.0149663,0.0153577,0.0114098,0.020242,0.0133198,0.0155662,0.0140888,0.0163074,0.013677,0.0155415,0.0147364,0.013932,0.0163227,0.0115237,0.0129319,0.0163697,0.0146339,0.0159639] +        # gamma = 295.181735298926
+                                     [0.0148536,0.011298,0.0108427,0.0146619,0.0149987,0.0128598,0.0122232,0.0129959,0.0176115,0.0138534,0.0162082,0.0186684,0.0150755,0.0136536,0.0126876,0.0210399,0.0114541,0.0188026,0.0141398,0.0154359]        # gamma = infinity
+                ).astype(float))}
+g_fastme_bl_f84_bootlier_log = {'gammarate':np.array([2.952]*20+[5.904]*20+[29.518]*20+[147.591]*20+[295.182]*20+[float('inf')]*20),
+                 'cherries':np.log10(np.array([0.00559831,0.00456873,0.00558805,0.00884671,0.00704158,0.00620422,0.00521341,0.00681691,0.00470836,0.00587218,0.00864176,0.00691832,0.00796316,0.00946477,0.00902331,0.00748267,0.00547795,0.00794232,0.00967675,0.0111826] +    # gamma = 2.95181735298926
+                                     [0.00729708,0.00796062,0.00884731,0.0100082,0.00889704,0.0131761,0.0079136,0.00976475,0.00807738,0.00683947,0.0076803,0.00525932,0.00748455,0.00703824,0.00976087,0.00892102,0.00631007,0.00944701,0.00884162,0.00712863] +  # gamma = 5.90363470597852
+                                     [0.00866107,0.00942393,0.00966997,0.00964417,0.00914312,0.011375,0.00553541,0.011636,0.0138578,0.00757752,0.00675555,0.00742165,0.00828122,0.00531442,0.00896275,0.00737442,0.00694002,0.00911732,0.00981926,0.0088206] +    # gamma = 29.518173529892621
+                                     [0.00917724,0.0074862,0.0100408,0.00856454,0.00936398,0.00705391,0.00779677,0.00695601,0.00555003,0.00667951,0.00661339,0.00855547,0.0102926,0.00677248,0.00843717,0.00640267,0.00895742,0.00784566,0.00591604,0.00868219] +   # gamma = 147.590867649463
+                                     [0.00960383,0.00906584,0.00847248,0.00793131,0.00682634,0.0122032,0.0079172,0.00922998,0.00831814,0.00916533,0.00816877,0.00957897,0.0090734,0.00860762,0.0100798,0.00685109,0.00678218,0.00883592,0.00720755,0.00997188] +        # gamma = 295.181735298926
+                                     [0.00864807,0.00538281,0.00642492,0.00758878,0.010481,0.00708935,0.00711153,0.00714225,0.0114501,0.00843324,0.00976885,0.0121485,0.00750576,0.0074987,0.00734012,0.0101079,0.00697802,0.00972331,0.00857094,0.00894273]        # gamma = infinity
+                ).astype(float))}
 
 # plot Estimated $\log_{10}{r}$ vs. r (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
 fig = plt.figure()
@@ -248,12 +323,14 @@ sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_raxml_bl),order=x,color=pa
 plt.plot(np.asarray([sum(r_raxml_bl['r'][i:i+20])/20.0 for i in range(0,len(r_raxml_bl['cherries']),20)])+4,[sum(r_raxml_bl['cherries'][i:i+20])/20.0 for i in range(0,len(r_raxml_bl['cherries']),20)],color=pal['raxml_bl'],linestyle=':',linewidth=3)
 sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_raxml_bl_bootlier_log),order=x,color=pal['raxml_bl_bootlier_log'],scale='width',width=0.3)
 plt.plot(np.asarray([sum(r_raxml_bl_bootlier_log['r'][i:i+20])/20.0 for i in range(0,len(r_raxml_bl_bootlier_log['cherries']),20)])+4,[sum(r_raxml_bl_bootlier_log['cherries'][i:i+20])/20.0 for i in range(0,len(r_raxml_bl_bootlier_log['cherries']),20)],color=pal['raxml_bl_bootlier_log'],linestyle=':',linewidth=3)
-sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_fastme_bl_tn93),order=x,color=pal['r_fastme_bl_tn93'],scale='width',width=0.3)
-plt.plot(np.asarray([sum(r_fastme_bl_tn93['r'][i:i+20])/20.0 for i in range(0,len(r_fastme_bl_tn93['cherries']),20)])+4,[sum(r_fastme_bl_tn93['cherries'][i:i+20])/20.0 for i in range(0,len(r_fastme_bl_tn93['cherries']),20)],color=pal['r_fastme_bl_tn93'],linestyle=':',linewidth=3)
-sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_fastme_bl_logdet),order=x,color=pal['r_fastme_bl_logdet'],scale='width',width=0.3)
-plt.plot(np.asarray([sum(r_fastme_bl_logdet['r'][i:i+20])/20.0 for i in range(0,len(r_fastme_bl_logdet['cherries']),20)])+4,[sum(r_fastme_bl_logdet['cherries'][i:i+20])/20.0 for i in range(0,len(r_fastme_bl_logdet['cherries']),20)],color=pal['r_fastme_bl_logdet'],linestyle=':',linewidth=3)
-sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_fastme_bl_f84),order=x,color=pal['r_fastme_bl_f84'],scale='width',width=0.3)
-plt.plot(np.asarray([sum(r_fastme_bl_f84['r'][i:i+20])/20.0 for i in range(0,len(r_fastme_bl_f84['cherries']),20)])+4,[sum(r_fastme_bl_f84['cherries'][i:i+20])/20.0 for i in range(0,len(r_fastme_bl_f84['cherries']),20)],color=pal['r_fastme_bl_f84'],linestyle=':',linewidth=3)
+#sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_fastme_bl_tn93),order=x,color=pal['fastme_bl_tn93'],scale='width',width=0.3)
+#plt.plot(np.asarray([sum(r_fastme_bl_tn93['r'][i:i+20])/20.0 for i in range(0,len(r_fastme_bl_tn93['cherries']),20)])+4,[sum(r_fastme_bl_tn93['cherries'][i:i+20])/20.0 for i in range(0,len(r_fastme_bl_tn93['cherries']),20)],color=pal['fastme_bl_tn93'],linestyle=':',linewidth=3)
+#sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_fastme_bl_logdet),order=x,color=pal['fastme_bl_logdet'],scale='width',width=0.3)
+#plt.plot(np.asarray([sum(r_fastme_bl_logdet['r'][i:i+20])/20.0 for i in range(0,len(r_fastme_bl_logdet['cherries']),20)])+4,[sum(r_fastme_bl_logdet['cherries'][i:i+20])/20.0 for i in range(0,len(r_fastme_bl_logdet['cherries']),20)],color=pal['fastme_bl_logdet'],linestyle=':',linewidth=3)
+sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_fastme_bl_f84),order=x,color=pal['fastme_bl_f84'],scale='width',width=0.3)
+plt.plot(np.asarray([sum(r_fastme_bl_f84['r'][i:i+20])/20.0 for i in range(0,len(r_fastme_bl_f84['cherries']),20)])+4,[sum(r_fastme_bl_f84['cherries'][i:i+20])/20.0 for i in range(0,len(r_fastme_bl_f84['cherries']),20)],color=pal['fastme_bl_f84'],linestyle=':',linewidth=3)
+sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r_fastme_bl_f84_bootlier_log),order=x,color=pal['fastme_bl_f84_bootlier_log'],scale='width',width=0.3)
+plt.plot(np.asarray([sum(r_fastme_bl_f84_bootlier_log['r'][i:i+20])/20.0 for i in range(0,len(r_fastme_bl_f84_bootlier_log['cherries']),20)])+4,[sum(r_fastme_bl_f84_bootlier_log['cherries'][i:i+20])/20.0 for i in range(0,len(r_fastme_bl_f84_bootlier_log['cherries']),20)],color=pal['fastme_bl_f84_bootlier_log'],linestyle=':',linewidth=3)
 setAlpha(ax,0.5)
 plt.plot([-1,0,1,2,3,4,5],[-5,-4,-3,-2,-1,0,1],label='Theoretical',linestyle='--',color=pal['theoretical'])
 plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
@@ -276,6 +353,10 @@ sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_raxml_bl),order=x,color=p
 plt.plot(np.asarray([sum(r2_raxml_bl['r'][i:i+20])/20.0 for i in range(0,len(r2_raxml_bl['cherries']),20)])+4,[sum(r2_raxml_bl['cherries'][i:i+20])/20.0 for i in range(0,len(r2_raxml_bl['cherries']),20)],color=pal['raxml_bl'],linestyle=':',linewidth=3)
 sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_raxml_bl_bootlier_log),order=x,color=pal['raxml_bl_bootlier_log'],scale='width',width=0.3)
 plt.plot(np.asarray([sum(r2_raxml_bl_bootlier_log['r'][i:i+20])/20.0 for i in range(0,len(r2_raxml_bl_bootlier_log['cherries']),20)])+4,[sum(r2_raxml_bl_bootlier_log['cherries'][i:i+20])/20.0 for i in range(0,len(r2_raxml_bl_bootlier_log['cherries']),20)],color=pal['raxml_bl_bootlier_log'],linestyle=':',linewidth=3)
+sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_fastme_bl_f84),order=x,color=pal['fastme_bl_f84'],scale='width',width=0.3)
+plt.plot(np.asarray([sum(r2_fastme_bl_f84['r'][i:i+20])/20.0 for i in range(0,len(r2_fastme_bl_f84['cherries']),20)])+4,[sum(r2_fastme_bl_f84['cherries'][i:i+20])/20.0 for i in range(0,len(r2_fastme_bl_f84['cherries']),20)],color=pal['fastme_bl_f84'],linestyle=':',linewidth=3)
+sns.violinplot(x='r',y='cherries',data=pd.DataFrame(r2_fastme_bl_f84_bootlier_log),order=x,color=pal['fastme_bl_f84_bootlier_log'],scale='width',width=0.3)
+plt.plot(np.asarray([sum(r2_fastme_bl_f84_bootlier_log['r'][i:i+20])/20.0 for i in range(0,len(r2_fastme_bl_f84_bootlier_log['cherries']),20)])+4,[sum(r2_fastme_bl_f84_bootlier_log['cherries'][i:i+20])/20.0 for i in range(0,len(r2_fastme_bl_f84_bootlier_log['cherries']),20)],color=pal['fastme_bl_f84_bootlier_log'],linestyle=':',linewidth=3)
 setAlpha(ax,0.5)
 x = np.linspace(-4,0,100)
 plt.plot([-1,0,1,2,3,4,5],[-5,-4,-3,-2,-1,0,1],label='Theoretical',linestyle='--',color=pal['theoretical'])
@@ -299,6 +380,10 @@ sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_raxml_bl),order=x,col
 sns.pointplot(np.asarray([sum(l_raxml_bl['lambda'][i:i+20])/20.0 for i in range(0,len(l_raxml_bl['cherries']),20)]),[sum(l_raxml_bl['cherries'][i:i+20])/20.0 for i in range(0,len(l_raxml_bl['cherries']),20)],color=pal['raxml_bl'],linestyles=[':'],linewidth=3)
 sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_raxml_bl_bootlier_log),order=x,color=pal['raxml_bl_bootlier_log'],scale='width',width=0.3)
 sns.pointplot(np.asarray([sum(l_raxml_bl_bootlier_log['lambda'][i:i+20])/20.0 for i in range(0,len(l_raxml_bl_bootlier_log['cherries']),20)]),[sum(l_raxml_bl_bootlier_log['cherries'][i:i+20])/20.0 for i in range(0,len(l_raxml_bl_bootlier_log['cherries']),20)],color=pal['raxml_bl_bootlier_log'],linestyles=[':'],linewidth=3)
+sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_fastme_bl_f84),order=x,color=pal['fastme_bl_f84'],scale='width',width=0.3)
+sns.pointplot(np.asarray([sum(l_fastme_bl_f84['lambda'][i:i+20])/20.0 for i in range(0,len(l_fastme_bl_f84['cherries']),20)]),[sum(l_fastme_bl_f84['cherries'][i:i+20])/20.0 for i in range(0,len(l_fastme_bl_f84['cherries']),20)],color=pal['fastme_bl_f84'],linestyles=[':'],linewidth=3)
+sns.violinplot(x='lambda',y='cherries',data=pd.DataFrame(l_fastme_bl_f84_bootlier_log),order=x,color=pal['fastme_bl_f84_bootlier_log'],scale='width',width=0.3)
+sns.pointplot(np.asarray([sum(l_fastme_bl_f84_bootlier_log['lambda'][i:i+20])/20.0 for i in range(0,len(l_fastme_bl_f84_bootlier_log['cherries']),20)]),[sum(l_fastme_bl_f84_bootlier_log['cherries'][i:i+20])/20.0 for i in range(0,len(l_fastme_bl_f84_bootlier_log['cherries']),20)],color=pal['fastme_bl_f84_bootlier_log'],linestyles=[':'],linewidth=3)
 setAlpha(ax,0.5)
 x = np.linspace(-100,1000,1100)
 plt.plot([-10,10],[-2,-2],label='Theoretical',linestyle='--',color=pal['theoretical'])
@@ -322,6 +407,10 @@ sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_raxml_bl),order=x,col
 sns.pointplot(np.asarray([sum(k_raxml_bl['length'][i:i+20])/20 for i in range(0,len(k_raxml_bl['cherries']),20)]),[sum(k_raxml_bl['cherries'][i:i+20])/20.0 for i in range(0,len(k_raxml_bl['cherries']),20)],color=pal['raxml_bl'],linestyles=[':'],linewidth=3)
 sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_raxml_bl_bootlier_log),order=x,color=pal['raxml_bl_bootlier_log'],scale='width',width=0.3)
 sns.pointplot(np.asarray([sum(k_raxml_bl_bootlier_log['length'][i:i+20])/20 for i in range(0,len(k_raxml_bl_bootlier_log['cherries']),20)]),[sum(k_raxml_bl_bootlier_log['cherries'][i:i+20])/20.0 for i in range(0,len(k_raxml_bl_bootlier_log['cherries']),20)],color=pal['raxml_bl_bootlier_log'],linestyles=[':'],linewidth=3)
+sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_fastme_bl_f84),order=x,color=pal['fastme_bl_f84'],scale='width',width=0.3)
+sns.pointplot(np.asarray([sum(k_fastme_bl_f84['length'][i:i+20])/20 for i in range(0,len(k_fastme_bl_f84['cherries']),20)]),[sum(k_fastme_bl_f84['cherries'][i:i+20])/20.0 for i in range(0,len(k_fastme_bl_f84['cherries']),20)],color=pal['fastme_bl_f84'],linestyles=[':'],linewidth=3)
+sns.violinplot(x='length',y='cherries',data=pd.DataFrame(k_fastme_bl_f84_bootlier_log),order=x,color=pal['fastme_bl_f84_bootlier_log'],scale='width',width=0.3)
+sns.pointplot(np.asarray([sum(k_fastme_bl_f84_bootlier_log['length'][i:i+20])/20 for i in range(0,len(k_fastme_bl_f84_bootlier_log['cherries']),20)]),[sum(k_fastme_bl_f84_bootlier_log['cherries'][i:i+20])/20.0 for i in range(0,len(k_fastme_bl_f84_bootlier_log['cherries']),20)],color=pal['fastme_bl_f84_bootlier_log'],linestyles=[':'],linewidth=3)
 setAlpha(ax,0.5)
 plt.plot([-10,10],[-2,-2],label='Theoretical',linestyle='--',color=pal['theoretical'])
 plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
@@ -344,6 +433,10 @@ sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_raxml_bl),order=x,
 sns.pointplot(np.asarray([sum(g_raxml_bl['gammarate'][i:i+20])/20.0 for i in range(0,len(g_raxml_bl['cherries']),20)]),[sum(g_raxml_bl['cherries'][i:i+20])/20.0 for i in range(0,len(g_raxml_bl['cherries']),20)],color=pal['raxml_bl'],linestyles=[':'],linewidth=3)
 sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_raxml_bl_bootlier_log),order=x,color=pal['raxml_bl_bootlier_log'],scale='width',width=0.3)
 sns.pointplot(np.asarray([sum(g_raxml_bl_bootlier_log['gammarate'][i:i+20])/20.0 for i in range(0,len(g_raxml_bl_bootlier_log['cherries']),20)]),[sum(g_raxml_bl_bootlier_log['cherries'][i:i+20])/20.0 for i in range(0,len(g_raxml_bl_bootlier_log['cherries']),20)],color=pal['raxml_bl_bootlier_log'],linestyles=[':'],linewidth=3)
+sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_fastme_bl_f84),order=x,color=pal['fastme_bl_f84'],scale='width',width=0.3)
+sns.pointplot(np.asarray([sum(g_fastme_bl_f84['gammarate'][i:i+20])/20.0 for i in range(0,len(g_fastme_bl_f84['cherries']),20)]),[sum(g_fastme_bl_f84['cherries'][i:i+20])/20.0 for i in range(0,len(g_fastme_bl_f84['cherries']),20)],color=pal['fastme_bl_f84'],linestyles=[':'],linewidth=3)
+sns.violinplot(x='gammarate',y='cherries',data=pd.DataFrame(g_fastme_bl_f84_bootlier_log),order=x,color=pal['fastme_bl_f84_bootlier_log'],scale='width',width=0.3)
+sns.pointplot(np.asarray([sum(g_fastme_bl_f84_bootlier_log['gammarate'][i:i+20])/20.0 for i in range(0,len(g_fastme_bl_f84_bootlier_log['cherries']),20)]),[sum(g_fastme_bl_f84_bootlier_log['cherries'][i:i+20])/20.0 for i in range(0,len(g_fastme_bl_f84_bootlier_log['cherries']),20)],color=pal['fastme_bl_f84_bootlier_log'],linestyles=[':'],linewidth=3)
 setAlpha(ax,0.5)
 plt.plot([-10,10],[-2,-2],label='Theoretical',linestyle='--',color=pal['theoretical'])
 plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
