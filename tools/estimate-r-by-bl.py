@@ -54,13 +54,13 @@ if __name__ == "__main__":
     # read tree parameters
     if args.treefile == 'stdin': # read from stdin
         tree = stdin.read().strip().encode('utf-8')
-        bl = [float(i) for i in Popen(['nw_distance','-mp','-sa','-'], stdout=PIPE, stdin=PIPE, stderr=STDOUT).communicate(input=tree)[0].decode().split()]
-        pen_bl = [float(i) for i in Popen(['nw_distance','-mp','-sf','-'], stdout=PIPE, stdin=PIPE, stderr=STDOUT).communicate(input=tree)[0].decode().split()]
+        bl = [float(i) for i in Popen(['nw_distance','-mp','-sa','-'], stdout=PIPE, stdin=PIPE, stderr=STDOUT).communicate(input=tree)[0].decode().split() if str(float(i)) != 'nan']
+        pen_bl = [float(i) for i in Popen(['nw_distance','-mp','-sf','-'], stdout=PIPE, stdin=PIPE, stderr=STDOUT).communicate(input=tree)[0].decode().split() if str(float(i)) != 'nan']
     else:
         args.treefile = expanduser(args.treefile)
         assert isfile(args.treefile), "No such file: %s" % args.treefile
-        bl = [float(i) for i in check_output(['nw_distance','-mp','-sa',args.treefile]).split()]
-        pen_bl = [float(i) for i in check_output(['nw_distance','-mp','-sf',args.treefile]).split()]
+        bl = [float(i) for i in check_output(['nw_distance','-mp','-sa',args.treefile]).split() if str(float(i)) != 'nan']
+        pen_bl = [float(i) for i in check_output(['nw_distance','-mp','-sf',args.treefile]).split() if str(float(i)) != 'nan']
 
     # estimate r (potentially after correcting branch lengths)
     fixed_bl,fixed_pen_bl = METHODS[args.correction](bl,pen_bl)
