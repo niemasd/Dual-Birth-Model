@@ -24,7 +24,33 @@ def bootlier(bl,pen_bl): # remove outliers using distribution-free method in Can
 def bootlier_log(bl,pen_bl): # remove outliers using Bootlier on log-scaled lengths
     log_bl_fixed,log_pen_bl_fixed = bootlier([log(i) for i in bl if i > 0],[log(i) for i in pen_bl if i > 0])
     return [exp(i) for i in log_bl_fixed],[exp(i) for i in log_pen_bl_fixed]
-METHODS = {None:none,'bootlier':bootlier,'bootlier_log':bootlier_log}
+def bootlier_log_above_med(bl,pen_bl): # remove outliers above median using Bootlier on log-scaled lengths
+    med_bl = bl[int(len(bl)/2)]
+    med_pen_bl = pen_bl[int(len(pen_bl)/2)]
+    bl_filtered,pen_bl_filtered = bootlier_log(bl,pen_bl)
+    bl_filtered_set = set(bl_filtered)
+    pen_bl_filtered_set = set(pen_bl_filtered)
+    for l in bl:
+        if l < med_bl and l not in bl_filtered_set:
+            bl_filtered.append(l)
+    for l in pen_bl:
+        if l < med_pen_bl and l not in pen_bl_filtered_set:
+            pen_bl_filtered.append(l)
+    return sorted(bl_filtered),sorted(pen_bl_filtered)
+def bootlier_log_below_med(bl,pen_bl): # remove outliers below median using Bootlier on log-scaled lengths
+    med_bl = bl[int(len(bl)/2)]
+    med_pen_bl = pen_bl[int(len(pen_bl)/2)]
+    bl_filtered,pen_bl_filtered = bootlier_log(bl,pen_bl)
+    bl_filtered_set = set(bl_filtered)
+    pen_bl_filtered_set = set(pen_bl_filtered)
+    for l in bl:
+        if l > med_bl and l not in bl_filtered_set:
+            bl_filtered.append(l)
+    for l in pen_bl:
+        if l > med_pen_bl and l not in pen_bl_filtered_set:
+            pen_bl_filtered.append(l)
+    return sorted(bl_filtered),sorted(pen_bl_filtered)
+METHODS = {None:none,'bootlier':bootlier,'bootlier_log':bootlier_log,'bootlier_log_above_med':bootlier_log_above_med,'bootlier_log_below_med':bootlier_log_below_med}
 
 # generally useful functions
 def sqrt(x):
