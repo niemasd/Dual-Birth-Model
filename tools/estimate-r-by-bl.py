@@ -8,6 +8,7 @@ from math import exp,log
 from os.path import expanduser,isfile
 from subprocess import Popen,PIPE,STDOUT
 import argparse
+from numpy import percentile
 
 # possible correction methods
 def none(bl,pen_bl): # no correction
@@ -25,8 +26,8 @@ def bootlier_log(bl,pen_bl): # remove outliers using Bootlier on log-scaled leng
     log_bl_fixed,log_pen_bl_fixed = bootlier([log(i) for i in bl if i > 0],[log(i) for i in pen_bl if i > 0])
     return [exp(i) for i in log_bl_fixed],[exp(i) for i in log_pen_bl_fixed]
 def bootlier_log_above_med(bl,pen_bl): # remove outliers above median using Bootlier on log-scaled lengths
-    med_bl = bl[int(len(bl)/2)]
-    med_pen_bl = pen_bl[int(len(pen_bl)/2)]
+    med_bl = percentile(bl,50)
+    med_pen_bl = percentile(pen_bl,50)
     bl_filtered,pen_bl_filtered = bootlier_log(bl,pen_bl)
     bl_filtered_set = set(bl_filtered)
     pen_bl_filtered_set = set(pen_bl_filtered)
@@ -38,8 +39,8 @@ def bootlier_log_above_med(bl,pen_bl): # remove outliers above median using Boot
             pen_bl_filtered.append(l)
     return sorted(bl_filtered),sorted(pen_bl_filtered)
 def bootlier_log_below_med(bl,pen_bl): # remove outliers below median using Bootlier on log-scaled lengths
-    med_bl = bl[int(len(bl)/2)]
-    med_pen_bl = pen_bl[int(len(pen_bl)/2)]
+    med_bl = percentile(bl,50)
+    med_pen_bl = percentile(pen_bl,50)
     bl_filtered,pen_bl_filtered = bootlier_log(bl,pen_bl)
     bl_filtered_set = set(bl_filtered)
     pen_bl_filtered_set = set(pen_bl_filtered)
@@ -50,7 +51,33 @@ def bootlier_log_below_med(bl,pen_bl): # remove outliers below median using Boot
         if l > med_pen_bl and l not in pen_bl_filtered_set:
             pen_bl_filtered.append(l)
     return sorted(bl_filtered),sorted(pen_bl_filtered)
-METHODS = {None:none,'bootlier':bootlier,'bootlier_log':bootlier_log,'bootlier_log_above_med':bootlier_log_above_med,'bootlier_log_below_med':bootlier_log_below_med}
+def bootlier_log_above_p75(bl,pen_bl): # remove outliers above 75th percentile using Bootlier on log-scaled lengths
+    p75_bl = percentile(bl,75)
+    p75_pen_bl = percentile(pen_bl,75)
+    bl_filtered,pen_bl_filtered = bootlier_log(bl,pen_bl)
+    bl_filtered_set = set(bl_filtered)
+    pen_bl_filtered_set = set(pen_bl_filtered)
+    for l in bl:
+        if l < p75_bl and l not in bl_filtered_set:
+            bl_filtered.append(l)
+    for l in pen_bl:
+        if l < p75_pen_bl and l not in pen_bl_filtered_set:
+            pen_bl_filtered.append(l)
+    return sorted(bl_filtered),sorted(pen_bl_filtered)
+def bootlier_log_below_p25(bl,pen_bl): # remove outliers above 25th percentile using Bootlier on log-scaled lengths
+    p25_bl = percentile(bl,25)
+    p25_pen_bl = percentile(pen_bl,25)
+    bl_filtered,pen_bl_filtered = bootlier_log(bl,pen_bl)
+    bl_filtered_set = set(bl_filtered)
+    pen_bl_filtered_set = set(pen_bl_filtered)
+    for l in bl:
+        if l > p25_bl and l not in bl_filtered_set:
+            bl_filtered.append(l)
+    for l in pen_bl:
+        if l > p25_pen_bl and l not in pen_bl_filtered_set:
+            pen_bl_filtered.append(l)
+    return sorted(bl_filtered),sorted(pen_bl_filtered)
+METHODS = {None:none,'bootlier':bootlier,'bootlier_log':bootlier_log,'bootlier_log_above_med':bootlier_log_above_med,'bootlier_log_below_med':bootlier_log_below_med,'bootlier_log_above_p75':bootlier_log_above_p75,'bootlier_log_below_p25':bootlier_log_below_p25}
 
 # generally useful functions
 def sqrt(x):
