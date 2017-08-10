@@ -18,6 +18,7 @@ except ImportError:
     import queue as Q
 sys.setrecursionlimit(1000000000)
 VERBOSE = False
+INNER = False
 
 # define Node class
 class Node:
@@ -61,7 +62,9 @@ class Node:
             lStr = self.children[0][1].newick()
             rLen = str(self.children[1][0])
             rStr = self.children[1][1].newick()
-            out = '(' + lStr + ':' + lLen + ',' + rStr + ':' + rLen + ')I' + str(self.label)
+            out = '(' + lStr + ':' + lLen + ',' + rStr + ':' + rLen + ')'
+            if INNER:
+                out += "I%s" % str(self.label)
             if self.parent == None: # if root, need semicolon (entire tree)
                 out += ';'
             return out
@@ -146,12 +149,14 @@ if __name__ == '__main__':
     parser.add_argument('-la', '--lambdaA', required=True, type=float, help="Activation Rate (lambda A)")
     parser.add_argument('-lb', '--lambdaB', required=True, type=float, help="Birth Rate (lambda B)")
     parser.add_argument('-n', '--leaves', required=True, type=int, help="Number of Leaves")
+    parser.add_argument('-i', '--inner', action="store_true", help="Display internal node labels")
     parser.add_argument('-r', '--replicates', required=False, type=int, default=1, help="Number of Replicates")
     parser.add_argument('-p', '--prob', required=False, type=float, default=0., help="Probability that Both Children are Active")
     parser.add_argument('-v', '--verbose', action="store_true", help="Verbose Mode")
     args = parser.parse_args()
     assert args.prob >= 0 and args.prob <= 1, "Probability must be between 0 and 1"
     VERBOSE = args.verbose
+    INNER = args.inner
 
     # perform simulation
     for i in range(0,args.replicates):
