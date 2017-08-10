@@ -10,6 +10,7 @@ See Theorem 3.3 from Stadler & Steel (2012) for proof about branch lengths
 # imports
 import sys
 import argparse
+from random import random
 from numpy.random import exponential
 try:
     import Queue as Q  # ver. < 3.0
@@ -74,7 +75,7 @@ INPUT:
 OUTPUT:
     -The simulated tree (as a string in the Newick format)
 '''
-def simulateAlu(rateA, rateB, n):
+def simulateAlu(rateA, rateB, n, p):
     # numpy uses scale parameters for exponential (beta = 1/lambda)
     beta = 1/(float(rateB))
     betaP = 1/(float(rateA))
@@ -94,7 +95,7 @@ def simulateAlu(rateA, rateB, n):
         numInternal+=1
 
         # self propagation
-        leftLength = exponential(scale=betaP)
+        leftLength = exponential(scale={True:beta,False:betaP}[random()<p])
         leftChild = Node(depth=currNode.depth+leftLength, parent=currNode)
         leftChild.right = False
 
@@ -146,10 +147,12 @@ if __name__ == '__main__':
     parser.add_argument('-lb', '--lambdaB', required=True, type=float, help="Birth Rate (lambda B)")
     parser.add_argument('-n', '--leaves', required=True, type=int, help="Number of Leaves")
     parser.add_argument('-r', '--replicates', required=False, type=int, default=1, help="Number of Replicates")
+    parser.add_argument('-p', '--prob', required=False, type=float, default=0., help="Probability that Both Children are Active")
     parser.add_argument('-v', '--verbose', action="store_true", help="Verbose Mode")
     args = parser.parse_args()
+    assert args.prob >= 0 and args.prob <= 1, "Probability must be between 0 and 1"
     VERBOSE = args.verbose
 
     # perform simulation
     for i in range(0,args.replicates):
-        print(simulateAlu(args.lambdaA,args.lambdaB,args.leaves))
+        print(simulateAlu(args.lambdaA,args.lambdaB,args.leaves,args.prob))
