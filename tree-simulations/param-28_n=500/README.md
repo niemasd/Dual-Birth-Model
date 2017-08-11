@@ -1,7 +1,7 @@
-# param-00 (default) #
+# param-28 (n=500) #
 
 ### Tree Shape Parameters ###
-* n           = 4000 leaves
+* n           = 500 leaves
 * r           = 1/100
 * lambdaA     = 1.6765100539857060
 * lambdaB     = 167.65100539857060
