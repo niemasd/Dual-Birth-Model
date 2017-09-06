@@ -16,6 +16,7 @@ rcParams['font.family'] = 'serif'
 
 # create plot
 data = eval(open(DATA_JSON).read())
+fig = plt.figure()
 ax = sns.pointplot(x='p',y='r',data=data,scale=0.3)
 tick_labels = ax.xaxis.get_ticklabels()
 for i in range(len(tick_labels)):
@@ -29,3 +30,5 @@ sns.plt.xlabel(r'$p$',fontsize=14)
 sns.plt.ylabel(r'Estimated $\log_{10}{r}$',fontsize=14)
 sns.plt.title(r'Estimated $\log_{10}{r}$ vs. $p$',fontsize=18,y=1.05)
 sns.plt.show()
+fig.savefig('prob-range-simulations.pdf', format='pdf', bbox_inches='tight')
+plt.close()
