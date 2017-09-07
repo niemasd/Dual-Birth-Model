@@ -18,6 +18,8 @@ rcParams['font.family'] = 'serif'
 data = eval(open(DATA_JSON).read())
 fig = plt.figure()
 ax = sns.pointplot(x='p',y='r',data=data,scale=0.3)
+plt.plot([-10,110],[0.01,0.01],linestyle='--',color='#000000')
+ax.set_yscale('log')
 tick_labels = ax.xaxis.get_ticklabels()
 for i in range(len(tick_labels)):
     if i % 10 != 0:
@@ -26,7 +28,7 @@ tick_lines = ax.xaxis.get_ticklines()
 for i in range(len(tick_lines)):
     if i % 20 != 0:
         tick_lines[i].set_visible(False)
-sns.plt.xlabel(r'$p$',fontsize=14)
+sns.plt.xlabel(r'$p$ (Percent)',fontsize=14)
 sns.plt.ylabel(r'Estimated $\log_{10}{r}$',fontsize=14)
 sns.plt.title(r'Estimated $\log_{10}{r}$ vs. $p$',fontsize=18,y=1.05)
 sns.plt.show()
