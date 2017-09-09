@@ -8,10 +8,9 @@ cat - | tee >( nw_distance -sf -mp - > $tmpf )| nw_distance -sa -mp - |sed '$ d'
 echo "
 l = mean(read.csv('"$tmpf"',sep= ' ',header=F)\$V1)
 b = mean(read.csv('"$tmpa"',sep= ' ',header=F)\$V1)
-cat( if ( b > l) 1 else  (-2 * b^3+5 * b^2* l-3 *b* l^2+2 * sqrt(2) * sqrt(-b^2* (b-l)^3 * l))/(b * (b-l) * l) )
+cat( if ( b > l) 1 else  ( 3 - 2 * b / l - 2 * sqrt(2*(1-b/l)) ) )
 " | R --vanilla -q --slave
 
 echo
 
-rm $tmpf
-rm $tmpa
+rm $tmpf $tmpa 
