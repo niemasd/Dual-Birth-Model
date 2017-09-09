@@ -86,7 +86,7 @@ def avg(x):
     return sum(x)/float(len(x))
 
 # estimate r from average branch length (b) and average terminal branch length (l)
-def r(bl,pen_bl):
+def r_complicated(bl,pen_bl): # compiclated original formula
     if len(bl) == 0 or len(pen_bl) == 0:
         return 1
     b = avg(bl)
@@ -94,8 +94,25 @@ def r(bl,pen_bl):
     if b > l:
         return 1
     return (-2*(b**3) + 5*(b**2)*l - 3*b*(l**2) + 2*sqrt(2)*sqrt(-1*(b**2)*((b-l)**3)*l)) / (b*(b-l)*l)
+def r_simple(bl,pen_bl): # simplified equivalent formula
+    if len(bl) == 0 or len(pen_bl) == 0:
+        return 1
+    b = avg(bl)
+    l = avg(pen_bl)
+    if b > l:
+        return 1
+    return (1-(2*(1-(b/l)))**0.5)**2
+def r_simple_approx(bl,pen_bl): # further simplified using approximations
+    if len(bl) == 0 or len(pen_bl) == 0:
+        return 1
+    l = avg(pen_bl)
+    i = float(sum(bl)-sum(pen_bl))/(len(bl)-len(pen_bl))
+    if i > l:
+        return 1
+    return (1-(1-(i/l))**0.5)**2
 
 # main function
+r = r_simple # set r = r_complicated, r_simple, or r_simple_approx
 if __name__ == "__main__":
     # parse user args
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
