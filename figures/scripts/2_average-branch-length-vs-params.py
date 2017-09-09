@@ -17,7 +17,7 @@ sns.set_style("ticks")
 rcParams['font.family'] = 'serif'
 pal = {'theoretical_all':'#000000', 'theoretical_pen':'#A0A0A0', 'simulated_all':'#597DBE', 'simulated_pen':'#70A2FF', 'fasttree_all':'#FF9980', 'fasttree_pen':'#FFD0C4', 'raxml_all':'#A2B7C3', 'raxml_pen':'#D4D7D8'}
 handles = [Patch(color=pal['theoretical_all'],label='Theoretical (All)'),Patch(color=pal['simulated_all'],label='Simulated (All)'),Patch(color=pal['fasttree_all'],label='Fasttree (All)'),Patch(color=pal['raxml_all'],label='Raxml (All)'),Patch(color=pal['theoretical_pen'],label='Conjectured (Pendant)'),Patch(color=pal['simulated_pen'],label='Simulated (Pendant)'),Patch(color=pal['fasttree_pen'],label='FastTree (Pendant)'),Patch(color=pal['raxml_pen'],label='RAxML (Pendant)')]
-meancolor='#FFFFFF'
+meancolor='#FF0000'
 meansize=20
 
 # expected pendant branch length

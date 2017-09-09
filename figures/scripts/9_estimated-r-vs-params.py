@@ -16,8 +16,8 @@ import seaborn as sns
 # settings
 sns.set_style("ticks")
 rcParams['font.family'] = 'serif'
-pal = {'theoretical':'#000000', 'raxml_bl':'#62E1EA', 'raxml_cherries':'#E6C594', 'fasttree_bl_bootlier_log':'#CE8F30', 'fasttree_bl_bootlier_log_below_p25':'#00FF00', 'raxml_bl_bootlier_log':'#37ACA4'}
-handles = [Patch(color=pal['theoretical'],label='Theoretical'), Patch(color=pal['raxml_cherries'],label='RAxML (Cherries)'), Patch(color=pal['raxml_bl'],label='RAxML (Branch Length)')]
+pal = {'theoretical':'#000000', 'raxml_bl':'#77BEDA', 'raxml_cherries':'#C4AD67', 'raxml_cherries_corrected':'#D75F60'}
+handles = [Patch(color=pal['theoretical'],label='Theoretical'), Patch(color=pal['raxml_cherries'],label='RAxML (Cherries)'), Patch(color=pal['raxml_cherries_corrected'],label='RAxML (Cherries, Corrected)'), Patch(color=pal['raxml_bl'],label='RAxML (Branch Length)')]
 axisY = np.asarray([-5,-4,-3,-2,-1,0,1])
 
 # Expected Number of Cherries as a Function of r
