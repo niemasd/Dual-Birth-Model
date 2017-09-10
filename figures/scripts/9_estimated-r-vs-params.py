@@ -17,7 +17,7 @@ import seaborn as sns
 sns.set_style("ticks")
 rcParams['font.family'] = 'serif'
 pal = {'theoretical':'#000000', 'raxml_bl':'#77BEDA', 'raxml_cherries':'#C4AD67', 'raxml_cherries_corrected':'#D75F60'}
-handles = [Patch(color=pal['theoretical'],label='Theoretical'), Patch(color=pal['raxml_cherries'],label='RAxML (Cherries)'), Patch(color=pal['raxml_cherries_corrected'],label='RAxML (Cherries, Corrected)'), Patch(color=pal['raxml_bl'],label='RAxML (Branch Length)')]
+handles = [Patch(color=pal['theoretical'],label='Theoretical'), Patch(color=pal['raxml_cherries'],label='Cherries'), Patch(color=pal['raxml_cherries_corrected'],label='Cherries (Corrected)'), Patch(color=pal['raxml_bl'],label='Branch Length')]
 axisY = np.asarray([-5,-4,-3,-2,-1,0,1])
 
 # Expected Number of Cherries as a Function of r
@@ -300,7 +300,7 @@ plt.close()
 
 # plot Estimated $\log_{10}{r}$ vs. n
 fig = plt.figure()
-x = np.array([250,500,1000,2000,4000])
+x = np.array([25,50,250,500,1000,2000,4000])
 ax = sns.violinplot(x='n',y='inferred_r',data=pd.DataFrame(n_raxml_bl),order=x,color=pal['raxml_bl'],scale='width',width=0.3,inner=None)
 plt.plot(np.asarray([int(i/20) for i in range(0,len(n_raxml_bl['inferred_r']),20)]),[sum(n_raxml_bl['inferred_r'][i:i+20])/20.0 for i in range(0,len(n_raxml_bl['inferred_r']),20)],color=pal['raxml_bl'],linestyle=':',linewidth=3)
 sns.violinplot(x='n',y='inferred_r',data=pd.DataFrame(n_raxml_cherries),order=x,color=pal['raxml_cherries'],scale='width',width=0.3,inner=None)
