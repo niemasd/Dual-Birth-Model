@@ -47,6 +47,13 @@ r_raxml_cherries = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # valu
                                                                  [240,256,244,250,253,239,242,238,242,240,241,237,250,236,244,244,235,237,254,256] + # r = 0.1
                                                                  [329,319,327,332,348,325,343,320,338,322,317,329,323,326,329,322,335,329,312,328] + # r = 1
                                                                  [])/1000.))}
+r_raxml_cherries_70 = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
+                    'inferred_r':np.log10(r_vs_cherries(np.array([0.159,0.17,0.186,0.171,0.174,0.16,0.184,0.171,0.198,0.142,0.171,0.196,0.157,0.179,0.19,0.183,0.172,0.179,0.183,0.173] + # r = 0.0001
+                                                                 [0.137,0.13,0.132,0.123,0.128,0.129,0.13,0.122,0.129,0.113,0.125,0.135,0.118,0.119,0.14,0.141,0.118,0.119,0.135,0.132] + # r = 0.001
+                                                                 [0.134,0.123,0.125,0.135,0.128,0.123,0.135,0.123,0.126,0.137,0.119,0.138,0.117,0.119,0.131,0.126,0.125,0.128,0.137,0.126] + # r = 0.01
+                                                                 [0.224,0.234,0.227,0.233,0.229,0.214,0.221,0.218,0.221,0.225,0.223,0.222,0.223,0.219,0.217,0.219,0.215,0.226,0.228,0.225] + # r = 0.1
+                                                                 [0.322,0.311,0.313,0.326,0.331,0.315,0.335,0.312,0.323,0.318,0.309,0.316,0.316,0.313,0.321,0.308,0.324,0.318,0.297,0.312] + # r = 1
+                                                                 [])))}
 r_raxml_bl = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
               'inferred_r':np.log10(np.array([0.000870785,0.000721476,0.000543969,0.000812787,0.000767027,0.00115985,0.000708702,0.000788084,0.000663358,0.0008593,0.000763153,0.000542042,0.000716182,0.000671087,0.00062377,0.000828667,0.000577192,0.000572545,0.000705479,0.000833441] +# r = 0.0001
                                              [0.00218258,0.00190193,0.00115899,0.00174507,0.00140276,0.00219349,0.00252501,0.00123777,0.0019915,0.00182022,0.00169188,0.00182905,0.00125066,0.00152518,0.00239899,0.00187002,0.00240785,0.00116542,0.00154912,0.00196829] + # r = 0.001
@@ -63,6 +70,13 @@ r2_raxml_cherries = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # val
                                                                  [243,253,260,262,249,246,253,244,250,265,252,245,255,254,253,254,247,259,252,250] + # r = 0.1
                                                                  [329,314,322,323,320,314,319,314,312,329,317,317,313,315,318,321,310,326,332,312] + # r = 1
                                                                  [])/1000.))}
+r2_raxml_cherries_70 = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
+                    'inferred_r':np.log10(r_vs_cherries(np.array([0.165,0.17,0.144,0.151,0.181,0.162,0.149,0.164,0.16,0.162,0.165,0.15,0.15,0.141,0.156,0.164,0.158,0.146,0.126,0.147] + # r = 0.0001
+                                                                 [0.119,0.12,0.121,0.129,0.126,0.12,0.132,0.109,0.118,0.122,0.118,0.118,0.122,0.122,0.116,0.123,0.105,0.11,0.113,0.104] + # r = 0.001
+                                                                 [0.134,0.123,0.125,0.135,0.128,0.123,0.135,0.123,0.126,0.137,0.119,0.138,0.117,0.119,0.131,0.126,0.125,0.128,0.137,0.126] + # r = 0.01
+                                                                 [0.214,0.224,0.225,0.213,0.215,0.21,0.214,0.217,0.213,0.226,0.218,0.212,0.222,0.213,0.217,0.215,0.212,0.21,0.215,0.217] + # r = 0.1
+                                                                 [0.287,0.268,0.279,0.279,0.274,0.268,0.28,0.272,0.281,0.286,0.271,0.279,0.264,0.274,0.283,0.278,0.266,0.283,0.29,0.273] + # r = 1
+                                                                 [])))}
 r2_raxml_bl = {'r':np.array([-4]*20+[-3]*20+[-2]*20+[-1]*20+[0]*20), # values of r (log-scaled)
                          'inferred_r':np.log10(np.array([0.00185575,0.00132657,0.00293458,0.00160861,0.00203998,0.00204604,0.00139835,0.00127956,0.00175538,0.00269108,0.00204559,0.00150601,0.00139718,0.00107835,0.00201859,0.0042152,0.00151108,0.00131407,0.000968635,0.00113553] +# r = 0.0001
                                                       [0.00221302,0.00227727,0.00172784,0.00179337,0.00150544,0.0013075,0.0024372,0.00210367,0.00166852,0.00149409,0.0015295,0.00188723,0.00234201,0.00259157,0.00214788,0.00150588,0.00224847,0.00167816,0.00192867,0.00208798] + # r = 0.001
@@ -80,6 +94,13 @@ l_raxml_cherries = {'lambda':np.array([33.866]*20+[84.664]*20+[169.328]*20+[338.
                                                                  [241,235,236,216,223,237,199,226,216,211,208,226,224,236,223,239,225,209,221,221] + # lambda = 338.65503090511262
                                                                  [270,266,263,262,286,257,267,255,263,264,266,255,256,272,260,259,256,271,263,281] + # lambda = 846.63757726278155
                                                                  [])/1000.))}
+l_raxml_cherries_70 = {'lambda':np.array([33.866]*20+[84.664]*20+[169.328]*20+[338.655]*20+[846.638]*20),
+                    'inferred_r':np.log10(r_vs_cherries(np.array([0.137,0.125,0.122,0.138,0.129,0.124,0.136,0.146,0.126,0.119,0.124,0.127,0.132,0.124,0.122,0.131,0.119,0.12,0.128,0.127] + # lambda = 33.86550309051126
+                                                                 [0.14,0.119,0.119,0.126,0.127,0.14,0.116,0.125,0.114,0.13,0.116,0.127,0.128,0.137,0.129,0.115,0.124,0.122,0.118,0.129] + # lambda = 84.66375772627816
+                                                                 [0.134,0.123,0.125,0.135,0.128,0.123,0.135,0.123,0.126,0.137,0.119,0.138,0.117,0.119,0.131,0.126,0.125,0.128,0.137,0.126] + # lambda = 169.32751545255631
+                                                                 [0.141,0.126,0.129,0.127,0.129,0.133,0.119,0.134,0.13,0.124,0.123,0.134,0.13,0.143,0.13,0.123,0.129,0.128,0.118,0.134] + # lambda = 338.65503090511262
+                                                                 [0.118,0.12,0.106,0.113,0.118,0.11,0.107,0.115,0.114,0.109,0.125,0.112,0.114,0.114,0.109,0.123,0.114,0.106,0.108,0.118] + # lambda = 846.63757726278155
+                                                                 [])))}
 l_raxml_bl = {'lambda':np.array([33.866]*20+[84.664]*20+[169.328]*20+[338.655]*20+[846.638]*20),
               'inferred_r':np.log10(np.array([0.0113864,0.0145343,0.0137272,0.0170479,0.0141306,0.0141814,0.0154513,0.0169736,0.0137584,0.0109028,0.019331,0.0128141,0.0127819,0.0140409,0.0114314,0.0155412,0.011516,0.0155445,0.0165628,0.0145607] +   # lambda = 33.86550309051126
                                              [0.0113919,0.00913125,0.0107799,0.0127229,0.0115249,0.014769,0.0133383,0.0144146,0.0109348,0.0131476,0.00821475,0.0139934,0.0139321,0.0157925,0.0175885,0.0115945,0.0109861,0.010966,0.0108227,0.0148753] +  # lambda = 84.66375772627816
@@ -99,6 +120,16 @@ k_raxml_cherries = {'length':np.array([50]*20+[100]*20+[200]*20+[300]*20+[600]*2
                                                                  [136,135,129,138,133,128,135,128,131,128,137,137,128,125,128,138,133,118,135,128] + # length = 2400
                                                                  [112,124,114,117,118,116,126,118,125,128,121,106,130,113,128,119,113,110,129,116] + # length = 4800
                                                                  [])/1000.))}
+k_raxml_cherries_70 = {'length':np.array([50]*20+[100]*20+[200]*20+[300]*20+[600]*20+[1200]*20+[2400]*20+[4800]*20), # values of length
+                    'inferred_r':np.log10(r_vs_cherries(np.array([0.154,0.155,0.151,0.156,0.136,0.154,0.157,0.147,0.149,0.151,0.144,0.133,0.154,0.139,0.14,0.143,0.149,0.14,0.164,0.157] + # length = 50
+                                                                 [0.144,0.146,0.144,0.137,0.141,0.135,0.141,0.138,0.138,0.133,0.142,0.161,0.144,0.144,0.138,0.148,0.147,0.14,0.159,0.145] + # length = 100
+                                                                 [0.135,0.13,0.131,0.129,0.147,0.142,0.136,0.129,0.127,0.131,0.147,0.134,0.133,0.141,0.126,0.137,0.145,0.135,0.13,0.145] + # length = 200
+                                                                 [0.134,0.123,0.125,0.135,0.128,0.123,0.135,0.123,0.126,0.137,0.119,0.138,0.117,0.119,0.131,0.126,0.125,0.128,0.137,0.126] + # length = 300
+                                                                 [0.118,0.109,0.113,0.107,0.121,0.126,0.115,0.121,0.121,0.125,0.111,0.117,0.112,0.123,0.11,0.115,0.128,0.116,0.122,0.109] + # length = 600
+                                                                 [0.092,0.104,0.104,0.11,0.101,0.115,0.125,0.111,0.104,0.101,0.103,0.113,0.116,0.107,0.113,0.11,0.106,0.107,0.1,0.108] + # length = 1200
+                                                                 [0.098,0.106,0.101,0.104,0.101,0.095,0.102,0.101,0.097,0.094,0.099,0.1,0.089,0.089,0.099,0.108,0.098,0.091,0.103,0.103] + # length = 2400
+                                                                 [0.083,0.097,0.097,0.093,0.099,0.089,0.097,0.094,0.092,0.103,0.093,0.087,0.106,0.09,0.103,0.103,0.088,0.086,0.102,0.083] + # length = 4800
+                                                                 [])))}
 k_raxml_bl = {'length':np.array([50]*20+[100]*20+[200]*20+[300]*20+[600]*20+[1200]*20+[2400]*20+[4800]*20), # values of length
               'inferred_r':np.log10(np.array([0.0238124,0.0263987,0.0290364,0.028915,0.0330315,0.0256918,0.0335829,0.0354851,0.0272294,0.0299068,0.0316723,0.024782,0.0261417,0.0283754,0.0225955,0.0304431,0.0217002,0.0311585,0.0233729,0.0275233] +  # length = 50
                                              [0.0185514,0.0193585,0.0117487,0.0156878,0.0170298,0.0182602,0.0151984,0.0168458,0.0141487,0.0181164,0.0146396,0.0183307,0.0170749,0.0180811,0.0110642,0.0184674,0.0167497,0.0178668,0.0156366,0.0168387] +   # length = 100
@@ -119,6 +150,14 @@ g_raxml_cherries = {'gammarate':np.array([2.952]*20+[5.904]*20+[29.518]*20+[147.
                                                                  [189,187,210,203,184,188,184,203,179,193,211,196,195,202,203,197,200,191,192,203] + # gamma = 295.181735298926
                                                                  [208,201,197,209,194,202,194,193,209,193,208,189,191,203,209,192,196,185,194,186] + # gamma = infinity
                                                                  [])/1000.))}
+g_raxml_cherries_70 = {'gammarate':np.array([2.952]*20+[5.904]*20+[29.518]*20+[147.591]*20+[295.182]*20+[float('inf')]*20),
+                    'inferred_r':np.log10(r_vs_cherries(np.array([0.133,0.122,0.132,0.128,0.129,0.122,0.124,0.124,0.119,0.135,0.134,0.134,0.136,0.134,0.138,0.125,0.143,0.126,0.13,0.117] + # gamma = 2.95181735298926
+                                                                 [0.128,0.126,0.12,0.117,0.129,0.144,0.126,0.127,0.125,0.13,0.123,0.13,0.119,0.124,0.125,0.122,0.131,0.124,0.126,0.121] + # gamma = 5.90363470597852
+                                                                 [0.134,0.123,0.125,0.135,0.128,0.123,0.135,0.123,0.126,0.137,0.119,0.138,0.117,0.119,0.131,0.126,0.125,0.128,0.137,0.126] + # gamma = 29.518173529892621
+                                                                 [0.126,0.119,0.127,0.119,0.136,0.124,0.13,0.129,0.121,0.128,0.14,0.12,0.134,0.117,0.118,0.122,0.123,0.119,0.117,0.125] + # gamma = 147.590867649463
+                                                                 [0.123,0.119,0.131,0.127,0.123,0.113,0.126,0.138,0.103,0.124,0.128,0.117,0.123,0.132,0.125,0.12,0.127,0.132,0.129,0.135] + # gamma = 295.181735298926
+                                                                 [0.134,0.118,0.124,0.132,0.116,0.124,0.127,0.125,0.137,0.13,0.149,0.129,0.123,0.136,0.131,0.135,0.123,0.128,0.122,0.123] + # gamma = infinity
+                                                                 [])))}
 g_raxml_bl = {'gammarate':np.array([2.952]*20+[5.904]*20+[29.518]*20+[147.591]*20+[295.182]*20+[float('inf')]*20),
               'inferred_r':np.log10(np.array([0.00942352,0.00833048,0.0108756,0.0143512,0.0117049,0.0106471,0.012181,0.0116684,0.00995295,0.00963702,0.0157126,0.00987403,0.0156713,0.014367,0.0151278,0.0119494,0.0109711,0.0126528,0.0168896,0.0179312] +    # gamma = 2.95181735298926
                                              [0.012748,0.0125605,0.0136604,0.0128767,0.011879,0.0196796,0.0108641,0.0138477,0.0110647,0.0110084,0.0127802,0.00861143,0.0107866,0.00890205,0.0137482,0.0104897,0.0103873,0.0147223,0.0113472,0.0112625] +  # gamma = 5.90363470597852
@@ -138,6 +177,15 @@ n_raxml_cherries = {'n':np.array([25]*20+[50]*20+[250]*20+[500]*20+[1000]*20+[20
                                                                  [0.199,0.2075,0.1935,0.199,0.19,0.188,0.194,0.2,0.2,0.196,0.197,0.204,0.1955,0.196,0.2075,0.1985,0.192,0.2035,0.201,0.1955] + # n = 2000
                                                                  [0.199,0.20525,0.2005,0.20475,0.19325,0.1915,0.201,0.2,0.19425,0.195,0.1865,0.1965,0.20375,0.19575,0.2,0.20025,0.19,0.199,0.1895,0.19925] + # n = 4000
                                                                  [])))}
+n_raxml_cherries_70 = {'n':np.array([25]*20+[50]*20+[250]*20+[500]*20+[1000]*20+[2000]*20+[4000]*20),
+                    'inferred_r':np.log10(r_vs_cherries(np.array([0.16,0.12,0.12,0.16,0.2,0.16,0.12,0.12,0.12,0.12,0.16,0.08,0.12,0.12,0.2,0.12,0.12,0.12,0.12,0.2] + # n = 25
+                                                                 [0.12,0.16,0.14,0.18,0.12,0.1,0.14,0.16,0.14,0.16,0.12,0.16,0.14,0.14,0.1,0.12,0.14,0.16,0.14,0.12] + # n = 50
+                                                                 [0.136,0.116,0.12,0.116,0.128,0.132,0.12,0.124,0.12,0.128,0.132,0.112,0.144,0.132,0.14,0.14,0.124,0.136,0.128,0.132] + # n = 250
+                                                                 [0.132,0.128,0.13,0.134,0.126,0.13,0.134,0.138,0.134,0.136,0.126,0.128,0.14,0.144,0.14,0.122,0.124,0.124,0.132,0.128] + # n = 500
+                                                                 [.134,0.123,0.125,0.135,0.128,0.123,0.135,0.123,0.126,0.137,0.119,0.138,0.117,0.119,0.131,0.126,0.125,0.128,0.137,0.126] + # n = 1000
+                                                                 [0.125,0.13,0.1255,0.131,0.124,0.12,0.128,0.1305,0.1385,0.1295,0.1185,0.124,0.1285,0.126,0.135,0.1215,0.121,0.1335,0.128,0.132] + # n = 2000
+                                                                 [0.1335,0.13225,0.1365,0.13075,0.12875,0.12475,0.13425,0.12475,0.131,0.1245,0.1215,0.1325,0.12925,0.12875,0.134,0.1255,0.126,0.13525,0.12825,0.13525] + # n = 4000
+                                                                 [])))}
 n_raxml_bl = {'n':np.array([25]*20+[50]*20+[250]*20+[500]*20+[1000]*20+[2000]*20+[4000]*20),
               'inferred_r':np.log10(np.array([0.163654826882608,0.019668103943059,0.0113511292241568,0.02482024815094,0.00889055626266301,0.0129092084454817,0.0171662181066667,0.00907853590054184,0.015277424026425,0.0132110958938845,0.010374821601061,0.0174385738966955,0.0478710608079377,0.0124704146318607,0.0216622381660909,0.00632467536089941,0.0193141140410937,0.0189439363962626,0.0186816721797017,0.0293088430978665] + # n = 25
                                              [0.00687872976990467,0.0147949265431412,0.0299487020040268,0.0419551198359811,0.00420313803034544,0.00842389759953178,0.0235681890503354,0.013831698936855,0.0139817008490749,0.0166627719973719,0.0244174811272832,0.0263155654761482,0.00857209465609564,0.0118744510392997,0.00460301906874792,0.0257933133950226,0.0115268815431111,0.0112992397725408,0.0227634286082296,0.00887416329971246] + # n = 50
@@ -155,6 +203,8 @@ ax = sns.violinplot(x='r',y='inferred_r',data=pd.DataFrame(r_raxml_bl),order=x,c
 plt.plot(np.asarray([sum(r_raxml_bl['r'][i:i+20])/20.0 for i in range(0,len(r_raxml_bl['inferred_r']),20)])+4,[sum(r_raxml_bl['inferred_r'][i:i+20])/20.0 for i in range(0,len(r_raxml_bl['inferred_r']),20)],color=pal['raxml_bl'],linestyle=':',linewidth=3)
 sns.violinplot(x='r',y='inferred_r',data=pd.DataFrame(r_raxml_cherries),order=x,color=pal['raxml_cherries'],scale='width',width=0.3,inner=None)
 plt.plot(np.asarray([sum(r_raxml_cherries['r'][i:i+20])/20.0 for i in range(0,len(r_raxml_cherries['inferred_r']),20)])+4,[sum(r_raxml_cherries['inferred_r'][i:i+20])/20.0 for i in range(0,len(r_raxml_cherries['inferred_r']),20)],color=pal['raxml_cherries'],linestyle=':',linewidth=3)
+sns.violinplot(x='r',y='inferred_r',data=pd.DataFrame(r_raxml_cherries_70),order=x,color=pal['raxml_cherries_corrected'],scale='width',width=0.3,inner=None)
+plt.plot(np.asarray([sum(r_raxml_cherries_70['r'][i:i+20])/20.0 for i in range(0,len(r_raxml_cherries_70['inferred_r']),20)])+4,[sum(r_raxml_cherries_70['inferred_r'][i:i+20])/20.0 for i in range(0,len(r_raxml_cherries_70['inferred_r']),20)],color=pal['raxml_cherries_corrected'],linestyle=':',linewidth=3)
 setAlpha(ax,0.5)
 plt.plot([-1,0,1,2,3,4,5],[-5,-4,-3,-2,-1,0,1],label='Theoretical',linestyle='--',color=pal['theoretical'])
 plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
@@ -173,6 +223,8 @@ ax = sns.violinplot(x='r',y='inferred_r',data=pd.DataFrame(r2_raxml_bl),order=x,
 plt.plot(np.asarray([sum(r2_raxml_bl['r'][i:i+20])/20.0 for i in range(0,len(r2_raxml_bl['inferred_r']),20)])+4,[sum(r2_raxml_bl['inferred_r'][i:i+20])/20.0 for i in range(0,len(r2_raxml_bl['inferred_r']),20)],color=pal['raxml_bl'],linestyle=':',linewidth=3)
 sns.violinplot(x='r',y='inferred_r',data=pd.DataFrame(r2_raxml_cherries),order=x,color=pal['raxml_cherries'],scale='width',width=0.3,inner=None)
 plt.plot(np.asarray([sum(r2_raxml_cherries['r'][i:i+20])/20.0 for i in range(0,len(r2_raxml_cherries['inferred_r']),20)])+4,[sum(r2_raxml_cherries['inferred_r'][i:i+20])/20.0 for i in range(0,len(r2_raxml_cherries['inferred_r']),20)],color=pal['raxml_cherries'],linestyle=':',linewidth=3)
+sns.violinplot(x='r',y='inferred_r',data=pd.DataFrame(r2_raxml_cherries_70),order=x,color=pal['raxml_cherries_corrected'],scale='width',width=0.3,inner=None)
+plt.plot(np.asarray([sum(r2_raxml_cherries_70['r'][i:i+20])/20.0 for i in range(0,len(r2_raxml_cherries_70['inferred_r']),20)])+4,[sum(r2_raxml_cherries_70['inferred_r'][i:i+20])/20.0 for i in range(0,len(r2_raxml_cherries_70['inferred_r']),20)],color=pal['raxml_cherries_corrected'],linestyle=':',linewidth=3)
 setAlpha(ax,0.5)
 x = np.linspace(-4,0,100)
 plt.plot([-1,0,1,2,3,4,5],[-5,-4,-3,-2,-1,0,1],label='Theoretical',linestyle='--',color=pal['theoretical'])
@@ -192,6 +244,8 @@ ax = sns.violinplot(x='lambda',y='inferred_r',data=pd.DataFrame(l_raxml_bl),orde
 plt.plot(np.asarray([int(i/20) for i in range(0,len(l_raxml_bl['inferred_r']),20)]),[sum(l_raxml_bl['inferred_r'][i:i+20])/20.0 for i in range(0,len(l_raxml_bl['inferred_r']),20)],color=pal['raxml_bl'],linestyle=':',linewidth=3)
 sns.violinplot(x='lambda',y='inferred_r',data=pd.DataFrame(l_raxml_cherries),order=x,color=pal['raxml_cherries'],scale='width',width=0.3,inner=None)
 plt.plot(np.asarray([int(i/20) for i in range(0,len(l_raxml_cherries['inferred_r']),20)]),[sum(l_raxml_cherries['inferred_r'][i:i+20])/20.0 for i in range(0,len(l_raxml_cherries['inferred_r']),20)],color=pal['raxml_cherries'],linestyle=':',linewidth=3)
+sns.violinplot(x='lambda',y='inferred_r',data=pd.DataFrame(l_raxml_cherries_70),order=x,color=pal['raxml_cherries_corrected'],scale='width',width=0.3,inner=None)
+plt.plot(np.asarray([int(i/20) for i in range(0,len(l_raxml_cherries_70['inferred_r']),20)]),[sum(l_raxml_cherries_70['inferred_r'][i:i+20])/20.0 for i in range(0,len(l_raxml_cherries_70['inferred_r']),20)],color=pal['raxml_cherries_corrected'],linestyle=':',linewidth=3)
 setAlpha(ax,0.5)
 x = np.linspace(-100,1000,1100)
 plt.plot([-10,10],[-2,-2],label='Theoretical',linestyle='--',color=pal['theoretical'])
@@ -211,6 +265,8 @@ ax = sns.violinplot(x='length',y='inferred_r',data=pd.DataFrame(k_raxml_bl),orde
 plt.plot(np.asarray([int(i/20) for i in range(0,len(k_raxml_bl['inferred_r']),20)]),[sum(k_raxml_bl['inferred_r'][i:i+20])/20.0 for i in range(0,len(k_raxml_bl['inferred_r']),20)],color=pal['raxml_bl'],linestyle=':',linewidth=3)
 sns.violinplot(x='length',y='inferred_r',data=pd.DataFrame(k_raxml_cherries),order=x,color=pal['raxml_cherries'],scale='width',width=0.3,inner=None)
 plt.plot(np.asarray([int(i/20) for i in range(0,len(k_raxml_cherries['inferred_r']),20)]),[sum(k_raxml_cherries['inferred_r'][i:i+20])/20.0 for i in range(0,len(k_raxml_cherries['inferred_r']),20)],color=pal['raxml_cherries'],linestyle=':',linewidth=3)
+sns.violinplot(x='length',y='inferred_r',data=pd.DataFrame(k_raxml_cherries_70),order=x,color=pal['raxml_cherries_corrected'],scale='width',width=0.3,inner=None)
+plt.plot(np.asarray([int(i/20) for i in range(0,len(k_raxml_cherries_70['inferred_r']),20)]),[sum(k_raxml_cherries_70['inferred_r'][i:i+20])/20.0 for i in range(0,len(k_raxml_cherries_70['inferred_r']),20)],color=pal['raxml_cherries_corrected'],linestyle=':',linewidth=3)
 setAlpha(ax,0.5)
 plt.plot([-10,10],[-2,-2],label='Theoretical',linestyle='--',color=pal['theoretical'])
 plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
@@ -229,6 +285,8 @@ ax = sns.violinplot(x='gammarate',y='inferred_r',data=pd.DataFrame(g_raxml_bl),o
 plt.plot(np.asarray([int(i/20) for i in range(0,len(g_raxml_bl['inferred_r']),20)]),[sum(g_raxml_bl['inferred_r'][i:i+20])/20.0 for i in range(0,len(g_raxml_bl['inferred_r']),20)],color=pal['raxml_bl'],linestyle=':',linewidth=3)
 sns.violinplot(x='gammarate',y='inferred_r',data=pd.DataFrame(g_raxml_cherries),order=x,color=pal['raxml_cherries'],scale='width',width=0.3,inner=None)
 plt.plot(np.asarray([int(i/20) for i in range(0,len(g_raxml_cherries['inferred_r']),20)]),[sum(g_raxml_cherries['inferred_r'][i:i+20])/20.0 for i in range(0,len(g_raxml_cherries['inferred_r']),20)],color=pal['raxml_cherries'],linestyle=':',linewidth=3)
+sns.violinplot(x='gammarate',y='inferred_r',data=pd.DataFrame(g_raxml_cherries_70),order=x,color=pal['raxml_cherries_corrected'],scale='width',width=0.3,inner=None)
+plt.plot(np.asarray([int(i/20) for i in range(0,len(g_raxml_cherries_70['inferred_r']),20)]),[sum(g_raxml_cherries_70['inferred_r'][i:i+20])/20.0 for i in range(0,len(g_raxml_cherries_70['inferred_r']),20)],color=pal['raxml_cherries_corrected'],linestyle=':',linewidth=3)
 setAlpha(ax,0.5)
 plt.plot([-10,10],[-2,-2],label='Theoretical',linestyle='--',color=pal['theoretical'])
 plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
@@ -247,6 +305,8 @@ ax = sns.violinplot(x='n',y='inferred_r',data=pd.DataFrame(n_raxml_bl),order=x,c
 plt.plot(np.asarray([int(i/20) for i in range(0,len(n_raxml_bl['inferred_r']),20)]),[sum(n_raxml_bl['inferred_r'][i:i+20])/20.0 for i in range(0,len(n_raxml_bl['inferred_r']),20)],color=pal['raxml_bl'],linestyle=':',linewidth=3)
 sns.violinplot(x='n',y='inferred_r',data=pd.DataFrame(n_raxml_cherries),order=x,color=pal['raxml_cherries'],scale='width',width=0.3,inner=None)
 plt.plot(np.asarray([int(i/20) for i in range(0,len(n_raxml_cherries['inferred_r']),20)]),[sum(n_raxml_cherries['inferred_r'][i:i+20])/20.0 for i in range(0,len(n_raxml_cherries['inferred_r']),20)],color=pal['raxml_cherries'],linestyle=':',linewidth=3)
+sns.violinplot(x='n',y='inferred_r',data=pd.DataFrame(n_raxml_cherries_70),order=x,color=pal['raxml_cherries_corrected'],scale='width',width=0.3,inner=None)
+plt.plot(np.asarray([int(i/20) for i in range(0,len(n_raxml_cherries_70['inferred_r']),20)]),[sum(n_raxml_cherries_70['inferred_r'][i:i+20])/20.0 for i in range(0,len(n_raxml_cherries_70['inferred_r']),20)],color=pal['raxml_cherries_corrected'],linestyle=':',linewidth=3)
 setAlpha(ax,0.5)
 plt.plot([-10,10],[-2,-2],label='Theoretical',linestyle='--',color=pal['theoretical'])
 plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
