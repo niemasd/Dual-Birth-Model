@@ -188,9 +188,9 @@ int main( int argc, char* argv[] ) {
         cout << USAGE << endl; exit(1);
     }
     bool END = false;
-    int         N = numeric_limits<int>::max();         // end number of leaves
+    int     N = numeric_limits<int>::max();     // end number of leaves
     DECIMAL T = numeric_limits<DECIMAL>::max(); // end time
-    long        R = DEFAULT_R;                          // number of replicates
+    long    R = DEFAULT_R;                      // number of replicates
 
     // parse rates
     double LA = strtod(argv[1],NULL); // activation rate
