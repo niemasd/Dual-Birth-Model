@@ -1,3 +1,6 @@
+### DUAL-BIRTH GITIGNORE###
+tools/dualbirth
+
 ### MAC GITIGNORE ###
 .DS_Store
 *.swp
