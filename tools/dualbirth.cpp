@@ -13,6 +13,7 @@
 using namespace std;
 
 // definitions
+using DECIMAL = long double;
 #define DEFAULT_R 1
 #define USAGE "USAGE: ./dualbirth lambda_A lambda_B [-n end_taxa] [-t end_time] [-r num_replicates]"
 #define BAD_RATE "ERROR: Rates must be positive"
@@ -76,7 +77,7 @@ public:
 };
 
 // output Newick tree
-void newick( const int & x, const vector<int> & left, const vector<int> & right, const vector<int> & parent, const vector<long double> & time ) {
+void newick( const int & x, const vector<int> & left, const vector<int> & right, const vector<int> & parent, const vector<DECIMAL> & time ) {
     // if leaf
     if(left[x] == -1 && right[x] == -1) {
         cout << 'L' << x;
@@ -84,9 +85,9 @@ void newick( const int & x, const vector<int> & left, const vector<int> & right,
 
     // if internal node
     else {
-        int x_left = left[x]; int x_right = right[x]; long double x_time = time[x];
-        long double left_length = time[x_left] - x_time;
-        long double right_length = time[x_right] - x_time;
+        int x_left = left[x]; int x_right = right[x]; DECIMAL x_time = time[x];
+        DECIMAL left_length = time[x_left] - x_time;
+        DECIMAL right_length = time[x_right] - x_time;
         cout << '(';
         newick(x_left,left,right,parent,time);
         cout << ':' << left_length << ',';
@@ -102,13 +103,13 @@ void newick( const int & x, const vector<int> & left, const vector<int> & right,
 }
 
 // Dual-Birth simulator
-void dualbirth( double LA, double LB, int N, long double T ) {
+void dualbirth( double LA, double LB, int N, DECIMAL T ) {
     // global variables
-    long double t = 0;        // current global time
+    DECIMAL t = 0;        // current global time
     vector<int> left;         // left[i] is the left child of node i
     vector<int> right;        // right[i] is the right child of node i
     vector<int> parent;       // parent[i] is the parent of node i
-    vector<long double> time; // time[i] is the time of node i
+    vector<DECIMAL> time; // time[i] is the time of node i
     set active;               // set containing all active nodes
     set inactive;             // set containing all inactive nodes
 
@@ -188,7 +189,7 @@ int main( int argc, char* argv[] ) {
     }
     bool END = false;
     int         N = numeric_limits<int>::max();         // end number of leaves
-    long double T = numeric_limits<long double>::max(); // end time
+    DECIMAL T = numeric_limits<DECIMAL>::max(); // end time
     long        R = DEFAULT_R;                          // number of replicates
 
     // parse rates
