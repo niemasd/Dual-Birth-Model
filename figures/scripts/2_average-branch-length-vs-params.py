@@ -15,10 +15,11 @@ import seaborn as sns
 # settings
 sns.set_style("ticks")
 rcParams['font.family'] = 'serif'
-pal = {'theoretical_all':'#000000', 'theoretical_pen':'#A0A0A0', 'simulated_all':'#597DBE', 'simulated_pen':'#70A2FF', 'fasttree_all':'#FF9980', 'fasttree_pen':'#FFD0C4', 'raxml_all':'#A2B7C3', 'raxml_pen':'#D4D7D8'}
-handles = [Patch(color=pal['theoretical_all'],label='Theoretical (All)'),Patch(color=pal['simulated_all'],label='Simulated (All)'),Patch(color=pal['fasttree_all'],label='Fasttree (All)'),Patch(color=pal['raxml_all'],label='Raxml (All)'),Patch(color=pal['theoretical_pen'],label='Conjectured (Pendant)'),Patch(color=pal['simulated_pen'],label='Simulated (Pendant)'),Patch(color=pal['fasttree_pen'],label='FastTree (Pendant)'),Patch(color=pal['raxml_pen'],label='RAxML (Pendant)')]
-meancolor='#FF0000'
+pal = {'theoretical_all':'#000000', 'theoretical_pen':'#A0A0A0', 'simulated_all':'#597DBE', 'simulated_pen':'#70A2FF', 'fasttree_all':'#FF0000', 'fasttree_pen':'#FFAAAA', 'raxml_all':'#0000FF', 'raxml_pen':'#AAAAFF'}
+#handles = [Patch(color=pal['theoretical_all'],label='Theoretical (All)'),Patch(color=pal['simulated_all'],label='Simulated (All)'),Patch(color=pal['fasttree_all'],label='Fasttree (All)'),Patch(color=pal['raxml_all'],label='Raxml (All)'),Patch(color=pal['theoretical_pen'],label='Conjectured (Pendant)'),Patch(color=pal['simulated_pen'],label='Simulated (Pendant)'),Patch(color=pal['fasttree_pen'],label='FastTree (Pendant)'),Patch(color=pal['raxml_pen'],label='RAxML (Pendant)')]
+meancolor='#00AA00'
 meansize=20
+handles = [Patch(color=pal['theoretical_all'],label='Theoretical (All)'),Patch(color=pal['fasttree_all'],label='Fasttree (All)'),Patch(color=pal['raxml_all'],label='Raxml (All)'),Patch(color=pal['theoretical_pen'],label='Conjectured (Pendant)'),Patch(color=pal['fasttree_pen'],label='FastTree (Pendant)'),Patch(color=pal['raxml_pen'],label='RAxML (Pendant)'),Patch(color=meancolor,label='Mean')]
 
 # expected pendant branch length
 def exp_pen_bl(la,lb):
@@ -335,16 +336,16 @@ n_raxml_pen    = {'n':np.array([25]*20+[50]*20+[250]*20+[500]*20+[1000]*20+[2000
                                    [0.0574366317364998,0.0550493369399999,0.0520701127009999,0.0501356538249998,0.0649350990001249,0.0531087593574998,0.0502549120549997,0.0503868703374999,0.0542708660949998,0.0532208695574998,0.0506011346874997,0.0535166394549997,0.0549343305099999,0.0508233483753174,0.0559817639112499,0.0586867968199997,0.0574062899999998,0.0481624381932498,0.0507216938644997,0.0529728945004999] + # n = 4000
                                    []
              ).astype(float)}
-'''
+
 # plot average branch length vs. r (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
 fig = plt.figure()
 x = np.array([-4,-3,-2,-1,0])
 df = {'r':{},'avgbranch':{},'category':{}}
 for i in range(len(r_original_all['avgbranch'])):
-    currNum = len(df['r'])
-    df['r'][currNum] = r_original_all['r'][i]
-    df['avgbranch'][currNum] = r_original_all['avgbranch'][i]
-    df['category'][currNum] = 'simulated_all'
+    #currNum = len(df['r'])
+    #df['r'][currNum] = r_original_all['r'][i]
+    #df['avgbranch'][currNum] = r_original_all['avgbranch'][i]
+    #df['category'][currNum] = 'simulated_all'
     currNum = len(df['r'])
     df['r'][currNum] = r_fasttree_all['r'][i]
     df['avgbranch'][currNum] = r_fasttree_all['avgbranch'][i]
@@ -353,10 +354,10 @@ for i in range(len(r_original_all['avgbranch'])):
     df['r'][currNum] = r_raxml_all['r'][i]
     df['avgbranch'][currNum] = r_raxml_all['avgbranch'][i]
     df['category'][currNum] = 'raxml_all'
-    currNum = len(df['r'])
-    df['r'][currNum] = r_original_pen['r'][i]
-    df['avgbranch'][currNum] = r_original_pen['avgbranch'][i]
-    df['category'][currNum] = 'simulated_pen'
+    #currNum = len(df['r'])
+    #df['r'][currNum] = r_original_pen['r'][i]
+    #df['avgbranch'][currNum] = r_original_pen['avgbranch'][i]
+    #df['category'][currNum] = 'simulated_pen'
     currNum = len(df['r'])
     df['r'][currNum] = r_fasttree_pen['r'][i]
     df['avgbranch'][currNum] = r_fasttree_pen['avgbranch'][i]
@@ -368,12 +369,12 @@ for i in range(len(r_original_all['avgbranch'])):
 df = pd.DataFrame(df)
 ax = sns.violinplot(x='r',y='avgbranch',hue='category',data=df,order=x,palette=pal,inner=None)
 for i in range(0,len(r_original_all['avgbranch']),20):
-    plt.scatter([int(i/20)-0.33],[avg(r_original_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)-0.2],[avg(r_fasttree_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)-0.06],[avg(r_raxml_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)+0.06],[avg(r_original_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)+0.2],[avg(r_fasttree_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)+0.33],[avg(r_raxml_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    #plt.scatter([int(i/20)-0.33],[avg(r_original_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)-0.29],[avg(r_fasttree_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)-0.10],[avg(r_raxml_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    #plt.scatter([int(i/20)+0.06],[avg(r_original_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)+0.10],[avg(r_fasttree_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)+0.29],[avg(r_raxml_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
 x = np.asarray([i/10.0 for i in range(-40,-34)])
 plt.plot(x+3.55,np.asarray([0.0298238593208140]*6),linestyle='--',color=pal['theoretical_all'])
 plt.plot(x+4.55,np.asarray([0.0298238593208140]*6),linestyle='--',color=pal['theoretical_all'])
@@ -401,10 +402,10 @@ fig = plt.figure()
 x = np.array([-4,-3,-2,-1,0])
 df = {'r':{},'avgbranch':{},'category':{}}
 for i in range(len(r2_original_all['avgbranch'])):
-    currNum = len(df['r'])
-    df['r'][currNum] = r2_original_all['r'][i]
-    df['avgbranch'][currNum] = r2_original_all['avgbranch'][i]
-    df['category'][currNum] = 'simulated_all'
+    #currNum = len(df['r'])
+    #df['r'][currNum] = r2_original_all['r'][i]
+    #df['avgbranch'][currNum] = r2_original_all['avgbranch'][i]
+    #df['category'][currNum] = 'simulated_all'
     currNum = len(df['r'])
     df['r'][currNum] = r2_fasttree_all['r'][i]
     df['avgbranch'][currNum] = r2_fasttree_all['avgbranch'][i]
@@ -413,10 +414,10 @@ for i in range(len(r2_original_all['avgbranch'])):
     df['r'][currNum] = r2_raxml_all['r'][i]
     df['avgbranch'][currNum] = r2_raxml_all['avgbranch'][i]
     df['category'][currNum] = 'raxml_all'
-    currNum = len(df['r'])
-    df['r'][currNum] = r2_original_pen['r'][i]
-    df['avgbranch'][currNum] = r2_original_pen['avgbranch'][i]
-    df['category'][currNum] = 'simulated_pen'
+    #currNum = len(df['r'])
+    #df['r'][currNum] = r2_original_pen['r'][i]
+    #df['avgbranch'][currNum] = r2_original_pen['avgbranch'][i]
+    #df['category'][currNum] = 'simulated_pen'
     currNum = len(df['r'])
     df['r'][currNum] = r2_fasttree_pen['r'][i]
     df['avgbranch'][currNum] = r2_fasttree_pen['avgbranch'][i]
@@ -428,12 +429,12 @@ for i in range(len(r2_original_all['avgbranch'])):
 df = pd.DataFrame(df)
 ax = sns.violinplot(x='r',y='avgbranch',hue='category',data=df,order=x,palette=pal,inner=None)
 for i in range(0,len(r2_original_all['avgbranch']),20):
-    plt.scatter([int(i/20)-0.33],[avg(r2_original_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)-0.2],[avg(r2_fasttree_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)-0.06],[avg(r2_raxml_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)+0.06],[avg(r2_original_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)+0.2],[avg(r2_fasttree_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)+0.33],[avg(r2_raxml_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    #plt.scatter([int(i/20)-0.33],[avg(r2_original_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)-0.29],[avg(r2_fasttree_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)-0.10],[avg(r2_raxml_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    #plt.scatter([int(i/20)+0.06],[avg(r2_original_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)+0.10],[avg(r2_fasttree_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)+0.29],[avg(r2_raxml_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
 x = np.asarray([i/10.0 for i in range(-40,-34)])
 plt.plot(x+7.55,np.asarray([0.0059057]*6),linestyle='--',color=pal['theoretical_all'])
 plt.plot(x+6.55,np.asarray([0.0102715]*6),linestyle='--',color=pal['theoretical_all'])
@@ -461,10 +462,10 @@ fig = plt.figure()
 x = np.array([33.866,84.664,169.328,338.655,846.638])
 df = {'lambda':{},'avgbranch':{},'category':{}}
 for i in range(len(l_original_all['avgbranch'])):
-    currNum = len(df['lambda'])
-    df['lambda'][currNum] = l_original_all['lambda'][i]
-    df['avgbranch'][currNum] = l_original_all['avgbranch'][i]
-    df['category'][currNum] = 'simulated_all'
+    #currNum = len(df['lambda'])
+    #df['lambda'][currNum] = l_original_all['lambda'][i]
+    #df['avgbranch'][currNum] = l_original_all['avgbranch'][i]
+    #df['category'][currNum] = 'simulated_all'
     currNum = len(df['lambda'])
     df['lambda'][currNum] = l_fasttree_all['lambda'][i]
     df['avgbranch'][currNum] = l_fasttree_all['avgbranch'][i]
@@ -473,10 +474,10 @@ for i in range(len(l_original_all['avgbranch'])):
     df['lambda'][currNum] = l_raxml_all['lambda'][i]
     df['avgbranch'][currNum] = l_raxml_all['avgbranch'][i]
     df['category'][currNum] = 'raxml_all'
-    currNum = len(df['lambda'])
-    df['lambda'][currNum] = l_original_pen['lambda'][i]
-    df['avgbranch'][currNum] = l_original_pen['avgbranch'][i]
-    df['category'][currNum] = 'simulated_pen'
+    #currNum = len(df['lambda'])
+    #df['lambda'][currNum] = l_original_pen['lambda'][i]
+    #df['avgbranch'][currNum] = l_original_pen['avgbranch'][i]
+    #df['category'][currNum] = 'simulated_pen'
     currNum = len(df['lambda'])
     df['lambda'][currNum] = l_fasttree_pen['lambda'][i]
     df['avgbranch'][currNum] = l_fasttree_pen['avgbranch'][i]
@@ -488,12 +489,12 @@ for i in range(len(l_original_all['avgbranch'])):
 df = pd.DataFrame(df)
 ax = sns.violinplot(x='lambda',y='avgbranch',hue='category',data=df,order=x,palette=pal,inner=None)
 for i in range(0,len(l_original_all['avgbranch']),20):
-    plt.scatter([int(i/20)-0.33],[avg(l_original_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)-0.2],[avg(l_fasttree_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)-0.06],[avg(l_raxml_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)+0.06],[avg(l_original_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)+0.2],[avg(l_fasttree_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)+0.33],[avg(l_raxml_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    #plt.scatter([int(i/20)-0.33],[avg(l_original_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)-0.29],[avg(l_fasttree_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)-0.10],[avg(l_raxml_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    #plt.scatter([int(i/20)+0.06],[avg(l_original_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)+0.10],[avg(l_fasttree_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)+0.29],[avg(l_raxml_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
 x = np.asarray([i/10.0 for i in range(-40,-34)])
 plt.plot(x+3.55,np.asarray([0.149117108605]*6),linestyle='--',color=pal['theoretical_all'])
 plt.plot(x+4.55,np.asarray([0.0596475479543]*6),linestyle='--',color=pal['theoretical_all'])
@@ -521,10 +522,10 @@ fig = plt.figure()
 x = np.array([50,100,200,300,600,1200,2400,4800])
 df = {'length':{},'avgbranch':{},'category':{}}
 for i in range(len(k_original_all['avgbranch'])):
-    currNum = len(df['length'])
-    df['length'][currNum] = k_original_all['length'][i]
-    df['avgbranch'][currNum] = k_original_all['avgbranch'][i]
-    df['category'][currNum] = 'simulated_all'
+    #currNum = len(df['length'])
+    #df['length'][currNum] = k_original_all['length'][i]
+    #df['avgbranch'][currNum] = k_original_all['avgbranch'][i]
+    #df['category'][currNum] = 'simulated_all'
     currNum = len(df['length'])
     df['length'][currNum] = k_fasttree_all['length'][i]
     df['avgbranch'][currNum] = k_fasttree_all['avgbranch'][i]
@@ -533,10 +534,10 @@ for i in range(len(k_original_all['avgbranch'])):
     df['length'][currNum] = k_raxml_all['length'][i]
     df['avgbranch'][currNum] = k_raxml_all['avgbranch'][i]
     df['category'][currNum] = 'raxml_all'
-    currNum = len(df['length'])
-    df['length'][currNum] = k_original_pen['length'][i]
-    df['avgbranch'][currNum] = k_original_pen['avgbranch'][i]
-    df['category'][currNum] = 'simulated_pen'
+    #currNum = len(df['length'])
+    #df['length'][currNum] = k_original_pen['length'][i]
+    #df['avgbranch'][currNum] = k_original_pen['avgbranch'][i]
+    #df['category'][currNum] = 'simulated_pen'
     currNum = len(df['length'])
     df['length'][currNum] = k_fasttree_pen['length'][i]
     df['avgbranch'][currNum] = k_fasttree_pen['avgbranch'][i]
@@ -548,12 +549,12 @@ for i in range(len(k_original_all['avgbranch'])):
 df = pd.DataFrame(df)
 ax = sns.violinplot(x='length',y='avgbranch',hue='category',data=df,order=x,palette=pal,inner=None)
 for i in range(0,len(k_original_all['avgbranch']),20):
-    plt.scatter([int(i/20)-0.33],[avg(k_original_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)-0.2],[avg(k_fasttree_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)-0.06],[avg(k_raxml_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)+0.06],[avg(k_original_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)+0.2],[avg(k_fasttree_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)+0.33],[avg(k_raxml_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    #plt.scatter([int(i/20)-0.33],[avg(k_original_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)-0.29],[avg(k_fasttree_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)-0.10],[avg(k_raxml_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    #plt.scatter([int(i/20)+0.06],[avg(k_original_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)+0.10],[avg(k_fasttree_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)+0.29],[avg(k_raxml_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
 x = np.asarray([i/10.0 for i in range(-40,-34)])
 plt.plot(x+3.55,np.asarray([0.0298238593208140]*6),linestyle='--',color=pal['theoretical_all'])
 plt.plot(x+4.55,np.asarray([0.0298238593208140]*6),linestyle='--',color=pal['theoretical_all'])
@@ -587,10 +588,10 @@ fig = plt.figure()
 x = np.array([2.952,5.904,29.518,147.591,295.182,float('inf')])
 df = {'gammarate':{},'avgbranch':{},'category':{}}
 for i in range(len(g_original_all['avgbranch'])):
-    currNum = len(df['gammarate'])
-    df['gammarate'][currNum] = g_original_all['gammarate'][i]
-    df['avgbranch'][currNum] = g_original_all['avgbranch'][i]
-    df['category'][currNum] = 'simulated_all'
+    #currNum = len(df['gammarate'])
+    #df['gammarate'][currNum] = g_original_all['gammarate'][i]
+    #df['avgbranch'][currNum] = g_original_all['avgbranch'][i]
+    #df['category'][currNum] = 'simulated_all'
     currNum = len(df['gammarate'])
     df['gammarate'][currNum] = g_fasttree_all['gammarate'][i]
     df['avgbranch'][currNum] = g_fasttree_all['avgbranch'][i]
@@ -599,10 +600,10 @@ for i in range(len(g_original_all['avgbranch'])):
     df['gammarate'][currNum] = g_raxml_all['gammarate'][i]
     df['avgbranch'][currNum] = g_raxml_all['avgbranch'][i]
     df['category'][currNum] = 'raxml_all'
-    currNum = len(df['gammarate'])
-    df['gammarate'][currNum] = g_original_pen['gammarate'][i]
-    df['avgbranch'][currNum] = g_original_pen['avgbranch'][i]
-    df['category'][currNum] = 'simulated_pen'
+    #currNum = len(df['gammarate'])
+    #df['gammarate'][currNum] = g_original_pen['gammarate'][i]
+    #df['avgbranch'][currNum] = g_original_pen['avgbranch'][i]
+    #df['category'][currNum] = 'simulated_pen'
     currNum = len(df['gammarate'])
     df['gammarate'][currNum] = g_fasttree_pen['gammarate'][i]
     df['avgbranch'][currNum] = g_fasttree_pen['avgbranch'][i]
@@ -614,12 +615,12 @@ for i in range(len(g_original_all['avgbranch'])):
 df = pd.DataFrame(df)
 ax = sns.violinplot(x='gammarate',y='avgbranch',hue='category',data=df,order=x,palette=pal,inner=None)
 for i in range(0,len(g_original_all['avgbranch']),20):
-    plt.scatter([int(i/20)-0.33],[avg(g_original_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)-0.2],[avg(g_fasttree_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)-0.06],[avg(g_raxml_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)+0.06],[avg(g_original_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)+0.2],[avg(g_fasttree_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)+0.33],[avg(g_raxml_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    #plt.scatter([int(i/20)-0.33],[avg(g_original_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)-0.29],[avg(g_fasttree_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)-0.10],[avg(g_raxml_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    #plt.scatter([int(i/20)+0.06],[avg(g_original_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)+0.10],[avg(g_fasttree_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)+0.29],[avg(g_raxml_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
 x = np.asarray([i/10.0 for i in range(-40,-34)])
 plt.plot(x+3.55,np.asarray([0.0298238593208140]*6),linestyle='--',color=pal['theoretical_all'])
 plt.plot(x+4.55,np.asarray([0.0298238593208140]*6),linestyle='--',color=pal['theoretical_all'])
@@ -639,20 +640,20 @@ plt.yticks(axisY); plt.ylim(0,0.1)
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., frameon=True)
 sns.plt.xlabel(r'Gamma Distribution Rate $\left(\alpha\right)$',fontsize=14)
 sns.plt.ylabel('Average Branch Length',fontsize=14)
-sns.plt.title('Average Branch Length vs. Deviation from Ultrametricity',fontsize=18,y=1.05)
+sns.plt.title('Average Branch Length vs. Ultrametricity',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('avg-branch-length_vs_gammarate.pdf', format='pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
-'''
+
 # plot average branch length vs. n
 fig = plt.figure()
 x = np.array([25,50,250,500,1000,2000,4000])
 df = {'n':{},'avgbranch':{},'category':{}}
 for i in range(len(n_original_all['avgbranch'])):
-    currNum = len(df['n'])
-    df['n'][currNum] = n_original_all['n'][i]
-    df['avgbranch'][currNum] = n_original_all['avgbranch'][i]
-    df['category'][currNum] = 'simulated_all'
+    #currNum = len(df['n'])
+    #df['n'][currNum] = n_original_all['n'][i]
+    #df['avgbranch'][currNum] = n_original_all['avgbranch'][i]
+    #df['category'][currNum] = 'simulated_all'
     currNum = len(df['n'])
     df['n'][currNum] = n_fasttree_all['n'][i]
     df['avgbranch'][currNum] = n_fasttree_all['avgbranch'][i]
@@ -661,10 +662,10 @@ for i in range(len(n_original_all['avgbranch'])):
     df['n'][currNum] = n_raxml_all['n'][i]
     df['avgbranch'][currNum] = n_raxml_all['avgbranch'][i]
     df['category'][currNum] = 'raxml_all'
-    currNum = len(df['n'])
-    df['n'][currNum] = n_original_pen['n'][i]
-    df['avgbranch'][currNum] = n_original_pen['avgbranch'][i]
-    df['category'][currNum] = 'simulated_pen'
+    #currNum = len(df['n'])
+    #df['n'][currNum] = n_original_pen['n'][i]
+    #df['avgbranch'][currNum] = n_original_pen['avgbranch'][i]
+    #df['category'][currNum] = 'simulated_pen'
     currNum = len(df['n'])
     df['n'][currNum] = n_fasttree_pen['n'][i]
     df['avgbranch'][currNum] = n_fasttree_pen['avgbranch'][i]
@@ -676,12 +677,12 @@ for i in range(len(n_original_all['avgbranch'])):
 df = pd.DataFrame(df)
 ax = sns.violinplot(x='n',y='avgbranch',hue='category',data=df,order=x,palette=pal,inner=None)
 for i in range(0,len(n_original_all['avgbranch']),20):
-    plt.scatter([int(i/20)-0.33],[avg(n_original_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)-0.2],[avg(n_fasttree_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)-0.06],[avg(n_raxml_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)+0.06],[avg(n_original_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)+0.2],[avg(n_fasttree_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)+0.33],[avg(n_raxml_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    #plt.scatter([int(i/20)-0.33],[avg(n_original_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)-0.29],[avg(n_fasttree_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)-0.10],[avg(n_raxml_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    #plt.scatter([int(i/20)+0.06],[avg(n_original_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)+0.10],[avg(n_fasttree_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)+0.29],[avg(n_raxml_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
 x = np.asarray([i/10.0 for i in range(-39,-34)])
 plt.plot(x+3.5,np.asarray([0.0298238593208140]*5),linestyle='--',color=pal['theoretical_all'])
 plt.plot(x+4.5,np.asarray([0.0298238593208140]*5),linestyle='--',color=pal['theoretical_all'])
