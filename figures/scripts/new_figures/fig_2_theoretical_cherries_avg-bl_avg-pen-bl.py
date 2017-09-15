@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 '''
-Niema Moshiri 2016
+Niema Moshiri 2017
 
 Generate plots of theoretical cherries and average branch length and pendant
 branch length with simulated values.
