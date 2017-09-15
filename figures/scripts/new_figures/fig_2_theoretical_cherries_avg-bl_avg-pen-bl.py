@@ -91,5 +91,5 @@ sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\rig
 sns.plt.ylabel('Cherry Fraction',fontsize=14)
 sns.plt.title(r'Cherry Fraction vs. $\log_{10}{r}$',fontsize=18,y=1.05)
 sns.plt.show()
-fig.savefig('theoretical_cherry-fraction_vs_r.pdf', format='pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
+fig.savefig('theoretical_cherry-fraction_vs_r.pdf', format='pdf', bbox_inches='tight')
 plt.close()
