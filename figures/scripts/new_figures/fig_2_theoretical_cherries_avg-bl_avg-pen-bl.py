@@ -15,7 +15,12 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 
+def avg(x):
+    return float(sum(x))/len(x)
+
 # settings
+meancolor = '#FFFFFF'
+meansize = 20
 LAMBDA = 48.
 sns.set_style("ticks")
 rcParams['font.family'] = 'serif'
@@ -44,6 +49,11 @@ fig = plt.figure()
 x = np.array(sorted(set(data['r'])))
 ax = sns.boxplot(x='r',y='avg_bl',data=data,color=pal['avg_bl'],width=0.3,showfliers=False)
 sns.boxplot(x='r',y='avg_pen_bl',data=data,color=pal['avg_pen_bl'],width=0.3,showfliers=False)
+for r in x:
+    avg_bl = [data_raw['avg_bl'][i] for i in range(len(data_raw['r'])) if data_raw['r'][i] == r]
+    plt.scatter([4*r+16],[avg(avg_bl)],c=meancolor,s=meansize)
+    avg_pen_bl = [data_raw['avg_pen_bl'][i] for i in range(len(data_raw['r'])) if data_raw['r'][i] == r]
+    plt.scatter([4*r+16],[avg(avg_pen_bl)],c=meancolor,s=meansize)
 tick_labels = ax.xaxis.get_ticklabels()
 for i in range(len(tick_labels)):
     if x[i] not in {-4.,-3.,-2.,-1.,0.,1.,2.,3.,4.}:
@@ -63,6 +73,9 @@ plt.close()
 fig = plt.figure()
 x = np.array(sorted(set(data['r'])))
 ax = sns.boxplot(x='r',y='cherries',data=data,order=x,color=pal['cherries'],width=0.3,showfliers=False)
+for r in x:
+    cherries = [data_raw['cherries'][i] for i in range(len(data_raw['r'])) if data_raw['r'][i] == r]
+    plt.scatter([4*r+16],[avg(cherries)],c=meancolor,s=meansize)
 tick_labels = ax.xaxis.get_ticklabels()
 for i in range(len(tick_labels)):
     if x[i] not in {-4.,-3.,-2.,-1.,0.,1.,2.,3.,4.}:
