@@ -13,12 +13,17 @@ import seaborn as sns
 DATA_JSON = '/'.join(argv[0].split('/')[:-1] + ['data_new.json'])
 sns.set_style("ticks")
 rcParams['font.family'] = 'serif'
+pal={'true':'#000000','double':'#FF0000','ten':'#00FF00'}
 
 # create plot
 data = eval(open(DATA_JSON).read())
 fig = plt.figure()
 ax = sns.pointplot(x='p',y='r',data=data,scale=0.3)
-plt.plot([-10,110],[0.01,0.01],linestyle='--',color='#000000')
+plt.plot([-10,110],[0.01,0.01],linestyle='--',color=pal['true'])
+plt.plot([-10,18],[0.02,0.02],linestyle='--',color=pal['double'])
+plt.plot([18,18],[-10,0.02],linestyle='--',color=pal['double'])
+plt.plot([-10,50],[0.1,0.1],linestyle='--',color=pal['ten'])
+plt.plot([50,50],[-10,0.1],linestyle='--',color=pal['ten'])
 ax.set_yscale('log')
 tick_labels = ax.xaxis.get_ticklabels()
 for i in range(len(tick_labels)):
