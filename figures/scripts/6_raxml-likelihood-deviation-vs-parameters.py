@@ -15,7 +15,7 @@ import seaborn as sns
 # settings
 sns.set_style("ticks")
 rcParams['font.family'] = 'serif'
-pal = {'simulated':'#597DBE', 'fasttree':'#FF9980', 'raxml':'#A2B7C3'}
+pal = {'simulated':'#597DBE', 'fasttree':'#FF0000', 'raxml':'#0000FF'}
 handles = [Patch(color=pal['fasttree'],label='FastTree'),Patch(color=pal['raxml'],label='RAxML')]
 axisY = np.asarray([i for i in range(-1000,1501,500)])
 
@@ -196,6 +196,26 @@ g_raxml    = {'gammarate':np.array([2.952]*20+[5.904]*20+[29.518]*20+[147.591]*2
              ).astype(float)}
 '''
 
+# modifying n
+n_fasttree = {'n':np.array([25]*20+[50]*20+[250]*20+[500]*20+[1000]*20+[2000]*20+[4000]*20),
+              'score':np.array([2.553719,1.59162,0.15927,2.302307,5.644638,5.702009,3.975923,-1.417003,0.466599,2.074479,6.416957,1.604742,0.000633,0.628374,5.076548,0.793097,2.571294,0.83539,1.011658,2.428829] + # n = 25
+                               [2.522978,3.036117,6.091044,5.604324,13.07789,15.090545,6.586299,8.526834,-4.640891,7.926857,9.731932,7.914527,0.799637,5.971405,-6.489723,2.946664,5.835776,1.404674,3.133966,4.45529] + # n = 50
+                               [34.21515,33.660909,26.253199,5.69123,42.714256,23.968124,42.416078,23.225456,17.55803,11.283666,22.313346,35.107251,5.771281,18.254338,40.211708,44.469623,23.777657,22.514452,30.149625,17.75481] + # n = 250
+                               [80.549219,27.319235,66.48392,46.026542,80.026585,42.70561,71.653989,55.418383,37.363895,58.278416,61.454227,47.993757,81.71128,48.612045,56.066744,18.971579,37.505909,34.869832,51.342313,41.789949] + # n = 500
+                               [110.594799,82.417724,131.699734,127.123887,50.357407,117.583231,136.812772,140.662363,52.354899,88.016958,102.843802,106.618877,106.374805,123.055934,135.332397,130.085503,108.284031,162.676886,123.634518,133.581771] + # n = 1000
+                               [182.004383,186.90385,266.756931,226.425903,143.188234,215.690189,199.084194,163.298967,225.729808,173.714964,171.179504,207.991447,251.155269,214.659698,257.58345,249.541515,228.92303,236.210803,199.637298,254.818601] + # n = 2000
+                               [334.133345,439.630512,458.939156,515.734301,414.675558,461.135278,556.894532,479.321821,413.076589,453.231773,358.211005,453.960328,425.213744,334.809898,509.725731,398.365774,449.047575,490.734605,423.962697,403.3844]   # n = 4000
+             ).astype(float)}
+n_raxml    = {'n':np.array([25]*20+[50]*20+[250]*20+[500]*20+[1000]*20+[2000]*20+[4000]*20),
+              'score':np.array([3.126333,3.694069,0.485275,3.049633,5.806828,5.69216,4.094939,9.3e-05,0.440221,1.295452,6.415636,1.604742,0.000667,1.350705,5.321059,6.112365,2.571304,0.83539,1.453968,2.428281] + # n = 25
+                               [2.741544,3.207842,6.443235,5.604291,13.269164,15.090436,7.735385,9.491638,8.5779,7.925132,10.467574,7.914534,7.399153,10.007575,2.503534,6.303063,7.099242,3.169774,6.602968,7.844635] + # n = 50
+                               [41.758094,49.267218,45.226708,30.51731,52.476896,43.868406,49.038052,40.879886,34.400603,37.202023,40.093543,40.680391,34.13625,34.347052,54.011984,54.75985,31.960969,29.712543,34.258903,37.413251] + # n = 250
+                               [88.102496,52.788837,93.584729,76.353379,104.716428,101.425549,91.718632,74.892625,87.989436,93.350506,93.106205,84.878242,109.811136,79.665589,79.981789,69.691096,89.257384,86.651009,67.198488,102.429613] + # n = 500
+                               [174.155064,147.318304,167.765215,176.891066,182.97742,148.00771,196.695035,214.55344,148.480067,172.543503,163.759704,216.776598,165.654509,185.057395,183.469069,198.527401,176.17566,238.077752,194.75257,191.078212] + # n = 1000
+                               [348.110796,352.119564,392.021827,317.250407,342.491522,379.580476,348.187379,347.839616,337.692731,327.60505,288.445227,365.469472,370.042909,388.203024,379.904709,366.805373,360.531671,369.549661,319.291067,372.187048] + # n = 2000
+                               [730.561611,712.279196,730.184151,729.779463,675.806415,723.928519,763.668822,739.160277,705.243411,757.791197,642.871841,708.497386,729.471431,670.64617,789.376416,749.648255,710.614863,753.955922,644.066059,783.901507]   # n = 4000
+             ).astype(float)}
+
 # plot RAxML Likelihood Score Difference vs. r (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
 fig = plt.figure()
 x = np.array([-4,-3,-2,-1,0])
@@ -306,8 +326,8 @@ for i in range(len(g_fasttree['score'])):
     df['score'][currNum] = g_fasttree['score'][i] - g_original['score'][i]
     df['category'][currNum] = 'fasttree'
     currNum = len(df['gammarate'])
-    df['gammarate'][currNum] = g_fasttree['gammarate'][i]
-    df['score'][currNum] = g_fasttree['score'][i] - g_original['score'][i]
+    df['gammarate'][currNum] = g_raxml['gammarate'][i]
+    df['score'][currNum] = g_raxml['score'][i] - g_original['score'][i]
     df['category'][currNum] = 'raxml'
 df = pd.DataFrame(df)
 ax = sns.violinplot(x='gammarate',y='score',hue='category',data=df,order=x,palette=pal)
@@ -316,7 +336,32 @@ plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., frameon=True)
 sns.plt.xlabel(r'Gamma Distribution Rate $\left(\alpha\right)$',fontsize=14)
 sns.plt.ylabel(r'RAxML Score Difference $\left(Inferred-True\right)$',fontsize=14)
-sns.plt.title('RAxML Score Difference vs. Deviation from Ultrametricity',fontsize=18,y=1.05)
+sns.plt.title('RAxML Score Difference vs. Ultrametricity',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('raxml-likelihood-difference_vs_gammarate.pdf', format='pdf', bbox_inches='tight')
+plt.close()
+
+# plot RAxML Likelihood Score Difference vs. n
+fig = plt.figure()
+x = np.array([25,50,250,500,1000,2000,4000])
+df = {'n':{},'score':{},'category':{}}
+for i in range(len(n_fasttree['score'])):
+    currNum = len(df['n'])
+    df['n'][currNum] = n_fasttree['n'][i]
+    df['score'][currNum] = n_fasttree['score'][i]
+    df['category'][currNum] = 'fasttree'
+    currNum = len(df['n'])
+    df['n'][currNum] = n_raxml['n'][i]
+    df['score'][currNum] = n_raxml['score'][i]
+    df['category'][currNum] = 'raxml'
+df = pd.DataFrame(df)
+ax = sns.violinplot(x='n',y='score',hue='category',data=df,order=x,palette=pal)
+plt.plot(np.linspace(-1,101,10),[0]*10,linestyle='--',color='#000000')
+plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
+legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., frameon=True)
+sns.plt.xlabel(r'$n$',fontsize=14)
+sns.plt.ylabel(r'RAxML Score Difference $\left(Inferred-True\right)$',fontsize=14)
+sns.plt.title(r'RAxML Score Difference vs. $n$',fontsize=18,y=1.05)
+sns.plt.show()
+fig.savefig('raxml-likelihood-difference_vs_n.pdf', format='pdf', bbox_inches='tight')
 plt.close()
