@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 import numpy as np
 from subprocess import check_output
-N = 1024
+N = 4096
 LAMBDA = 48
 MIN_LOG_R = -4
 MAX_LOG_R = 4
