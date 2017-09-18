@@ -41,7 +41,15 @@ def avg_pen_bl_vs_r(r):
 
 # load data
 data_raw = eval(open('/'.join(realpath(__file__).split('/')[:-1]) + '/fig_2_data.json').read())
-data = pd.DataFrame(data_raw)
+data_filt = {'r':[],'avg_bl':[],'avg_pen_bl':[],'cherries':[]}
+for i in range(len(data_raw['r'])): # filter out r > 1
+    if data_raw['r'][i] <= 0: # it's log r
+        data_filt['r'].append(data_raw['r'][i])
+        data_filt['avg_bl'].append(data_raw['avg_bl'][i])
+        data_filt['avg_pen_bl'].append(data_raw['avg_pen_bl'][i])
+        data_filt['cherries'].append(data_raw['cherries'][i])
+data_raw = data_filt # filter out r > 1
+data = pd.DataFrame(data_raw) # filter out r > 1
 
 # branch lengths
 handles = [Patch(color=pal['theoretical_bl'],label='Theoretical Average Branch Length'), Patch(color=pal['avg_bl'],label='Empirical Average Branch Length'), Patch(color=pal['theoretical_pen'],label='Conjectured Average Pendant Branch Length'), Patch(color=pal['avg_pen_bl'],label='Empirical Average Pendant Branch Length')]
@@ -58,7 +66,8 @@ for r in x:
 '''
 tick_labels = ax.xaxis.get_ticklabels()
 for i in range(len(tick_labels)):
-    if x[i] not in {-4.,-3.,-2.,-1.,0.,1.,2.,3.,4.}:
+    #if x[i] not in {-4.,-3.,-2.,-1.,0.,1.,2.,3.,4.}:
+    if x[i] not in {-4.,-3.,-2.,-1.,0.}: # filter out r > 1
         tick_labels[i].set_visible(False)
 x = np.linspace(data_raw['r'][0],data_raw['r'][-1],100)
 plt.plot(4*x+16,avg_bl_vs_r(10**x),linestyle='--',color=pal['theoretical_bl'])
@@ -83,7 +92,8 @@ for r in x:
 '''
 tick_labels = ax.xaxis.get_ticklabels()
 for i in range(len(tick_labels)):
-    if x[i] not in {-4.,-3.,-2.,-1.,0.,1.,2.,3.,4.}:
+    #if x[i] not in {-4.,-3.,-2.,-1.,0.,1.,2.,3.,4.}:
+    if x[i] not in {-4.,-3.,-2.,-1.,0.}: # filter out r > 1
         tick_labels[i].set_visible(False)
 x = np.linspace(data_raw['r'][0],data_raw['r'][-1],100)
 plt.plot(4*x+16,cherries_vs_r(10**x),linestyle='--',color=pal['theoretical_cherries'])
