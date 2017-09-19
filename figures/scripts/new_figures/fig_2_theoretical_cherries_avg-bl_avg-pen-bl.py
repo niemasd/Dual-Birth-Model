@@ -99,7 +99,7 @@ sns.plt.show()
 fig.savefig('theoretical_branch-lengths_vs_r.pdf', format='pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
 
-# cherry fraction
+# cherry and right leaf fraction
 handles = [Patch(color=pal['theoretical_cherries'],label='Theoretical Cherry Fraction'), Patch(color=pal['cherries'],label='Empirical Cherry Fraction')]
 fig = plt.figure()
 x = np.array(sorted(set(data['r'])))
@@ -117,18 +117,9 @@ for i in range(len(tick_labels)):
 x = np.linspace(data_raw['r'][0],data_raw['r'][-1],100)
 plt.plot(4*x+16,cherries_vs_r(10**x),linestyle='--',color=pal['theoretical_cherries'])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., frameon=True)
-sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}$',fontsize=14)
-sns.plt.ylabel('Cherry Fraction',fontsize=14)
-sns.plt.title(r'Cherry Fraction vs. $\log_{10}{r}$',fontsize=18,y=1.05)
-sns.plt.show()
-fig.savefig('theoretical_cherry-fraction_vs_r.pdf', format='pdf', bbox_inches='tight')
-plt.close()
-
-# right leaf fraction
-handles = [Patch(color=pal['theoretical_right_leaves'],label='Theoretical Right Leaf Fraction'), Patch(color=pal['right_leaves'],label='Empirical Right Leaf Fraction')]
-fig = plt.figure()
+handles += [Patch(color=pal['theoretical_right_leaves'],label='Theoretical Active Leaf Fraction'), Patch(color=pal['right_leaves'],label='Empirical Active Leaf Fraction')]
 x = np.array(sorted(set(data['r'])))
-ax = sns.boxplot(x='r',y='right_leaves',data=data,order=x,color=pal['right_leaves'],width=0.3,showfliers=False)
+sns.boxplot(x='r',y='right_leaves',data=data,order=x,color=pal['right_leaves'],width=0.3,showfliers=False)
 '''white dots
 for r in x:
     right_leaves = [data_raw['right_leaves'][i] for i in range(len(data_raw['r'])) if data_raw['r'][i] == r]
@@ -143,8 +134,8 @@ x = np.linspace(data_raw['r'][0],data_raw['r'][-1],100)
 plt.plot(4*x+16,right_leaves_vs_r(10**x),linestyle='--',color=pal['theoretical_right_leaves'])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., frameon=True)
 sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}$',fontsize=14)
-sns.plt.ylabel('Active Leaf Fraction Fraction',fontsize=14)
-sns.plt.title(r'Active Leaf Fraction Fraction vs. $\log_{10}{r}$',fontsize=18,y=1.05)
+sns.plt.ylabel('Cherry and Active Leaf Fraction',fontsize=14)
+sns.plt.title(r'Cherry and Active Leaf Fraction vs. $\log_{10}{r}$',fontsize=18,y=1.05)
 sns.plt.show()
-fig.savefig('theoretical_right-leaves_vs_r.pdf', format='pdf', bbox_inches='tight')
+fig.savefig('theoretical_fractions_vs_r.pdf', format='pdf', bbox_inches='tight')
 plt.close()
