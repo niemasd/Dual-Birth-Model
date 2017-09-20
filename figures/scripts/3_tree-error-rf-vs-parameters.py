@@ -177,6 +177,15 @@ n_raxml = {'n':np.array([25]*20+[50]*20+[250]*20+[500]*20+[1000]*20+[2000]*20+[4
                             [0.34975,0.36745,0.3563,0.3608,0.356,0.3531,0.3515,0.36575,0.3498,0.35575,0.33575,0.35325,0.36675,0.36,0.35325,0.37395,0.34795,0.3695,0.344,0.35795]   # n = 4000
              ).astype(float)}
 
+# modifying model of sequence evolution
+m_raxml = {'m':['JC69']*20+['K80']*20+['HKY85']*20+['GTRCAT']*20+['GTRGAMMA']*20,
+           'RF':np.array([0.3601,0.3569,0.38195,0.391,0.4002,0.3982,0.3872,0.3651,0.3499,0.343,0.3771,0.3902,0.3571,0.3771,0.332,0.39,0.384,0.398,0.3579,0.3649] + # m = JC69
+                         [0.337,0.34585,0.3569,0.3719,0.3791,0.3852,0.3852,0.3631,0.33985,0.335,0.3541,0.3962,0.337,0.3681,0.321,0.394,0.3579,0.393,0.34585,0.3649] + # m = K80
+                         [0.333,0.34785,0.3609,0.3689,0.3651,0.3791,0.3922,0.3651,0.3509,0.339,0.3591,0.3882,0.347,0.3681,0.33,0.3729,0.3579,0.393,0.33485,0.3649] + # m = HKY85
+                         [0.343,0.34335,0.3549,0.37895,0.3661,0.3731,0.3821,0.3631,0.33685,0.342,0.3561,0.3872,0.337,0.3621,0.33,0.38095,0.3619,0.38095,0.34185,0.3529] + # m = GTRCAT
+                         [0.334,0.3579,0.3529,0.37695,0.3691,0.3671,0.3811,0.3661,0.34385,0.339,0.3681,0.3872,0.336,0.3691,0.335,0.38295,0.3569,0.39,0.34285,0.3619] # m = GTRGAMMA
+            ).astype(float)}
+
 # plot tree error (RF) vs. r (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
 fig = plt.figure()
 x = np.array([-4,-3,-2,-1,0])
@@ -194,9 +203,9 @@ df = pd.DataFrame(df)
 ax = sns.violinplot(x='r',y='RF',hue='category',data=df,order=x,palette=pal)
 plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., frameon=True)
-sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}\ \left(E(l_b)=0.298\right)$',fontsize=14)
+sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}$',fontsize=14)
 sns.plt.ylabel('Tree Error (RF)',fontsize=14)
-sns.plt.title(r'Tree Error (RF) vs. $\log_{10}{r}\ \left(E(l_b)=0.298\right)$',fontsize=18,y=1.05)
+sns.plt.title(r'Tree Error (RF) vs. $\log_{10}{r}$',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('tree-error-rf_vs_r_const-exp-branch-length.pdf', format='pdf', bbox_inches='tight')
 plt.close()
@@ -283,8 +292,8 @@ for i in range(len(g_fasttree['RF'])):
     df['RF'][currNum] = g_fasttree['RF'][i]
     df['category'][currNum] = 'fasttree'
     currNum = len(df['gammarate'])
-    df['gammarate'][currNum] = g_fasttree['gammarate'][i]
-    df['RF'][currNum] = g_fasttree['RF'][i]
+    df['gammarate'][currNum] = g_raxml['gammarate'][i]
+    df['RF'][currNum] = g_raxml['RF'][i]
     df['category'][currNum] = 'raxml'
 df = pd.DataFrame(df)
 ax = sns.violinplot(x='gammarate',y='RF',hue='category',data=df,order=x,palette=pal)
@@ -307,8 +316,8 @@ for i in range(len(n_fasttree['RF'])):
     df['RF'][currNum] = n_fasttree['RF'][i]
     df['category'][currNum] = 'fasttree'
     currNum = len(df['n'])
-    df['n'][currNum] = n_fasttree['n'][i]
-    df['RF'][currNum] = n_fasttree['RF'][i]
+    df['n'][currNum] = n_raxml['n'][i]
+    df['RF'][currNum] = n_raxml['RF'][i]
     df['category'][currNum] = 'raxml'
 df = pd.DataFrame(df)
 ax = sns.violinplot(x='n',y='RF',hue='category',data=df,order=x,palette=pal)
@@ -319,4 +328,24 @@ sns.plt.ylabel('Tree Error (RF)',fontsize=14)
 sns.plt.title(r'Tree Error (RF) vs. $n$',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('tree-error-rf_vs_n.pdf', format='pdf', bbox_inches='tight')
+plt.close()
+
+# plot tree error (RF) vs. model of sequence evolution
+handles = [Patch(color=pal['raxml'],label='RAxML')]
+fig = plt.figure()
+df = {'m':{},'RF':{},'category':{}}
+for i in range(len(m_raxml['RF'])):
+    currNum = len(df['m'])
+    df['m'][currNum] = m_raxml['m'][i]
+    df['RF'][currNum] = m_raxml['RF'][i]
+    df['category'][currNum] = 'raxml'
+df = pd.DataFrame(df)
+ax = sns.violinplot(x='m',y='RF',hue='category',data=df,palette=pal)
+plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
+legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., frameon=True)
+sns.plt.xlabel('DNA Evolution Model',fontsize=14)
+sns.plt.ylabel('Tree Error (RF)',fontsize=14)
+sns.plt.title(r'Tree Error (RF) vs. DNA Evolution Model',fontsize=18,y=1.05)
+sns.plt.show()
+fig.savefig('tree-error-rf_vs_model.pdf', format='pdf', bbox_inches='tight')
 plt.close()
