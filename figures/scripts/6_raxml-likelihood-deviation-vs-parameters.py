@@ -17,7 +17,7 @@ sns.set_style("ticks")
 rcParams['font.family'] = 'serif'
 pal = {'simulated':'#597DBE', 'fasttree':'#FF0000', 'raxml':'#0000FF'}
 handles = [Patch(color=pal['fasttree'],label='FastTree'),Patch(color=pal['raxml'],label='RAxML')]
-axisY = np.asarray([i for i in range(-1000,1501,500)])
+axisY = np.asarray([i for i in range(-3000,1501,500)])
 
 # DATASETS
 # modifying r = lambdaA/lambdaB (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
@@ -216,6 +216,15 @@ n_raxml    = {'n':np.array([25]*20+[50]*20+[250]*20+[500]*20+[1000]*20+[2000]*20
                                [730.561611,712.279196,730.184151,729.779463,675.806415,723.928519,763.668822,739.160277,705.243411,757.791197,642.871841,708.497386,729.471431,670.64617,789.376416,749.648255,710.614863,753.955922,644.066059,783.901507]   # n = 4000
              ).astype(float)}
 
+# modifying model of sequence evolution
+m_raxml = {'m':['JC69']*20+['K80']*20+['HKY85']*20+['GTRCAT']*20+['GTRGAMMA']*20,
+           'score':np.array([-2970.298224,-2628.409973,-2618.818465,-2535.148657,-2629.475238,-2522.13355,-2783.171979,-2329.61718,-2484.636713,-2866.200849,-2804.446987,-2902.602393,-2640.90235,-2789.903355,-2530.101129,-2663.844077,-2525.224096,-2410.041446,-2809.117313,-2963.942001] + # m = JC69
+                                     [154.501756,130.433079,159.289804,149.161268,169.993645,132.002907,170.185656,189.929919,119.901537,130.90232,147.21427,193.493004,160.168616,185.90957,193.818004,172.15891,148.496476,218.722321,158.677786,174.13834] + # m = K80
+                                     [149.082203,44.491558,149.656039,152.960988,155.98511,134.249346,28.802909,161.962375,93.155813,91.818455,89.729629,138.274642,91.946058,-29.119853,108.593896,82.497622,81.939165,158.507194,181.258548,179.011982] + # m = HKY85
+                                     [626.965528,594.222097,594.773624,639.371189,663.791398,600.062118,646.579723,579.811294,605.521214,609.545136,621.458523,654.55314,611.117739,651.918815,644.634207,594.185057,616.171067,720.671947,678.543471,648.482659] + # m = GTRCAT
+                                     [174.155064,147.318304,167.765215,176.891066,182.97742,148.00771,196.695035,214.55344,148.480067,172.543503,163.759704,216.776598,165.654509,185.057395,183.469069,198.527401,176.17566,238.077752,194.75257,191.078212] + # m = GTRGAMMA
+                                     [])}
+
 # plot RAxML Likelihood Score Difference vs. r (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
 fig = plt.figure()
 x = np.array([-4,-3,-2,-1,0])
@@ -234,9 +243,9 @@ ax = sns.violinplot(x='r',y='score',hue='category',data=df,order=x,palette=pal)
 plt.plot(np.linspace(-1,101,10),[0]*10,linestyle='--',color='#000000')
 plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., frameon=True)
-sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}\ \left(E(l_b)=0.298\right)$',fontsize=14)
+sns.plt.xlabel(r'$\log_{10}{r} = \log_{10}{\left(\frac{\lambda_A}{\lambda_B}\right)}$',fontsize=14)
 sns.plt.ylabel(r'RAxML Score Difference $\left(Inferred-True\right)$',fontsize=14)
-sns.plt.title(r'RAxML Score Difference vs. $\log_{10}{r}\ \left(E(l_b)=0.298\right)$',fontsize=18,y=1.05)
+sns.plt.title(r'RAxML Score Difference vs. $\log_{10}{r}$',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('raxml-likelihood-difference_vs_r_const-exp-branch-length.pdf', format='pdf', bbox_inches='tight')
 plt.close()
@@ -364,4 +373,25 @@ sns.plt.ylabel(r'RAxML Score Difference $\left(Inferred-True\right)$',fontsize=1
 sns.plt.title(r'RAxML Score Difference vs. $n$',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('raxml-likelihood-difference_vs_n.pdf', format='pdf', bbox_inches='tight')
+plt.close()
+
+# plot RAxML Likelihood Score Difference vs. model of sequence evolution
+handles = [Patch(color=pal['raxml'],label='RAxML')]
+fig = plt.figure()
+df = {'m':{},'score':{},'category':{}}
+for i in range(len(m_raxml['score'])):
+    currNum = len(df['m'])
+    df['m'][currNum] = m_raxml['m'][i]
+    df['score'][currNum] = m_raxml['score'][i]
+    df['category'][currNum] = 'raxml'
+df = pd.DataFrame(df)
+ax = sns.violinplot(x='m',y='score',hue='category',data=df,palette=pal)
+plt.plot(np.linspace(-1,101,10),[0]*10,linestyle='--',color='#000000')
+plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
+legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., frameon=True)
+sns.plt.xlabel('DNA Evolution Model',fontsize=14)
+sns.plt.ylabel(r'RAxML Score Difference $\left(Inferred-True\right)$',fontsize=14)
+sns.plt.title(r'RAxML Score Difference vs. DNA Evolution Model',fontsize=18,y=1.05)
+sns.plt.show()
+fig.savefig('raxml-likelihood-difference_vs_model.pdf', format='pdf', bbox_inches='tight')
 plt.close()
