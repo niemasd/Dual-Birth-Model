@@ -18,7 +18,7 @@ rcParams['font.family'] = 'serif'
 pal = {'theoretical_all':'#000000', 'theoretical_pen':'#A0A0A0', 'simulated_all':'#00FF00', 'simulated_pen':'#AAFFAA', 'fasttree_all':'#FF0000', 'fasttree_pen':'#FFAAAA', 'raxml_all':'#0000FF', 'raxml_pen':'#AAAAFF'}
 meancolor='#00AA00'
 meansize=20
-handles = [Patch(color=pal['theoretical_all'],label='Theoretical (All)'),Patch(color=pal['fasttree_all'],label='Fasttree (All)'),Patch(color=pal['raxml_all'],label='Raxml (All)'),Patch(color=pal['theoretical_pen'],label='Conjectured (Pendant)'),Patch(color=pal['fasttree_pen'],label='FastTree (Pendant)'),Patch(color=pal['raxml_pen'],label='RAxML (Pendant)'),Patch(color=meancolor,label='Mean')]
+handles = [Patch(color=pal['theoretical_all'],label='Theoretical (All)'),Patch(color=pal['fasttree_all'],label='Fasttree (All)'),Patch(color=pal['raxml_all'],label='RAxML (All)'),Patch(color=pal['theoretical_pen'],label='Conjectured (Pendant)'),Patch(color=pal['fasttree_pen'],label='FastTree (Pendant)'),Patch(color=pal['raxml_pen'],label='RAxML (Pendant)'),Patch(color=meancolor,label='Mean')]
 
 # expected pendant branch length
 def exp_pen_bl(la,lb):
