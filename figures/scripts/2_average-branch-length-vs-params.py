@@ -351,7 +351,7 @@ m_raxml_pen    = {'m':['JC69']*20+['K80']*20+['HKY85']*20+['GTRCAT']*20+['GTRGAM
                                    [0.053172090843,0.0487083008849999,0.0498164780799999,0.0479418431799999,0.0537065229599999,0.048344404815,0.05356191126,0.0417136300599999,0.04594742029,0.0562902536299999,0.0520954645599999,0.0604033055320998,0.04891104672,0.05813004361,0.0508926172599998,0.0500418995,0.0491949301699999,0.04698836094,0.05082933991,0.0586636794499999] + # m = GTRCAT
                                    [0.053244245845,0.048381250994,0.04991983727,0.0479605690499998,0.0534337896699999,0.0483772793259999,0.0535554350399999,0.0418456882699999,0.0461932962399999,0.0561950290199998,0.0519095218399999,0.0600406398299999,0.04905802711,0.0581779192899999,0.05086339094,0.04985123391,0.0489749013199999,0.04717251422,0.0508396067799999,0.0587191549399999] # m = GTRGAMMA
              ).astype(float)}
-'''
+
 # plot average branch length vs. r (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
 fig = plt.figure()
 x = np.array([-4,-3,-2,-1,0])
@@ -723,7 +723,7 @@ sns.plt.title(r'Average Branch Length vs. $n$',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('avg-branch-length_vs_n.pdf', format='pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
-'''
+
 # plot average branch length vs. model of sequence evolution
 handles = [Patch(color=pal['theoretical_all'],label='Theoretical (All)'),Patch(color=pal['raxml_all'],label='Raxml (All)'),Patch(color=pal['theoretical_pen'],label='Conjectured (Pendant)'),Patch(color=pal['raxml_pen'],label='RAxML (Pendant)'),Patch(color=meancolor,label='Mean')]
 fig = plt.figure()

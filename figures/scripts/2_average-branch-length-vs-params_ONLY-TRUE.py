@@ -140,6 +140,22 @@ n_original_pen = {'n':np.array([25]*20+[50]*20+[250]*20+[500]*20+[1000]*20+[2000
                                    []
              ).astype(float)}
 
+# modifying model of sequence evolution
+m_original_all    = {'m':['JC69']*20+['K80']*20+['HKY85']*20+['GTRCAT']*20+['GTRGAMMA']*20,
+              'avgbranch':np.array([0.0324368929047,0.0297296903215,0.0288485932844,0.0283625675391,0.0305399759106,0.0287495336242,0.0312924089442,0.0258828176824,0.0283369150003,0.0310587031688,0.0315481480198,0.0357377345189,0.0296620093877,0.0324900928253,0.0296365747935,0.0309474224846,0.0299091439225,0.0287504569736,0.0295955130799,0.033324377919] + # m = JC69
+                                   [0.0324368929047,0.0297296903215,0.0288485932844,0.0283625675391,0.0305399759106,0.0287495336242,0.0312924089442,0.0258828176824,0.0283369150003,0.0310587031688,0.0315481480198,0.0357377345189,0.0296620093877,0.0324900928253,0.0296365747935,0.0309474224846,0.0299091439225,0.0287504569736,0.0295955130799,0.033324377919] + # m = K80
+                                   [0.0324368929047,0.0297296903215,0.0288485932844,0.0283625675391,0.0305399759106,0.0287495336242,0.0312924089442,0.0258828176824,0.0283369150003,0.0310587031688,0.0315481480198,0.0357377345189,0.0296620093877,0.0324900928253,0.0296365747935,0.0309474224846,0.0299091439225,0.0287504569736,0.0295955130799,0.033324377919] + # m = HKY85
+                                   [0.0324368929047,0.0297296903215,0.0288485932844,0.0283625675391,0.0305399759106,0.0287495336242,0.0312924089442,0.0258828176824,0.0283369150003,0.0310587031688,0.0315481480198,0.0357377345189,0.0296620093877,0.0324900928253,0.0296365747935,0.0309474224846,0.0299091439225,0.0287504569736,0.0295955130799,0.033324377919] + # m = GTRCAT
+                                   [0.0324368929047,0.0297296903215,0.0288485932844,0.0283625675391,0.0305399759106,0.0287495336242,0.0312924089442,0.0258828176824,0.0283369150003,0.0310587031688,0.0315481480198,0.0357377345189,0.0296620093877,0.0324900928253,0.0296365747935,0.0309474224846,0.0299091439225,0.0287504569736,0.0295955130799,0.033324377919] # m = GTRGAMMA
+             ).astype(float)}
+m_original_pen    = {'m':['JC69']*20+['K80']*20+['HKY85']*20+['GTRCAT']*20+['GTRGAMMA']*20,
+              'avgbranch':np.array([0.054535951574,0.049555332245,0.0479049161356,0.0472623505316001,0.0510811875846,0.0472539221421001,0.0536389278309099,0.0422586666341,0.0454898116453,0.05258177772979,0.0537887074779999,0.060414100249,0.04909265413686,0.0553610336059999,0.0486882849941,0.0522882162929999,0.0506369394969999,0.0479567180705,0.04916231158884,0.05566594314884] + # m = JC69
+                                   [0.054535951574,0.049555332245,0.0479049161356,0.0472623505316001,0.0510811875846,0.0472539221421001,0.0536389278309099,0.0422586666341,0.0454898116453,0.05258177772979,0.0537887074779999,0.060414100249,0.04909265413686,0.0553610336059999,0.0486882849941,0.0522882162929999,0.0506369394969999,0.0479567180705,0.04916231158884,0.05566594314884] + # m = K80
+                                   [0.054535951574,0.049555332245,0.0479049161356,0.0472623505316001,0.0510811875846,0.0472539221421001,0.0536389278309099,0.0422586666341,0.0454898116453,0.05258177772979,0.0537887074779999,0.060414100249,0.04909265413686,0.0553610336059999,0.0486882849941,0.0522882162929999,0.0506369394969999,0.0479567180705,0.04916231158884,0.05566594314884] + # m = HKY85
+                                   [0.054535951574,0.049555332245,0.0479049161356,0.0472623505316001,0.0510811875846,0.0472539221421001,0.0536389278309099,0.0422586666341,0.0454898116453,0.05258177772979,0.0537887074779999,0.060414100249,0.04909265413686,0.0553610336059999,0.0486882849941,0.0522882162929999,0.0506369394969999,0.0479567180705,0.04916231158884,0.05566594314884] + # m = GTRCAT
+                                   [0.054535951574,0.049555332245,0.0479049161356,0.0472623505316001,0.0510811875846,0.0472539221421001,0.0536389278309099,0.0422586666341,0.0454898116453,0.05258177772979,0.0537887074779999,0.060414100249,0.04909265413686,0.0553610336059999,0.0486882849941,0.0522882162929999,0.0506369394969999,0.0479567180705,0.04916231158884,0.05566594314884] # m = GTRGAMMA
+             ).astype(float)}
+
 # plot average branch length vs. r (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
 fig = plt.figure()
 x = np.array([-4,-3,-2,-1,0])
@@ -390,4 +406,48 @@ sns.plt.ylabel('Average Branch Length',fontsize=14)
 sns.plt.title(r'Average Branch Length vs. $n$',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('avg-branch-length_vs_n.pdf', format='pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
+plt.close()
+
+# plot average branch length vs. model of sequence evolution
+#handles = [Patch(color=pal['theoretical_all'],label='Theoretical (All)'),Patch(color=pal['raxml_all'],label='Raxml (All)'),Patch(color=pal['theoretical_pen'],label='Conjectured (Pendant)'),Patch(color=pal['raxml_pen'],label='RAxML (Pendant)'),Patch(color=meancolor,label='Mean')]
+fig = plt.figure()
+df = {'m':{},'avgbranch':{},'category':{}}
+for i in range(len(m_original_all['avgbranch'])):
+    currNum = len(df['m'])
+    df['m'][currNum] = m_original_all['m'][i]
+    df['avgbranch'][currNum] = m_original_all['avgbranch'][i]
+    df['category'][currNum] = 'simulated_all'
+    currNum = len(df['m'])
+    df['m'][currNum] = m_original_pen['m'][i]
+    df['avgbranch'][currNum] = m_original_pen['avgbranch'][i]
+    df['category'][currNum] = 'simulated_pen'
+df = pd.DataFrame(df)
+ax = sns.violinplot(x='m',y='avgbranch',hue='category',data=df,palette=pal,inner=None)
+for i in range(0,len(m_original_all['avgbranch']),20):
+    plt.scatter([int(i/20)-0.2],[avg(m_original_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)+0.2],[avg(m_original_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+x = np.asarray([i/10.0 for i in range(-39,-34)])
+plt.plot(x+3.5,np.asarray([0.0298238593208140]*5),linestyle='--',color=pal['theoretical_all'])
+plt.plot(x+4.5,np.asarray([0.0298238593208140]*5),linestyle='--',color=pal['theoretical_all'])
+plt.plot(x+5.5,np.asarray([0.0298238593208140]*5),linestyle='--',color=pal['theoretical_all'])
+plt.plot(x+6.5,np.asarray([0.0298238593208140]*5),linestyle='--',color=pal['theoretical_all'])
+plt.plot(x+7.5,np.asarray([0.0298238593208140]*5),linestyle='--',color=pal['theoretical_all'])
+plt.plot(x+8.5,np.asarray([0.0298238593208140]*5),linestyle='--',color=pal['theoretical_all'])
+plt.plot(x+9.5,np.asarray([0.0298238593208140]*5),linestyle='--',color=pal['theoretical_all'])
+x = np.asarray([i/10.0 for i in range(-39,-34)])
+plt.plot(x+3.9,np.asarray([0.05012413331229246]*5),linestyle='--',color=pal['theoretical_pen'])
+plt.plot(x+4.9,np.asarray([0.05012413331229246]*5),linestyle='--',color=pal['theoretical_pen'])
+plt.plot(x+5.9,np.asarray([0.05012413331229246]*5),linestyle='--',color=pal['theoretical_pen'])
+plt.plot(x+6.9,np.asarray([0.05012413331229246]*5),linestyle='--',color=pal['theoretical_pen'])
+plt.plot(x+7.9,np.asarray([0.05012413331229246]*5),linestyle='--',color=pal['theoretical_pen'])
+plt.plot(x+8.9,np.asarray([0.05012413331229246]*5),linestyle='--',color=pal['theoretical_pen'])
+plt.plot(x+9.9,np.asarray([0.05012413331229246]*5),linestyle='--',color=pal['theoretical_pen'])
+axisY = np.asarray([i/100.0 for i in range(0,11,2)])
+plt.yticks(axisY); plt.ylim(0,0.1)
+legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., frameon=True)
+sns.plt.xlabel('DNA Evolution Model',fontsize=14)
+sns.plt.ylabel('Average Branch Length',fontsize=14)
+sns.plt.title(r'Average Branch Length vs. DNA Evolution Model',fontsize=18,y=1.05)
+sns.plt.show()
+fig.savefig('avg-branch-length_vs_model.pdf', format='pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
