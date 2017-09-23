@@ -725,7 +725,7 @@ fig.savefig('avg-branch-length_vs_n.pdf', format='pdf', bbox_extra_artists=(lege
 plt.close()
 
 # plot average branch length vs. model of sequence evolution
-handles = [Patch(color=pal['theoretical_all'],label='Theoretical (All)'),Patch(color=pal['raxml_all'],label='Raxml (All)'),Patch(color=pal['theoretical_pen'],label='Conjectured (Pendant)'),Patch(color=pal['raxml_pen'],label='RAxML (Pendant)'),Patch(color=meancolor,label='Mean')]
+handles = [Patch(color=pal['theoretical_all'],label='Theoretical (All)'),Patch(color=pal['raxml_all'],label='RAxML (All)'),Patch(color=pal['theoretical_pen'],label='Conjectured (Pendant)'),Patch(color=pal['raxml_pen'],label='RAxML (Pendant)'),Patch(color=meancolor,label='Mean')]
 fig = plt.figure()
 df = {'m':{},'avgbranch':{},'category':{}}
 for i in range(len(m_raxml_all['avgbranch'])):
