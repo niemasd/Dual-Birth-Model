@@ -245,6 +245,39 @@ n_fasttree_bl = {'n':np.array([25]*20+[50]*20+[250]*20+[500]*20+[1000]*20+[2000]
                                              [0.013775825366655,0.0121571381466063,0.01354572915387,0.0131313027546302,0.0132184488762507,0.0120673045892059,0.0133645937497721,0.0123862099696911,0.0145972198070904,0.0119118241976839,0.0147075184735567,0.0161307038869194,0.0121304246352677,0.0144306855149803,0.0135545705684828,0.0126574422487482,0.0148028940425942,0.0154711730316754,0.0149429571958578,0.0131381856190489]        # n = 4000
                                              ))}
 
+# modifying model of evolution
+m_original_cherries = {'m':['JC69']*20+['K80']*20+['HKY85']*20+['GTRCAT']*20+['GTRGAMMA']*20,
+                    'inferred_r':np.log10(r_vs_cherries(np.array([88,91,90,88,86,90,90,91,92,94,85,87,88,86,100,88,91,91,98,90] + # m = JC69
+                                  [88,91,90,88,86,90,90,91,92,94,85,87,88,86,100,88,91,91,98,90] + # K80
+                                  [88,91,90,88,86,90,90,91,92,94,85,87,88,86,100,88,91,91,98,90] + # HKY85
+                                  [88,91,90,88,86,90,90,91,92,94,85,87,88,86,100,88,91,91,98,90] + # m = GTRCAT
+                                  [88,91,90,88,86,90,90,91,92,94,85,87,88,86,100,88,91,91,98,90] + # m = GTRGAMMA
+                                                                 [])/1000.))}
+m_original_bl = {'m':['JC69']*20+['K80']*20+['HKY85']*20+['GTRCAT']*20+['GTRGAMMA']*20,
+              'inferred_r':np.log10(np.array([0.00995117597171412,0.0111289089744208,0.0116730286415915,0.0111713941429863,0.0106494155513853,0.013229609652557,0.0076022779285254,0.0143143538301239,0.0173149555568293,0.0090642584253839,0.00821316131714652,0.00924879351955583,0.0121630365665877,0.00828441565109192,0.0133064398208696,0.00931618027234134,0.0090609615951467,0.0110299126137654,0.0116223823690031,0.0108293064302953] + # m = JC69
+                            [0.00995117597171412,0.0111289089744208,0.0116730286415915,0.0111713941429863,0.0106494155513853,0.013229609652557,0.0076022779285254,0.0143143538301239,0.0173149555568293,0.0090642584253839,0.00821316131714652,0.00924879351955583,0.0121630365665877,0.00828441565109192,0.0133064398208696,0.00931618027234134,0.0090609615951467,0.0110299126137654,0.0116223823690031,0.0108293064302953] + # K80
+                            [0.00995117597171412,0.0111289089744208,0.0116730286415915,0.0111713941429863,0.0106494155513853,0.013229609652557,0.0076022779285254,0.0143143538301239,0.0173149555568293,0.0090642584253839,0.00821316131714652,0.00924879351955583,0.0121630365665877,0.00828441565109192,0.0133064398208696,0.00931618027234134,0.0090609615951467,0.0110299126137654,0.0116223823690031,0.0108293064302953] + # HKY85
+                            [0.00995117597171412,0.0111289089744208,0.0116730286415915,0.0111713941429863,0.0106494155513853,0.013229609652557,0.0076022779285254,0.0143143538301239,0.0173149555568293,0.0090642584253839,0.00821316131714652,0.00924879351955583,0.0121630365665877,0.00828441565109192,0.0133064398208696,0.00931618027234134,0.0090609615951467,0.0110299126137654,0.0116223823690031,0.0108293064302953] + # m = GTRCAT
+                            [0.00995117597171412,0.0111289089744208,0.0116730286415915,0.0111713941429863,0.0106494155513853,0.013229609652557,0.0076022779285254,0.0143143538301239,0.0173149555568293,0.0090642584253839,0.00821316131714652,0.00924879351955583,0.0121630365665877,0.00828441565109192,0.0133064398208696,0.00931618027234134,0.0090609615951467,0.0110299126137654,0.0116223823690031,0.0108293064302953] # m = GTRGAMMA
+                                             ))}
+m_fasttree_cherries = {'m':['JC69']*20+['K80']*20+['HKY85']*20+['GTRCAT']*20+['GTRGAMMA']*20,
+                    'inferred_r':np.log10(r_vs_cherries(np.array([223,209,216,211,220,210,217,197,205,208,227,229,187,211,213,207,220,212,212,213] + # m = JC69
+                                  [1]*20 + # K80
+                                  [1]*20 + # HKY85
+                                  [208,204,216,214,214,216,216,197,206,197,221,218,176,207,205,217,220,210,214,197] + # m = GTRCAT
+                                  [208,204,216,214,213,216,216,196,207,197,221,219,176,206,205,217,219,210,214,197] + # m = GTRGAMMA
+                                  [])/1000.))}
+for i in range(len(m_fasttree_cherries['inferred_r'])):
+    if m_fasttree_cherries['inferred_r'][i] < -5:
+        m_fasttree_cherries['inferred_r'][i] = float('inf')
+m_fasttree_bl = {'m':['JC69']*20+['K80']*20+['HKY85']*20+['GTRCAT']*20+['GTRGAMMA']*20,
+              'inferred_r':np.log10(np.array([0.0140112115188115,0.0153508330721529,0.0161827711079539,0.0146602649780239,0.0144746611542048,0.0180072388335712,0.010911301110577,0.0188350979804544,0.0218213013618891,0.0135524446574123,0.0120786385099234,0.0145870375203729,0.0161544971113381,0.0108644681962226,0.0173872300998891,0.0135942369611839,0.0126243578552526,0.0153392297544034,0.0170149215607051,0.0151828999285849] + # m = JC69
+                            [float('inf')]*20 + # K80
+                            [float('inf')]*20 + # HKY85
+                            [0.0122571586708818,0.0140084565145715,0.014732284725549,0.012890961134659,0.012820446862819,0.0165997388946496,0.009660786587848,0.0170200591453651,0.0205941945512145,0.0116562695551446,0.0104273289612117,0.0129342335717491,0.0144577814344793,0.00951573088927998,0.0153008229217173,0.0119062749535512,0.0111583888033098,0.0137227229616995,0.0150564314783303,0.0129921191796931] + # m = GTRCAT
+                            [0.0122579147016221,0.0140103720789263,0.0147327035321984,0.0129625491965347,0.0127696805376614,0.0166013558138436,0.00966062419265548,0.0170135675784685,0.0205515493185258,0.0116561323976982,0.01042762109447,0.0129336999874741,0.0144581019807326,0.00953682843475937,0.0153007440503203,0.0119300082256185,0.0111576599980953,0.0136172999063792,0.015183613341153,0.0130099110208662] # m = GTRGAMMA
+                                             ))}
+
 # plot Estimated $\log_{10}{r}$ vs. r (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
 fig = plt.figure()
 x = np.array([-4,-3,-2,-1,0])
@@ -374,7 +407,28 @@ plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., frameon=True)
 sns.plt.xlabel(r'$n$',fontsize=14)
 sns.plt.ylabel(r'Estimated $\log_{10}{r}$',fontsize=14)
-sns.plt.title('Estimated $\log_{10}{r}$ vs. $n$',fontsize=18,y=1.05)
+sns.plt.title(r'Estimated $\log_{10}{r}$ vs. $n$',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('estimated-r_vs_n_with-corrections.pdf', format='pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
+plt.close()
+
+# plot Estimated $\log_{10}{r}$ vs. model of evolution
+fig = plt.figure()
+ax = sns.violinplot(x='m',y='inferred_r',data=pd.DataFrame(m_original_bl),color=pal['original_bl'],scale='width',width=0.3,inner=None)
+plt.plot(np.asarray([int(i/20) for i in range(0,len(m_original_bl['inferred_r']),20)]),[sum(m_original_bl['inferred_r'][i:i+20])/20.0 for i in range(0,len(m_original_bl['inferred_r']),20)],color=pal['original_bl'],linestyle=':',linewidth=3)
+sns.violinplot(x='m',y='inferred_r',data=pd.DataFrame(m_original_cherries),color=pal['original_cherries'],scale='width',width=0.3,inner=None)
+plt.plot(np.asarray([int(i/20) for i in range(0,len(m_original_cherries['inferred_r']),20)]),[sum(m_original_cherries['inferred_r'][i:i+20])/20.0 for i in range(0,len(m_original_cherries['inferred_r']),20)],color=pal['original_cherries'],linestyle=':',linewidth=3)
+sns.violinplot(x='m',y='inferred_r',data=pd.DataFrame(m_fasttree_bl),color=pal['fasttree_bl'],scale='width',width=0.3,inner=None)
+plt.plot(np.asarray([int(i/20) for i in range(0,len(m_fasttree_bl['inferred_r']),20)]),[sum(m_fasttree_bl['inferred_r'][i:i+20])/20.0 for i in range(0,len(m_fasttree_bl['inferred_r']),20)],color=pal['fasttree_bl'],linestyle=':',linewidth=3)
+sns.violinplot(x='m',y='inferred_r',data=pd.DataFrame(m_fasttree_cherries),color=pal['fasttree_cherries'],scale='width',width=0.3,inner=None)
+plt.plot(np.asarray([int(i/20) for i in range(0,len(m_fasttree_cherries['inferred_r']),20)]),[sum(m_fasttree_cherries['inferred_r'][i:i+20])/20.0 for i in range(0,len(m_fasttree_cherries['inferred_r']),20)],color=pal['fasttree_cherries'],linestyle=':',linewidth=3)
+setAlpha(ax,0.7)
+plt.plot([-10,10],[-2,-2],label='Theoretical',linestyle='--',color=pal['theoretical'])
+plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
+legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., frameon=True)
+sns.plt.xlabel(r'$n$',fontsize=14)
+sns.plt.ylabel(r'Estimated $\log_{10}{r}$',fontsize=14)
+sns.plt.title('Estimated $\log_{10}{r}$ vs. DNA Evolution Model',fontsize=18,y=1.05)
+sns.plt.show()
+fig.savefig('estimated-r_vs_model_with-corrections.pdf', format='pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
