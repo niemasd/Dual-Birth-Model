@@ -187,6 +187,32 @@ n_raxml    = {'n':np.array([25]*20+[50]*20+[250]*20+[500]*20+[1000]*20+[2000]*20
                                   [0.199,0.20525,0.2005,0.20475,0.19325,0.1915,0.201,0.2,0.19425,0.195,0.1865,0.1965,0.20375,0.19575,0.2,0.20025,0.19,0.199,0.1895,0.19925]                      # n = 4000
              ).astype(float)} # divide by number of leaves to get percentage
 
+# modifying model of evolution
+m_simulated = {'m':['JC69']*20+['K80']*20+['HKY85']*20+['GTRCAT']*20+['GTRGAMMA']*20,
+              'cherries':np.array([88,91,90,88,86,90,90,91,92,94,85,87,88,86,100,88,91,91,98,90] + # m = JC69
+                            [88,91,90,88,86,90,90,91,92,94,85,87,88,86,100,88,91,91,98,90] + # K80
+                            [88,91,90,88,86,90,90,91,92,94,85,87,88,86,100,88,91,91,98,90] + # HKY85
+                            [88,91,90,88,86,90,90,91,92,94,85,87,88,86,100,88,91,91,98,90] + # m = GTRCAT
+                            [88,91,90,88,86,90,90,91,92,94,85,87,88,86,100,88,91,91,98,90] # m = GTRGAMMA
+             ).astype(float)/1000} # divide by number of leaves to get percentage
+m_fasttree = {'m':['JC69']*20+['K80']*20+['HKY85']*20+['GTRCAT']*20+['GTRGAMMA']*20,
+              'cherries':np.array([223,209,216,211,220,210,217,197,205,208,227,229,187,211,213,207,220,212,212,213] + # m = JC69
+                            [1]*20 + # K80
+                            [1]*20 + # HKY85
+                            [208,204,216,214,214,216,216,197,206,197,221,218,176,207,205,217,220,210,214,197] + # m = GTRCAT
+                            [208,204,216,214,213,216,216,196,207,197,221,219,176,206,205,217,219,210,214,197] # m = GTRGAMMA
+             ).astype(float)/1000} # divide by number of leaves to get percentage
+for i in range(len(m_fasttree['cherries'])):
+    if m_fasttree['cherries'][i] == 1./1000.:
+        m_fasttree['cherries'][i] = float('inf')
+m_raxml    = {'m':['JC69']*20+['K80']*20+['HKY85']*20+['GTRCAT']*20+['GTRGAMMA']*20,
+              'cherries':np.array([203,200,209,215,210,210,214,194,199,187,219,224,183,203,186,196,211,202,203,203] + # m = JC69
+                                                           [192,191,203,197,199,201,204,193,193,196,201,209,186,197,184,197,197,197,205,192] + # m = K80
+                                                           [190,195,204,197,195,198,221,188,197,191,198,206,193,192,188,182,209,195,202,197] + # m = HKY85
+                                                           [204,192,202,196,198,209,212,189,192,198,205,205,189,200,197,194,209,207,205,194] + # m = GTRCAT
+                                                           [193,190,199,193,197,196,209,190,190,199,205,218,192,199,185,197,203,203,198,189] # m = GTRGAMMA
+             ).astype(float)/1000} # divide by number of leaves to get percentage
+
 # plot Cherry Fraction vs. r (with different lambda = lambdaA+lambdaB to keep expected branch length constant)
 fig = plt.figure()
 x = np.array([-4,-3,-2,-1,0])
@@ -311,4 +337,24 @@ sns.plt.ylabel('Cherry Fraction',fontsize=14)
 sns.plt.title(r'Cherry Fraction vs. $n$',fontsize=18,y=1.05)
 sns.plt.show()
 fig.savefig('cherries-fraction_vs_n_with-corrections.pdf', format='pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
+plt.close()
+
+# plot Cherry Fraction vs. model of evolution
+fig = plt.figure()
+ax = sns.violinplot(x='m',y='cherries',data=pd.DataFrame(m_fasttree),color=pal['fasttree'],width=0.3)
+sns.pointplot(np.asarray([int(i/20) for i in range(0,len(m_fasttree['cherries']),20)]),[sum(m_fasttree['cherries'][i:i+20])/20.0 for i in range(0,len(m_fasttree['cherries']),20)],color=pal['fasttree'],linestyles=['--'],linewidth=3)
+sns.violinplot(x='m',y='cherries',data=pd.DataFrame(m_raxml),color=pal['raxml'],width=0.3)
+sns.pointplot(np.asarray([int(i/20) for i in range(0,len(m_raxml['cherries']),20)]),[sum(m_raxml['cherries'][i:i+20])/20.0 for i in range(0,len(m_raxml['cherries']),20)],color=pal['raxml'],linestyles=['--'],linewidth=3)
+sns.violinplot(x='m',y='cherries',data=pd.DataFrame(m_simulated),color=pal['simulated'],width=0.3)
+sns.pointplot(np.asarray([int(i/20) for i in range(0,len(m_simulated['cherries']),20)]),[sum(m_simulated['cherries'][i:i+20])/20.0 for i in range(0,len(m_simulated['cherries']),20)],color=pal['simulated'],linestyles=['--'],linewidth=3)
+setAlpha(ax,0.5)
+x = np.linspace(-100,1000,5000)
+plt.plot(x,np.array([cherries_vs_r(0.01)]*len(x)),label='Theoretical',linestyle='--',color=pal['theoretical'])
+plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
+legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., frameon=True)
+sns.plt.xlabel('DNA Evolution Model',fontsize=14)
+sns.plt.ylabel('Cherry Fraction',fontsize=14)
+sns.plt.title(r'Cherry Fraction vs. DNA Evolution Model',fontsize=18,y=1.05)
+sns.plt.show()
+fig.savefig('cherries-fraction_vs_model_with-corrections.pdf', format='pdf', bbox_extra_artists=(legend,), bbox_inches='tight')
 plt.close()
