@@ -337,6 +337,20 @@ n_raxml_pen    = {'n':np.array([25]*20+[50]*20+[250]*20+[500]*20+[1000]*20+[2000
              ).astype(float)}
 
 # modifying model of sequence evolution
+m_fasttree_all    = {'m':['JC69']*20+['K80']*20+['HKY85']*20+['GTRCAT']*20+['GTRGAMMA']*20,
+              'avgbranch':np.array([0.0312544115268169,0.0277503930970335,0.0282914254979958,0.0281231587832412,0.029113766754131,0.0279656107065325,0.0299407623635907,0.0252821242929647,0.0269865446889111,0.0306255207479918,0.029349282382028,0.0347020374932125,0.0289133042595765,0.0312879285875563,0.0280553303416957,0.0296041855779447,0.0277823897239477,0.0267075145280842,0.0287453938033115,0.032655126623181] + # m = JC69
+                                   [float('inf')]*20 + # K80
+                                   [float('inf')]*20 + # HKY85
+                                   [0.032545040552882,0.0291361671397685,0.0291749734534066,0.0290862104846963,0.0302091321256885,0.0290405945281406,0.0319415068766298,0.0261540372778894,0.02806647913146,0.0320946299236946,0.0317017961541163,0.0371057305897436,0.0305647977918345,0.0337263320526843,0.0294776388946311,0.0313705074887217,0.0292560186017032,0.0282863400837511,0.0300148484666331,0.0338047539182137] + # m = GTRCAT
+                                   [0.0328280374927,0.0293589119216,0.0293702403287,0.0292681320346,0.0304669867301,0.0293316668095,0.0321295772533,0.0263854120724,0.0283967136126,0.03225246587,0.0319497768996,0.0374410630995,0.0308409901689,0.0339875604079,0.0297108082644,0.0315950468596,0.0294834989233,0.028531067488,0.0302582171395,0.0339871709363] # m = GTRGAMMA
+             ).astype(float)}
+m_fasttree_pen    = {'m':['JC69']*20+['K80']*20+['HKY85']*20+['GTRCAT']*20+['GTRGAMMA']*20,
+              'avgbranch':np.array([0.051122480815,0.0450330323419999,0.045696180551,0.045821888465,0.047488227141,0.044731562381,0.0499844511459999,0.040269479241,0.042377722546,0.0502355222509999,0.048602507735,0.0565655789849999,0.0467079573179999,0.0522510038809999,0.0450205625859999,0.048547591217,0.0458420486849999,0.043343546647,0.046219378931,0.0530436484909999] + # m = JC69
+                                   [float('inf')]*20 + # K80
+                                   [float('inf')]*20 + # HKY85
+                                   [0.053830516335,0.047658492724,0.047515432311,0.04791064277,0.049782920931,0.0467989003709999,0.053822609266,0.042051609656,0.044324147445,0.053301291041,0.0531106763949999,0.061103365038,0.049860062328,0.056894161196,0.047849730196,0.052010022092,0.04875563644,0.0463495716029999,0.048790634241,0.055646883771] + # m = GTRCAT
+                                   [0.05429832944,0.048022279512,0.0478333330219999,0.0481881549409999,0.050224322631,0.047267546798,0.0541395826969999,0.042425100062,0.044854692312,0.0535634681539999,0.053526008508,0.0616557804509999,0.05031051607,0.057325405126,0.048228245456,0.052373883944,0.049134988781,0.04678109667,0.049150004384,0.055940799892] # m = GTRGAMMA
+             ).astype(float)}
 m_raxml_all    = {'m':['JC69']*20+['K80']*20+['HKY85']*20+['GTRCAT']*20+['GTRGAMMA']*20,
               'avgbranch':np.array([0.0314482768633633,0.0296024978263262,0.0297926895880878,0.0286565800295293,0.031574693674174,0.0299476350255253,0.0310344320470469,0.0251743669434984,0.0287465362292291,0.0332445214499498,0.0290170195815814,0.035261587807307,0.0304748267387386,0.0341822875257255,0.0315287234719718,0.0285228863743742,0.0276479783288286,0.0298233189234232,0.0308850399147045,0.0347433706627626] + # m = JC69
                                    [0.0320250720075574,0.0301409033458958,0.0300885191095094,0.0293369978173172,0.0322606354996495,0.0303926842117115,0.0317634185570069,0.0256634132282281,0.0292205994412911,0.0342779471545544,0.0296998328410909,0.036321435824339,0.0312722910240238,0.0349776800445442,0.0324732348910408,0.0294966647424923,0.0279658929779779,0.0306600988466964,0.0313518966859357,0.0351495510673672] + # m = K80
@@ -725,14 +739,21 @@ fig.savefig('avg-branch-length_vs_n.pdf', format='pdf', bbox_extra_artists=(lege
 plt.close()
 
 # plot average branch length vs. model of sequence evolution
-handles = [Patch(color=pal['theoretical_all'],label='Theoretical (All)'),Patch(color=pal['raxml_all'],label='RAxML (All)'),Patch(color=pal['theoretical_pen'],label='Conjectured (Pendant)'),Patch(color=pal['raxml_pen'],label='RAxML (Pendant)'),Patch(color=meancolor,label='Mean')]
 fig = plt.figure()
 df = {'m':{},'avgbranch':{},'category':{}}
 for i in range(len(m_raxml_all['avgbranch'])):
     currNum = len(df['m'])
+    df['m'][currNum] = m_fasttree_all['m'][i]
+    df['avgbranch'][currNum] = m_fasttree_all['avgbranch'][i]
+    df['category'][currNum] = 'fasttree_all'
+    currNum = len(df['m'])
     df['m'][currNum] = m_raxml_all['m'][i]
     df['avgbranch'][currNum] = m_raxml_all['avgbranch'][i]
     df['category'][currNum] = 'raxml_all'
+    currNum = len(df['m'])
+    df['m'][currNum] = m_fasttree_pen['m'][i]
+    df['avgbranch'][currNum] = m_fasttree_pen['avgbranch'][i]
+    df['category'][currNum] = 'fasttree_pen'
     currNum = len(df['m'])
     df['m'][currNum] = m_raxml_pen['m'][i]
     df['avgbranch'][currNum] = m_raxml_pen['avgbranch'][i]
@@ -740,8 +761,10 @@ for i in range(len(m_raxml_all['avgbranch'])):
 df = pd.DataFrame(df)
 ax = sns.violinplot(x='m',y='avgbranch',hue='category',data=df,palette=pal,inner=None)
 for i in range(0,len(m_raxml_all['avgbranch']),20):
-    plt.scatter([int(i/20)-0.2],[avg(m_raxml_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
-    plt.scatter([int(i/20)+0.2],[avg(m_raxml_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)-0.29],[avg(m_fasttree_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)-0.10],[avg(m_raxml_all['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)+0.10],[avg(m_fasttree_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
+    plt.scatter([int(i/20)+0.29],[avg(m_raxml_pen['avgbranch'][i:i+20])],c=meancolor,s=meansize)
 x = np.asarray([i/10.0 for i in range(-39,-34)])
 plt.plot(x+3.5,np.asarray([0.0298238593208140]*5),linestyle='--',color=pal['theoretical_all'])
 plt.plot(x+4.5,np.asarray([0.0298238593208140]*5),linestyle='--',color=pal['theoretical_all'])

@@ -178,6 +178,13 @@ n_raxml = {'n':np.array([25]*20+[50]*20+[250]*20+[500]*20+[1000]*20+[2000]*20+[4
              ).astype(float)}
 
 # modifying model of sequence evolution
+m_fasttree = {'m':['JC69']*20+['K80']*20+['HKY85']*20+['GTRCAT']*20+['GTRGAMMA']*20,
+           'RF':np.array([0.3993,0.3998,0.38135,0.4216,0.426,0.3786,0.401,0.3847,0.39045,0.37825,0.3964,0.40755,0.36865,0.38565,0.3605,0.40915,0.41045,0.3978,0.37335,0.38545] + # m = JC69
+                         [float('inf')]*20 + # K80
+                         [float('inf')]*20 + # HKY85
+                         [0.37315,0.39425,0.37025,0.3975,0.4079,0.3766,0.395,0.3726,0.37335,0.35715,0.38635,0.4065,0.3545,0.38055,0.34945,0.3961,0.38735,0.3968,0.3593,0.3663] + # m = GTRCAT
+                         [0.37315,0.39425,0.37025,0.3995,0.4079,0.3756,0.395,0.3726,0.37335,0.35715,0.38635,0.4065,0.3545,0.37955,0.34945,0.3971,0.38635,0.3948,0.3593,0.3653] # m = GTRGAMMA
+            ).astype(float)}
 m_raxml = {'m':['JC69']*20+['K80']*20+['HKY85']*20+['GTRCAT']*20+['GTRGAMMA']*20,
            'RF':np.array([0.3601,0.3569,0.38195,0.391,0.4002,0.3982,0.3872,0.3651,0.3499,0.343,0.3771,0.3902,0.3571,0.3771,0.332,0.39,0.384,0.398,0.3579,0.3649] + # m = JC69
                          [0.337,0.34585,0.3569,0.3719,0.3791,0.3852,0.3852,0.3631,0.33985,0.335,0.3541,0.3962,0.337,0.3681,0.321,0.394,0.3579,0.393,0.34585,0.3649] + # m = K80
@@ -331,10 +338,13 @@ fig.savefig('tree-error-rf_vs_n.pdf', format='pdf', bbox_inches='tight')
 plt.close()
 
 # plot tree error (RF) vs. model of sequence evolution
-handles = [Patch(color=pal['raxml'],label='RAxML')]
 fig = plt.figure()
 df = {'m':{},'RF':{},'category':{}}
 for i in range(len(m_raxml['RF'])):
+    currNum = len(df['m'])
+    df['m'][currNum] = m_fasttree['m'][i]
+    df['RF'][currNum] = m_fasttree['RF'][i]
+    df['category'][currNum] = 'fasttree'
     currNum = len(df['m'])
     df['m'][currNum] = m_raxml['m'][i]
     df['RF'][currNum] = m_raxml['RF'][i]
