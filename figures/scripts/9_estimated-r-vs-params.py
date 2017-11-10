@@ -16,7 +16,8 @@ import seaborn as sns
 # settings
 sns.set_style("ticks")
 rcParams['font.family'] = 'serif'
-pal = {'theoretical':'#000000', 'raxml_bl':'#0000FF', 'raxml_cherries':'#FF0000', 'raxml_cherries_corrected':'#D75F60'}
+pal = {'theoretical':'#000000', 'raxml_bl':'#696969', 'raxml_cherries':'#C0C0C0', 'raxml_cherries_corrected':'#D75F60'}
+#pal = {'theoretical':'#000000', 'raxml_bl':'#0000FF', 'raxml_cherries':'#FF0000', 'raxml_cherries_corrected':'#D75F60'}
 handles = [Patch(color=pal['theoretical'],label='Theoretical'), Patch(color=pal['raxml_cherries'],label='Cherries'), Patch(color=pal['raxml_bl'],label='Branch Length')]
 axisY = np.asarray([-5,-4,-3,-2,-1,0,1])
 
@@ -171,7 +172,7 @@ ax = sns.violinplot(x='r',y='inferred_r',data=pd.DataFrame(r_raxml_bl),order=x,c
 plt.plot(np.asarray([sum(r_raxml_bl['r'][i:i+20])/20.0 for i in range(0,len(r_raxml_bl['inferred_r']),20)])+4,[sum(r_raxml_bl['inferred_r'][i:i+20])/20.0 for i in range(0,len(r_raxml_bl['inferred_r']),20)],color=pal['raxml_bl'],linestyle=':',linewidth=3)
 sns.violinplot(x='r',y='inferred_r',data=pd.DataFrame(r_raxml_cherries),order=x,color=pal['raxml_cherries'],scale='width',width=0.3,inner=None)
 plt.plot(np.asarray([sum(r_raxml_cherries['r'][i:i+20])/20.0 for i in range(0,len(r_raxml_cherries['inferred_r']),20)])+4,[sum(r_raxml_cherries['inferred_r'][i:i+20])/20.0 for i in range(0,len(r_raxml_cherries['inferred_r']),20)],color=pal['raxml_cherries'],linestyle=':',linewidth=3)
-setAlpha(ax,0.7)
+setAlpha(ax,0.9)
 plt.plot([-1,0,1,2,3,4,5],[-5,-4,-3,-2,-1,0,1],label='Theoretical',linestyle='--',color=pal['theoretical'])
 plt.yticks(axisY); plt.ylim(axisY[0],axisY[-1])
 legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., frameon=True)
