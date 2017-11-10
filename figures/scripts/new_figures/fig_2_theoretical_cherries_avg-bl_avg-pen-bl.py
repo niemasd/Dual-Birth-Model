@@ -24,7 +24,8 @@ meansize = 20
 LAMBDA = 48.
 sns.set_style("ticks")
 rcParams['font.family'] = 'serif'
-pal = {'cherries':'#FF0000', 'avg_bl':'#0000FF', 'avg_pen_bl':'#00FF00', 'theoretical_cherries':'#FFAAAA', 'theoretical_bl':'#AAAAFF', 'theoretical_pen':'#AAFFAA', 'right_leaves':'#FF00FF','theoretical_right_leaves':'#FFAAFF'}
+#pal = {'cherries':'#FF0000', 'avg_bl':'#0000FF', 'avg_pen_bl':'#00FF00', 'theoretical_cherries':'#FFAAAA', 'theoretical_bl':'#AAAAFF', 'theoretical_pen':'#AAFFAA', 'right_leaves':'#FF00FF','theoretical_right_leaves':'#FFAAFF'}
+pal = {'cherries':'#696969', 'avg_bl':'#696969', 'avg_pen_bl':'#C0C0C0', 'theoretical_cherries':'#696969', 'theoretical_bl':'#696969', 'theoretical_pen':'#C0C0C0', 'right_leaves':'#C0C0C0','theoretical_right_leaves':'#C0C0C0'}
 
 # Expected Number of Cherries as a Function of r
 def cherries_vs_r(r):
@@ -71,7 +72,8 @@ data_raw = data_filt # filter out r > 1
 data = pd.DataFrame(data_raw) # filter out r > 1
 
 # branch lengths
-handles = [Patch(color=pal['theoretical_bl'],label='Theoretical Average Branch Length'), Patch(color=pal['avg_bl'],label='Empirical Average Branch Length'), Patch(color=pal['theoretical_pen'],label='Conjectured Average Pendant Branch Length'), Patch(color=pal['avg_pen_bl'],label='Empirical Average Pendant Branch Length')]
+#handles = [Patch(color=pal['theoretical_bl'],label='Theoretical Average Branch Length'), Patch(color=pal['avg_bl'],label='Empirical Average Branch Length'), Patch(color=pal['theoretical_pen'],label='Conjectured Average Pendant Branch Length'), Patch(color=pal['avg_pen_bl'],label='Empirical Average Pendant Branch Length')]
+handles = [Patch(color=pal['avg_pen_bl'],label='Average Pendant Branch Length'), Patch(color=pal['avg_bl'],label='Average Branch Length')]
 fig = plt.figure()
 x = np.array(sorted(set(data['r'])))
 ax = sns.boxplot(x='r',y='avg_bl',data=data,color=pal['avg_bl'],width=0.3,showfliers=False)
@@ -100,7 +102,8 @@ fig.savefig('theoretical_branch-lengths_vs_r.pdf', format='pdf', bbox_extra_arti
 plt.close()
 
 # cherry and right leaf fraction
-handles = [Patch(color=pal['theoretical_cherries'],label='Theoretical Cherry Fraction'), Patch(color=pal['cherries'],label='Empirical Cherry Fraction')]
+#handles = [Patch(color=pal['theoretical_cherries'],label='Theoretical Cherry Fraction'), Patch(color=pal['cherries'],label='Empirical Cherry Fraction')]
+handles = [Patch(color=pal['right_leaves'],label='Active Leaf Fraction'), Patch(color=pal['cherries'],label='Cherry Fraction')]
 fig = plt.figure()
 x = np.array(sorted(set(data['r'])))
 ax = sns.boxplot(x='r',y='cherries',data=data,order=x,color=pal['cherries'],width=0.3,showfliers=False)
@@ -116,8 +119,7 @@ for i in range(len(tick_labels)):
         tick_labels[i].set_visible(False)
 x = np.linspace(data_raw['r'][0],data_raw['r'][-1],100)
 plt.plot(4*x+16,cherries_vs_r(10**x),linestyle='--',color=pal['theoretical_cherries'])
-legend = plt.legend(handles=handles,bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., frameon=True)
-handles += [Patch(color=pal['theoretical_right_leaves'],label='Theoretical Active Leaf Fraction'), Patch(color=pal['right_leaves'],label='Empirical Active Leaf Fraction')]
+#handles += [Patch(color=pal['theoretical_right_leaves'],label='Theoretical Active Leaf Fraction'), Patch(color=pal['right_leaves'],label='Empirical Active Leaf Fraction')]
 x = np.array(sorted(set(data['r'])))
 sns.boxplot(x='r',y='right_leaves',data=data,order=x,color=pal['right_leaves'],width=0.3,showfliers=False)
 '''white dots
