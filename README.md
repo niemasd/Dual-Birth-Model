@@ -1,4 +1,4 @@
-This is the Git repository containing all code and simulation data for the paper titled "A two-state model of tree evolution and its applications to *Alu* retrotransposition" ([doi: 10.1093/sysbio/syx088](https://doi.org/10.1093/sysbio/syx088)). The real *Alu* data (sequences, alignments, and trees) are too large for a Git repository and can instead be obtained [here](https://doi.org/10.6084/m9.figshare.4615147.v1).
+This is the Git repository containing all code and simulation data for the paper titled "A two-state model of tree evolution and its applications to *Alu* retrotransposition" ([doi: 10.1093/sysbio/syx088](https://doi.org/10.1093/sysbio/syx088)). The supplementary files for the paper can be found [here](https://doi.org/10.5061/dryad.13n52).
 
 REQUIREMENTS
 ===
