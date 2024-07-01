@@ -1,6 +1,6 @@
 This is the Git repository containing all code and simulation data for the paper titled "A two-state model of tree evolution and its applications to *Alu* retrotransposition" ([doi:10.1093/sysbio/syx088](https://doi.org/10.1093/sysbio/syx088)). The supplementary files for the paper can be found [here](https://doi.org/10.5061/dryad.13n52).
 
-**NOTE:** If you want to sample trees under the dual-birth, **DO NOT** use the simulator in this repository! The original algorithm proposed in the paper is O(*n* log *n*) for a tree with *n* leaves, but we more recently proposed a O(*n*) algorithm that we proved correct and implemented in C++ ("A linear-time algorithm to sample the dual-birth model", [doi:10.1093/sysbio/syx088](https://doi.org/10.1093/sysbio/syx088)), which can be found [here](https://github.com/niemasd/Dual-Birth-Simulator). The original implementation is being kept here for the sake of reproducibility of the original paper.
+**NOTE:** If you want to sample trees under the dual-birth, **DO NOT** use the simulator in this repository! The original algorithm proposed in the paper is O(*n* log *n*) for a tree with *n* leaves, but we more recently proposed a O(*n*) algorithm that we proved correct and implemented in C++ ("A linear-time algorithm to sample the dual-birth model", [doi:10.1101/226423](https://doi.org/10.1101/226423)), which can be found [here](https://github.com/niemasd/Dual-Birth-Simulator). The original implementation is being kept here for the sake of reproducibility of the original paper.
 
 REQUIREMENTS
 ===
